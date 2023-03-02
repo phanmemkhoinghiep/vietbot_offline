@@ -1,5 +1,5 @@
 # vietbot_offline
-Vietbot Offline phiên bản Beta
+Vietbot Offline phiên bản Beta, xử lý tại chỗ không cần máy chủ
 
 # Sơ đồ luồng xử lý của Vietbot
 
