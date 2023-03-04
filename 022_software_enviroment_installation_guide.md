@@ -44,10 +44,10 @@ sau đó
 ```sh
 sudo apt-get upgrade -y
 ```
-2.1.2.
+2.1.2. Cài đặt các gói thư viện
 
 ```sh
-sudo apt-get install git python3-pip libsdl2-mixer-2.0-0 libportaudio2  libportaudio-dev vlc pulseaudio -y
+sudo apt-get install git python3-pip python3-pyaudio python-all-dev python3-all-dev libsdl2-mixer-2.0-0 libportaudio2  libportaudio-dev vlc pulseaudio -y
 
 ```
 2.2. Khởi động lại
@@ -67,7 +67,6 @@ python3 -m pip install --upgrade pip
 
 ```
 3.2. Cài đặt các gói Python 
-
 
 ```sh
 cd ~ 
@@ -96,9 +95,11 @@ python3 -m pip install -r requirements.txt
 sudo nano /home/pi/.local/lib/python3.9/site-packages/pafy/backend_youtube_dl.py
 
 ```
-Sau đó tìm đến dòng sau và bổ sung ký tự # đằng trước
+Sau đó tìm đến các dòng sau và bổ sung ký tự # đằng trước
 
 ```sh
+#        self._viewcount = self._ydl_info['view_count']
+#        self._likes = self._ydl_info['like_count']
 #        self._dislikes = self._ydl_info['dislike_count']
 
 ```
@@ -178,9 +179,9 @@ sudo alsactl store
 ```sh
 python3 -m pip install rpi.gpio
 ```
-4.2. Cài đặt cho Mic USB và Loa
+4.2. Cài đặt cho Mic USB (Mic USB thường và Mic Respeaker USB)
 
-4.2.1. Thống kê ID của Mic USB và Loa
+4.2.1. Thống kê ID của Mic USB và Loa 
 
 Chạy lệnh sau để biết ID của Mic USB
 ```sh
@@ -193,15 +194,16 @@ aplay -l
 ```
 Lưu lại thông tin về card_id và device_id ở mỗi kết quả lệnh
 
-4.2.2. Khai báo cho Mic USB
 
-Chạy lệnh sau 
+4.2.2 Khai báo thiết bị loa và mic Default
+
+sau đó tạo một file rỗng .asoundrc tại thư mục /home/pi như sau
 
 ```sh
 sudo nano /home/pi/.asoundrc
 ```
-Cửa sổ nano hiện lên, paste dòng sau, thay thế <card_id> và <device_id> bằng kết quả đã lưu ví dụ 0:0 hoặc 1:0 hoặc 1:1:
 
+Paste nội dung sau vào
 ```sh
 pcm.!default {
   type asym
@@ -221,60 +223,77 @@ pcm.speaker {
   }
 }
 ```
+Thay <card_id> và <device_id> bằng giá trị thu được 4.2.1 ở
+
 Bấm lần lượt Ctrl + X, sau đó Y rồi Enter
 
-4.2.3. Copy file thiết lập cho mọi account 
+Copy file thiết lập cho mọi account 
 
 Chạy lệnh sau
 ```sh
 sudo cp /home/pi/.asoundrc /etc/asound.conf
 ```
-4.2.4. Fix lỗi Audio không chạy tự động của Mic USB
 
-Chạy lệnh sau
+
+
+
+4.2.3. Khai báo Default cho ALSA
+
+Chạy lệnh sau 
 
 ```sh
-cd /home/pi/       
-git clone https://github.com/shivasiddharth/PulseAudio-System-Wide       
-cd ./PulseAudio-System-Wide/      
-sudo cp ./pulseaudio.service /etc/systemd/system/pulseaudio.service    
-sudo systemctl --system enable pulseaudio.service       
-sudo systemctl --system start pulseaudio.service       
-sudo cp ./client.conf /etc/pulse/client.conf        
-sudo sed -i '/^pulse-access:/ s/$/root,pi/' /etc/group    
+sudo nano /usr/share/alsa/alsa.conf
+```
+Cửa sổ nano hiện lên, tìm tới 2 dòng sau
+```sh
+# defaults
+defaults.ctl.card 0
+defaults.pcm.card 0
+
+```
+Thay thế ký tự '0' bằng kết quả đã lưu cho <card_id>, ví dụ 1
+
+tiếp tục tìm tới 2 dòng sau
+```sh
+# defaults
+defaults.pcm.device 0
+defaults.pcm.subdevice 0
+```
+Thay thế ký tự '0' bằng kết quả đã lưu cho <device_id>, ví dụ 1 (Nếu 0 thì ko phải thay)
+
+4.2.3. Đưa Account đang dùng (Ví dụ pi) vào group root
+
+Chạy lệnh sau
+```sh
+sudo usermod -aG root pi
+```
+4.2.4. fix lỗi bot không hoạt động sau 1 thời gian.
+Chạy lệnh sau
+```sh
+sudo usermod -aG audio root
 ```
 4.2.5. Reboot lại Pi
 Chạy lệnh sau
 ```sh
 sudo reboot
 ```
+4.2.6. Test loa và mic sau khi cài
 
-4.3. Cài đặt điều khiển Led cho Modun ReSpeaker Mic Array v2.0 hoặc ReSpeaker USB Mic Array (Nếu không dùng thì bỏ qua)
-
-4.3.1. Đưa Account đang dùng (Ví dụ pi) vào group root
-
-Chạy lệnh sau
-```sh
-sudo usermod -aG root pi
-```
-
-4.4. Test loa và mic sau khi cài
-
-4.4.1. Test loa
-Chạy lệnh sau
+Test loa bằng lệnh sau
 ```sh
 speaker-test -t wav -c 2
 ```
-4.4.2. Test Mic
-Chạy lệnh sau để ghi âm
+4.3. Test Mic
+
+4.3.1. Ghi âm
 ```sh
 arecord --format=S16_LE --duration=5 --rate=16000 --file-type=raw out.raw
 ```
-Chạy lệnh sau để phát lại
+4.3.2. Phát lại
 ```sh
 aplay --format=S16_LE --rate=16000 out.raw
 ```
-4.4.3. Test stream giữa Mic và Loa
+4.3.3. Test stream giữa Mic và Loa bằng lệnh sau
 ```sh
 arecord --format=S16_LE --rate=16000 | aplay --format=S16_LE --rate=16000
 ```

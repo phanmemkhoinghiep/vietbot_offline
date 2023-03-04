@@ -2,20 +2,17 @@
 
 ### STEP1. Download bộ Image cho Raspberry Pi đã cài đặt sẵn
 
-1.1. Download bộ Image cho Raspberry Pi đã cài đặt sẵn Drive cho Respeaker 2 Mic Hat, Respeaker USB Mic và Mic USB thường tại Link sau
+Download bộ Image cho Raspberry Pi đã cài đặt sẵn cho tất cả các loại Mic tại Link sau
 
-[GOOGLE DRIVE](https://drive.google.com/file/d/1jY3hx7nrfd-ukf4AeMss5YgZkauzemWO/view?usp=sharing)
-
-hoặc
-
-[FSHARE](https://www.fshare.vn/file/WUBPA38PI75U)
-
+[GOOGLE DRIVE FILE NÉN 1.4G](https://drive.google.com/file/d/1SZwM6F2k0eiubYJ0VcXg47Me68E9WReX/view?usp=sharing)
 
 ### STEP2. Ghi vào thẻ SD
 
 2.1. Dùng Win32IMG để ghi vào thẻ nhớ SD
 
 ### STEP3. Khai báo WiFi
+có thể tải file wpa_supplicant.conf mẫu chuẩn ở link này, rồi sửa lại ID wifi và pass wifi cho đúng. Hoặc làm file mới như hướng dẫn phía dưới
+[GOOGLE DRIVE](https://drive.google.com/file/d/1D2iFC-sP2PUL-RijPmK9yKo3IsgEAvJ8/view?usp=sharing)
 
 3.1. Sử dụng Notepad ++ để tạo file có tên là wpa_supplicant.conf trong thư mục boot của thẻ nhớ
 
@@ -36,6 +33,9 @@ network={
 3.4. Save lại nội dung File
 
 3.5. Tạo một file rỗng có tên là SSH
+có thể tải file SSH mẫu chuẩn ở link này
+[GOOGLE DRIVE](https://drive.google.com/file/d/1QCAYZMTlXJ7Zx3ZW8iKjiXDVuGqZMqTc/view?usp=sharing)
+
 
 ### STEP4. Kết nối và điều chỉnh
 
@@ -43,7 +43,7 @@ network={
 
 4.1.1. Cắm thẻ nhớ vào Pi Zero 2 W/Pi 3B+/Pi4 và boot lên
 
-4.1.2. Sử dụng SSH để truy cập từ xa vào Console
+4.1.2. Tìm địa chỉ IP của pi và sử dụng SSH để truy cập từ xa vào Console
 
 4.1.3. Nhập Username và password đăng nhập (pi/vietbot)
 
@@ -64,7 +64,7 @@ sudo raspi-config
 
 ### STEP5. Khai báo Mic
 
-5.1. Khai báo Mic 2 Hat, Mic 4Hat
+5.1. Cài đặt cho Mic 2 Hat, Mic 4Hat
 
 5.1.1. Tạo một file rỗng asound.conf tại thư mục /home/pi như sau
 
@@ -80,8 +80,22 @@ Chạy lệnh sau
 ```sh
 sudo cp /home/pi/.asoundrc /etc/asound.conf
 ```
+5.1.3. Cài đặt âm lượng
 
-5.2. Khai báo Mic USB (Mic USB thường và Mic Respeaker USB)
+Vào alxamixer bằng lệnh
+
+```sh
+alsamixer
+```
+bấm F6 để chọn sound card seed, sau đó bấm F5, dùng phím lên trên bàn phím để kéo hết các giá trị lên Max, phím trái, phải để chọn các giá trị Stereo tại các mục tương ứng
+
+Gõ lệnh sau để lưu lại
+
+```sh
+sudo alsactl store
+```
+
+5.2. Cài đặt cho Mic USB (Mic USB thường và Mic Respeaker USB)
 
 5.2.1. Thống kê ID của Mic USB và Loa 
 
@@ -96,46 +110,66 @@ aplay -l
 ```
 Lưu lại thông tin về card_id và device_id ở mỗi kết quả lệnh
 
-5.2.2. Khai báo cho Mic USB (Nếu ko sử dụng Mic USB thì bỏ qua phần này)
+5.2.2. Khai báo Default cho ALSA
+
+Chạy lệnh sau 
 
 ```sh
-sudo nano /home/pi/.asoundrc
+sudo nano /usr/share/alsa/alsa.conf
 ```
-Cửa sổ nano hiện lên, paste dòng sau, thay thế <card_id> và <device_id> bằng kết quả đã lưu ví dụ 0:0 hoặc 1:0 hoặc 1:1:
-
+Cửa sổ nano hiện lên, tìm tới 2 dòng sau
 ```sh
-pcm.!default {
-  type asym
-  capture.pcm "mic"  
-  playback.pcm "speaker"  
-}
-pcm.mic {
-  type plug
-  slave {
-    pcm "hw:<card_id>,<device_id>"
-  }
-}
-pcm.speaker {
-  type plug
-  slave {
-    pcm "hw:<card_id>,<device_id>"
-  }
-}
+# defaults
+defaults.ctl.card 0
+defaults.pcm.card 0
+
 ```
-Bấm lần lượt Ctrl + X, sau đó Y rồi Enter
+Thay thế ký tự '0' bằng kết quả đã lưu cho <card_id>, ví dụ 1
 
-5.2.3. Copy file thiết lập cho mọi account (Nếu chỉ dùng Account Pi thì bỏ qua bước này)
-
-Chạy lệnh sau
+tiếp tục tìm tới 2 dòng sau
 ```sh
-sudo cp /home/pi/.asoundrc /etc/asound.conf
+# defaults
+defaults.pcm.device 0
+defaults.pcm.subdevice 0
 ```
-5.2.4. Đưa Account đang dùng (Ví dụ pi) vào group root
+Thay thế ký tự '0' bằng kết quả đã lưu cho <device_id>, ví dụ 1 (Nếu 0 thì ko phải thay)
+
+5.2.3. Đưa Account đang dùng (Ví dụ pi) vào group root
 
 Chạy lệnh sau
 ```sh
 sudo usermod -aG root pi
 ```
+5.2.4. fix lỗi bot không hoạt động sau 1 thời gian.
+Chạy lệnh sau
+```sh
+sudo usermod -aG audio root
+```
+5.2.5. Reboot lại Pi
+Chạy lệnh sau
+```sh
+sudo reboot
+```
+5.3. Test loa và mic sau khi cài
+
+5.3.1. Test loa bằng lệnh sau
+```sh
+speaker-test -t wav -c 2
+```
+5.3.2. Test Mic bằng lệnh sau 
+Ghi âm
+```sh
+arecord --format=S16_LE --duration=5 --rate=16000 --file-type=raw out.raw
+```
+Phát lại
+```sh
+aplay --format=S16_LE --rate=16000 out.raw
+```
+5.3.3. Test stream giữa Mic và Loa bằng lệnh sau
+```sh
+arecord --format=S16_LE --rate=16000 | aplay --format=S16_LE --rate=16000
+```
+
 Tiếp đó chuyển qua 
 
 ![CÀI ĐẶT, CẬP NHẬT PHẦN MỀM](https://github.com/phanmemkhoinghiep/vietbot_online/blob/main/03_software_install_update_guide.md) 
