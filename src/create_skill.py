@@ -76,7 +76,7 @@ skill['chatgpt_skill'].append({
 })
 skill['tts_speaker_skill'] = []
 skill['tts_speaker_skill'].append({
-    'is_active': True
+    'is_active': False
 })
 skill['hanet_skill'] = []
 skill['hanet_skill'].append({
