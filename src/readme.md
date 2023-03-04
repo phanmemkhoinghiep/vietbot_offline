@@ -4,12 +4,12 @@
 
 1.1. Cài đặt theo hướng dẫn
 
-https://github.com/phanmemkhoinghiep/vietbot_online/blob/main/03_software_install_guide.md
+https://github.com/phanmemkhoinghiep/vietbot_offline/blob/main/03_software_install_guide.md
 
 2.1. Cài đặt thư viện
 Di chuyển đến thư mục
 ```sh
-cd /home/pi/vietbot_online/src_beta
+cd /home/pi/vietbot_offline/src_beta
 
 ```
 Sau đó
@@ -23,7 +23,7 @@ python3 -m pip install -r requirements.txt
 
 Di chuyển đến thư mục
 ```sh
-cd /home/pi/vietbot_online/src_beta
+cd /home/pi/vietbot_offline/src_beta
 ```
 Sau đó
 
@@ -36,11 +36,11 @@ python3 -m create_config.py
 
 Chạy theo hướng dẫn
 
-https://github.com/phanmemkhoinghiep/vietbot_online/blob/main/06_running_guide.md
+https://github.com/phanmemkhoinghiep/vietbot_offline/blob/main/06_running_guide.md
 
 Di chuyển đến thư mục
 ```sh
-cd /home/pi/vietbot_online/src_beta
+cd /home/pi/vietbot_offline/src_beta
 ```
 Sau đó
 
