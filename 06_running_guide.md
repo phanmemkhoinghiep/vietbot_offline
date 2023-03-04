@@ -5,7 +5,7 @@
 Sử dụng lệnh sau
 
 ```sh
-cd vietbot_online/src
+cd vietbot_offline/src
 ```
 1.2. Edit config bằng lệnh 
 
@@ -44,8 +44,8 @@ Description=vietbot
 After=alsa-state.service
 
 [Service]
-ExecStart = /usr/bin/python3.9  /home/pi/vietbot_online/src/start.py
-WorkingDirectory=/home/pi/vietbot_online/src
+ExecStart = /usr/bin/python3.9  /home/pi/vietbot_offline/src/start.py
+WorkingDirectory=/home/pi/vietbot_offline/src
 StandardOutput=inherit
 StandardError=inherit
 Restart=always
