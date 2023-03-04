@@ -8,7 +8,7 @@ config['mic'].append({
     'led_off_color': '',
     'led_think_mode': '',    
     'led_thing_color': '',            
-    'is_active': False            
+    'is_active': True            
 })
 config['mic'].append({
     'type': 'ReSpeaker 2-Mics Pi HAT',
@@ -31,7 +31,7 @@ config['mic'].append({
     'led_think_mode': '',    
     'led_thing_color': '', 
     'led_pattern': 2,
-    'is_active': True        
+    'is_active': False        
 })
 config['mic'].append({
     'type': 'ReSpeaker Mic Array v2.0',
@@ -39,7 +39,7 @@ config['mic'].append({
     'led_off_color': 'fffcff',
     'led_wakeup_mode': 2,
     'led_wakeup_color': '074a25',    
-    'is_active': True        
+    'is_active': False        
 })
 config['volume'] = []
 config['volume'].append({
@@ -53,7 +53,7 @@ config['hotword_engine'].append({
 config['hotword_engine'].append({
     'name': 'porcupine',
     'is_active': True,
-    'porcupine_access_key': 'pJwv7qAbPrw9yXx2D3QeceV39+Rn+KW35JBTeyEal70VOOWoDvm7JQ=='
+    'porcupine_access_key': 'pJwvvm7JQ=='
 })
 config['hotword'] = []
 config['hotword'].append({
@@ -167,13 +167,13 @@ config['local_stt'] = []
 config['local_stt'].append({
     'name': 'stt_gg_free',
     'time_out': 6000,
-    'is_active': False    
+    'is_active': True    
 })
 config['local_stt'].append({
     'name': 'stt_gg_cloud',
     'token_file': 'google.json',    
     'time_out': 6000,
-    'is_active': True    
+    'is_active': False    
 })
 config['local_stt'].append({
     'name': 'stt_gg_ass',
@@ -184,7 +184,7 @@ config['local_stt'].append({
 })
 config['local_stt'].append({
     'name': 'stt_viettel',
-    'token': 'SythBY7N8AUndsdfsdfWpxlyXxzdWRNwYE8N',
+    'token': 'SythdWRNwYE8N',
     'time_out': 4000,
     'is_active': False    
 })
@@ -203,7 +203,7 @@ config['local_tts'].append({
     'speed': '',
     'pitch': '',
     're_use': True,
-    'is_active': False    
+    'is_active': True    
 })
 config['local_tts'].append({
     'token': 'AIzaSyDsdfsdf_k16b3c',
@@ -214,7 +214,7 @@ config['local_tts'].append({
     'speed': 1.0,
     'pitch': 0,
     're_use': True,
-    'is_active': True    
+    'is_active': False    
 })
 config['local_tts'].append({
     'token': 'dfgdfgdfgARWDFSc',
@@ -273,14 +273,14 @@ config['button_data'].append({
     'type': 'touch',
     'pulse': True,    
     'function': 'volume_down',
-    'is_active': True    
+    'is_active': False    
 })
 config['button_data'].append({
     'gpio_address': 5,
     'type': 'touch',
     'pulse': True,    
     'function': 'volume_up',
-    'is_active': True    
+    'is_active': False    
 })
 config['button_data'].append({
     'gpio_address': 25,
@@ -294,7 +294,7 @@ config['button_data'].append({
     'type': 'touch',    
     'pulse': True,    
     'function': 'direct_command',
-    'is_active': True    
+    'is_active': False    
 })
 with open('config.json', 'w') as outfile:
     json.dump(config, outfile)
