@@ -1,4 +1,4 @@
-### ĐÂY LÀ HƯỚNG DẪN CÀI ĐẶT PHẦN HỆ ĐIỀU HÀNH, THƯ VIỆN, DRIVER CHO PI ZERO WIRLESS, MODUN 2 MIC HAT, 4 MIC ARRAY HOẶC MIC USB
+### ĐÂY LÀ HƯỚNG DẪN CÀI ĐẶT PHẦN HỆ ĐIỀU HÀNH, THƯ VIỆN, DRIVER CHO PI, MODUN 2 MIC HAT, 4 MIC ARRAY HOẶC MIC USB
 
 ### STEP1. Cài đặt hệ điều hành Raspbian
 
