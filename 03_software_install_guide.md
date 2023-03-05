@@ -37,3 +37,5 @@ Sử dụng lệnh sau
 ```sh
 cd vietbot_offline
 ```
+Đi đến mục tiếp theo
+![CẤU HÌNH STT VÀ TTS](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/04_stt_and_tts_configuration_guide.md)
