@@ -110,3 +110,5 @@ Kích hoạt TTS Engine nào thì sẽ đặt tham số is_active là True và n
 ```sh
 python3 create_config.py
 ```
+Đi đến mục tiếp theo:
+![CẤU HÌNH HOTWORD](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/05_hotword_configuration.guide) 
