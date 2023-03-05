@@ -3,7 +3,7 @@
 ### STEP1. Cấp quyền cho các File
 
 ```sh
-cd /home/pi/vietbot_online/src
+cd /home/pi/vietbot_offline/src
 ```
 Sau đó
 
@@ -25,13 +25,13 @@ sudo apt-get install -y -d network-manager
 ```
 2.2. Cài đặt File chạy WiFi-Connect
 ```sh
-sudo cp /home/pi/vietbot_online/src/start-wifi-connect.sh /home/pi/
+sudo cp /home/pi/vietbot_offline/src/start-wifi-connect.sh /home/pi/
 ```
 2.3. Cài đặt Service chạy WiFi-Connect khi khởi động
 
 Copy file vào systemd
 ```sh
-sudo cp /home/pi/vietbot_online/src/wifi-connect.service /etc/systemd/system/wifi-connect.service
+sudo cp /home/pi/vietbot_offline/src/wifi-connect.service /etc/systemd/system/wifi-connect.service
 ```
 sau đó
 
@@ -48,7 +48,7 @@ Là thành công
 2.4. Cài đặt WiFi-Connect
 
 ```sh
-cd /home/pi/vietbot_online/src
+cd /home/pi/vietbot_offline/src
 ```
 Sau đó
 
