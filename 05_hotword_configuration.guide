@@ -78,4 +78,6 @@ data['hotword'].append({
 ```sh
 python3 create_config.py
 ```
-Bước tiếp theo: ![CÁCH CHẠY](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/06_running_guide.md) 
+Bước tiếp theo:
+
+![CÁCH CHẠY](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/06_running_guide.md) 
