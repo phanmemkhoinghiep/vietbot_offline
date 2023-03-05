@@ -1,4 +1,4 @@
-### ĐÂY LÀ HƯỚNG DẪN TỐI ƯU CHO PI
+### ĐÂY LÀ HƯỚNG DẪN TỐI ƯU CHO RASPBIAN
 
 ### STEP1. Cấu hình tối ưu cho Pi
 
