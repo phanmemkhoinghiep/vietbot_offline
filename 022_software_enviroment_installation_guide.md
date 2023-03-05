@@ -75,12 +75,12 @@ cd ~
 sau đó
 
 ```sh
-git clone -b beta --single-branch https://github.com/phanmemkhoinghiep/vietbot_online.git
+git clone -b beta --single-branch https://github.com/phanmemkhoinghiep/vietbot_offline.git
 ```
 sau đó
 
 ```sh
-cd /home/pi/vietbot_online/src
+cd /home/pi/vietbot_offline/src
 ```
 sau đó
 
@@ -233,10 +233,6 @@ Chạy lệnh sau
 ```sh
 sudo cp /home/pi/.asoundrc /etc/asound.conf
 ```
-
-
-
-
 4.2.3. Khai báo Default cho ALSA
 
 Chạy lệnh sau 
@@ -297,3 +293,4 @@ aplay --format=S16_LE --rate=16000 out.raw
 ```sh
 arecord --format=S16_LE --rate=16000 | aplay --format=S16_LE --rate=16000
 ```
+Đi đến mục tiếp theo ![CÀI ĐẶT, CẬP NHẬT PHẦN MỀM](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/03_software_install_update_guide.md)
