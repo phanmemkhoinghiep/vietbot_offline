@@ -293,4 +293,6 @@ aplay --format=S16_LE --rate=16000 out.raw
 ```sh
 arecord --format=S16_LE --rate=16000 | aplay --format=S16_LE --rate=16000
 ```
-Đi đến mục tiếp theo ![CÀI ĐẶT, CẬP NHẬT PHẦN MỀM](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/03_software_install_update_guide.md)
+Đi đến mục tiếp theo
+![TỐI ƯU CHO RASPBIAN](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/023_software_enviroment_installation_optimize.md)
+
