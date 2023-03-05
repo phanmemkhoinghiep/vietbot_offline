@@ -26,7 +26,9 @@ Vietbot hỗ trợ các hotword của Porcupine cho Raspberry
 3.1. Truy cập vào thư mục vietbot_offline trên M Pi Zero Wireless
 
 ```sh
+
 cd /home/pi/vietbot_offline/src
+
 ```
 
 3.2. Mở file create_config.py bằng WinSCP và Notepad ++
@@ -76,3 +78,4 @@ data['hotword'].append({
 ```sh
 python3 create_config.py
 ```
+Bước tiếp theo: ![CÁCH CHẠY](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/06_running_guide.md) 
