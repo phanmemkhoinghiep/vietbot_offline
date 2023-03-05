@@ -172,5 +172,5 @@ arecord --format=S16_LE --rate=16000 | aplay --format=S16_LE --rate=16000
 
 Tiếp đó chuyển qua 
 
-![CÀI ĐẶT, CẬP NHẬT PHẦN MỀM](https://github.com/phanmemkhoinghiep/vietbot_online/blob/main/03_software_install_update_guide.md) 
+![CÀI ĐẶT, CẬP NHẬT PHẦN MỀM](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/main/03_software_install_update_guide.md) 
 
