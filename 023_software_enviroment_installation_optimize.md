@@ -99,3 +99,6 @@ Hệ thống sẽ trả về bộ nhớ Swap có dung lượng xấp xỉ 1G
 Mem:           459Mi        57Mi       278Mi       1.0Mi       123Mi       351Mi
 Swap:          1.0Gi          0B       1.0Gi
 ```
+Đi đến mục tiếp theo
+
+![CÀI ĐẶT, CẬP NHẬT PHẦN MỀM](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/03_software_install_update_guide.md)
