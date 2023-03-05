@@ -77,6 +77,7 @@ data['hotword'].append({
 
 ```sh
 python3 create_config.py
+
 ```
 Bước tiếp theo:
 
