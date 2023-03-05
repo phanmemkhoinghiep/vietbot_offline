@@ -5,7 +5,7 @@
 Sử dụng lệnh sau
 
 ```sh
-cd vietbot_online/src
+cd vietbot_offline/src
 ```
 1.2. Edit config bằng lệnh 
 
@@ -51,8 +51,8 @@ Tại cửa sổ Nano, gõ dòng lệnh sau
 Description=vietbot
 
 [Service]
-ExecStart = /usr/bin/python3.9  /home/pi/vietbot_online/src/start.py 2>/dev/null
-WorkingDirectory=/home/pi/vietbot_online/src
+ExecStart = /usr/bin/python3.9  /home/pi/vietbot_offline/src/start.py 2>/dev/null
+WorkingDirectory=/home/pi/vietbot_offline/src
 StandardOutput=inherit
 StandardError=inherit
 Restart=always
@@ -69,8 +69,8 @@ Description=vietbot
 After=alsa-state.service
 
 [Service]
-ExecStart = /usr/bin/python3.9  /home/pi/vietbot_online/src/start.py 2>/dev/null
-WorkingDirectory=/home/pi/vietbot_online/src
+ExecStart = /usr/bin/python3.9  /home/pi/vietbot_offline/src/start.py 2>/dev/null
+WorkingDirectory=/home/pi/vietbot_offline/src
 StandardOutput=inherit
 StandardError=inherit
 Restart=always
@@ -126,3 +126,5 @@ Hệ thống sẽ hiện ra
 Removed /etc/systemd/system/multi-user.target.wants/vietbot.service
 ```
 Hệ thống đã stop vietbot không chạy tự động nữa
+
+Đến mục tiếp theo: ![WIFI-CONNECT](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/08_auto_wifi-connect.md)
