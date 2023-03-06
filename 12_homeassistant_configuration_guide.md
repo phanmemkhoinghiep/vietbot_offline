@@ -28,7 +28,7 @@ data['smh_skill'].append({
 3.2. Chạy lại script create_config.py để tạo file config.json
 
 ```sh
-python3 /home/pi/vietbot_online/src/create_config.json
+python3 /home/pi/vietbot_offline/src/create_config.json
 ```
 
 ### STEP4. Chạy lại bot
@@ -73,7 +73,6 @@ Là tên friendly name của entity tương ứng với thiết bị, đã khai 
 <Hiển thị> <giá trị><nhiệt độ phòng khách>
 <Thông báo> <trạng thái><cửa sân thượng>
 ```
-
 4.1.1. <action> Lệnh kiểm tra
 
 Một trong các từ được định nghĩa trong request_check của file json, thêm vào bằng cách edit file craete_config, sau đó chạy python3 create_config.py 
@@ -92,4 +91,6 @@ Thông báo kết quả với các thiết bị không có phản hồi (Ví d�
 
 4.3.2. Không thành công
 
-Thông báo kết quả ra lệnh không thành công với lý do tại sao
+- Nếu chưa kích hoạt Hass: Đưa ra thông báo chưa kích hoạt Hass
+- Nếu không kết nối được Hass: Đưa ra thông báo không kết nối được
+- Nếu ra lệnh không thành công: Đưa ra thông báo lý do 
