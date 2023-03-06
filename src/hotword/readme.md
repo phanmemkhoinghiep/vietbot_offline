@@ -1,1 +1,1 @@
-Danh mục các Hotword đang sử dụng
+Nơi đặt Hotword file
