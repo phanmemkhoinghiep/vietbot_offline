@@ -52,7 +52,7 @@ skill['history_skill'].append({
 })
 skill['hass_skill'] = []
 skill['hass_skill'].append({
-    'hass_url':'http://abc.ddns.net',    
+    'hass_url': 'http://abc.ddns.net',    
     'hass_token': 'eyJhbGcFZHTvxB7KxjnV0V26hPNfE8M',
     'pre_answer': 'Lệnh được thi hành ngay sau đây',
     'error_answer': 'Lỗi kết nối đến Hass',
