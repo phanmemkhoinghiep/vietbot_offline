@@ -105,6 +105,37 @@ Sau đó tìm đến các dòng sau và bổ sung ký tự # đằng trước
 ```
 Bấm Ctrl + X, rồi Y để Save lại
 
+Tiếp tục 
+
+```sh
+sudo nano /home/pi/.local/lib/python3.9/site-packages/youtube_dl/extractor/
+
+```
+Sau đó tìm đến dòng thứ 1794 và bổ sung ký tự # đằng trước
+
+```sh
+
+# 'uploader_id': self._search_regex(r'/(?:channel|user)/([^/?&#]+)', owner_profile_url, 'uploader id') if owner_profile_url else None,
+
+```
+Bổ sung dòng sau thay thế dòng trên
+
+'uploader_id': self._search_regex(r'/(?:channel/|user/|(?=@))([^/?&#]+)', owner_profile_url, 'uploader id', default=None),
+
+```
+Kết quả cuối là:
+
+```sh
+
+# 'uploader_id': self._search_regex(r'/(?:channel|user)/([^/?&#]+)', owner_profile_url, 'uploader id') if owner_profile_url else None,
+'uploader_id': self._search_regex(r'/(?:channel/|user/|(?=@))([^/?&#]+)', owner_profile_url, 'uploader id', default=None),
+
+```
+
+
+Bấm Ctrl + X, rồi Y để Save lại
+
+
 ### STEP4. Config Mig, Speaker, LED
 
 4.1. Cài đặt cho Modun ReSpeaker 2 Mic Hat hoặc ReSpeaker 4-Mic Array for Raspberry Pi (Nếu ko sử dụng thì bỏ qua)
