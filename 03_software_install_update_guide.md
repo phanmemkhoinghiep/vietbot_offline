@@ -8,7 +8,7 @@ cd ~
 ```
 Sau đó
 ```sh
-git clone -b beta --single-branch https://github.com/phanmemkhoinghiep/vietbot_online.git
+git clone -b beta --single-branch https://github.com/phanmemkhoinghiep/vietbot_offline.git
 ```
 Chờ cho đến khi kết thúc
 
@@ -17,7 +17,7 @@ Chờ cho đến khi kết thúc
 2.1. Truy cập vào thư mục vietbot_online
 
 ```sh
-cd /home/pi/vietbot_online/src
+cd /home/pi/vietbot_offline/src
 ```
 Sau đó kiểm tra chính xác xem có trong nhánh beta hay không
 
@@ -111,10 +111,10 @@ python3 -m pip install --upgrade pip
 ```
 3.2. Cài đặt các gói Python 
 
-Truy cập vào thư mục vietbot_online
+Truy cập vào thư mục vietbot_offline
 
 ```sh
-cd /home/pi/vietbot_online/src
+cd /home/pi/vietbot_offline/src
 ```
 Cài đặt các gói Python được list trong file requirements.txt
 ```sh
