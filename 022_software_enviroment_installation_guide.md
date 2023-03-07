@@ -108,6 +108,7 @@ Bấm Ctrl + X, rồi Y để Save lại
 Tiếp tục 
 
 ```sh
+
 sudo nano /home/pi/.local/lib/python3.9/site-packages/youtube_dl/extractor/
 
 ```
@@ -119,6 +120,8 @@ Sau đó tìm đến dòng thứ 1794 và bổ sung ký tự # đằng trước
 
 ```
 Bổ sung dòng sau thay thế dòng trên
+
+```sh
 
 'uploader_id': self._search_regex(r'/(?:channel/|user/|(?=@))([^/?&#]+)', owner_profile_url, 'uploader id', default=None),
 
