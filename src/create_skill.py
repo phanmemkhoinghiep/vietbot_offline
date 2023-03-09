@@ -50,10 +50,28 @@ skill['history_skill'].append({
     'error_answer': 'Lỗi tra cứu ngày này năm xưa',
     'is_active': True    
 })
+skill['currency_rate_skill'] = []
+skill['currency_rate_skill'].append({ 
+    'pre_answer': 'Kết quả được thông báo ngay sau đây',
+    'error_answer': 'Lỗi tra cứu tỉ giá ngoại tệ',
+    'is_active': True    
+})
+skill['gold_rate_skill'] = []
+skill['gold_rate_skill'].append({ 
+    'pre_answer': 'Kết quả được thông báo ngay sau đây',
+    'error_answer': 'Lỗi tra cứu giá vàng',
+    'is_active': True    
+})
+skill['lottery_skill'] = []
+skill['lottery_skill'].append({ 
+    'pre_answer': 'Kết quả được thông báo ngay sau đây',
+    'error_answer': 'Lỗi tra cứu kết quả sổ xố',
+    'is_active': True    
+})
 skill['hass_skill'] = []
 skill['hass_skill'].append({
-    'hass_url': 'http://abc.ddns.net',    
-    'hass_token': 'eyJhbGcFZHTvxB7KxjnV0V26hPNfE8M',
+    'hass_url':'http://tvntech.ddns.net',    
+    'hass_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhNDkyNWIwYTE5NjU0NDNiOGEzZWVlN2FlMzM2ZTU0NiIsImlhdCI6MTY3NjExMTAwMywiZXhwIjoxOTkxNDcxMDAzfQ._ok2Ugo6FhuHCldz4gRFZHTvxB7KxjnV0V26hPNfE8M',
     'pre_answer': 'Lệnh được thi hành ngay sau đây',
     'error_answer': 'Lỗi kết nối đến Hass',
     'is_active': True        
@@ -68,7 +86,7 @@ skill['gass_skill'].append({
 })
 skill['chatgpt_skill'] = []
 skill['chatgpt_skill'].append({
-    'token': 'sk-UR3WQN03a',
+    'token': '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',
     'engine': 'text-davinci-003',
     'pre_answer': 'Câu trả lời từ chatGPT có ngay sau đây',
     'error_answer': 'Lỗi chatGPT',
@@ -76,7 +94,7 @@ skill['chatgpt_skill'].append({
 })
 skill['tts_speaker_skill'] = []
 skill['tts_speaker_skill'].append({
-    'is_active': False
+    'is_active': True
 })
 skill['hanet_skill'] = []
 skill['hanet_skill'].append({

@@ -399,7 +399,6 @@ obj['anniversary_data'].append({
     'month': '03',
     'is_lunar_calendar': True
 })
-                            
 obj['anniversary_data'].append({
     'name':'test code',
     'day': '22',
@@ -436,11 +435,7 @@ obj['anniversary_data'].append({
     'month': '12',
     'is_lunar_calendar': False
 })
-
 obj['lunar_day'] = []
-obj['lunar_day'].append({
-    'value': 'ngày âm'
-})
 obj['lunar_day'].append({
     'value': 'lịch âm'
 })
@@ -653,6 +648,253 @@ obj['light_color_data'].append({
     'G':255,
     'B':0    
 })
+obj['currency_rate'] = []
+obj['currency_rate'].append({
+    'value': 'tỷ giá'
+})
+obj['currency_rate'].append({
+    'value': 'ngoại tệ'
+})
+obj['currency_rate_data'] = []
+obj['currency_rate_data'].append({
+    'name': 'đô la',
+    'code': 'USD'    
+})
+obj['currency_rate_data'].append({
+    'name': 'đôla',
+    'code': 'USD'    
+})
+obj['currency_rate_data'].append({
+    'name': 'ơ rô',
+    'code': 'EUR'    
+})    
+obj['currency_rate_data'].append({
+    'name': 'ơrô',
+    'code': 'EUR'    
+}) 
+obj['currency_rate_data'].append({
+    'name': 'bảng anh',
+    'code': 'GBP'    
+})
+obj['gold_rate'] = []    
+obj['gold_rate'].append({
+    'value': 'giá vàng'
+})
+obj['gold_rate'].append({
+    'value': 'vàng SJC'
+})
+obj['gold_rate'].append({
+    'value': 'vàng miếng'
+})
+obj['gold_rate_data'] = []
+obj['gold_rate_data'].append({
+    'location': 'Hà Nội'
+})
+obj['gold_rate_data'].append({
+    'location': 'Đà Nẵng'    
+})
+obj['gold_rate_data'].append({
+    'location': 'Hồ Chí Minh'    
+})
+obj['gold_rate_data'].append({
+    'location': 'Nha Trang'    
+})
+obj['gold_rate_data'].append({
+    'location': 'Cà Mau'    
+})
+obj['gold_rate_data'].append({
+    'location': 'Huế'    
+})
+obj['gold_rate_data'].append({
+    'location': 'Bình Phước'    
+})
+obj['gold_rate_data'].append({
+    'location': 'Miền Tây'    
+})
+obj['gold_rate_data'].append({
+    'location': 'Biên Hòa'   
+})
+obj['gold_rate_data'].append({
+    'location': 'Quảng Ngãi'    
+})
+obj['gold_rate_data'].append({
+    'location': 'Long Xuyên'    
+})
+obj['gold_rate_data'].append({
+    'location': 'Bạc Liêu'   
+})
+obj['gold_rate_data'].append({
+    'location': 'Quy Nhơn'   
+})
+obj['gold_rate_data'].append({
+    'location': 'Phan Rang'    
+})
+obj['gold_rate_data'].append({
+    'location': 'Hạ Long'    
+})
+obj['gold_rate_data'].append({
+    'location': 'Quảng Nam'
+})
+obj['lottery'] = []
+obj['lottery'].append({
+    'value': 'sổ xố'    
+})
+obj['lottery'].append({
+    'value': 'vé số'    
+})
+obj['lottery_data'] = []
+obj['lottery_data'].append({
+    'location': 'miền nam',
+    'link': 'https://xskt.com.vn/rss-feed/mien-nam-xsmn.rss'
 
+})
+obj['lottery_data'].append({
+    'location': 'miền trung',
+    'link': 'https://xskt.com.vn/rss-feed/mien-trung-xsmt.rss'
+})
+obj['lottery_data'].append({
+    'location': 'miền bắc',    
+    'link': 'https://xskt.com.vn/rss-feed/mien-bac-xsmb.rss'
+})
+obj['lottery_data'].append({
+    'location': 'an giang',     
+    'link': 'https://xskt.com.vn/rss-feed/an-giang-xsag.rss'
+})
+obj['lottery_data'].append({
+    'location': 'bình dương',     
+    'link': 'https://xskt.com.vn/rss-feed/binh-duong-xsbd.rss'
+})
+obj['lottery_data'].append({
+    'location': 'bình định',
+    'link': 'https://xskt.com.vn/rss-feed/binh-dinh-xsbdi.rss'
+})
+obj['lottery_data'].append({
+    'location': 'bạc liêu',     
+    'link': 'https://xskt.com.vn/rss-feed/bac-lieu-xsbl.rss'
+})
+obj['lottery_data'].append({
+    'location': 'bình phước',     
+    'link': 'https://xskt.com.vn/rss-feed/binh-phuoc-xsbp.rss'
+})
+obj['lottery_data'].append({
+    'location': 'bến tre',   
+    'link': 'https://xskt.com.vn/rss-feed/ben-tre-xsbt.rss'
+})
+obj['lottery_data'].append({
+    'location': 'bình thuận',    
+    'link': 'https://xskt.com.vn/rss-feed/binh-thuan-xsbth.rss'
+})
+obj['lottery_data'].append({
+    'location': 'cà mau',  
+    'link': 'https://xskt.com.vn/rss-feed/ca-mau-xscm.rss'
+})
+obj['lottery_data'].append({
+    'location': 'cần thơ',    
+    'link': 'https://xskt.com.vn/rss-feed/can-tho-xsct.rss'
+})
+obj['lottery_data'].append({
+    'location': 'đắc lắc',    
+    'link': 'https://xskt.com.vn/rss-feed/dac-lac-xsdlk.rss'
+})
+obj['lottery_data'].append({
+    'location': 'đồng nai',
+    'link': 'https://xskt.com.vn/rss-feed/dong-nai-xsdn.rss'
+})
+obj['lottery_data'].append({
+    'location': 'đà nẵng',
+    'link': 'https://xskt.com.vn/rss-feed/da-nang-xsdng.rss'
+})
+obj['lottery_data'].append({
+    'location': 'đắc nông',     
+    'link': 'https://xskt.com.vn/rss-feed/dac-nong-xsdno.rss'
+})
+obj['lottery_data'].append({
+    'location': 'đồng tháp',     
+    'link': 'https://xskt.com.vn/rss-feed/dong-thap-xsdt.rss'    
+})
+obj['lottery_data'].append({
+    'location': 'gia lai',     
+    'link': 'https://xskt.com.vn/rss-feed/gia-lai-xsgl.rss'    
+})
+obj['lottery_data'].append({
+    'location': 'hồ chí minh',
+    'link': 'https://xskt.com.vn/rss-feed/tp-hcm-xshcm.rss'    
+})
+obj['lottery_data'].append({
+    'location': 'hậu giang',
+    'link': 'https://xskt.com.vn/rss-feed/hau-giang-xshg.rss'    
+})
+obj['lottery_data'].append({
+    'location': 'kiên giang',
+    'link': 'https://xskt.com.vn/rss-feed/kien-giang-xskg.rss'    
+})
+obj['lottery_data'].append({
+    'location': 'khánh hòa',
+    'link': 'https://xskt.com.vn/rss-feed/khanh-hoa-xskh.rss'    
+})
+obj['lottery_data'].append({
+    'location': 'con tum',
+    'link': 'https://xskt.com.vn/rss-feed/kon-tum-xskt.rss'    
+})
+obj['lottery_data'].append({
+    'location': 'long an',
+    'link': 'https://xskt.com.vn/rss-feed/long-an-xsla.rss'    
+})
+obj['lottery_data'].append({
+    'location': 'lâm đồng',
+    'link': 'https://xskt.com.vn/rss-feed/lam-dong-xsld.rss'    
+})
+obj['lottery_data'].append({
+    'location': 'ninh thuận',
+    'link': 'https://xskt.com.vn/rss-feed/ninh-thuan-xsnt.rss'    
+})
+obj['lottery_data'].append({
+    'location': 'phú yên',
+    'link': 'https://xskt.com.vn/rss-feed/phu-yen-xspy.rss'    
+})
+obj['lottery_data'].append({
+    'location': 'quảng bình',
+    'link': 'https://xskt.com.vn/rss-feed/quang-binh-xsqb.rss'    
+})
+obj['lottery_data'].append({
+    'location': 'quảng ngãi',
+    'link': 'https://xskt.com.vn/rss-feed/quang-ngai-xsqng.rss'    
+})
+obj['lottery_data'].append({
+    'location': 'quảng nam',
+    'link': 'https://xskt.com.vn/rss-feed/quang-nam-xsqnm.rss'    
+})
+obj['lottery_data'].append({
+    'location': 'quảng trị',
+    'link': 'https://xskt.com.vn/rss-feed/quang-tri-xsqt.rss'    
+})
+obj['lottery_data'].append({
+    'location': 'sóc trăng',
+    'link': 'https://xskt.com.vn/rss-feed/soc-trang-xsst.rss'    
+})
+obj['lottery_data'].append({
+    'location': 'tiền giang',
+    'link': 'https://xskt.com.vn/rss-feed/tien-giang-xstg.rss'    
+})
+obj['lottery_data'].append({
+    'location': 'tây ninh',
+    'link': 'https://xskt.com.vn/rss-feed/tay-ninh-xstn.rss'    
+})
+obj['lottery_data'].append({
+    'location': 'thừa thiên huế',
+    'link': 'https://xskt.com.vn/rss-feed/thua-thien-hue-xstth.rss'    
+})
+obj['lottery_data'].append({
+    'location': 'trà vinh',
+    'link': 'https://xskt.com.vn/rss-feed/tra-vinh-xstv.rss'    
+})
+obj['lottery_data'].append({
+    'location': 'vĩnh long',
+    'link': 'https://xskt.com.vn/rss-feed/vinh-long-xsvl.rss'    
+})
+obj['lottery_data'].append({
+    'location': 'vũng tàu',
+    'link': 'https://xskt.com.vn/rss-feed/vung-tau-xsvt.rss'
+})
 with open('object.json', 'w') as outfile:
     json.dump(obj, outfile)
