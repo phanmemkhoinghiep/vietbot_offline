@@ -109,7 +109,7 @@ Tiếp tục
 
 ```sh
 
-sudo nano /home/pi/.local/lib/python3.9/site-packages/youtube_dl/extractor/
+sudo nano /home/pi/.local/lib/python3.9/site-packages/youtube_dl/extractor/youtube.py
 
 ```
 Sau đó tìm đến dòng thứ 1794 và bổ sung ký tự # đằng trước
