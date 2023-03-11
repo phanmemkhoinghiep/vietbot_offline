@@ -76,13 +76,25 @@ skill['hass_skill'].append({
     'error_answer': 'Lỗi kết nối đến Hass',
     'is_active': True        
 })
+skill['funny_story__skill'] = []
+skill['funny_story__skill'].append({
+    'pre_answer': 'Tìm câu trả lời từ Skill truyện cười',
+    'error_answer': 'Lỗi Skill truyện cười',
+    'is_active': True    
+})
+skill['simsim_skill'] = []
+skill['simsim_skill'].append({
+    'pre_answer': 'Tìm câu trả lời từ Sim sim',
+    'error_answer': 'Lỗi Skill Sim sim',
+    'is_active': True    
+})
 skill['gass_skill'] = []
 skill['gass_skill'].append({
     'credentials_file': 'credentials.json',
     'device_config_file': 'device_config.json',    
-    'pre_answer': 'Câu trả lời từ Google có ngay sau đây',
+    'pre_answer': None,
     'error_answer': 'Lỗi Google Assistant',
-    'is_active': True    
+    'is_active': False    
 })
 skill['chatgpt_skill'] = []
 skill['chatgpt_skill'].append({
@@ -90,11 +102,11 @@ skill['chatgpt_skill'].append({
     'engine': 'text-davinci-003',
     'pre_answer': 'Câu trả lời từ chatGPT có ngay sau đây',
     'error_answer': 'Lỗi chatGPT',
-    'is_active': True        
+    'is_active': False        
 })
 skill['tts_speaker_skill'] = []
 skill['tts_speaker_skill'].append({
-    'is_active': True
+    'is_active': False
 })
 skill['hanet_skill'] = []
 skill['hanet_skill'].append({

@@ -455,6 +455,16 @@ obj['history'].append({
 obj['history'].append({
     'value': 'năm xưa'
 })
+obj['funny_story'] = []
+obj['funny_story'].append({
+    'value': 'truyện cười'
+})
+obj['funny_story'].append({
+    'value': 'truyện cười'
+})
+obj['funny_story'].append({
+    'value': 'truyện hài'
+})
 obj['event'] = []
 obj['event'].append({
     'value': 'sự kiện'
