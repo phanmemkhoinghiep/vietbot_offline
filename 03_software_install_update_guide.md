@@ -14,7 +14,7 @@ Chờ cho đến khi kết thúc
 
 ### STEP2.  Download code về khi đã có Code, cần cập nhật lại
 
-2.1. Truy cập vào thư mục vietbot_online
+2.1. Truy cập vào thư mục vietbot_offline
 
 ```sh
 cd /home/pi/vietbot_offline/src
@@ -35,7 +35,7 @@ thì vietbot đã đúng nhánh beta, khi đó có thể check xem có file gì 
 ```sh
 git fetch
 ```
-Chú ý muốn giữ lại create_config.py cần đổi tên sang create_config.py.old nếu ko sẽ bị ghi đè
+Chú ý muốn giữ lại create_config.py, create_action.py, create_object.py, create_skill.py cần đổi tên nếu ko sẽ bị ghi đè
 
 Download các File mới về
 
