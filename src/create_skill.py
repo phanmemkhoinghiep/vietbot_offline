@@ -76,8 +76,8 @@ skill['hass_skill'].append({
     'error_answer': 'Lỗi kết nối đến Hass',
     'is_active': True        
 })
-skill['funny_story__skill'] = []
-skill['funny_story__skill'].append({
+skill['funny_story_skill'] = []
+skill['funny_story_skill'].append({
     'pre_answer': 'Tìm câu trả lời từ Skill truyện cười',
     'error_answer': 'Lỗi Skill truyện cười',
     'is_active': True    
