@@ -198,15 +198,10 @@ config['local_stt'].append({
 config['local_tts'] = []
 config['local_tts'].append({
     'name': 'tts_gg_free',
-    'token': '8sJJ39sdfsdfSIlkmBXC2fRGU',    
-    'voice_name': '',    
-    'speed': '',
-    'pitch': '',
     're_use': True,
     'is_active': True    
 })
 config['local_tts'].append({
-    'token': 'AIzaSyDsdfsdf_k16b3c',
     'token_file': 'google.json',    
     'name': 'tts_gg_cloud',    
     'voice_name': 'vi-VN-Wavenet-A',
@@ -227,8 +222,7 @@ config['local_tts'].append({
     'is_active': False   
 })
 config['local_tts'].append({
-    'token': 'SythBY7N8AUsfsdfq-jxLrWsdfsdRNwYE8N',
-    'token_file': '',    
+    'token': 'SythBsdfsdfsddfsdRNwYE8N',
     'name': 'tts_viettel',    
     'voice_name': 'hcm-diemmy2',
     'speed': 1.0,
@@ -238,7 +232,6 @@ config['local_tts'].append({
 })
 config['local_tts'].append({
     'token': '8sJJsdfsdffRGU',
-    'token_file': '',    
     'name': 'tts_zalo',
     'voice_name': '1',    
     'speed': 1.0,
