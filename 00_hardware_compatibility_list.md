@@ -19,7 +19,7 @@ Lưu ý:
 
 2.1. 2 Mic Hat: https://wiki.seeedstudio.com/ReSpeaker_2_Mics_Pi_HAT/ (Đã Test)
 
-2.2. ReSpeaker 4-Mic Array for Raspberry Pi: https://wiki.seeedstudio.com/ReSpeaker_4_Mic_Array_for_Raspberry_Pi/
+2.2. ReSpeaker 4-Mic Array for Raspberry Pi: https://wiki.seeedstudio.com/ReSpeaker_4_Mic_Array_for_Raspberry_Pi/ (Đã Test)
 
 2.3. ReSpeaker 4-Mic Linear Array Kit for Raspberry Pi: https://wiki.seeedstudio.com/ReSpeaker_4-Mic_Linear_Array_Kit_for_Raspberry_Pi/
 
@@ -27,7 +27,7 @@ Lưu ý:
 
 2.5. ReSpeaker USB Mic Array: https://wiki.seeedstudio.com/ReSpeaker-USB-Mic-Array/ (Đã Test)
 
-2.6. Mic USB trên thị trường mà Raspian tự nhận (Đã Test)
+2.6. Mic USB trên thị trường mà OS Raspian tự nhận (Đã Test)
 
 Lưu ý: 
 
@@ -37,13 +37,13 @@ Lưu ý:
 
 ### STEP3.  Danh sách các củ loa tương thích và khuyến nghị
 
-3.1 Củ loa đấu trực tiếp ko qua Amply: Loa toàn dải của GH Mini (Đã test)
+3.1 Củ loa đấu trực tiếp ko qua Amply: Loa toàn dải của GH Mini (Đã test), loa toàn dải của AKG (Đã test)
 
-3.2 Củ loa đấu qua qua Amply: Mọi loa toàn dải và có xử lý âm 360 (Đã test)
+3.2 Củ loa đấu qua qua Amply: Mọi loa toàn dải và có xử lý âm 360 
 
 Lưu ý: 
 
 - Chọn củ loa có cỡ phù hợp với phần còn lại của loa, tránh quá to khó chế vỏ
 
-- Củ loa tác giả khuyến nghị sử dụng: Củ loa của GH Mini
+- Củ loa tác giả khuyến nghị sử dụng: Củ loa của loa AKG
 
