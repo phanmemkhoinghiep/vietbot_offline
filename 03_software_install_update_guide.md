@@ -116,7 +116,7 @@ Truy cập vào thư mục vietbot_offline
 ```sh
 cd /home/pi/vietbot_offline/src
 ```
-Cài đặt các gói Python được list trong file requirements.txt
+Cài đặt các gói Python được list trong file requirements.txt để cài dặt các lib nếu cần
 ```sh
 python3 -m pip install -r requirements.txt
 
