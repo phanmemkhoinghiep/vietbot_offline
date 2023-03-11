@@ -177,8 +177,8 @@ config['local_stt'].append({
 })
 config['local_stt'].append({
     'name': 'stt_gg_ass',
-    'token': '',
-    'token_file': '',    
+    'credentials_file': 'credentials.json',
+    'device_config_file': 'device_config.json',    
     'time_out': 6000,
     'is_active': False    
 })
