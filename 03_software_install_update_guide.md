@@ -1,5 +1,6 @@
 ### STEP1. Download code về Pi khi chưa có Code
 Download Code về phần cứng raspberry theo cách sau:
+
 1.1. Truy cập vào Git
 Trên console của Pi, sử dụng lệnh sau
 Quay về thư mục gốc
