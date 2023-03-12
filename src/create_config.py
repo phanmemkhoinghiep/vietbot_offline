@@ -197,7 +197,9 @@ config['local_stt'].append({
 })
 config['local_tts'] = []
 config['local_tts'].append({
+    'token': '',
     'name': 'tts_gg_free',
+    'token': '',
     're_use': True,
     'is_active': True    
 })
