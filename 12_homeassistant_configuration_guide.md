@@ -33,11 +33,9 @@ python3 /home/pi/vietbot_offline/src/create_config.json
 
 ### STEP4. Chạy lại bot
 
-4.1. Chạy lại bot theo hướng dẫn tại https://github.com/phanmemkhoinghiep/vietbot/blob/main/running_guide.md
+4.1. Chạy lại bot theo hướng dẫn tại [https://github.com/phanmemkhoinghiep/vietbot/blob/main/running_guide.md](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/06_running_guide.md)
 
-4.2. Chờ khi nào có thông báo là: 'Đã kết nối thành công tới trung tâm điều khiển nhà' là kết nối với Hass thành công
-
-4.3. Chờ tiếp đến khi nào có thông báo là: 'Sẵn sàng chờ lệnh" là có thể ra lệnh với Hass
+4.2. Chờ tiếp đến khi nào có thông báo là: 'Sẵn sàng chờ lệnh" là có thể ra lệnh với Hass
 
 ### STEP4. Cách ra lệnh trên Hass
 
