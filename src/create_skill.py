@@ -4,7 +4,7 @@ skill = {}
 
 skill['time_skill'] = []
 skill['time_skill'].append({ 
-    'pre_answer': 'Kết quả được thông báo ngay sau đây',
+    'pre_answer': None,
     'error_answer': 'Lỗi tra cứu thời gian',
     'is_active': True    
 })
@@ -34,13 +34,13 @@ skill['music_skill'].append({
 })
 skill['lunar_calendar_skill'] = []
 skill['lunar_calendar_skill'].append({ 
-    'pre_answer': 'Kết quả được thông báo ngay sau đây',
+    'pre_answer': None,
     'error_answer': 'Lỗi tra cứu lịch âm',
     'is_active': True    
 })
 skill['anniversary_skill'] = []
 skill['anniversary_skill'].append({ 
-    'pre_answer': 'Kết quả được thông báo ngay sau đây',
+    'pre_answer': None,
     'error_answer': 'Lỗi tra cứu ngày kỉ niệm',
     'is_active': True    
 })
@@ -70,11 +70,11 @@ skill['lottery_skill'].append({
 })
 skill['hass_skill'] = []
 skill['hass_skill'].append({
-    'hass_url':'http://tvntech.ddns.net',    
-    'hass_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhNDkyNWIwYTE5NjU0NDNiOGEzZWVlN2FlMzM2ZTU0NiIsImlhdCI6MTY3NjExMTAwMywiZXhwIjoxOTkxNDcxMDAzfQ._ok2Ugo6FhuHCldz4gRFZHTvxB7KxjnV0V26hPNfE8M',
-    'pre_answer': 'Lệnh được thi hành ngay sau đây',
+    'hass_url':'http://myname.ddns.net',    
+    'hass_token': 'eysfdsfM',
+    'pre_answer': None,
     'error_answer': 'Lỗi kết nối đến Hass',
-    'is_active': True        
+    'is_active': False        
 })
 skill['funny_story_skill'] = []
 skill['funny_story_skill'].append({
@@ -84,9 +84,9 @@ skill['funny_story_skill'].append({
 })
 skill['simsim_skill'] = []
 skill['simsim_skill'].append({
-    'pre_answer': 'Tìm câu trả lời từ Sim sim',
+    'pre_answer': None,
     'error_answer': 'Lỗi Skill Sim sim',
-    'is_active': True    
+    'is_active': False    
 })
 skill['gass_skill'] = []
 skill['gass_skill'].append({
@@ -94,11 +94,11 @@ skill['gass_skill'].append({
     'device_config_file': 'device_config.json',    
     'pre_answer': None,
     'error_answer': 'Lỗi Google Assistant',
-    'is_active': False    
+    'is_active': True    
 })
 skill['chatgpt_skill'] = []
 skill['chatgpt_skill'].append({
-    'token': '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',
+    'token': 'sk-UR3fdsfsdsfsdfN03a',
     'engine': 'text-davinci-003',
     'pre_answer': 'Câu trả lời từ chatGPT có ngay sau đây',
     'error_answer': 'Lỗi chatGPT',
