@@ -70,7 +70,7 @@ skill['lottery_skill'].append({
 })
 skill['hass_skill'] = []
 skill['hass_skill'].append({
-    'hass_url':'http://myname.ddns.net',    
+    'hass_url': 'http://myname.ddns.net',    
     'hass_token': 'eysfdsfM',
     'pre_answer': None,
     'error_answer': 'Lỗi kết nối đến Hass',
