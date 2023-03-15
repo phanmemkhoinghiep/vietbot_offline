@@ -68,6 +68,13 @@ skill['lottery_skill'].append({
     'error_answer': 'Lỗi tra cứu kết quả sổ xố',
     'is_active': True    
 })
+skill['weather_skill'] = []
+skill['weather_skill'].append({ 
+    'openweathermap_key': 'ffddba060ff1a735f04ff426f85f070b',
+    'pre_answer': None,
+    'error_answer': 'Lỗi tra cứu thời tiết khu vực',     
+    'is_active': True    
+})
 skill['hass_skill'] = []
 skill['hass_skill'].append({
     'hass_url': 'http://myname.ddns.net',    
