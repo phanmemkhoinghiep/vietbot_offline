@@ -75,6 +75,12 @@ skill['weather_skill'].append({
     'error_answer': 'Lỗi tra cứu thời tiết khu vực',     
     'is_active': True    
 })
+skill['wikipedia_skill'] = []
+skill['wikipedia_skill'].append({
+    'pre_answer': 'Tìm câu trả lời từ Wikipedia',
+    'error_answer': 'Lỗi Skill Wikipedia',
+    'is_active': True    
+})
 skill['hass_skill'] = []
 skill['hass_skill'].append({
     'hass_url': 'http://myname.ddns.net',    
