@@ -291,5 +291,10 @@ config['button_data'].append({
     'function': 'direct_command',
     'is_active': False    
 })
+config['location'] = []
+config['location'].append({
+    'lon': 105.804817,
+    'lat': 21.028511
+})
 with open('config.json', 'w') as outfile:
     json.dump(config, outfile)
