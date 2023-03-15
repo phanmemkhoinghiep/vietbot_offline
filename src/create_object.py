@@ -104,6 +104,12 @@ obj['weather'] = []
 obj['weather'].append({
     'value': 'thời tiết'
 })
+obj['weather'].append({
+    'value': 'nắng mưa'
+})
+obj['weather'].append({
+    'value': 'mưa nắng'
+})
 obj['news'] = []
 obj['news'].append({
     'value': 'tin tức'
