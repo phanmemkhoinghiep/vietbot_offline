@@ -912,5 +912,22 @@ obj['lottery_data'].append({
     'location': 'vũng tàu',
     'link': 'https://xskt.com.vn/rss-feed/vung-tau-xsvt.rss'
 })
+obj['who_is'] = []
+obj['who_is'].append({
+    'value': 'là ai'    
+})
+obj['who_is'].append({
+    'value': 'ai là'    
+})
+obj['what_is'] = []
+obj['what_is'].append({
+    'value': 'là gì'    
+})
+obj['what_is'].append({
+    'value': 'cái gì'    
+})
+obj['what_is'].append({
+    'value': 'gì là'    
+})
 with open('object.json', 'w') as outfile:
     json.dump(obj, outfile)
