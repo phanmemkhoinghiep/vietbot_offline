@@ -19,7 +19,7 @@ Vietbot hỗ trợ các hotword của Porcupine cho Raspberry
 
 ### STEP2. Copy file
 
-2.1. Copy file alexa_raspberry-pi.ppn từ PC sang Pi Zero Wireless bằng WinSCP
+2.1. Copy các file .ppn từ PC sang Pi Zero Wireless bằng WinSCP vào đúng thư mục vietbot_offline/src/hotword
 
 ### STEP3. Khai báo cho hotword mới
 
@@ -37,10 +37,6 @@ cd /home/pi/vietbot_offline/src
 ```sh
 
 data['hotword_engine'] = []
-data['hotword_engine'].append({
-    'name': 'snowboy',
-    'is_active': True
-})
 data['hotword_engine'].append({
     'name': 'porcupine',
     'is_active': False,
