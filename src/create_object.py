@@ -919,6 +919,9 @@ obj['who_is'].append({
 obj['who_is'].append({
     'value': 'ai là'    
 })
+obj['who_is'].append({
+    'value': 'người nào'    
+})
 obj['what_is'] = []
 obj['what_is'].append({
     'value': 'là gì'    
@@ -928,6 +931,9 @@ obj['what_is'].append({
 })
 obj['what_is'].append({
     'value': 'gì là'    
+})
+obj['what_is'].append({
+    'value': 'gì nhỉ'    
 })
 with open('object.json', 'w') as outfile:
     json.dump(obj, outfile)
