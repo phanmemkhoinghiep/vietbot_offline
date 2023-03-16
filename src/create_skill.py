@@ -75,24 +75,24 @@ skill['weather_skill'].append({
     'error_answer': 'Lỗi tra cứu thời tiết khu vực',     
     'is_active': True    
 })
-skill['wikipedia_skill'] = []
-skill['wikipedia_skill'].append({
-    'pre_answer': 'Tìm câu trả lời từ Wikipedia',
-    'error_answer': 'Lỗi Skill Wikipedia',
-    'is_active': True    
-})
 skill['hass_skill'] = []
 skill['hass_skill'].append({
-    'hass_url': 'http://myname.ddns.net',    
-    'hass_token': 'eysfdsfM',
+    'hass_url': 'https://leluong76.co',    
+    'hass_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI2MmZlZjgyMTdmZjE0MDgyOTljYzM4NTNmNzFhNDFmMyIsImlhdCI6MTY2NuxQY-C_lbnIZwTAZu5wI74jsG2c',
     'pre_answer': None,
     'error_answer': 'Lỗi kết nối đến Hass',
-    'is_active': False        
+    'is_active': True
 })
 skill['funny_story_skill'] = []
 skill['funny_story_skill'].append({
     'pre_answer': 'Tìm câu trả lời từ Skill truyện cười',
     'error_answer': 'Lỗi Skill truyện cười',
+    'is_active': True    
+})
+skill['wikipedia_skill'] = []
+skill['wikipedia_skill'].append({
+    'pre_answer': 'Tìm câu trả lời từ Wikipedia',
+    'error_answer': 'Lỗi Skill Wikipedia',
     'is_active': True    
 })
 skill['simsim_skill'] = []
