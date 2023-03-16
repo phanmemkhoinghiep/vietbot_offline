@@ -50,6 +50,9 @@ act['execute'].append({
     'value': 'thực hiện'
 })
 act['execute'].append({
+    'value': 'thực thi'
+})
+act['execute'].append({
     'value': 'thi hành'
 })
 act['disable'] = []
@@ -152,14 +155,20 @@ act['setup'].append({
 act['setup'].append({
     'value': 'đặt'
 })
-act['setup'].append({
-    'value': 'chỉnh'
-})
+
 act['setup'].append({
     'value': 'thiết lập'
 })
-act['setup'].append({
+
+act['change'] = []
+act['change'].append({
+    'value': 'thay đổi'
+})
+act['change'].append({
     'value': 'chuyển'
+})
+act['change'].append({
+    'value': 'chỉnh'
 })
 with open('action.json', 'w') as outfile:
     json.dump(act, outfile)
