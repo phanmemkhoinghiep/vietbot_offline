@@ -169,10 +169,14 @@ act['change'].append({
     'value': 'thay đổi'
 })
 act['change'].append({
-    'value': 'chuyển'
-})
-act['change'].append({
     'value': 'chỉnh'
+})
+act['send'] = []
+act['send'].append({
+    'value': 'gửi'
+})
+act['send'].append({
+    'value': 'chuyển'
 })
 with open('action.json', 'w') as outfile:
     json.dump(act, outfile)

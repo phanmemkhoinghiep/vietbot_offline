@@ -117,7 +117,6 @@ skill['chatgpt_skill'].append({
     'error_answer': 'Lỗi chatGPT',
     'is_active': False        
 })
-})
 skill['hanet_skill'] = []
 skill['hanet_skill'].append({
     'agent_annoucement': 'Phát hiện người nhà hoặc nhân viên tên là',    
@@ -127,7 +126,7 @@ skill['hanet_skill'].append({
 })
 skill['telegram_skill'] = []
 skill['telegram_skill'].append({
-    'token': '60dfdsddoAeU',    
+    'token': '6068674110:AAEZE0cJirYzQyHKQUx4E_UzNMn52BdoAeU',    
     'pre_answer': 'Đang gửi Telegram tới đich',
     'error_answer': 'Lỗi Telegram',
     'is_active': False        

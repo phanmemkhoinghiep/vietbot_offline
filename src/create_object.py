@@ -935,7 +935,6 @@ obj['what_is'].append({
 obj['what_is'].append({
     'value': 'gì nhỉ'    
 })
-
 obj['information'] = []
 obj['information'].append({
     'value': 'thông tin'    
