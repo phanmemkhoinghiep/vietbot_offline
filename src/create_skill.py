@@ -117,9 +117,6 @@ skill['chatgpt_skill'].append({
     'error_answer': 'Lỗi chatGPT',
     'is_active': False        
 })
-skill['tts_speaker_skill'] = []
-skill['tts_speaker_skill'].append({
-    'is_active': False
 })
 skill['hanet_skill'] = []
 skill['hanet_skill'].append({
@@ -127,6 +124,13 @@ skill['hanet_skill'].append({
     'partner_annoucement': 'Phát hiện khách hoặc nhân viên tên là',    
     'stranger_annoucement': 'Phát hiện người lạ hoặc không nhận diện đủ gương mặt',    
     'is_active': False
+})
+skill['telegram_skill'] = []
+skill['telegram_skill'].append({
+    'token': '60dfdsddoAeU',    
+    'pre_answer': 'Đang gửi Telegram tới đich',
+    'error_answer': 'Lỗi Telegram',
+    'is_active': False        
 })
 with open('skill.json', 'w') as outfile:
     json.dump(skill, outfile)
