@@ -935,5 +935,44 @@ obj['what_is'].append({
 obj['what_is'].append({
     'value': 'gì nhỉ'    
 })
+
+obj['information'] = []
+obj['information'].append({
+    'value': 'thông tin'    
+})
+obj['detail'] = []
+obj['detail'].append({
+    'value': 'chi tiết'    
+})
+obj['volume'] = []
+obj['volume'].append({
+    'value': 'âm lượng'
+})
+obj['telegram'] = []
+obj['telegram'].append({
+    'value': 'telegram'
+})
+obj['telegram'].append({
+    'value': 'tele'
+})
+obj['telegram'].append({
+    'value': 'te le'
+})
+obj['telegram'].append({
+    'value': 'tê lê'
+})
+obj['content'] = []
+obj['content'].append({
+    'value': 'nội dung'
+})
+obj['telegram_data'] = []
+obj['telegram_data'].append({
+    'name': 'Thế Anh',
+    'chat_id': 6059124493    
+})
+obj['telegram_data'].append({
+    'name': 'Nguyễn Duy',
+    'chat_id': 6059124493    
+})
 with open('object.json', 'w') as outfile:
     json.dump(obj, outfile)
