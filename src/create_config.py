@@ -1,6 +1,44 @@
 import json
 
 config = {}
+config['input_module'] =[]
+config['input_module'].append({
+    'type': 'text',
+    'is_active': True            
+})
+config['input_module'].append({
+    'type': 'api',
+    'is_active': False            
+})
+config['input_module'].append({
+    'type': 'mic',
+    'is_active': True            
+})
+config['output_module'] =[]
+config['output_module'].append({
+    'type': 'text',
+    'is_active': True            
+})
+config['output_module'].append({
+    'type': 'speaker',
+    'is_active': True            
+})
+config['speaker'] = []
+config['speaker'].append({
+    'type': 'default',
+    'is_active': True            
+})
+config['speaker'].append({
+    'type': 'cast',
+    'name': 'cast_speaker',
+    'IP': '192.168.1.10',    
+    'is_active': False            
+})
+config['speaker'].append({
+    'type': 'bluetooth',
+    'MAC': '',    
+    'is_active': False            
+})
 config['mic'] = []
 config['mic'].append({
     'type': 'None Respeaker Mic',
