@@ -334,5 +334,9 @@ config['location'].append({
     'lon': 105.804817,
     'lat': 21.028511
 })
+config['volume_annoucement'] = []
+config['volume_annoucement'].append({
+    'is_active': False   
+})
 with open('config.json', 'w') as outfile:
     json.dump(config, outfile)
