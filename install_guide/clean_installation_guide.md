@@ -1,4 +1,4 @@
-### ĐÂY LÀ HƯỚNG DẪN CÀI ĐẶT PHẦN HỆ ĐIỀU HÀNH, THƯ VIỆN, DRIVER CHO PI, MODUN 2 MIC HAT, 4 MIC ARRAY HOẶC MIC USB
+### ĐÂY LÀ HƯỚNG DẪN CÀI ĐẶT TỪ ĐẦU CHO RASPBERRY
 
 ### STEP1. Cài đặt hệ điều hành Raspbian
 
@@ -327,6 +327,21 @@ aplay --format=S16_LE --rate=16000 out.raw
 ```sh
 arecord --format=S16_LE --rate=16000 | aplay --format=S16_LE --rate=16000
 ```
+
+### STEP6. Cài đặt Code
+Download Code về phần cứng raspberry theo cách sau:
+6.1. Truy cập vào Git
+Trên console của Pi, sử dụng lệnh sau
+Quay về thư mục gốc
+```sh
+cd ~
+```
+Sau đó
+```sh
+git clone -b beta --single-branch https://github.com/phanmemkhoinghiep/vietbot_offline.git
+```
+Chờ cho đến khi kết thúc
+
 Đi đến mục tiếp theo
 ![TỐI ƯU CHO RASPBIAN](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/023_software_enviroment_installation_optimize.md)
 
