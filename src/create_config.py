@@ -334,6 +334,10 @@ config['location'].append({
     'lon': 105.804817,
     'lat': 21.028511
 })
+config['web_interface'] = []
+config['web_interface'].append({
+    'port': 5000,
+})                             
 config['volume_annoucement'] = []
 config['volume_annoucement'].append({
     'is_active': False   
