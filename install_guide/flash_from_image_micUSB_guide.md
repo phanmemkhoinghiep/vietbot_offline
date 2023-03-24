@@ -107,35 +107,50 @@ tiếp tục tìm tới 2 dòng sau
 # defaults
 defaults.pcm.device 0
 defaults.pcm.subdevice 0
-```
+
 Thay thế ký tự '0' bằng kết quả đã lưu cho <device_id>, ví dụ device_id là 0, thì không phải thay
 
+5.2. Chọn đúng Speaker (Trong trường hợp dùng các dòng Pi có cổng 3.5)
 
-5.3. Đưa Account đang dùng (Ví dụ pi) vào group root
+5.2.1. Chạy lệnh
+
+```sh
+sudo raspi-config
+```
+
+5.2.2. Vào các mục mục System Option, Audio, chọn USB Audio rồi Enter, chọn OK rồi Finish
+
+5.2.3 Chọn Reboot hoặc bỏ qua Reboot, sau đó reboot bằng lệnh:
+
+```sh
+sudo reboot
+```
+
+5.4. Đưa Account đang dùng (Ví dụ pi) vào group root
 
 Chạy lệnh sau
 ```sh
 sudo usermod -aG root pi
 ```
-5.4. fix lỗi bot không hoạt động sau 1 thời gian.
+5.5. fix lỗi bot không hoạt động sau 1 thời gian.
 
 Chạy lệnh sau
 ```sh
 sudo usermod -aG audio root
 ```
 
-5.5. Reboot lại Pi
+5.6. Reboot lại Pi
 Chạy lệnh sau
 ```sh
 sudo reboot
 ```
-5.6. Test loa và mic sau khi cài
+5.7. Test loa và mic sau khi cài
 
-5.6.1. Test loa bằng lệnh sau
+5.7.1. Test loa bằng lệnh sau
 ```sh
 speaker-test -t wav -c 2
 ```
-5.6.2. Test Mic bằng lệnh sau 
+5.7.2. Test Mic bằng lệnh sau 
 Ghi âm
 ```sh
 arecord --format=S16_LE --duration=5 --rate=16000 --file-type=raw out.raw
@@ -144,7 +159,7 @@ Phát lại
 ```sh
 aplay --format=S16_LE --rate=16000 out.raw
 ```
-5.6.3. Test stream giữa Mic và Loa bằng lệnh sau
+5.7.3. Test stream giữa Mic và Loa bằng lệnh sau
 ```sh
 arecord --format=S16_LE --rate=16000 | aplay --format=S16_LE --rate=16000
 ```
