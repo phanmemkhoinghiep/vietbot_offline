@@ -139,8 +139,40 @@ Bấm Ctrl + X, rồi Y để Save lại
 
 ### STEP4. Cài đặt Mic2Hat
 
+4.1. Cài đặt Driver Mic2Hat
 
-4.1. Cài đặt âm lượng
+Chạy lần lượt các lệnh sau
+
+```sh
+sudo apt-get update -y
+```
+sau đó 
+```sh
+sudo apt-get upgrade -y
+```
+sau đó
+
+```sh
+git clone https://github.com/HinTak/seeed-voicecard
+```
+sau đó
+```sh
+cd seeed-voicecard
+```
+sau đó
+```sh
+sudo ./install.sh
+```
+chờ cài đặt kết thúc
+
+khởi động lại
+
+```sh
+sudo reboot
+
+```
+
+4.2. Cài đặt âm lượng
 
 Vào alxamixer bằng lệnh
 
@@ -155,13 +187,13 @@ Gõ lệnh sau để lưu lại
 sudo alsactl store
 ```
 
-4.2. Test loa và mic sau khi cài
+4.3. Test loa và mic sau khi cài
 
-4.2.1. Test loa bằng lệnh sau
+4.3.1. Test loa bằng lệnh sau
 ```sh
 speaker-test -t wav -c 2
 ```
-4.2.2. Test Mic bằng lệnh sau 
+4.3.2. Test Mic bằng lệnh sau 
 Ghi âm
 ```sh
 arecord --format=S16_LE --duration=5 --rate=16000 --file-type=raw out.raw
@@ -170,7 +202,7 @@ Phát lại
 ```sh
 aplay --format=S16_LE --rate=16000 out.raw
 ```
-4.2.3. Test stream giữa Mic và Loa bằng lệnh sau
+4.3.3. Test stream giữa Mic và Loa bằng lệnh sau
 ```sh
 arecord --format=S16_LE --rate=16000 | aplay --format=S16_LE --rate=16000
 ```
