@@ -62,25 +62,9 @@ sudo raspi-config
 
 4.2.5. Chọn Yes để Reboot
 
-### STEP5. Khai báo Mic
+### STEP5. Khai báo Mic 2Hat, Mic 4Hat Respeaker
 
-5.1. Cài đặt cho Mic 2 Hat, Mic 4Hat
-
-5.1.1. Tạo một file rỗng asound.conf tại thư mục /home/pi như sau
-
-```sh
-sudo nano /home/pi/.asoundrc
-```
-Gõ space bar sau đó gõ backspace
-Bấm lần lượt Ctrl + X, sau đó Y rồi Enter
-
-5.1.2. Copy file thiết lập cho mọi account (Nếu chỉ dùng Account Pi thì bỏ qua bước này)
-
-Chạy lệnh sau
-```sh
-sudo cp /home/pi/.asoundrc /etc/asound.conf
-```
-5.1.3. Cài đặt âm lượng
+5.1. Cài đặt âm lượng
 
 Vào alxamixer bằng lệnh
 
@@ -95,68 +79,13 @@ Gõ lệnh sau để lưu lại
 sudo alsactl store
 ```
 
-5.2. Cài đặt cho Mic USB (Mic USB thường và Mic Respeaker USB)
+5.2. Test loa và mic sau khi cài
 
-5.2.1. Thống kê ID của Mic USB và Loa 
-
-Chạy lệnh sau để biết ID của Mic USB
-```sh
-arecord -l
-```
-sau đó chạy lệnh sau để biết ID của Loa
-
-```sh
-aplay -l
-```
-Lưu lại thông tin về card_id và device_id ở mỗi kết quả lệnh
-
-5.2.2. Khai báo Default cho ALSA
-
-Chạy lệnh sau 
-
-```sh
-sudo nano /usr/share/alsa/alsa.conf
-```
-Cửa sổ nano hiện lên, tìm tới 2 dòng sau
-```sh
-# defaults
-defaults.ctl.card 0
-defaults.pcm.card 0
-
-```
-Thay thế ký tự '0' bằng kết quả đã lưu cho <card_id>, ví dụ 1
-
-tiếp tục tìm tới 2 dòng sau
-```sh
-# defaults
-defaults.pcm.device 0
-defaults.pcm.subdevice 0
-```
-Thay thế ký tự '0' bằng kết quả đã lưu cho <device_id>, ví dụ 1 (Nếu 0 thì ko phải thay)
-
-5.2.3. Đưa Account đang dùng (Ví dụ pi) vào group root
-
-Chạy lệnh sau
-```sh
-sudo usermod -aG root pi
-```
-5.2.4. fix lỗi bot không hoạt động sau 1 thời gian.
-Chạy lệnh sau
-```sh
-sudo usermod -aG audio root
-```
-5.2.5. Reboot lại Pi
-Chạy lệnh sau
-```sh
-sudo reboot
-```
-5.3. Test loa và mic sau khi cài
-
-5.3.1. Test loa bằng lệnh sau
+5.2.1. Test loa bằng lệnh sau
 ```sh
 speaker-test -t wav -c 2
 ```
-5.3.2. Test Mic bằng lệnh sau 
+5.2.2. Test Mic bằng lệnh sau 
 Ghi âm
 ```sh
 arecord --format=S16_LE --duration=5 --rate=16000 --file-type=raw out.raw
@@ -165,12 +94,9 @@ Phát lại
 ```sh
 aplay --format=S16_LE --rate=16000 out.raw
 ```
-5.3.3. Test stream giữa Mic và Loa bằng lệnh sau
+5.2.3. Test stream giữa Mic và Loa bằng lệnh sau
 ```sh
 arecord --format=S16_LE --rate=16000 | aplay --format=S16_LE --rate=16000
 ```
 
 Tiếp đó chuyển qua 
-
-![CÀI ĐẶT, CẬP NHẬT PHẦN MỀM](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/main/03_software_install_update_guide.md) 
-
