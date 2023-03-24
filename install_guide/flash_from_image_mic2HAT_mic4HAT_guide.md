@@ -31,7 +31,7 @@ network={
 }
 ```
 3.4. Save lại nội dung File
-
+ 
 3.5. Tạo một file rỗng có tên là SSH
 có thể tải file SSH mẫu chuẩn ở link này
 [GOOGLE DRIVE](https://drive.google.com/file/d/1QCAYZMTlXJ7Zx3ZW8iKjiXDVuGqZMqTc/view?usp=sharing)
