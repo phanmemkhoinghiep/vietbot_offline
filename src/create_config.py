@@ -8,13 +8,17 @@ config['input_module'].append({
 })
 config['input_module'].append({
     'type': 'api',
-    'is_active': False            
+    'is_active': True            
 })
 config['input_module'].append({
     'type': 'mic',
     'is_active': True            
 })
 config['output_module'] =[]
+config['output_module'].append({
+    'type': 'api',
+    'is_active': True            
+})
 config['output_module'].append({
     'type': 'text',
     'is_active': True            
@@ -46,7 +50,7 @@ config['mic'].append({
     'led_off_color': '',
     'led_think_mode': '',    
     'led_thing_color': '',            
-    'is_active': True            
+    'is_active': False            
 })
 config['mic'].append({
     'type': 'ReSpeaker 2-Mics Pi HAT',
@@ -77,23 +81,33 @@ config['mic'].append({
     'led_off_color': 'fffcff',
     'led_wakeup_mode': 2,
     'led_wakeup_color': '074a25',    
-    'is_active': False        
+    'is_active': True        
 })
 config['volume'] = []
 config['volume'].append({
-    'value': 50 
+    'value': 20 
 })
 config['hotword_engine'] = []
 config['hotword_engine'].append({
-    'name': 'snowboy',
-    'is_active': False
+    'name': 'google',
+    'is_active': True
 })
 config['hotword_engine'].append({
     'name': 'porcupine',
     'is_active': True,
-    'porcupine_access_key': 'pJwvvm7JQ=='
+    'porcupine_access_key': 'pJwv7qAbPrw9yXx2D3QeceV39+Rn+KW35JBTeyEal70VOOWoDvm7JQ=='
 })
 config['hotword'] = []
+config['hotword'].append({
+    'type': 'google',
+    'value': 'em ơi',    
+    'is_active': True    
+})
+config['hotword'].append({
+    'type': 'google',
+    'value': 'ê cu',    
+    'is_active': True    
+})
 config['hotword'].append({
     'type': 'porcupine',
     'file_name': 'vi-ci-ci_en_raspberry-pi.ppn',    
@@ -205,13 +219,13 @@ config['local_stt'] = []
 config['local_stt'].append({
     'name': 'stt_gg_free',
     'time_out': 6000,
-    'is_active': True    
+    'is_active': False    
 })
 config['local_stt'].append({
     'name': 'stt_gg_cloud',
     'token_file': 'google.json',    
     'time_out': 6000,
-    'is_active': False    
+    'is_active': True    
 })
 config['local_stt'].append({
     'name': 'stt_gg_ass',
@@ -222,7 +236,7 @@ config['local_stt'].append({
 })
 config['local_stt'].append({
     'name': 'stt_viettel',
-    'token': 'SythdWRNwYE8N',
+    'token': 'SythBY7N8AUndsdfsdfWpxlyXxzdWRNwYE8N',
     'time_out': 4000,
     'is_active': False    
 })
@@ -235,13 +249,16 @@ config['local_stt'].append({
 })
 config['local_tts'] = []
 config['local_tts'].append({
-    'token': '',
     'name': 'tts_gg_free',
-    'voice_name': '',
+    'token': '8sJJ39sdfsdfSIlkmBXC2fRGU',    
+    'voice_name': '',    
+    'speed': '',
+    'pitch': '',
     're_use': True,
-    'is_active': True    
+    'is_active': False    
 })
 config['local_tts'].append({
+    'token': 'AIzaSyDsdfsdf_k16b3c',
     'token_file': 'google.json',    
     'name': 'tts_gg_cloud',    
     'voice_name': 'vi-VN-Wavenet-A',
@@ -249,12 +266,12 @@ config['local_tts'].append({
     'speed': 1.0,
     'pitch': 0,
     're_use': True,
-    'is_active': False    
+    'is_active': True    
 })
 config['local_tts'].append({
     'token': 'dfgdfgdfgARWDFSc',
     'name': 'tts_gg_cloud_free',    
-    'voice_name': 'vi-VN-Wavenet-B',
+    'voice_name': 'vi-VN-Wavenet-A',
     'profile': 'telephony-class-application',      
     'speed': 1.0,
     'pitch': 0,
@@ -262,7 +279,8 @@ config['local_tts'].append({
     'is_active': False   
 })
 config['local_tts'].append({
-    'token': 'SythBsdfsdfsddfsdRNwYE8N',
+    'token': 'SythBY7N8AUsfsdfq-jxLrWsdfsdRNwYE8N',
+    'token_file': '',    
     'name': 'tts_viettel',    
     'voice_name': 'hcm-diemmy2',
     'speed': 1.0,
@@ -272,6 +290,7 @@ config['local_tts'].append({
 })
 config['local_tts'].append({
     'token': '8sJJsdfsdffRGU',
+    'token_file': '',    
     'name': 'tts_zalo',
     'voice_name': '1',    
     'speed': 1.0,
@@ -306,14 +325,14 @@ config['button_data'].append({
     'type': 'touch',
     'pulse': True,    
     'function': 'volume_down',
-    'is_active': False    
+    'is_active': True    
 })
 config['button_data'].append({
     'gpio_address': 5,
     'type': 'touch',
     'pulse': True,    
     'function': 'volume_up',
-    'is_active': False    
+    'is_active': True    
 })
 config['button_data'].append({
     'gpio_address': 25,
@@ -327,7 +346,7 @@ config['button_data'].append({
     'type': 'touch',    
     'pulse': True,    
     'function': 'direct_command',
-    'is_active': False    
+    'is_active': True    
 })
 config['location'] = []
 config['location'].append({
@@ -337,10 +356,27 @@ config['location'].append({
 config['web_interface'] = []
 config['web_interface'].append({
     'port': 5000,
-})                             
-config['volume_annoucement'] = []
-config['volume_annoucement'].append({
-    'is_active': False   
+})
+config['sound_event'] = []                             
+config['sound_event'].append({
+    'name': 'system_start',
+    'value': 'sound/ding.mp3'        
+})
+config['sound_event'].append({
+    'name': 'system_finish',
+    'value': 'sound/dong.mp3'        
+})
+config['sound_event'].append({
+    'name': 'bot_start',
+    'value': 'sound/ding.mp3'        
+})
+config['sound_event'].append({
+    'name': 'bot_welcome',
+    'value': 'Xin chào mời đọc khẩu lệnh để ra lệnh'        
+})
+config['sound_event'].append({
+    'name': 'bot_volume',
+    'is_active': True   
 })
 with open('config.json', 'w') as outfile:
     json.dump(config, outfile)
