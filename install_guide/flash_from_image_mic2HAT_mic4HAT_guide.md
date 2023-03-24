@@ -1,10 +1,10 @@
-### ĐÂY LÀ HƯỚNG DẪN CÀI ĐẶT PHẦN HỆ ĐIỀU HÀNH, THƯ VIỆN, DRIVER CHO PI ZERO WIRLESS, MODUN 2 MIC HAT, 4 MIC ARRAY HOẶC MIC USB TỪ IMAGE CÓ SẴN
+### ĐÂY LÀ HƯỚNG DẪN CÀI ĐẶT PHẦN HỆ ĐIỀU HÀNH, THƯ VIỆN, DRIVER CHO PI ZERO WIRLESS, MODUN 2 MIC HAT, 4 MIC ARRAY
 
 ### STEP1. Download bộ Image cho Raspberry Pi đã cài đặt sẵn
 
-Download bộ Image cho Raspberry Pi đã cài đặt sẵn cho tất cả các loại Mic tại Link sau
+Download bộ Image cho Raspberry Pi đã cài đặt sẵn cho Mic2Hat
 
-[GOOGLE DRIVE FILE NÉN 1.4G](https://drive.google.com/file/d/1SZwM6F2k0eiubYJ0VcXg47Me68E9WReX/view?usp=sharing)
+([GOOGLE DRIVE FILE NÉN](https://drive.google.com/file/d/1JNoFlm4zSZ7A5g4SpKBxg8-_SZubZ97U/view))
 
 ### STEP2. Ghi vào thẻ SD
 
