@@ -58,7 +58,7 @@ config['mic'].append({
     'led_off_color': '',
     'led_think_mode': '',    
     'led_thing_color': '',            
-    'is_active': False        
+    'is_active': True        
 })
 config['mic'].append({
     'type': 'ReSpeaker 2-Mics Pi HAT with WS281x LED',
@@ -81,7 +81,7 @@ config['mic'].append({
     'led_off_color': 'fffcff',
     'led_wakeup_mode': 2,
     'led_wakeup_color': '074a25',    
-    'is_active': True        
+    'is_active': False        
 })
 config['volume'] = []
 config['volume'].append({
