@@ -112,13 +112,13 @@ config['hotword'].append({
     'type': 'porcupine',
     'file_name': 'vi-ci-ci_en_raspberry-pi.ppn',    
     'sensitive': 0.4,        
-    'is_active': True    
+    'is_active': False    
 })
 config['hotword'].append({
     'type': 'porcupine',
     'file_name': 'alexa_raspberry-pi.ppn',    
     'sensitive': 0.4,        
-    'is_active': True    
+    'is_active': False    
 })
 config['hotword'].append({
     'type': 'porcupine',
@@ -130,13 +130,13 @@ config['hotword'].append({
     'type': 'porcupine',
     'file_name': 'blueberry_raspberry-pi.ppn',    
     'sensitive': 0.4,        
-    'is_active': True    
+    'is_active': False    
 })
 config['hotword'].append({
     'type': 'porcupine',
     'file_name': 'bumblebee_raspberry-pi.ppn',    
     'sensitive': 0.4,        
-    'is_active': True    
+    'is_active': False    
 })
 config['hotword'].append({
     'type': 'porcupine',
@@ -148,19 +148,19 @@ config['hotword'].append({
     'type': 'porcupine',
     'file_name': 'grapefruit_raspberry-pi.ppn',    
     'sensitive': 0.4,        
-    'is_active': True    
+    'is_active': False    
 })
 config['hotword'].append({
     'type': 'porcupine',
     'file_name': 'grasshopper_raspberry-pi.ppn',    
     'sensitive': 0.4,        
-    'is_active': True    
+    'is_active': False    
 })
 config['hotword'].append({
     'type': 'porcupine',
     'file_name': 'hey barista_raspberry-pi.ppn',    
     'sensitive': 0.4,        
-    'is_active': True    
+    'is_active': False    
 })
 config['hotword'].append({
     'type': 'porcupine',
@@ -178,7 +178,7 @@ config['hotword'].append({
     'type': 'porcupine',
     'file_name': 'jarvis_raspberry-pi.ppn',    
     'sensitive': 0.4,        
-    'is_active': True   
+    'is_active': False   
 })
 config['hotword'].append({
     'type': 'porcupine',
@@ -190,7 +190,7 @@ config['hotword'].append({
     'type': 'porcupine',
     'file_name': 'pico clock_raspberry-pi.ppn',    
     'sensitive': 0.4,        
-    'is_active': True    
+    'is_active': False    
 })
 config['hotword'].append({
     'type': 'porcupine',
@@ -202,7 +202,7 @@ config['hotword'].append({
     'type': 'porcupine',
     'file_name': 'porcupine_raspberry-pi.ppn',    
     'sensitive': 0.4,        
-    'is_active': True    
+    'is_active': False    
 })
 config['hotword'].append({
     'type': 'porcupine',
@@ -219,13 +219,13 @@ config['local_stt'] = []
 config['local_stt'].append({
     'name': 'stt_gg_free',
     'time_out': 6000,
-    'is_active': False    
+    'is_active': True    
 })
 config['local_stt'].append({
     'name': 'stt_gg_cloud',
     'token_file': 'google.json',    
     'time_out': 6000,
-    'is_active': True    
+    'is_active': False    
 })
 config['local_stt'].append({
     'name': 'stt_gg_ass',
@@ -236,7 +236,7 @@ config['local_stt'].append({
 })
 config['local_stt'].append({
     'name': 'stt_viettel',
-    'token': 'SythBY7N8AUndsdfsdfWpxlyXxzdWRNwYE8N',
+    'token': 'SythBY7dWRNwYE8N',
     'time_out': 4000,
     'is_active': False    
 })
@@ -250,15 +250,15 @@ config['local_stt'].append({
 config['local_tts'] = []
 config['local_tts'].append({
     'name': 'tts_gg_free',
-    'token': '8sJJ39sdfsdfSIlkmBXC2fRGU',    
+    'token': '8sJJmBXC2fRGU',    
     'voice_name': '',    
     'speed': '',
     'pitch': '',
     're_use': True,
-    'is_active': False    
+    'is_active': True    
 })
 config['local_tts'].append({
-    'token': 'AIzaSyDsdfsdf_k16b3c',
+    'token': 'AIza_k16b3c',
     'token_file': 'google.json',    
     'name': 'tts_gg_cloud',    
     'voice_name': 'vi-VN-Wavenet-A',
@@ -266,7 +266,7 @@ config['local_tts'].append({
     'speed': 1.0,
     'pitch': 0,
     're_use': True,
-    'is_active': True    
+    'is_active': False    
 })
 config['local_tts'].append({
     'token': 'dfgdfgdfgARWDFSc',
@@ -279,7 +279,7 @@ config['local_tts'].append({
     'is_active': False   
 })
 config['local_tts'].append({
-    'token': 'SythBY7N8AUsfsdfq-jxLrWsdfsdRNwYE8N',
+    'token': 'SythBY7NsdRNwYE8N',
     'token_file': '',    
     'name': 'tts_viettel',    
     'voice_name': 'hcm-diemmy2',
@@ -325,14 +325,14 @@ config['button_data'].append({
     'type': 'touch',
     'pulse': True,    
     'function': 'volume_down',
-    'is_active': True    
+    'is_active': False    
 })
 config['button_data'].append({
     'gpio_address': 5,
     'type': 'touch',
     'pulse': True,    
     'function': 'volume_up',
-    'is_active': True    
+    'is_active': False    
 })
 config['button_data'].append({
     'gpio_address': 25,
@@ -346,7 +346,7 @@ config['button_data'].append({
     'type': 'touch',    
     'pulse': True,    
     'function': 'direct_command',
-    'is_active': True    
+    'is_active': False    
 })
 config['location'] = []
 config['location'].append({
@@ -376,7 +376,7 @@ config['sound_event'].append({
 })
 config['sound_event'].append({
     'name': 'bot_volume',
-    'is_active': True   
+    'is_active': False   
 })
 with open('config.json', 'w') as outfile:
     json.dump(config, outfile)
