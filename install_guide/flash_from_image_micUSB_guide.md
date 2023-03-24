@@ -106,17 +106,17 @@ defaults.pcm.subdevice 0
 
 Thay thế ký tự '0' bằng kết quả đã lưu cho <device_id>, ví dụ device_id là 0, thì không phải thay
 
-5.2. Chọn đúng Speaker (Trong trường hợp dùng các dòng Pi có cổng 3.5)
+5.3. Chọn đúng Speaker (Trong trường hợp dùng các dòng Pi có cổng 3.5)
 
-5.2.1. Chạy lệnh
+5.3.1. Chạy lệnh
 
 ```sh
 sudo raspi-config
 ```
 
-5.2.2. Vào các mục mục System Option, Audio, chọn USB Audio rồi Enter, chọn OK rồi Finish
+5.3.2. Vào các mục mục System Option, Audio, chọn USB Audio rồi Enter, chọn OK rồi Finish
 
-5.2.3 Chọn Reboot hoặc bỏ qua Reboot, sau đó reboot bằng lệnh:
+5.3.3 Chọn Reboot hoặc bỏ qua Reboot, sau đó reboot bằng lệnh:
 
 ```sh
 sudo reboot
