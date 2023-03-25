@@ -664,34 +664,6 @@ obj['light_color_data'].append({
     'G':255,
     'B':0    
 })
-obj['currency_rate'] = []
-obj['currency_rate'].append({
-    'value': 'tỷ giá'
-})
-obj['currency_rate'].append({
-    'value': 'ngoại tệ'
-})
-obj['currency_rate_data'] = []
-obj['currency_rate_data'].append({
-    'name': 'đô la',
-    'code': 'USD'    
-})
-obj['currency_rate_data'].append({
-    'name': 'đôla',
-    'code': 'USD'    
-})
-obj['currency_rate_data'].append({
-    'name': 'ơ rô',
-    'code': 'EUR'    
-})    
-obj['currency_rate_data'].append({
-    'name': 'ơrô',
-    'code': 'EUR'    
-}) 
-obj['currency_rate_data'].append({
-    'name': 'bảng anh',
-    'code': 'GBP'    
-})
 obj['gold_rate'] = []    
 obj['gold_rate'].append({
     'value': 'giá vàng'
@@ -751,6 +723,36 @@ obj['gold_rate_data'].append({
 obj['gold_rate_data'].append({
     'location': 'Quảng Nam'
 })
+obj['currency_rate'] = []
+obj['currency_rate'].append({
+    'value': 'tỷ giá'
+})
+obj['currency_rate'].append({
+    'value': 'ngoại tệ'
+})
+obj['currency_rate_data'] = []
+obj['currency_rate_data'].append({
+    'name': 'đô la',
+    'code': 'USD'    
+})
+obj['currency_rate_data'].append({
+    'name': 'bảng anh',
+    'code': 'GBP'    
+})
+obj['currency_rate_data'].append({
+    'name': 'ơ rô',
+    'code': 'EUR'    
+})
+obj['currency_rate_data'].append({
+    'name': 'yên',
+    'code': 'JPY'    
+})    
+obj['currency_rate_data'].append({
+    'name': 'rúp',
+    'code': 'RUB'    
+}) 
+
+
 obj['lottery'] = []
 obj['lottery'].append({
     'value': 'sổ xố'    
