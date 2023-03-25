@@ -1,17 +1,35 @@
 ### HƯỚNG DẪN CÀI ĐẶT VÀ SỬ DỤNG
-Vietbot hỗ trợ tính năng phát TTS trực tiếp, tức thời
+Vietbot hỗ trợ tính năng xử lý API thông qua nhận RestFull và phản hồi lại 
 
-### STEP1. Truyền text vào TTS để phát thông báo
+### STEP1. Enable Module API trong Config
+1.1. Sửa File config như sau:
+```sh
 
-1.1 Truyền trực tiếp
-Truyền trực tiếp qua giao diện
- http://X.X.X.X:5000/
- 
- Gõ Text, sau đó bấm Submit
+config['input_module'].append({
+    'type': 'api',
+    'is_active': True            
+})
+config['output_module'] =[]
+config['output_module'].append({
+    'type': 'api',
+    'is_active': True            
+})
 
-1.2. Truyền qua API
+```
+sau đó Save lại
 
-1.2.1. Mô tả API
+1.2. Gen file config.json như sau
+Sau đó 
+
+```sh
+
+python3 /home/pi/vietbot_offline/src/create_config.py  
+
+```
+
+### STEP2. Truyền text vào Vietbot để phát thành âm thanh
+
+2.1. Mô tả API
 
 Địa chỉ: http://X.X.1.X:5000/api
 
@@ -19,18 +37,48 @@ Phương thức: POST
 
 Định dạng bản tin: json
 
-Cấu trúc bản tin: {"data":"Nội dung cần phát"} 
+Cấu trúc bản tin: {"data":"Nội dung cần phát","type":1} 
 
-Phản hồi thành công: TTS sẽ trả về nội dung 'Playback OK'
+2.2 Phản hồi
 
-Phản hồi không thành công: Trả về nội dung 'Playback not OK'
+2.2.1 Phản hồi thành công: 
+
+TTS sẽ trả về bản tin json với payload:
 
 ```sh
-[BOT-TTS-GOOGLE-CLOUD]: Cộng hòa xã hội chủ nghĩa Việt Nam. Độc lập tự do hạnh phúc
-Delayed: 5(s)
-192.168.1.106 - - [27/Apr/2021 10:16:04] "POST HTTP/1.1" 200 -
+
+'state':'OK','result':'Speak TTS OK'
+
 ```
-1.2.2. Ví dụ với Home Assistant
+2.3 Phản hồi không thành công
+
+2.3.1. Do không kích hoạt Module Speaker Ouput
+```sh
+
+'state':'Failed','result':'Ouput Speaker in Vietbot config not enable'
+
+```
+2.3.2. Giá trị type bị đưa sai
+
+```sh
+'state':'Failed','result':'type in request payload is invalid'
+
+```
+
+2.3.4. Tiến trình xử lý trên Vietbot đang bị lỗi 
+
+```sh
+'state':'Failed','result':'Vietbot process error'                        
+
+```
+2.3.5. Và cuối cùng là sai định dạng 
+
+```sh
+'state' : 'Failed','result':'Payload of request is invalid format' 
+
+```
+2.4. Ví dụ
+2.4.1 Với Home Assistant
 
 Khai báo trong configuration.yaml
 ```sh
@@ -38,7 +86,7 @@ rest_command:
   vietbot_tts:
     url: http://192.168.1.109:5000/api
     method: POST
-    payload: '{"data":"{{ data }}"}'
+    payload: '{"data":"{{ data }}","type":1}'
     content_type: 'application/json; charset=utf-8'
 automation:
   alias: test
@@ -56,4 +104,114 @@ automation:
         data: Đã tắt đèn rồi nhé anh 
   mode: single
 ```
+### STEP3. Truyền câu lệnh vào Vietbot để trả lời
 
+3.1. Mô tả API
+
+Địa chỉ: http://X.X.1.X:5000/api
+
+Phương thức: POST
+
+Định dạng bản tin: json
+
+Cấu trúc bản tin: {"data":"Nội dung cần phát","type":2} 
+
+3.2 Phản hồi
+
+3.2.1 Phản hồi thành công: 
+
+TTS sẽ trả về bản tin json với payload:
+
+```sh
+
+'state':'Success','answer_text':text,'answer_link':link
+
+```
+Trong đó text, link là câu trả lời và link online của bài hát, kênh Radio (Nếu có)
+
+2.3 Phản hồi không thành công
+
+2.3.1. Giá trị type bị đưa sai
+
+```sh
+'state':'Failed','result':'type in request payload is invalid'
+
+```
+
+2.3.2. Tiến trình xử lý trên Vietbot đang bị lỗi 
+
+```sh
+'state':'Failed','result':'Vietbot process error'                        
+
+```
+2.3.3. Và cuối cùng là sai định dạng 
+
+```sh
+'state' : 'Failed','result':'Payload of request is invalid format' 
+
+```
+
+2.4. Ví dụ
+2.4.1 Với Home Assistant
+
+Khai báo trong configuration.yaml
+```sh
+rest_command:
+  vietbot_tts:
+    url: http://192.168.1.109:5000/api
+    method: POST
+    payload: '{"data":"{{ data }}","type":2}'
+    content_type: 'application/json; charset=utf-8'
+automation:
+  alias: test
+  description: ''
+  trigger:
+    - platform: device
+      type: turned_off
+      device_id: cc94e4e74c8e7bcf0a9f2649637d3734
+      entity_id: switch.0x588e81fffede3767_switch_l2
+      domain: switch
+  condition: []
+  action:
+    - service: rest_command.vietbot_tts
+      data:
+        data: Tắt Tivi phòng khách 
+  mode: single
+```
+### STEP4. Nhận cảnh báo tù Cam Hanet và đọc ra loa
+
+4.1. Mô tả API
+
+Địa chỉ: http://X.X.1.X:5000/api
+
+Phương thức: POST
+
+Định dạng bản tin: json
+
+Cấu trúc bản tin: Theo quy định của Hanet
+
+4.2 Phản hồi
+
+4.2.1 Phản hồi thành công: 
+
+TTS sẽ trả về bản tin json với payload:
+
+```sh
+
+'state' : 'Success','Result' : 'Get Hanet event and speak face information OK'
+
+```
+4.3 Phản hồi không thành công
+
+4.3.1. Tiến trình xử lý trên Vietbot đang bị lỗi 
+
+```sh
+'state':'Failed','result':'Vietbot process error'                        
+
+```
+4.3.2. Và cuối cùng là sai định dạng 
+
+```sh
+'state' : 'Failed','result':'Payload of request is invalid format' 
+
+```
