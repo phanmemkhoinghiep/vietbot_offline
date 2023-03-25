@@ -52,7 +52,7 @@ TTS sẽ trả về bản tin json với payload:
 ```
 2.3 Phản hồi không thành công
 
-2.3.1. Do không kích hoạt Module Speaker Ouput
+2.3.1. Do không kích hoạt Module Speaker Ouput trong config Vietbot
 ```sh
 
 'state':'Failed','result':'Ouput Speaker in Vietbot config not enable'
@@ -203,13 +203,20 @@ TTS sẽ trả về bản tin json với payload:
 ```
 4.3 Phản hồi không thành công
 
-4.3.1. Tiến trình xử lý trên Vietbot đang bị lỗi 
+4.3.1. Do không kích hoạt Module Speaker Ouput trong config Vietbot
+
+```sh
+state':'Failed','result':'Ouput Speaker in Vietbot config not enable'                        
+
+```
+
+4.3.2. Tiến trình xử lý trên Vietbot đang bị lỗi 
 
 ```sh
 'state':'Failed','result':'Vietbot process error'                        
 
 ```
-4.3.2. Và cuối cùng là sai định dạng 
+4.3.3. Và cuối cùng là sai định dạng 
 
 ```sh
 'state' : 'Failed','result':'Payload of request is invalid format' 
