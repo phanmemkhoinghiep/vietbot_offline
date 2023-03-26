@@ -962,6 +962,9 @@ obj['telegram'].append({
 obj['telegram'].append({
     'value': 'tê lê'
 })
+obj['telegram'].append({
+    'value': 'tin nhắn'
+})
 obj['content'] = []
 obj['content'].append({
     'value': 'nội dung'
