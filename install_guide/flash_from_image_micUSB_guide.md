@@ -4,7 +4,7 @@
 
 Download bộ Image cho Raspberry Pi đã cài đặt sẵn cho tất cả các loại Mic tại Link sau
 
-[GOOGLE DRIVE FILE NÉN 1.4G](https://drive.google.com/file/d/1SZwM6F2k0eiubYJ0VcXg47Me68E9WReX/view?usp=sharing)
+[GOOGLE DRIVE FILE NÉN 1.7G](https://drive.google.com/file/d/1KslHaIFc4ktYVUj7KVia9UPDmZGJe3Cf/view?usp=share_link)
 
 ### STEP2. Ghi vào thẻ SD
 
@@ -59,6 +59,8 @@ sudo raspi-config
 4.2.5. Chọn Yes để Reboot
 
 ### STEP5. Khai báo Mic USB (Mic USB thường và Mic Respeaker USB)
+
+Cần khai báo lại cho đúng với thực tế
 
 5.1. Thống kê ID của Mic USB và Loa 
 
@@ -122,31 +124,13 @@ sudo raspi-config
 sudo reboot
 ```
 
-5.4. Đưa Account đang dùng (Ví dụ pi) vào group root
+5.4. Test loa và mic sau khi chỉnh lại cho phù hợp
 
-Chạy lệnh sau
-```sh
-sudo usermod -aG root pi
-```
-5.5. fix lỗi bot không hoạt động sau 1 thời gian.
-
-Chạy lệnh sau
-```sh
-sudo usermod -aG audio root
-```
-
-5.6. Reboot lại Pi
-Chạy lệnh sau
-```sh
-sudo reboot
-```
-5.7. Test loa và mic sau khi cài
-
-5.7.1. Test loa bằng lệnh sau
+5.4.1. Test loa bằng lệnh sau
 ```sh
 speaker-test -t wav -c 2
 ```
-5.7.2. Test Mic bằng lệnh sau 
+5.4.2. Test Mic bằng lệnh sau 
 Ghi âm
 ```sh
 arecord --format=S16_LE --duration=5 --rate=16000 --file-type=raw out.raw
@@ -155,7 +139,7 @@ Phát lại
 ```sh
 aplay --format=S16_LE --rate=16000 out.raw
 ```
-5.7.3. Test stream giữa Mic và Loa bằng lệnh sau
+5.4.3. Test stream giữa Mic và Loa bằng lệnh sau
 ```sh
 arecord --format=S16_LE --rate=16000 | aplay --format=S16_LE --rate=16000
 ```
