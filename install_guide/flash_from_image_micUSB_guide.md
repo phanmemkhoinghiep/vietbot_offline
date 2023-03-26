@@ -105,7 +105,7 @@ tiếp tục tìm tới 2 dòng sau
 # defaults
 defaults.pcm.device 0
 defaults.pcm.subdevice 0
-
+```
 Thay thế ký tự '0' bằng kết quả đã lưu cho <device_id>, ví dụ device_id là 0, thì không phải thay
 
 5.3. Chọn đúng Speaker (Trong trường hợp dùng các dòng Pi có cổng 3.5)
