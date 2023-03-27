@@ -373,8 +373,8 @@ config['sound_event'].append({
 config['sound_event'].append({
     'name': 'bot_welcome',
     'path': 'sound/ding.mp3',        
-    'value': 'Xin chào mời đọc khẩu lệnh để ra lệnh',        
-    'mode': 'path'            
+    'text': 'Xin chào mời đọc khẩu lệnh để ra lệnh',        
+    'mode': 'text'            
 })
 config['sound_event'].append({
     'name': 'bot_volume',
