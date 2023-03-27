@@ -360,23 +360,25 @@ config['web_interface'].append({
 config['sound_event'] = []                             
 config['sound_event'].append({
     'name': 'system_start',
-    'value': 'sound/ding.mp3'        
+    'path': 'sound/ding.mp3'        
 })
 config['sound_event'].append({
     'name': 'system_finish',
-    'value': 'sound/dong.mp3'        
+    'path': 'sound/dong.mp3'        
 })
 config['sound_event'].append({
     'name': 'bot_start',
-    'value': 'sound/ding.mp3'        
+    'path': 'sound/ding.mp3'        
 })
 config['sound_event'].append({
     'name': 'bot_welcome',
-    'value': 'Xin chào mời đọc khẩu lệnh để ra lệnh'        
+    'path': 'sound/ding.mp3',        
+    'value': 'Xin chào mời đọc khẩu lệnh để ra lệnh',        
+    'type': 2            
 })
 config['sound_event'].append({
     'name': 'bot_volume',
-    'is_active': False   
+    'is_active': True   
 })
 with open('config.json', 'w') as outfile:
     json.dump(config, outfile)
