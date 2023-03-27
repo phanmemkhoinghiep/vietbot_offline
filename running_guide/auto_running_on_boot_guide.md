@@ -88,7 +88,7 @@ Removed /etc/systemd/system/multi-user.target.wants/vietbot.service
 ```
 Hệ thống đã stop vietbot không chạy tự động nữa
 
-### STEP1.  Chạy bằng Systemd (Khi dùng STT GG Ass)
+### STEP1.  Chạy bằng Systemd User (Khi dùng STT GG Ass)
 
 2.1. Gõ lệnh
 
@@ -143,6 +143,12 @@ systemctl --user daemon-reload
 systemctl --user enable vietbot.service
 
 ```
+Hệ thống sẽ báo
+
+```sh
+Created symlink /home/pi/.config/systemd/user/default.target.wants/vietbot.service → /home/pi/.config/systemd/user/vietbot.service.
+```
+
 Hệ thống đã sẵn sàng tự động chạy tu dong vietbot
 
 1.1.5. Gõ lệnh sau để chạy tự động vietbot
