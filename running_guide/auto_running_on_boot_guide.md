@@ -48,9 +48,6 @@ Bấm Ctrl + X, Y, Enter
 
 ```sh
 sudo systemctl enable vietbot.service
-```
-Hệ thống sẽ hiện ra
-```sh
 Created symlink /etc/systemd/system/multi-user.target.wants/vietbot.service → /etc/systemd/system/vietbot.service.
 ```
 Hệ thống đã sẵn sàng tự động chạy tu dong vietbot
@@ -80,10 +77,6 @@ Gõ lệnh sau để disable
 
 ```sh
 sudo systemctl disable vietbot.service
-```
-
-Hệ thống sẽ hiện ra
-```sh
 Removed /etc/systemd/system/multi-user.target.wants/vietbot.service
 ```
 Hệ thống đã stop vietbot không chạy tự động nữa
@@ -141,11 +134,6 @@ Bấm Ctrl + X, Y, Enter
 ```sh
 systemctl --user daemon-reload
 systemctl --user enable vietbot.service
-
-```
-Hệ thống sẽ báo
-
-```sh
 Created symlink /home/pi/.config/systemd/user/default.target.wants/vietbot.service → /home/pi/.config/systemd/user/vietbot.service.
 ```
 
@@ -176,5 +164,7 @@ Gõ lệnh sau để disable
 
 ```sh
 systemctl --user disable vietbot.service
+Removed /home/pi/.config/systemd/user/default.target.wants/vietbot.service.
 ```
+
 Hệ thống đã stop vietbot không chạy tự động nữa
