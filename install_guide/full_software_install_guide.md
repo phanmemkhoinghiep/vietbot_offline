@@ -101,16 +101,16 @@ Fast-forward
 ```
 là đã thành công
 
-### STEP3. Cài đặt các gói Python do nâng cấp tính năng
+### STEP2. Cài đặt các gói Python do nâng cấp tính năng
 
-3.1. Nâng cấp PIP
+2.1. Nâng cấp PIP
 
 Chạy lần lượt các lệnh sau
 ```sh
 python3 -m pip install --upgrade pip
 
 ```
-3.2. Cài đặt các gói Python 
+2.2. Cài đặt các gói Python 
 
 Truy cập vào thư mục vietbot_offline
 
@@ -122,3 +122,4 @@ Cài đặt các gói Python được list trong file requirements.txt để cà
 python3 -m pip install -r requirements.txt
 
 ```
+
