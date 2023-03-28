@@ -26,7 +26,7 @@ act['close'].append({
     'value': 'đóng'
 })
 act['connect'] = []
-act['off'].append({
+act['connect'].append({
     'value': 'kết nối'
 })
 act['adjust'] = []
@@ -34,7 +34,7 @@ act['adjust'].append({
     'value': 'điều chỉnh'
 })
 act['disconnect'] = []
-act['off'].append({
+act['disconnect'].append({
     'value': 'ngắt'
 })
 act['check'] = []
