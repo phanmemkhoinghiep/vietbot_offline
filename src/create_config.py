@@ -43,45 +43,49 @@ config['speaker'].append({
     'MAC': '',    
     'is_active': False            
 })
-config['mic'] = []
-config['mic'].append({
-    'type': 'None Respeaker Mic',
-    'led_off_mode': '',
-    'led_off_color': '',
-    'led_think_mode': '',    
-    'led_thing_color': '',            
-    'is_active': False            
+config['led'] =[]
+config['led'].append({
+    'type': None,
+    'is_active': False        
 })
-config['mic'].append({
+config['led'].append({
     'type': 'ReSpeaker 2-Mics Pi HAT',
-    'led_off_mode': '',
-    'led_off_color': '',
-    'led_think_mode': '',    
-    'led_thing_color': '',            
+    'is_active': False        
+})
+config['led'].append({
+    'type': 'ReSpeaker 4-Mics Pi HAT',
+    'pattern': 2,   # 1- Google Home Pattern, 2- Alexa Pattern
+    'is_active': False        
+})
+config['led'].append({
+    'type': 'ReSpeaker Mic Array v2.0',
+    'off_mode': 2,
+    'off_color': 'fffcff',
+    'wakeup_mode': 2,
+    'wakeup_color': '074a25',    
+    'is_active': False        
+})
+config['led'].append({
+    'type': 'WS281x',
+    'number_led': 16,#Number of LED
+    'brightness':10, # Set to 0 for darkest and 255 for brightest
+    'off_mode': 1, #1 - No Color, 2 - 16 LED with off_color
+    'off_color': '074a25',    # Hexa color
+    'wakeup_mode': 1, #1 - theaterChase with wakeup_color, 2 - rainbow, 3 - rainbowCycle, 4 - theaterChaseRainbow
+    'wakeup_color': '074a25',
+    'listen_mode': 2, #1 - theaterChase with wakeup_color, 2 - rainbow, 3 - rainbowCycle, 4 - theaterChaseRainbow        
+    'listen_color': '074a25',            
+    'think_mode': 3, #1 - theaterChase with wakeup_color, 2 - rainbow, 3 - rainbowCycle, 4 - theaterChaseRainbow        
+    'think_color': '074a25',            
+    'speak_mode': 4,
+    'speak_color': '074a25', #1 - theaterChase with wakeup_color, 2 - rainbow, 3 - rainbowCycle, 4 - theaterChaseRainbow                   
     'is_active': True        
 })
-config['mic'].append({
-    'type': 'ReSpeaker 2-Mics Pi HAT with WS281x LED',
-    'led_brightness': 100,
-    'led_wakeup_color': 'bc6dca',  
-    'is_active': False        
-})
-config['mic'].append({
-    'type': 'ReSpeaker 4-Mics Pi HAT',
-    'led_off_mode': '',
-    'led_off_color': '',
-    'led_think_mode': '',    
-    'led_thing_color': '', 
-    'led_pattern': 2,
-    'is_active': False        
-})
-config['mic'].append({
-    'type': 'ReSpeaker Mic Array v2.0',
-    'led_off_mode': 2,
-    'led_off_color': 'fffcff',
-    'led_wakeup_mode': 2,
-    'led_wakeup_color': '074a25',    
-    'is_active': False        
+config['led'].append({
+    'type': 'APA102',
+    'number_led': 8, #Number of LED   
+    'pattern': 2,        
+    'is_active': False                              
 })
 config['volume'] = []
 config['volume'].append({
