@@ -93,7 +93,7 @@ config['volume'].append({
 })
 config['hotword_engine'] = []
 config['hotword_engine'].append({
-    'name': 'google',
+    'name': 'system',
     'is_active': True
 })
 config['hotword_engine'].append({
@@ -103,12 +103,12 @@ config['hotword_engine'].append({
 })
 config['hotword'] = []
 config['hotword'].append({
-    'type': 'google',
+    'type': 'system',
     'value': 'em ơi',    
     'is_active': True    
 })
 config['hotword'].append({
-    'type': 'google',
+    'type': 'system',
     'value': 'ê cu',    
     'is_active': True    
 })
@@ -148,6 +148,7 @@ config['hotword'].append({
     'sensitive': 0.4,        
     'is_active': True    
 })
+
 config['hotword'].append({
     'type': 'porcupine',
     'file_name': 'grapefruit_raspberry-pi.ppn',    
@@ -219,62 +220,62 @@ config['continuous_asking'].append({
     'content': 'hỏi liên tục',
     'is_active': False
 })
-config['local_stt'] = []
-config['local_stt'].append({
-    'name': 'stt_gg_free',
-    'time_out': 6000,
-    'is_active': True    
-})
-config['local_stt'].append({
-    'name': 'stt_gg_cloud',
-    'token_file': 'google.json',    
+config['stt'] = []
+config['stt'].append({
+    'type': 'stt_gg_free',
     'time_out': 6000,
     'is_active': False    
 })
-config['local_stt'].append({
-    'name': 'stt_gg_ass',
+config['stt'].append({
+    'type': 'stt_gg_cloud',
+    'token_file': 'google.json',    
+    'time_out': 6000,
+    'is_active': True    
+})
+config['stt'].append({
+    'type': 'stt_gg_ass',
     'credentials_file': 'credentials.json',
     'device_config_file': 'device_config.json',    
     'time_out': 6000,
     'is_active': False    
 })
-config['local_stt'].append({
-    'name': 'stt_viettel',
-    'token': 'SythBY7dWRNwYE8N',
+config['stt'].append({
+    'type': 'stt_viettel',
+    'token': 'SythBY7fsdfXxzdsfsYE8N',
     'time_out': 4000,
     'is_active': False    
 })
-config['local_stt'].append({
-    'name': 'stt_fpt',
+config['stt'].append({
+    'type': 'stt_fpt',
     'token': '',
     'token_file': '',    
     'time_out': '',
     'is_active': False    
 })
-config['local_tts'] = []
-config['local_tts'].append({
-    'name': 'tts_gg_free',
-    'token': '8sJJmBXC2fRGU',    
+config['tts'] = []
+config['tts'].append({
+    'type': 'tts_gg_free',
+    'token': '8sJJ39ssfsfBXC2fRGU',    
     'voice_name': '',    
     'speed': '',
     'pitch': '',
     're_use': True,
-    'is_active': True    
+    'is_active': False    
 })
-config['local_tts'].append({
-    'token': 'AIza_k16b3c',
+config['tts'].append({
+    'token': 'AIzaSyDsdfsdf_k16b3c',
     'token_file': 'google.json',    
-    'name': 'tts_gg_cloud',    
+    'type': 'tts_gg_cloud',    
     'voice_name': 'vi-VN-Wavenet-A',
     'profile': 'telephony-class-application',      
     'speed': 1.0,
     'pitch': 0,
     're_use': True,
-    'is_active': False    
+    'is_active': True    
 })
-config['local_tts'].append({
+config['tts'].append({
     'token': 'dfgdfgdfgARWDFSc',
-    'name': 'tts_gg_cloud_free',    
+    'type': 'tts_gg_cloud_free',    
     'voice_name': 'vi-VN-Wavenet-A',
     'profile': 'telephony-class-application',      
     'speed': 1.0,
@@ -282,29 +283,29 @@ config['local_tts'].append({
     're_use': True,
     'is_active': False   
 })
-config['local_tts'].append({
-    'token': 'SythBY7NsdRNwYE8N',
+config['tts'].append({
+    'token': 'SythBYsfsdfs
     'token_file': '',    
-    'name': 'tts_viettel',    
+    'type': 'tts_viettel',    
     'voice_name': 'hcm-diemmy2',
     'speed': 1.0,
     'pitch': '',
     're_use': True,
     'is_active': False    
 })
-config['local_tts'].append({
+config['tts'].append({
     'token': '8sJJsdfsdffRGU',
     'token_file': '',    
-    'name': 'tts_zalo',
+    'type': 'tts_zalo',
     'voice_name': '1',    
     'speed': 1.0,
     'pitch': '',
     're_use': True, 
     'is_active': False    
 })    
-config['local_tts'].append({
+config['tts'].append({
     'token': '9onFsfsdfqzjjDU',
-    'name': 'tts_fpt',
+    'type': 'tts_fpt',
     'voice_name': 'ngoclam',
     'speed': 1.0,
     'pitch': '',    
@@ -386,3 +387,4 @@ config['sound_event'].append({
 })
 with open('config.json', 'w') as outfile:
     json.dump(config, outfile)
+
