@@ -284,7 +284,7 @@ config['tts'].append({
     'is_active': False   
 })
 config['tts'].append({
-    'token': 'SythBYsfsdfs
+    'token': 'SythBYsfsdfs',
     'token_file': '',    
     'type': 'tts_viettel',    
     'voice_name': 'hcm-diemmy2',
