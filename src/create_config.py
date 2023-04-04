@@ -66,21 +66,21 @@ config['led'].append({
     'is_active': False        
 })
 config['led'].append({
-    'type': 'WS281x',
+    'type': 'WS2812',
     'number_led': 16,#Number of LED
     'brightness':10, # Set to 0 for darkest and 255 for brightest
     'off_mode': 1, #1 - No Color, 2 - 16 LED with off_color
-    'off_color': '074a25',    # Hexa color
+    'off_color': '03254b',    # Hexa color
     'wakeup_mode': 1, #1 - theaterChase with wakeup_color, 2 - rainbow, 3 - rainbowCycle, 4 - theaterChaseRainbow
-    'wakeup_color': '074a25',
+    'wakeup_color': '03254b',# Hexa color
     'listen_mode': 2, #1 - theaterChase with wakeup_color, 2 - rainbow, 3 - rainbowCycle, 4 - theaterChaseRainbow        
-    'listen_color': '074a25',            
+    'listen_color': '03254b',            
     'think_mode': 3, #1 - theaterChase with wakeup_color, 2 - rainbow, 3 - rainbowCycle, 4 - theaterChaseRainbow        
     'think_color': '074a25',            
-    'speak_mode': 4,
-    'speak_color': '074a25', #1 - theaterChase with wakeup_color, 2 - rainbow, 3 - rainbowCycle, 4 - theaterChaseRainbow                   
+    'speak_mode': 2, #1 - theaterChase with wakeup_color, 2 - rainbow, 3 - rainbowCycle, 4 - theaterChaseRainbow                   
+    'speak_color': '074a25', # Hexa color
     'is_active': True        
-})
+ })
 config['led'].append({
     'type': 'APA102',
     'number_led': 8, #Number of LED   
