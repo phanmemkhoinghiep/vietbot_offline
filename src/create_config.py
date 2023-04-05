@@ -70,14 +70,14 @@ config['led'].append({
 config['led'].append({
     'type': 'WS2812',
     'number_led': 16,#Number of LED
-    'brightness':10, # Set to 0 for darkest and 255 for brightest
+    'brightness':255, # Set to 0 for darkest and 255 for brightest
     'off_mode': 1, #1 - No Color, 2 - All LED off
     'off_color': '03254b',    # All LED with Hexa color
     'wakeup_mode': 1, #1 - theaterChase with wakeup_color, 2 - rainbow, 3 - rainbowCycle, 4 - theaterChaseRainbow
     'wakeup_color': '03254b',# Hexa color
-    'listen_mode': 2, #1 - theaterChase with wakeup_color, 2 - rainbow, 3 - rainbowCycle, 4 - theaterChaseRainbow        
+    'listen_mode': 1, #1 - theaterChase with wakeup_color, 2 - rainbow, 3 - rainbowCycle, 4 - theaterChaseRainbow        
     'listen_color': '03254b',            
-    'think_mode': 3, #1 - theaterChase with wakeup_color, 2 - rainbow, 3 - rainbowCycle, 4 - theaterChaseRainbow        
+    'think_mode': 1, #1 - theaterChase with wakeup_color, 2 - rainbow, 3 - rainbowCycle, 4 - theaterChaseRainbow        
     'think_color': '074a25',            
     'speak_mode': 2, #1 - theaterChase with wakeup_color, 2 - rainbow, 3 - rainbowCycle, 4 - theaterChaseRainbow                   
     'speak_color': '074a25', # Hexa color
