@@ -46,16 +46,18 @@ config['speaker'].append({
 config['led'] =[]
 config['led'].append({
     'type': None,
-    'is_active': False        
-})
-config['led'].append({
-    'type': 'ReSpeaker 2-Mics Pi HAT',
-    'is_active': False        
+    'is_active': True        
 })
 config['led'].append({
     'type': 'ReSpeaker 4-Mics Pi HAT',
-    'pattern': 2,   # 1- Google Home Pattern, 2- Alexa Pattern
+    'effect_mode': 2,# 1- Google Home Pattern, 2- Alexa Pattern
     'is_active': False        
+})
+config['led'].append({
+    'type': 'APA102',
+    'number_led': 8, #Number of LED   
+    'effect_mode': 1,# 1- Google Home Pattern, 2- Alexa Pattern
+    'is_active': False                              
 })
 config['led'].append({
     'type': 'ReSpeaker Mic Array v2.0',
@@ -79,7 +81,7 @@ config['led'].append({
     'think_color': '074a25',            
     'speak_mode': 2, #1 - theaterChase with wakeup_color, 2 - rainbow, 3 - rainbowCycle, 4 - theaterChaseRainbow                   
     'speak_color': '074a25', # Hexa color
-    'is_active': True        
+    'is_active': False        
  })
 config['led'].append({
     'type': 'APA102',
