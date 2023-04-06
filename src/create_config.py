@@ -91,7 +91,7 @@ config['led'].append({
 })
 config['volume'] = []
 config['volume'].append({
-    'value': 20 
+    'value': [50,50] 
 })
 config['hotword_engine'] = []
 config['hotword_engine'].append({
