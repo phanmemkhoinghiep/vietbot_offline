@@ -29,7 +29,12 @@ config['output_module'].append({
 })
 config['speaker'] = []
 config['speaker'].append({
-    'type': 'default',
+    'type': None,
+    'is_active': False
+})
+config['speaker'].append({
+    'type': 'soundcard',
+    'amixer_id': 0,    
     'is_active': True            
 })
 config['speaker'].append({
