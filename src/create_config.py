@@ -34,7 +34,7 @@ config['speaker'].append({
 })
 config['speaker'].append({
     'type': 'soundcard',
-    'amixer_id': 0,    
+    'amixer_id': 0,  #Id of mixer that use for Master Volume, list by amixer command result form top to bottom, start from 0  
     'is_active': True            
 })
 config['speaker'].append({
