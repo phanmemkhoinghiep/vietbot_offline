@@ -131,5 +131,17 @@ skill['telegram_skill'].append({
     'error_answer': 'Lỗi Telegram',
     'is_active': False        
 })
+skill['countdown_skill'] = []
+skill['countdown_skill'].append({
+    'pre_answer': 'Đang tạo tác vụ đếm ngược',
+    'error_answer': 'Lỗi tạo tác vụ đếm ngược',
+    'is_active': False        
+})
+skill['schedule_skill'] = []
+skill['schedule_skill'].append({
+    'pre_answer': 'Đang tạo tác vụ lập lịch',
+    'error_answer': 'Lỗi tạo tác vụ lập lịch',
+    'is_active': False        
+})
 with open('skill.json', 'w') as outfile:
     json.dump(skill, outfile)
