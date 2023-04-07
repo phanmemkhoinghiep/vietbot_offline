@@ -145,13 +145,6 @@ act['sing'].append({
 act['download'].append({
     'value': 'download'
 })
-act['schedule'] = []
-act['schedule'].append({
-    'value': 'lập lịch'
-})
-act['schedule'].append({
-    'value': 'hẹn giờ'
-})
 act['setup'] = []
 act['setup'].append({
     'value': 'cài'
@@ -177,6 +170,17 @@ act['send'].append({
 })
 act['send'].append({
     'value': 'chuyển'
+})
+act['notice'] = []
+act['notice'].append({
+    'value': 'nhắc'
+})
+act['schedule'] = []
+act['schedule'].append({
+    'value': 'lập lịch'
+})
+act['schedule'].append({
+    'value': 'đặt lịch'
 })
 with open('action.json', 'w') as outfile:
     json.dump(act, outfile)
