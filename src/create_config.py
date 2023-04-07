@@ -106,7 +106,7 @@ config['hotword_engine'].append({
 config['hotword_engine'].append({
     'name': 'porcupine',
     'is_active': True,
-    'porcupine_access_key': 'pJwv7qAbPrw9yXx2D3QeceV39+Rn+KW35JBTeyEal70VOOWoDvm7JQ=='
+    'porcupine_access_key': 'pJwdfsdoDvm7JQ=='
 })
 config['hotword'] = []
 config['hotword'].append({
