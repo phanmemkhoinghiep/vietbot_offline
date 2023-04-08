@@ -58,9 +58,7 @@ config['led'].append({
     'type': 'ReSpeaker 2-Mics Pi HAT',
     'is_active': False        
 })                                    
-                              
-  
-                      
+config['led'].append({                                                  
     'type': 'ReSpeaker 4-Mics Pi HAT',
     'effect_mode': 2,# 1- Google Home Pattern, 2- Alexa Pattern
     'is_active': False        
