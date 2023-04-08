@@ -54,6 +54,13 @@ config['led'].append({
     'is_active': True        
 })
 config['led'].append({
+config['led'].append({
+    'type': 'ReSpeaker 2-Mics Pi HAT',
+    'is_active': False        
+})                                    
+                              
+  
+                      
     'type': 'ReSpeaker 4-Mics Pi HAT',
     'effect_mode': 2,# 1- Google Home Pattern, 2- Alexa Pattern
     'is_active': False        
@@ -101,7 +108,7 @@ config['volume'].append({
 config['hotword_engine'] = []
 config['hotword_engine'].append({
     'name': 'system',
-    'is_active': True
+    'is_active': False
 })
 config['hotword_engine'].append({
     'name': 'porcupine',
