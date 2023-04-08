@@ -137,7 +137,7 @@ Kết quả cuối là:
 Bấm Ctrl + X, rồi Y để Save lại
 
 
-### STEP4. Cài đặt Mic2Hat
+### STEP4. Cài đặt Mic USB
 
 4.1. Thống kê ID của Mic USB và Loa 
 
