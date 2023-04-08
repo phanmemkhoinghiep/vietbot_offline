@@ -978,9 +978,6 @@ obj['telegram_data'].append({
     'name': 'Nguyễn Duy',
     'chat_id': 6059124493    
 })
-act['notice'] = []
-act['notice'].append({
-    'value': 'nhắc'
-})
+
 with open('object.json', 'w') as outfile:
     json.dump(obj, outfile)
