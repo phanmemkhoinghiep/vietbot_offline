@@ -54,7 +54,6 @@ config['led'].append({
     'is_active': True        
 })
 config['led'].append({
-config['led'].append({
     'type': 'ReSpeaker 2-Mics Pi HAT',
     'is_active': False        
 })                                    
