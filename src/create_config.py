@@ -104,7 +104,7 @@ config['volume'].append({
 })
 config['hotword_engine'] = []
 config['hotword_engine'].append({
-    'name': 'system',
+    'name': 'google',
     'is_active': False
 })
 config['hotword_engine'].append({
@@ -114,12 +114,12 @@ config['hotword_engine'].append({
 })
 config['hotword'] = []
 config['hotword'].append({
-    'type': 'system',
+    'type': 'google',
     'value': 'em ơi',    
     'is_active': True    
 })
 config['hotword'].append({
-    'type': 'system',
+    'type': 'google',
     'value': 'ê cu',    
     'is_active': True    
 })
