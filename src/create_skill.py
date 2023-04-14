@@ -81,6 +81,7 @@ skill['hass_skill'].append({
     'hass_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI2MmZlZjgyMTdmZjE0MDgyOTljYzM4NTNmNzFhNDFmMyIsImlhdCI6MTY2NuxQY-C_lbnIZwTAZu5wI74jsG2c',
     'pre_answer': None,
     'error_answer': 'Lỗi kết nối đến Hass',
+    'display_full_state': False,
     'is_active': True
 })
 skill['funny_story_skill'] = []
