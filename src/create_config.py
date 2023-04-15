@@ -104,7 +104,7 @@ config['volume'].append({
 })
 config['hotword_engine'] = []
 config['hotword_engine'].append({
-    'name': 'google',
+    'name': 'custom',
     'is_active': False
 })
 config['hotword_engine'].append({
@@ -114,14 +114,24 @@ config['hotword_engine'].append({
 })
 config['hotword'] = []
 config['hotword'].append({
-    'type': 'google',
+    'type': 'custom',
     'value': 'em ơi',    
     'is_active': True    
 })
 config['hotword'].append({
-    'type': 'google',
+    'type': 'custom',
+    'value': 'hà nội',    
+    'is_active': False    
+})
+config['hotword'].append({
+    'type': 'custom',
     'value': 'ê cu',    
     'is_active': True    
+})
+config['hotword'].append({
+    'type': 'custom',
+    'value': 'mai ca ơi',    
+    'is_active': False    
 })
 config['hotword'].append({
     'type': 'porcupine',
