@@ -24,6 +24,11 @@ python3 start.py  2>/dev/null
 2.1. Tạo 1 Session Tmux
 
 ```sh
+sudo apt-get install tmux -y
+```
+
+
+```sh
 tmux new -s vietbot
 ```
 2.2. Cửa sổ Tmux mở, di chuyển tới thư mục vietbot, sử dụng lệnh sau
