@@ -70,18 +70,18 @@ config['led'].append({
 })
 config['led'].append({
     'type': 'ReSpeaker Mic Array v2.0',
-    'off_mode': 2,
-    'off_color': 'fffcff',
-    'wakeup_mode': 2,
-    'wakeup_color': '074a25',    
+    'off_mode': 1, #1 - No Color, 2 - All LED on with off_color
+    'off_color': 'fffcff', # Hexa color
+    'wakeup_mode': 1, #1 - White Color, 2 - All LED on with wake_color
+    'wakeup_color': '074a25', # Hexa color    
     'is_active': False        
 })
 config['led'].append({
     'type': 'WS2812',
     'number_led': 16,#Number of LED
     'brightness':255, # Set to 0 for darkest and 255 for brightest
-    'off_mode': 1, #1 - No Color, 2 - All LED off
-    'off_color': '03254b',    # All LED with Hexa color
+    'off_mode': 1, #1 - No Color, 2 - All LED on with off_color
+    'off_color': '03254b',    # Hexa color
     'wakeup_mode': 1, #1 - theaterChase with wakeup_color, 2 - rainbow, 3 - rainbowCycle, 4 - theaterChaseRainbow
     'wakeup_color': '03254b',# Hexa color
     'listen_mode': 1, #1 - theaterChase with wakeup_color, 2 - rainbow, 3 - rainbowCycle, 4 - theaterChaseRainbow        
@@ -92,12 +92,6 @@ config['led'].append({
     'speak_color': '074a25', # Hexa color
     'is_active': False        
  })
-config['led'].append({
-    'type': 'APA102',
-    'number_led': 8, #Number of LED   
-    'pattern': 2,        
-    'is_active': False                              
-})
 config['volume'] = []
 config['volume'].append({
     'value': [50,50] 
@@ -131,12 +125,6 @@ config['hotword'].append({
 config['hotword'].append({
     'type': 'custom',
     'value': 'mai ca ơi',    
-    'is_active': False    
-})
-config['hotword'].append({
-    'type': 'porcupine',
-    'file_name': 'vi-ci-ci_en_raspberry-pi.ppn',    
-    'sensitive': 0.4,        
     'is_active': False    
 })
 config['hotword'].append({
