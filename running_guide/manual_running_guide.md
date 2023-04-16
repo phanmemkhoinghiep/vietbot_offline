@@ -1,5 +1,5 @@
 
-### STEP1. Chạy Manual từ SSH trên PC (Mất kết nối sẽ ngừng Vietbot)
+### Tùy chọn 1. Chạy Manual từ SSH trên PC (Mất kết nối sẽ ngừng Vietbot)
 
 1.1. Truy nhập vào thư mục Bot
 Sử dụng lệnh sau
@@ -19,7 +19,7 @@ python3 start.py  2>/dev/null
 ```
 
 
-### STEP2. Chạy Manual từ SSH trên PC (Mất kết nối sẽ ngừng Vietbot)
+### Tùy chọn 2. Chạy Manual từ SSH trên PC (Mất kết nối sẽ không ngừng Vietbot)
 
 2.1. Tạo 1 Session Tmux
 
