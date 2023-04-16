@@ -77,7 +77,45 @@ Lưu lại thông tin về card_id và device_id ở mỗi kết quả lệnh
 
 Ví dụ card_id là 1, device_id là 0
 
-5.2. Khai báo Default cho ALSA
+5.2. Khai báo Sound & MIC Default
+
+5.2.1
+
+Chạy lệnh sau 
+
+```sh
+sudo nano /home/pi/.asoundrc
+```
+Cửa sổ nano hiện lên, paste dòng sau, thay thế <card_id> và <device_id> bằng kết quả đã lưu ví dụ 0:0 hoặc 1:0 hoặc 1:1:
+
+```sh
+pcm.!default {
+  type asym
+  capture.pcm "mic"  
+  playback.pcm "speaker"  
+}
+pcm.mic {
+  type plug
+  slave {
+    pcm "hw:<card_id>,<device_id>"
+  }
+}
+pcm.speaker {
+  type plug
+  slave {
+    pcm "hw:<card_id>,<device_id>"
+  }
+}
+```
+Bấm lần lượt Ctrl + X, sau đó Y rồi Enter
+
+5.2.3. Copy file thiết lập cho mọi account (Nếu chỉ dùng Account Pi thì bỏ qua bước này)
+
+Chạy lệnh sau
+```sh
+sudo cp /home/pi/.asoundrc /etc/asound.conf
+```
+5.2.4. Khai báo cho Alsa
 
 Chạy lệnh sau 
 
@@ -108,7 +146,7 @@ defaults.pcm.subdevice 0
 ```
 Thay thế ký tự '0' bằng kết quả đã lưu cho <device_id>, ví dụ device_id là 0, thì không phải thay
 
-5.3. Chọn đúng Speaker (Trong trường hợp dùng các dòng Pi có cổng 3.5)
+5.3. Chọn đúng Speaker (Trong trường hợp dùng các dòng Pi có Soundcard sẵn cổng 3.5)
 
 5.3.1. Chạy lệnh
 
