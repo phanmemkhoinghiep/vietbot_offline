@@ -1,4 +1,4 @@
-### STEP1.  Chạy bằng Systemd (Khi dùng STT Google Free, STT Google Cloud)
+### Lựa chọn 1.  Chạy bằng Systemd (Khi dùng STT Google Free, STT Google Cloud)
 
 1.1. Gõ lệnh
 
@@ -81,7 +81,7 @@ Removed /etc/systemd/system/multi-user.target.wants/vietbot.service
 ```
 Hệ thống đã stop vietbot không chạy tự động nữa
 
-### STEP1.  Chạy bằng Systemd User (Khi dùng STT GG Ass)
+### Lựa chọn 2.  Chạy bằng Systemd User (Khi dùng STT GG Ass)
 
 2.1. Gõ lệnh
 
