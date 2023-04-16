@@ -969,6 +969,16 @@ obj['content'] = []
 obj['content'].append({
     'value': 'nội dung'
 })
+obj['hotword'] = []
+obj['hotword'].append({
+    'value': 'từ khóa'
+})
+obj['hotword'].append({
+    'value': 'mật mã'
+})
+obj['hotword'].append({
+    'value': 'khẩu lệnh'
+})
 obj['telegram_data'] = []
 obj['telegram_data'].append({
     'name': 'Thế Anh',
