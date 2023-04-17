@@ -131,7 +131,7 @@ config['hotword'].append({
     'type': 'porcupine',
     'file_name': 'alexa_raspberry-pi.ppn',    
     'sensitive': 0.4,        
-    'is_active': False    
+    'is_active': True    
 })
 config['hotword'].append({
     'type': 'porcupine',
@@ -141,56 +141,7 @@ config['hotword'].append({
 })
 config['hotword'].append({
     'type': 'porcupine',
-    'file_name': 'blueberry_raspberry-pi.ppn',    
-    'sensitive': 0.4,        
-    'is_active': False    
-})
-config['hotword'].append({
-    'type': 'porcupine',
-    'file_name': 'bumblebee_raspberry-pi.ppn',    
-    'sensitive': 0.4,        
-    'is_active': False    
-})
-config['hotword'].append({
-    'type': 'porcupine',
-    'file_name': 'computer_raspberry-pi.ppn',    
-    'sensitive': 0.4,        
-    'is_active': True    
-})
-
-config['hotword'].append({
-    'type': 'porcupine',
-    'file_name': 'grapefruit_raspberry-pi.ppn',    
-    'sensitive': 0.4,        
-    'is_active': False    
-})
-config['hotword'].append({
-    'type': 'porcupine',
-    'file_name': 'grasshopper_raspberry-pi.ppn',    
-    'sensitive': 0.4,        
-    'is_active': False    
-})
-config['hotword'].append({
-    'type': 'porcupine',
-    'file_name': 'hey barista_raspberry-pi.ppn',    
-    'sensitive': 0.4,        
-    'is_active': False    
-})
-config['hotword'].append({
-    'type': 'porcupine',
     'file_name': 'hey google_raspberry-pi.ppn',    
-    'sensitive': 0.4,        
-    'is_active': False   
-})
-config['hotword'].append({
-    'type': 'porcupine',
-    'file_name': 'hey siri_raspberry-pi.ppn',    
-    'sensitive': 0.4,        
-    'is_active': True   
-})
-config['hotword'].append({
-    'type': 'porcupine',
-    'file_name': 'jarvis_raspberry-pi.ppn',    
     'sensitive': 0.4,        
     'is_active': False   
 })
@@ -202,21 +153,9 @@ config['hotword'].append({
 })
 config['hotword'].append({
     'type': 'porcupine',
-    'file_name': 'pico clock_raspberry-pi.ppn',    
+    'file_name': 'hey siri_raspberry-pi.ppn',    
     'sensitive': 0.4,        
-    'is_active': False    
-})
-config['hotword'].append({
-    'type': 'porcupine',
-    'file_name': 'picovoice_raspberry-pi.ppn',    
-    'sensitive': 0.4,        
-    'is_active': True    
-})
-config['hotword'].append({
-    'type': 'porcupine',
-    'file_name': 'porcupine_raspberry-pi.ppn',    
-    'sensitive': 0.4,        
-    'is_active': False    
+    'is_active': True   
 })
 config['hotword'].append({
     'type': 'porcupine',
@@ -239,14 +178,14 @@ config['stt'].append({
     'type': 'stt_gg_cloud',
     'token_file': 'google.json',    
     'time_out': 6000,
-    'is_active': True    
+    'is_active': False    
 })
 config['stt'].append({
     'type': 'stt_gg_ass',
     'credentials_file': 'credentials.json',
     'device_config_file': 'device_config.json',    
     'time_out': 6000,
-    'is_active': False    
+    'is_active': True    
 })
 config['stt'].append({
     'type': 'stt_viettel',
@@ -280,7 +219,7 @@ config['tts'].append({
     'speed': 1.0,
     'pitch': 0,
     're_use': True,
-    'is_active': True    
+    'is_active': False    
 })
 config['tts'].append({
     'token': 'dfgdfgdfgARWDFSc',
@@ -290,7 +229,7 @@ config['tts'].append({
     'speed': 1.0,
     'pitch': 0,
     're_use': True,
-    'is_active': False   
+    'is_active': True   
 })
 config['tts'].append({
     'token': 'SythBYsfsdfs',
@@ -396,4 +335,3 @@ config['sound_event'].append({
 })
 with open('config.json', 'w') as outfile:
     json.dump(config, outfile)
-
