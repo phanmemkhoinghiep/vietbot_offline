@@ -127,7 +127,7 @@ Restart=always
 User=pi
 
 [Install]
-WantedBy==default.target
+WantedBy=default.target
 ```
 
 Bấm Ctrl + X, Y, Enter
