@@ -87,6 +87,9 @@ Hệ thống đã stop vietbot không chạy tự động nữa
 
 ```sh
 mkdir -p  ~/.config/systemd/user/
+```
+và 
+```sh
 sudo nano  ~/.config/systemd/user/vietbot.service
 ```
 Tại cửa sổ Nano, gõ dòng lệnh sau
