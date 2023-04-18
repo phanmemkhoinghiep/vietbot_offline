@@ -158,7 +158,7 @@ sudo reboot
 2.6. Gõ lệnh sau để xem log
 
 ```sh
- journalctl -unit vietbot.service 
+ journalctl --user-unit vietbot.service 
 ```
 2.7. Gõ lệnh sau để stop chạy tự động 
 
