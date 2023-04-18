@@ -37,7 +37,6 @@ WorkingDirectory=/home/pi/vietbot_offline/src
 StandardOutput=inherit
 StandardError=inherit
 Restart=always
-User=pi
 
 [Install]
 WantedBy=multi-user.target
@@ -109,7 +108,6 @@ WorkingDirectory=/home/pi/vietbot_offline/src
 StandardOutput=inherit
 StandardError=inherit
 Restart=always
-User=pi
 
 [Install]
 WantedBy=default.target
