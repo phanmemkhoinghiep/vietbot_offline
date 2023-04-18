@@ -1,4 +1,4 @@
-### Lựa chọn 1.  Chạy bằng Systemd (Khi dùng STT Google Free, STT Google Cloud)
+### Lựa chọn 1.  Chạy bằng Systemd
 
 1.1. Gõ lệnh
 
@@ -19,10 +19,9 @@ WorkingDirectory=/home/pi/vietbot_offline/src
 StandardOutput=inherit
 StandardError=inherit
 Restart=always
-User=pi
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target
 ```
 1.2.2. Với các loại Mic USB
 
@@ -83,7 +82,7 @@ Hệ thống sẽ thông báo như sau và vietbot sẽ không chạy tự độ
 Removed /etc/systemd/system/multi-user.target.wants/vietbot.service
 ```
 
-### Lựa chọn 2.  Chạy bằng Systemd User (Khi dùng STT GG Ass)
+### Lựa chọn 2.  Chạy bằng Systemd User
 
 2.1. Gõ lệnh
 
@@ -110,7 +109,7 @@ StandardError=inherit
 Restart=always
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target
 ```
 2.2.1. Với các loại Mic USB
 
