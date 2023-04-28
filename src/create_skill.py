@@ -70,7 +70,7 @@ skill['lottery_skill'].append({
 })
 skill['weather_skill'] = []
 skill['weather_skill'].append({ 
-    'openweathermap_key': 'ffddba060ff1a735f04ff426f85f070b',
+    'openweathermap_key': 'ffddba0dfgdfg26ffdgdf070b',
     'pre_answer': None,
     'error_answer': 'Lỗi tra cứu thời tiết khu vực',     
     'is_active': True    
@@ -78,7 +78,7 @@ skill['weather_skill'].append({
 skill['hass_skill'] = []
 skill['hass_skill'].append({
     'hass_url': 'https://leluong76.co',    
-    'hass_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI2MmZlZjgyMTdmZjE0MDgyOTljYzM4NTNmNzFhNDFmMyIsImlhdCI6MTY2NuxQY-C_lbnIZwTAZu5wI74jsG2c',
+    'hass_token': 'eyJhbGciOiJIUzIdfgdfgFhNDFmMyIsImlhdCI6MTY2NuxQY-C_lbnIZwTAZu5wI74jsG2c',
     'pre_answer': None,
     'error_answer': 'Lỗi kết nối đến Hass',
     'display_full_state': False,
