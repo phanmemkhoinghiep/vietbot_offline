@@ -127,7 +127,7 @@ skill['hanet_skill'].append({
 })
 skill['telegram_skill'] = []
 skill['telegram_skill'].append({
-    'token': '6068674110:AAEZE0cJirYzQyHKQUx4E_UzNMn52BdoAeU',    
+    'token': '6068674110:AAEsdfQUx4E_UzNMsfdAeU',    
     'pre_answer': 'Đang gửi Telegram tới đich',
     'error_answer': 'Lỗi Telegram',
     'is_active': False        
