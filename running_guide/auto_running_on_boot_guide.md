@@ -30,7 +30,7 @@ StandardError=inherit
 Restart=always
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target
 ```
 2.2.1. Với các loại Mic USB
 
