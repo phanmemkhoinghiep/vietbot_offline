@@ -34,7 +34,7 @@ Playback: Cơ chế phát nhạc theo đường dẫn File hoặc link, hỗ tr�
 
 Speaker: Phần cứng phát âm thanh
 
-![DANH SÁCH PHẦN CỨNG TƯƠNG THÍCH](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/00_hardware_compatibility_list.md)=>
+![DANH SÁCH PHẦN CỨNG TƯƠNG THÍCH](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/hardware_guide/hardware_compatibility_list.md) =>
 ![ĐỘ PHẦN CỨNG](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/01_hardware_diy_guide.md) =>
 ![FLASH THẺ NHỚ](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/021_software_enviroment_installation_guide.md) => 
 ![CÀI MỚI TỪ ĐẦU](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/022_software_enviroment_installation_guide.md) => 
