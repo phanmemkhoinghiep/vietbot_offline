@@ -21,7 +21,7 @@ chmod +x start-wifi-connect.sh
 1.2. Tắt Apache2 Service
 
 ```sh
-sudo systemctl status apache2.service 
+sudo systemctl disable apache2.service 
 ```
 
 ### STEP2.  Cài đặt 
@@ -116,7 +116,7 @@ sudo reboot
 ```sh
  sudo journalctl -u wifi-connect.service -f
 ```
-2.1.5. Gõ lệnh sau để stop chạy tự động khi khởi động
+3.6.1. Gõ lệnh sau để stop chạy tự động khi khởi động
 
 Gõ lệnh để stop tạm thời
 
@@ -136,3 +136,9 @@ Hệ thống sẽ hiện ra
 Removed /etc/systemd/system/multi-user.target.wants/wifi-connectservice
 ```
 Hệ thống đã stop wifi-connect không chạy tự động nữa
+
+3.6.2. Phục hồi Apache2 Service
+
+```sh
+sudo systemctl enable apache2.service 
+```
