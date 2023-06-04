@@ -1,6 +1,8 @@
 ### Hướng dẫn cài đặt để vietbot tự phát WiFi khi không kết nối được mạng WiFi
 
-### STEP1. Cấp quyền cho các File
+### STEP1. Chuẩn bị
+
+1.1. Cấp quyền cho các File
 
 ```sh
 cd /home/pi/vietbot_offline/src
@@ -15,6 +17,11 @@ sau đó
 ```sh
 chmod +x start-wifi-connect.sh
 
+```
+1.2. Tắt Apache2 Service
+
+```sh
+sudo systemctl status apache2.service 
 ```
 
 ### STEP2.  Cài đặt 
