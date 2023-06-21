@@ -10,36 +10,55 @@ password: vietbot
 ```
 ### STEP2. Cập nhật code mới
 
-1.1. Truy cập vào thư mục vietbot_offline
+2.1. Truy cập vào thư mục vietbot_offline
 
 ```sh
 cd /home/pi/vietbot_offline/src
 ```
-Sau đó kiểm tra chính xác xem có trong nhánh beta hay không
+2.3. Kiểm tra chính xác xem có trong nhánh beta hay không
 
 ```sh
 git branch -vv
 ```
-Nếu câu trả lời là
+2.2.1. Nếu câu trả lời là
 
 ```sh
 
 * beta b7da00f [origin/beta] Update 03_software_install_guide.md
 ```
-thì vietbot đã đúng nhánh beta, khi đó có thể check xem có file gì mới không
+thì vietbot đã đúng nhánh beta, 
+
+2.2.2. Nếu câu trả lời là 
+```sh
+* alpha ccd4057 [origin/alpha] Update config.json
+```
+Thì vietbot đang ở nhánh alpha, cần chuyển về nhánh beta bằng lệnh
+
+```sh
+git checkout -b beta
+```
+```sh
+git branch -vv   
+```
+```sh
+  alpha ccd4057 [origin/alpha] Update config.json
+* beta  ccd4057 Update config.json
+```
+2.3. Check xem có file gì mới không
 
 ```sh
 git fetch
 ```
+
 Chú ý muốn giữ lại create_config.py, create_action.py, create_object.py, create_skill.py cần đổi tên nếu ko sẽ bị ghi đè
 
-Download các File mới về
+2.4. Download các File mới về
 
 ```sh
 git pull
 ```
 
-Nếu ra thông báo sau
+2.4.1. Nếu ra thông báo ví dụ như sau
 ```sh
 hint: Pulling without specifying how to reconcile divergent branches is
 hint: discouraged. You can squelch this message by running one of the following
@@ -60,7 +79,7 @@ Aborting
 ```
 Là do đã copy file main.so từ bên ngoài chứ ko phải từ lần git trước cần phải xóa hoặc đổi tên file này, sau đó chạy lại lệnh
 
-Nếu ra thông báo sau
+2.4.2. Nếu ra thông báo sau
 ```sh
 hint: Pulling without specifying how to reconcile divergent branches is
 hint: discouraged. You can squelch this message by running one of the following
