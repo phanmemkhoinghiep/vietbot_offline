@@ -5,7 +5,7 @@
         },
         "speaker": {
             "type": "default",
-            "amixer_id": 0
+            "amixer_id": 2
         },
         "led": {
             "type": "Vietbot AIO Board V2.0",
