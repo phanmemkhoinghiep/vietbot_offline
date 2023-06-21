@@ -20,11 +20,11 @@ sudo reboot
 Gõ lệnh sau để chạy lại vietbot ngay lập tức
 
 ```sh
-systemctl --user restart vietbot.service
+systemctl --user start vietbot.service
 ```
 hoặc
 ```sh
-sudo reboot
+systemctl --user restart vietbot.service
 ```
 ### Tạm dừng chạy 
 
