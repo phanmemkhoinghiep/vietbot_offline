@@ -29,3 +29,26 @@ git clone -b beta --single-branch https://github.com/phanmemkhoinghiep/vietbot_o
 ```
 Chờ cho đến khi kết thúc
 
+
+### STEP4. Cài đặt các gói Python do nâng cấp tính năng (Nếu cần)
+
+4.1. Nâng cấp PIP
+
+Chạy lần lượt các lệnh sau
+```sh
+python3 -m pip install --upgrade pip
+
+```
+4.2. Cài đặt các gói Python 
+
+Truy cập vào thư mục vietbot_offline
+
+```sh
+cd /home/pi/vietbot_offline/src
+```
+Cài đặt các gói Python được list trong file requirements.txt để cài dặt các lib nếu cần
+```sh
+python3 -m pip install -r requirements.txt
+
+```
+
