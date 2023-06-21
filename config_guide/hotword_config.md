@@ -36,30 +36,105 @@ cd /home/pi/vietbot_offline/src
 
 ```sh
 
-data['hotword_engine'] = []
-data['hotword_engine'].append({
-    'name': 'porcupine',
-    'is_active': False,
-    'porcupine_access_key': 'Giá trị của Access Key'    
-data['hotword'] = []
-data['hotword'].append({
-    'type': 'snowboy',
-    'file_name': 'snowboy.umdl',    
-    'sensitive': 0.6,        
-    'is_active': True    
-})
-data['hotword'].append({
-    'type': 'snowboy',
-    'file_name': 'subex.umdl',    
-    'sensitive': 0.6,        
-    'is_active': True    
-})
-data['hotword'].append({
-    'type': 'porcupine',
-    'file_name': 'hey siri_raspberry-pi.ppn',    
-    'sensitive': 0.3,        
-    'is_active': True    
-})
+    "smart_wakeup": {
+        "hotword_engine": {
+            "type": "porcupine",
+            "key": "riHsfsdfbcKcisA=="
+        },
+        "wakeup_reply": [{
+                "value": "có em"
+            },
+            {
+                "value": "em đây"
+            },
+            {
+                "value": "đây anh"
+            },
+            {
+                "value": "gì anh"
+            },
+            {
+                "value": "yes anh"
+            },
+            {
+                "value": "anh à"
+            },
+            {
+                "value": "vâng anh"
+            }
+        ],
+        "hotword": [{
+                "type": "porcupine",
+                "value": null,
+                "file_name": "hey siri_raspberry-pi.ppn",
+                "lang": "eng",
+                "sensitive": 0.4,
+                "say_reply": false,
+                "command": null,
+                "active": false
+            },
+            {
+                "type": "porcupine",
+                "value": null,
+                "lang": "vi",
+                "file_name": "chào-chị_raspberry-pi.ppn",
+                "sensitive": 0.1,
+                "say_reply": false,
+                "command": null,
+                "active": true
+            },
+            {
+                "type": "porcupine",
+                "value": null,
+                "lang": "vi",
+                "file_name": "em-ơi_raspberry-pi.ppn",
+                "sensitive": 0.1,
+                "say_reply": false,
+                "command": null,
+                "active": true
+            },
+            {
+                "type": "porcupine",
+                "value": null,
+                "lang": "vi",
+                "file_name": "người-đẹp-ơi_raspberry-pi.ppn",
+                "sensitive": 0.1,
+                "say_reply": false,
+                "command": null,
+                "active": true
+            },
+            {
+                "type": "porcupine",
+                "value": null,
+                "lang": "vi",
+                "file_name": "hà-nội-ơi_raspberry-pi.ppn",
+                "sensitive": 0.1,
+                "say_reply": false,
+                "command": null,
+                "active": true
+            },
+            {
+                "type": "porcupine",
+                "value": null,
+                "lang": "vi",
+                "file_name": "vợ-đâu-rồi_raspberry-pi.ppn",
+                "sensitive": 0.1,
+                "say_reply": false,
+                "command": null,
+                "active": true
+            },
+            {
+                "type": "porcupine",
+                "value": null,
+                "lang": "vi",
+                "file_name": "con-mụ-kia_raspberry-pi.ppn",
+                "sensitive": 0.1,
+                "say_reply": false,
+                "command": null,
+                "active": true
+            }
+        ]
+    },
 
 ```
 
