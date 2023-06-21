@@ -1,4 +1,4 @@
-### ĐÂY LÀ HƯỚNG DẪN CÀI ĐẶT TỪ IMAGE CÓ SẴN
+### ĐÂY LÀ HƯỚNG DẪN NHANH ĐỂ SỬ DỤNG VIETBOT
 
 ### STEP1. Download bộ Image cho Raspberry Pi đã cài đặt sẵn
 
