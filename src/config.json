@@ -175,7 +175,7 @@
             }
         },
         "tts": {
-            "type": "tts_gg_cloud",
+            "type": "tts_gg_free",
             "token": null,
             "token_file": "google.json",
             "voice_name": "vi-VN-Neural2-A",
