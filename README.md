@@ -1,6 +1,6 @@
 # vietbot_offline
 Phiên bản Beta
-Xử lý hoàn toàn tại chỗ không liên kết tới máy chủ
+Xử lý hoàn toàn tại chỗ không liên kết tới máy chủ vietbot
 
 # Sơ đồ luồng xử lý của Vietbot
 
