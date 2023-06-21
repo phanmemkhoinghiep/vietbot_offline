@@ -15,9 +15,6 @@
         "active": true
     },
     "news_data": [{
-            "name": "Lao Động",
-            "link": "https://laodong.vn/rss/home.rss"
-        },
         {
             "name": "Việt Nam net",
             "link": "https://laodong.vn/rss/home.rss"
@@ -391,24 +388,24 @@
     "distance_route": {
         "pre_answer": null,
         "error_answer": "Không thực hiện được tra cứu khoảng cách và tuyến đường, hãy kiểm tra lại",
-		"gg_geocoding_api": "AIzaSyAA6BteMlLcaVJ3PlG6DQZ-rrQ3F5golEU",		
+		"gg_geocoding_api": "AIzaSsdflG6DQZ-rrQ3fdsf,		
         "active": false
     },
     "nearby_place": {
         "pre_answer": null,
         "error_answer": "Không thực hiện được tra cứu địa điểm gần đây, hãy kiểm tra lại",
-		"gg_geocoding_api": "AIzaSyAA6BteMlLcaVJ3PlG6DQZ-rrQ3F5golEU",		
+		"gg_geocoding_api": "AIzasfsfVJ3PlG6DQZ-rrQsdfsdflEU",		
         "active": false
     },    
     "weather": {
-        "openweathermap_key": "ffddba060ff1a735f04ff426f85f070b",
+        "openweathermap_key": "ffdsdfsdfsdf70b",
         "pre_answer": null,
         "error_answer": "Không thực hiện được tra cứu thời tiết khu vực, hãy kiểm tra lại",
         "active": true
     },
     "hass": {
-        "url": "http://27.76.106.107:8123",
-        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIzYjZhOWI3ZWNjZTg0NTdjYTI1M2ZjNDAzYmI3NDMyOCIsImlhdCI6MTY4MzEwNzY5OCwiZXhwIjoxOTk4NDY3Njk4fQ.Apwzjywznr_CD4viWpmZQW_qa4ov5GOvnl9j6ZVCXec",
+        "url": "http://192.168.1.10:8123",
+        "token": "eyJhbGcisfsdf3NDMyOCIsImlhdCIsfdsQW_qa4ov5GOvnl9j6ZVCXec",
         "pre_answer": null,
         "error_answer": "Không thực hiện được kết nối đến Hass, hãy kiểm tra lại",
         "display_full_state": true,
@@ -436,7 +433,7 @@
         "error_answer": "Không thực hiện được tra cứu Google Assistant, hãy kiểm tra lại"
     },
     "chatgpt": {
-        "token": "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",
+        "token": "sk-8kFdsfsdfrsdfsdfnlf",
         "engine": "text-davinci-003",
         "pre_answer": "Câu trả lời từ chatGPT có ngay sau đây",
         "error_answer": "Không thực hiện được tra cứu chatGPT, hãy kiểm tra lại"
