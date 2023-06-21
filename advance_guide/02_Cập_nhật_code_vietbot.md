@@ -37,6 +37,7 @@ Thì vietbot đang ở nhánh alpha, cần chuyển về nhánh beta bằng lệ
 ```sh
 git checkout -b beta
 ```
+sau đó kiểm tra lại xem đã chuyển sang nhánh beta hay chưa
 ```sh
 git branch -vv   
 ```
