@@ -237,7 +237,7 @@
 	},
 	"lottery_data": [{
 			"location": "miền trung",
-			"link": " https://xskt.com.vn/rss-feed/mien-trung-xsmt.rss"
+			"link": "https://xskt.com.vn/rss-feed/mien-trung-xsmt.rss"
 		},
 		{
 			"location": "miền bắc",
