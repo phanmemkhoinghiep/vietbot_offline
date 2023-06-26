@@ -153,6 +153,7 @@
             "type": "stt_gg_ass",
             "token": "9osdsfsjjDU",
             "token_file": "google.json",
+            "stt_gg_ass_mode": "default",            
             "credentials_file": "credentials.json",
             "device_config_file": "device_config.json",
             "time_out": 6000
