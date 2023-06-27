@@ -8,7 +8,7 @@
             "amixer_id": 2
         },
         "led": {
-            "type": "Vietbot AIO Board V2.0", 
+            "type": "Vietbot AIO Board V2.0",
             "number_led": 12,
             "effect_mode": 1,
             "brightness": 210,
@@ -51,7 +51,7 @@
     "smart_wakeup": {
         "hotword_engine": {
             "type": "porcupine",
-            "key": "riHyEfsdfsisA=="
+            "key": "EhpfsdfdsfIwUtAONg=="
         },
         "wakeup_reply": [{
                 "value": "có em"
@@ -151,9 +151,9 @@
         "continuous_asking": false,
         "stt": {
             "type": "stt_gg_ass",
-            "token": "9osdsfsjjDU",
+            "token": null,
             "token_file": "google.json",
-            "stt_gg_ass_mode": "default",            
+            "stt_gg_ass_mode": "default",
             "credentials_file": "credentials.json",
             "device_config_file": "device_config.json",
             "time_out": 6000
@@ -184,9 +184,10 @@
             "speed": null,
             "pitch": null
         },
-        "external_bot_priority_1": "gass",
-        "external_bot_priority_2": "chatGPT",                     
-        "pre_answer_timeout": 5,
+        "external_bot_priority_1": "gg_ass",
+        "external_bot_priority_2": "chatGPT",       
+        "external_bot_priority_3": "SIMSIM",                
+        "pre_answer_timeout": 8,
         "pre_answer": [{
                 "value": "Cần thêm thời gian, vui lòng đợi"
                 },
