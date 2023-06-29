@@ -2,7 +2,7 @@
 
 1.1. Mô tả API
 
-Địa chỉ: http://X.X.1.X:5000/api
+Địa chỉ: http://X.X.1.X:5000
 
 Phương thức: POST
 Mào đầu (Header): 
