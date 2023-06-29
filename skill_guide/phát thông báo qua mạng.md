@@ -13,6 +13,7 @@ Mào đầu (Header):
 {'content-type': 'application/json;charset=utf-8'}
 ```
 Định dạng bản tin: json
+
 Cấu trúc bản tin: 
 ```sh
 {"data":"Nội dung cần phát","type":1} 
