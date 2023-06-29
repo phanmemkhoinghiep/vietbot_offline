@@ -5,7 +5,7 @@ Vietbot hỗ trợ tính năng xử lý API thông qua nhận RestFull và phả
 
 1.1. Mô tả API
 
-Địa chỉ: http://X.X.1.X:5000/api
+Địa chỉ: http://X.X.1.X:5000
 
 Phương thức: POST
 Mào đầu (Header): 
@@ -63,7 +63,7 @@ Khai báo trong configuration.yaml
 ```sh
 rest_command:
   vietbot_tts:
-    url: http://192.168.1.109:5000/api
+    url: http://192.168.1.109:5000
     method: POST
     payload: '{"data":"{{ data }}","type":1}'
     content_type: 'application/json; charset=utf-8'
