@@ -5,11 +5,16 @@
 Địa chỉ: http://X.X.1.X:5000/api
 
 Phương thức: POST
-
+Mào đầu (Header): 
+```sh
+{'content-type': 'application/json;charset=utf-8'}
+```
 Định dạng bản tin: json
 
-Cấu trúc bản tin: {"data":"Nội dung cần phát","type":2} 
-
+Cấu trúc bản tin: 
+```sh
+{"data":"Nội dung cần phát","type":2} 
+```
 1.2 Phản hồi
 
 1.2.1 Phản hồi thành công: 
