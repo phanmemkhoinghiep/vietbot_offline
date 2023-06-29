@@ -56,7 +56,7 @@ Khai báo trong configuration.yaml
 ```sh
 rest_command:
   vietbot_tts:
-    url: http://192.168.1.109:5000/api
+    url: http://192.168.1.109:5000
     method: POST
     payload: '{"data":"{{ data }}","type":2}'
     content_type: 'application/json; charset=utf-8'
