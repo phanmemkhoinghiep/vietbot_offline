@@ -8,10 +8,15 @@ Vietbot hỗ trợ tính năng xử lý API thông qua nhận RestFull và phả
 Địa chỉ: http://X.X.1.X:5000/api
 
 Phương thức: POST
-
+Mào đầu (Header): 
+```sh
+{'content-type': 'application/json;charset=utf-8'}
+```
 Định dạng bản tin: json
-
-Cấu trúc bản tin: {"data":"Nội dung cần phát","type":1} 
+Cấu trúc bản tin: 
+```sh
+{"data":"Nội dung cần phát","type":1} 
+```
 
 1.2 Phản hồi
 
