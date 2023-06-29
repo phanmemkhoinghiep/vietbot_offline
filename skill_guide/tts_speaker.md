@@ -1,7 +1,7 @@
 ### HƯỚNG DẪN CÀI ĐẶT VÀ SỬ DỤNG
 Vietbot hỗ trợ tính năng xử lý API thông qua nhận RestFull và phản hồi lại 
 
-### STEP1. Truyền text vào Vietbot để phát thành âm thanh
+### Truyền text vào Vietbot để phát thành âm thanh
 
 1.1. Mô tả API
 
