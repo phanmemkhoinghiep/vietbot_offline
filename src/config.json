@@ -43,9 +43,17 @@
         "web_interface": {
             "port": 5000
         },
-        "location": {
-            "lon": 105.804817,
-            "lat": 21.028511
+        "user_info": {
+            "name": "Vũ Tuyển",
+            "lon": "21.028511",
+            "lat": "105.804817",
+            "address": {
+                "street": "Đường 206",
+                "wards": "Vĩnh Khúc",
+                "district": "Văn giang",
+                "province": "Hưng YÊN",
+                "country": "Việt Nam"
+            }
         }
     },
     "smart_wakeup": {
