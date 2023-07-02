@@ -160,7 +160,6 @@
         "stt": {
             "type": "stt_gg_ass",
             "token": null,
-            "token_file": "google.json",
             "stt_gg_ass_mode": "default",
             "credentials_file": "credentials.json",
             "device_config_file": "device_config.json",
@@ -170,24 +169,23 @@
     "smart_answer": {
         "sound": {
             "default": {
-                "start": "sound/default/ding.mp3",
-                "finish": "sound/default/dong.mp3",
-                "volume_change": "sound/default/tut_tut.mp3"
+                "start": "sound\/default\/ding.mp3",
+                "finish": "sound\/default\/dong.mp3",
+                "volume_change": "sound\/default\/tut_tut.mp3"
             },
             "custom": {
-                "start": "sound/custom/"
+                "start": "sound\/custom\/"
             },
             "welcome": {
                 "mode": "text",
-                "path": "sound/welcome/welcome.mp3",
+                "path": "sound\/welcome\/welcome.mp3",
                 "text": "Xin chào mời đọc khẩu lệnh, để ra lệnh"
             }
         },
         "tts": {
             "type": "tts_gg_free",
             "token": null,
-            "token_file": "google.json",
-            "voice_name": "vi-VN-Neural2-A",
+            "voice_name": "south_female_voice",
             "voice_profile": null,
             "speed": null,
             "pitch": null
