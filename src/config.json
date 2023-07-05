@@ -48,11 +48,9 @@
             "lon": "21.028511",
             "lat": "105.804817",
             "address": {
-                "street": "Đường 206",
                 "wards": "Vĩnh Khúc",
                 "district": "Văn giang",
-                "province": "Hưng YÊN",
-                "country": "Việt Nam"
+                "province": "Hưng YÊN"
             }
         }
     },
@@ -160,7 +158,6 @@
         "stt": {
             "type": "stt_gg_ass",
             "token": null,
-            "token_file": null,            
             "stt_gg_ass_mode": "default",
             "credentials_file": "credentials.json",
             "device_config_file": "device_config.json",
@@ -186,7 +183,6 @@
         "tts": {
             "type": "tts_gg_free",
             "token": null,
-            "token_file": null,                        
             "voice_name": "south_female_voice",
             "voice_profile": null,
             "speed": null,
