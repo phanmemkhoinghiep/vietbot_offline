@@ -190,7 +190,6 @@
         },
         "external_bot_priority_1": "gg_ass",
         "external_bot_priority_2": "chatGPT",       
-        "external_bot_priority_3": "SIMSIM",                
         "pre_answer_timeout": 8,
         "pre_answer": [{
                 "value": "Cần thêm thời gian, vui lòng đợi"
