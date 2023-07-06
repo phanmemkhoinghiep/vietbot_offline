@@ -52,7 +52,8 @@
                 "district": "Văn giang",
                 "province": "Hưng YÊN"
             }
-        }
+        },
+        "console_ouput": null
     },
     "smart_wakeup": {
         "hotword_engine": {
