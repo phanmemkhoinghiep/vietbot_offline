@@ -1,4 +1,13 @@
 {
+    "at_moment": [{
+        "value": "hiện tại"
+    }, {
+        "value": "thời điểm này"
+    }, {
+        "value": "bây giờ"
+    }, {
+        "value": "lúc này"
+    }],
     "at_time": [{
         "value": "từ"
     }, {
