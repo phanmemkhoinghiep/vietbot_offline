@@ -52,7 +52,7 @@ Sau đó bấm lần lượt Ctrl + Y rồi X để lưu lại file
 
 ### STEP3. Thay đổi khai báo Default trong Alsa
 
-2.1. Gọi lệnh sửa file Pulse
+2.1. Gọi lệnh sửa file Alsa
 
 ```sh
 sudo nano /usr/share/alsa/alsa.conf
