@@ -1,4 +1,4 @@
-### Link image 20/5:
+### Link image 03/6:
 
 https://drive.google.com/file/d/1ePY0s56LmfrJyzRhsbjdJQa96Ih-TeWL/view?usp=drive_link
 - Ngày 03/6
