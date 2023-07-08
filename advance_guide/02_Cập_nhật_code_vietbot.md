@@ -56,7 +56,7 @@ Chú ý muốn giữ lại create_config.py, create_action.py, create_object.py,
 2.4. Download các File mới về
 
 ```sh
-git pull
+git pull --no-commit
 ```
 
 2.4.1. Nếu ra thông báo ví dụ như sau
