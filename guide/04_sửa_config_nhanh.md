@@ -1,6 +1,14 @@
 ### ĐÂY LÀ HƯỚNG DẪN NHANH ĐỂ SỬA CONFIG, VỚI CÁC THỨ TỰ ƯU TIÊN
 
-### STEP1. ID CỦA SOUNDCARD
+### STEP1. CẤP QUYỀN CHO UI
+
+  ```sh
+ sudo chmod -R 0777 /home/pi/vietbot_offline/html/ && sudo chmod -R 0777 /home/pi/vietbot_offline/src/
+
+```
+
+### STEP2. ID CỦA SOUNDCARD
+ 
   ```sh
             "amixer_id": 0
   ```
@@ -23,11 +31,17 @@
 - Đăng ký và lấy key từ trang PICOVOICE.AI
 - Nhập giá trị key thay thế giá trị mặc định 
 
-### STEP4. TỌA ĐỘ
-  "location": {
-      "lon": 105.804817,
-      "lat": 21.028511
-  }
-Người dùng nhập tọa độ thay thế cho các giá trị mặc định, để có được kết quả dự báo thời tiết chính xác
+### STEP4. THÔNG TIN CÁ NHÂN
+  ```sh
+        "user_info": {
+            "name": "Vũ Tuyển",
+            "address": {
+                "wards": "Xã Vĩnh Khúc",
+                "district": "Huyện Văn Giang",
+                "province": "Tỉnh Hưng Yên"
+            }
+        },
+  ```
+Người dùng nhập vị trí thay thế cho các giá trị mặc định, để có được kết quả dự báo thời tiết chính xác
 đến tận khu vực nhập
 
