@@ -1,0 +1,258 @@
+{
+  "Thành phố Hà Nội": {
+    "latitude": 21.028511,
+    "longitude": 105.854200
+  },
+  "Thành phố Hồ Chí Minh": {
+    "latitude": 10.762622,
+    "longitude": 106.660172
+  },
+  "Thành phố Hải Phòng": {
+    "latitude": 20.844911,
+    "longitude": 106.688084
+  },
+  "Thành phố Cần Thơ": {
+    "latitude": 10.031197,
+    "longitude": 105.783234
+  },
+  "Thành phố Đà Nẵng": {
+    "latitude": 16.054407,
+    "longitude": 108.202167
+  },
+  "Tỉnh An Giang": {
+    "latitude": 10.542878,
+    "longitude": 105.118308
+  },
+  "Tỉnh Bà Rịa - Vũng Tàu": {
+    "latitude": 10.574153,
+    "longitude": 107.216700
+  },
+  "Tỉnh Bắc Giang": {
+    "latitude": 21.281132,
+    "longitude": 106.204440
+  },
+  "Tỉnh Bắc Kạn": {
+    "latitude": 22.146930,
+    "longitude": 105.834879
+  },
+  "Tỉnh Bạc Liêu": {
+    "latitude": 9.294973,
+    "longitude": 105.727058
+  },
+  "Tỉnh Bắc Ninh": {
+    "latitude": 21.186067,
+    "longitude": 106.076348
+  },
+  "Tỉnh Bến Tre": {
+    "latitude": 10.233179,
+    "longitude": 106.375322
+  },
+  "Tỉnh Bình Định": {
+    "latitude": 13.782492,
+    "longitude": 109.218292
+  },
+  "Tỉnh Bình Dương": {
+    "latitude": 11.043646,
+    "longitude": 106.877629
+  },
+  "Tỉnh Bình Phước": {
+    "latitude": 11.529891,
+    "longitude": 106.902885
+  },
+  "Tỉnh Bình Thuận": {
+    "latitude": 10.935050,
+    "longitude": 108.102113
+  },
+  "Tỉnh Cà Mau": {
+    "latitude": 9.176596,
+    "longitude": 105.152380
+  },
+  "Tỉnh Cao Bằng": {
+    "latitude": 22.664446,
+    "longitude": 106.267346
+  },
+  "Tỉnh Đắk Lắk": {
+    "latitude": 12.687218,
+    "longitude": 108.042389
+  },
+  "Tỉnh Đắk Nông": {
+    "latitude": 12.262776,
+    "longitude": 107.930623
+  },
+  "Tỉnh Điện Biên": {
+    "latitude": 21.382054,
+    "longitude": 103.016328
+  },
+  "Tỉnh Đồng Nai": {
+    "latitude": 10.946506,
+    "longitude": 106.831710
+  },
+  "Tỉnh Đồng Tháp": {
+    "latitude": 10.466696,
+    "longitude": 105.631601
+  },
+  "Tỉnh Gia Lai": {
+    "latitude": 13.986717,
+    "longitude": 108.007303
+  },
+  "Tỉnh Hà Giang": {
+    "latitude": 22.830979,
+    "longitude": 104.983541
+  },
+  "Tỉnh Hà Nam": {
+    "latitude": 20.542957,
+    "longitude": 105.922741
+  },
+  "Tỉnh Hà Tĩnh": {
+    "latitude": 18.341911,
+    "longitude": 105.905040
+  },
+  "Tỉnh Hải Dương": {
+    "latitude": 20.944720,
+    "longitude": 106.332474
+  },
+  "Tỉnh Hậu Giang": {
+    "latitude": 9.789883,
+    "longitude": 105.485469
+  },
+  "Tỉnh Hòa Bình": {
+    "latitude": 20.810669,
+    "longitude": 105.337630
+  },
+  "Tỉnh Hưng Yên": {
+    "latitude": 20.648098,
+    "longitude": 106.051099
+  },
+  "Tỉnh Khánh Hòa": {
+    "latitude": 12.238791,
+    "longitude": 109.196748
+  },
+  "Tỉnh Kiên Giang": {
+    "latitude": 10.190438,
+    "longitude": 105.281883
+  },
+  "Tỉnh Kon Tum": {
+    "latitude": 14.354513,
+    "longitude": 107.983051
+  },
+  "Tỉnh Lai Châu": {
+    "latitude": 22.385647,
+    "longitude": 103.459286
+  },
+  "Tỉnh Lâm Đồng": {
+    "latitude": 11.945004,
+    "longitude": 108.246141
+  },
+  "Tỉnh Lạng Sơn": {
+    "latitude": 21.853324,
+    "longitude": 106.761449
+  },
+  "Tỉnh Lào Cai": {
+    "latitude": 22.483616,
+    "longitude": 103.956990
+  },
+  "Tỉnh Long An": {
+    "latitude": 10.549940,
+    "longitude": 106.413117
+  },
+  "Tỉnh Nam Định": {
+    "latitude": 20.431009,
+    "longitude": 106.141297
+  },
+  "Tỉnh Nghệ An": {
+    "latitude": 19.234322,
+    "longitude": 104.920582
+  },
+  "Tỉnh Ninh Bình": {
+    "latitude": 20.253998,
+    "longitude": 105.974266
+  },
+  "Tỉnh Ninh Thuận": {
+    "latitude": 11.568957,
+    "longitude": 108.998601
+  },
+  "Tỉnh Phú Thọ": {
+    "latitude": 21.328984,
+    "longitude": 105.208496
+  },
+  "Tỉnh Phú Yên": {
+    "latitude": 13.088186,
+    "longitude": 109.092876
+  },
+  "Tỉnh Quảng Bình": {
+    "latitude": 17.536911,
+    "longitude": 106.353746
+  },
+  "Tỉnh Quảng Nam": {
+    "latitude": 15.511685,
+    "longitude": 108.374432
+  },
+  "Tỉnh Quảng Ngãi": {
+    "latitude": 15.121197,
+    "longitude": 108.792322
+  },
+  "Tỉnh Quảng Ninh": {
+    "latitude": 20.952443,
+    "longitude": 107.023323
+  },
+  "Tỉnh Quảng Trị": {
+    "latitude": 16.735692,
+    "longitude": 107.187263
+  },
+  "Tỉnh Sóc Trăng": {
+    "latitude": 9.603320,
+    "longitude": 105.977992
+  },
+  "Tỉnh Sơn La": {
+    "latitude": 21.327522,
+    "longitude": 103.912178
+  },
+  "Tỉnh Tây Ninh": {
+    "latitude": 11.312464,
+    "longitude": 106.096070
+  },
+  "Tỉnh Thái Bình": {
+    "latitude": 20.454885,
+    "longitude": 106.340772
+  },
+  "Tỉnh Thái Nguyên": {
+    "latitude": 21.592173,
+    "longitude": 105.844475
+  },
+  "Tỉnh Thanh Hóa": {
+    "latitude": 19.807235,
+    "longitude": 105.779984
+  },
+  "Tỉnh Thừa Thiên Huế": {
+    "latitude": 16.449800,
+    "longitude": 107.562350
+  },
+  "Tỉnh Tiền Giang": {
+    "latitude": 10.408937,
+    "longitude": 106.958759
+  },
+  "Tỉnh Trà Vinh": {
+    "latitude": 9.933333,
+    "longitude": 106.343744
+  },
+  "Tỉnh Tuyên Quang": {
+    "latitude": 21.816165,
+    "longitude": 105.206829
+  },
+  "Tỉnh Vĩnh Long": {
+    "latitude": 10.253649,
+    "longitude": 105.972601
+  },
+  "Tỉnh Vĩnh Phúc": {
+    "latitude": 21.309184,
+    "longitude": 105.220190
+  },
+  "Tỉnh Yên Bái": {
+    "latitude": 21.724089,
+    "longitude": 104.911530
+  },
+  "Phú Quốc": {
+    "latitude": 10.227027,
+    "longitude": 103.963722
+  }
+}
