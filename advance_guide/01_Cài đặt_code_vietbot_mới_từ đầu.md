@@ -6,7 +6,7 @@
 
 ```sh
 username: pi
-password: pi
+password: vietbot
 ```
 ### STEP2. Xóa thư mục code cũ, (Nếu có)
 
