@@ -1,3 +1,19 @@
+### Link image 10/07:
+
+https://drive.google.com/file/d/1XHd2ugUb26CFIqj5QB6I6wwmYvd53DX7/view?usp=sharing
+- Ngày 09/07, tối ưu từ bản 20/5
+- Tương thích với Mic AIO, Mic2HAT, MicUSB
+- Sử dụng raspbian bản Desktop
+- Driver của WaveShare cho Mic2HAT
+- Chạy ổn định
+- Có Code vietbot
+- Có chạy tự động
+- Có UI
+- Có Auto WiFi
+- Cần thẻ nhớ 8G trở lên
+
+
+
 ### Link image 09/07:
 
 https://drive.google.com/file/d/1420dhKLrpNCaPy3XksFHY6NI6Mol-Vic/view?usp=drive_link
