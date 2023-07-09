@@ -3,7 +3,7 @@
 //Facebook: https://www.facebook.com/TWFyaW9uMDAx
 include "../Configuration.php";
 	$FileConfigJson = "$DuognDanThuMucJson"."config.json";
-	$FileVolumeJson = "$DuognDanThuMucJson"."volume_state.json";
+	$FileVolumeJson = "$DuognDanThuMucJson"."state.json";
 	$json_volume_data = file_get_contents($FileVolumeJson);
     $json_config_data = file_get_contents($FileConfigJson);
 	$data_volume = json_decode($json_volume_data);
