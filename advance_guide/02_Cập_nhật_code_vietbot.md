@@ -56,7 +56,7 @@ Chú ý muốn giữ lại create_config.py, create_action.py, create_object.py,
 2.4. Download các File mới về
 
 ```sh
-git pull --no-commit
+git pull
 ```
 
 2.4.1. Nếu ra thông báo ví dụ như sau
@@ -94,25 +94,26 @@ hint: You can replace "git config" with "git config --global" to set a default
 hint: preference for all repositories. You can also pass --rebase, --no-rebase,
 hint: or --ff-only on the command line to override the configured default per
 hint: invocation.
-Updating b7da00f..e33167d
+Updating fb04f3a..f7bd158
+Updating files: 100% (14/14), done.
 Fast-forward
- 021_software_enviroment_installation_guide.md                       |   3 ++-
- 022_software_enviroment_installation_guide.md                       |   6 ++---
- 03_software_install_guide.md => 03_software_install_update_guide.md |  31 +++++++++++++++++++++++--
- 07_updating_guide.md                                                |  63 ---------------------------------------------------
- README.md                                                           |  16 ++++++++++++-
- requirements.txt                                                    |   5 ----
- src/create_config.py                                                |   2 +-
- src/led_controll.so                                                 | Bin 1713052 -> 1713116 bytes
- src/local_controll.so                                               | Bin 693048 -> 827620 bytes
- src/main.so                                                         | Bin 5441808 -> 5405524 bytes
- src/requirements.txt                                                |   1 +
- src/schedule_controll.so                                            | Bin 271520 -> 0 bytes
- 12 files changed, 51 insertions(+), 76 deletions(-)
- rename 03_software_install_guide.md => 03_software_install_update_guide.md (52%)
- delete mode 100644 07_updating_guide.md
- delete mode 100644 requirements.txt
- delete mode 100644 src/schedule_controll.so
+ "guide/01_Danh_s\303\241ch_image_vietbot.md"                                                                                  |   16 +
+ "guide/02_C\303\240i_\304\221\341\272\267t_t\341\273\253_image.md" => guide/02_Flash_image.md                                 |    0
+ "guide/03_C\303\240i_\304\221\341\272\267t_nhanh.md"                                                                          |   74 +++
+ .../03_C\303\240i_\304\221\341\272\267t_\303\242m_thanh.md" => "guide/04_C\303\240i_\304\221\341\272\267t_\303\242m_thanh.md" |    0
+ "guide/04_s\341\273\255a_config_nhanh.md"                                                                                     |   33 --
+ skill_guide/homeassistant.md => "skill_guide/C\303\240i_\304\221\341\272\267t_hass.md"                                        |   23 +-
+ src/data_process.cpython-39-arm-linux-gnueabihf.so                                                                            |  Bin 5296764 -> 5631832 bytes
+ src/mic_process.cpython-39-arm-linux-gnueabihf.so                                                                             |  Bin 2574440 -> 2593148 bytes
+ src/object.json                                                                                                               | 1576 ++++++++++++++++++++++++++++++++--------------------------------
+ src/skill_process.cpython-39-arm-linux-gnueabihf.so                                                                           |  Bin 3374692 -> 3400648 bytes
+ src/speaker_process.cpython-39-arm-linux-gnueabihf.so                                                                         |  Bin 558828 -> 559392 bytes
+ 11 files changed, 885 insertions(+), 837 deletions(-)
+ rename "guide/02_C\303\240i_\304\221\341\272\267t_t\341\273\253_image.md" => guide/02_Flash_image.md (100%)
+ create mode 100644 "guide/03_C\303\240i_\304\221\341\272\267t_nhanh.md"
+ rename "guide/03_C\303\240i_\304\221\341\272\267t_\303\242m_thanh.md" => "guide/04_C\303\240i_\304\221\341\272\267t_\303\242m_thanh.md" (100%)
+ delete mode 100644 "guide/04_s\341\273\255a_config_nhanh.md"
+ rename skill_guide/homeassistant.md => "skill_guide/C\303\240i_\304\221\341\272\267t_hass.md" (75%)
 ```
 là đã thành công
 
