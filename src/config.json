@@ -158,7 +158,7 @@
         "continuous_asking": false,
         "stt": {
             "type": "stt_gg_ass",
-            "token": "google_stt.json",
+            "token": "",
             "stt_gg_ass_mode": "default",
             "credentials_file": "credentials.json",
             "device_config_file": "device_config.json",
@@ -183,7 +183,7 @@
         },
         "tts": {
             "type": "tts_gg_free",
-            "token": "google_tts.json",
+            "token": "",
             "voice_name": null,
             "voice_profile": null,
             "speed": null,
