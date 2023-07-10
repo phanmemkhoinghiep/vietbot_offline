@@ -1,24 +1,31 @@
 ### ĐÂY LÀ HƯỚNG DẪN NHANH ĐỂ SỬA CONFIG, VỚI CÁC THỨ TỰ ƯU TIÊN
 
+### STEP1. KẾT NỐI VỚI UI
+
+1.1. Bật nguồn
+1.2. Lắng 
+
+
+
 ### STEP1. CẤP QUYỀN CHO UI
 
   ```sh
  sudo chmod -R 0777 /home/pi/vietbot_offline/html/ && sudo chmod -R 0777 /home/pi/vietbot_offline/src/
 
 ```
-
 ### STEP2. ID CỦA SOUNDCARD
- 
-  ```sh
-            "amixer_id": 0
-  ```
+   
 - Sử dụng để khai báo id của soundcard nhằm chỉnh âm lượng hệ thống
 - Được xác định bằng lệnh
   ```sh
   amixer
   ```
 - Sau đó tìm giá trị Master Volume và nhập thay thế giá trị 0 mặc định
-- Với các Image đi kèm thì giá trị mặc định đã đúng
+- Tìm mục tương ứng trong Tab Config
+
+- ```sh
+            "amixer_id": 0
+  ```
 
 ### STEP3. KEY CỦA WAKEUP
   ```sh
