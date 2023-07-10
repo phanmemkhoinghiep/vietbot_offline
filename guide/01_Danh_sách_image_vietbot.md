@@ -1,5 +1,5 @@
 ### Link image 11/07:
-https://drive.google.com/file/d/1DtcgEcgzj6AyF0ZMgz8GIMoQ4Tjavea/view?usp=drivesdk
+https://drive.google.com/file/d/1Dtc-gEcgzj6AyF0ZMgz8GIMoQ4Tjavea/view?usp=drivesdk
 - Ngày 11/07, tối ưu từ bản 20/5
 - Tương thích với Mic AIO, Mic2HAT, MicUSB
 - Sử dụng raspbian bản Desktop
