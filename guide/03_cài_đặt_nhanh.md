@@ -1,8 +1,6 @@
 ### ĐÂY LÀ HƯỚNG DẪN NHANH ĐỂ SỬA CONFIG, VỚI CÁC THỨ TỰ ƯU TIÊN
 
-Trước khi thực hiện đảm bảo đã thực hiện Guide 01 và Loa đã được cấp WiFi
-
-
+Trước khi thực hiện đảm bảo đã thực hiện Guide 02 và Loa đã được cấp WiFi
 
 
 ### STEP1. KẾT NỐI VỚI UI
