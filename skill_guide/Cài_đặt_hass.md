@@ -14,28 +14,13 @@ Có dạng: http://abc.def:8123 (Có thể không có 8123) hoặc không với 
 
 ### STEP3.  Chỉnh sửa lại Config
 
-3.1. Nhập giá trị tại 1.1 hoặc 1.2 vào file create_config.py
+3.1. Vào Web UI, chọn Tab Skill
 
-```sh
-data['smh_skill'].append({
-    'smh_name': 'hass',
-    'smh_url':'https://flsdfjsldfj.duckdns.org:8123',
-    'smh_token1': 'sdfljsdlfjsldf',
-    'smh_token2':'',
-    'smh_token3':'',
-    'is_active': True        
-```
-3.2. Chạy lại script create_config.py để tạo file config.json
+3.3. Nhập Hass URL và Hass Long Token vào mục cần nhập
 
-```sh
-python3 /home/pi/vietbot_offline/src/create_config.json
-```
+3.4. Chọn lưu cấu hình
 
-### STEP4. Chạy lại bot
-
-4.1. Chạy lại bot theo hướng dẫn tại [https://github.com/phanmemkhoinghiep/vietbot/blob/main/running_guide.md](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/06_running_guide.md)
-
-4.2. Chờ tiếp đến khi nào có thông báo là: 'Sẵn sàng chờ lệnh" là có thể ra lệnh với Hass
+3.5. Chọn Restart lại vietbot
 
 ### STEP4. Cách ra lệnh trên Hass
 
