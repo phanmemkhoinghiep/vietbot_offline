@@ -13,7 +13,7 @@ password: vietbot
 2.1. Truy cập vào thư mục vietbot_offline
 
 ```sh
-cd /home/pi/vietbot_offline/src
+cd /home/pi/vietbot_offline/
 ```
 2.3. Kiểm tra chính xác xem có trong nhánh beta hay không
 
