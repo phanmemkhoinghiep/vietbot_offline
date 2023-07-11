@@ -56,7 +56,7 @@
     "smart_wakeup": {
         "hotword_engine": {
             "type": "porcupine",
-            "key": "iB0k3SrHnf0j1hvf89nkuQSsc4T7fEMuaW6lOXqU4Jy7sA3bArwy+w=="
+            "key": "iB0kfsdfsdf+w=="
         },
         "wakeup_reply": [
             {
@@ -158,7 +158,7 @@
         "continuous_asking": false,
         "stt": {
             "type": "stt_gg_ass",
-            "token": null,
+            "token": "",
             "stt_gg_ass_mode": "default",
             "credentials_file": "credentials.json",
             "device_config_file": "device_config.json",
@@ -182,8 +182,8 @@
             }
         },
         "tts": {
-            "type": "tts_zalo",
-            "token": "KgGfQHrA4FBg2x9FjSOQUFceTl2VbAmu",
+            "type": "tts_gg_free",
+            "token": "",
             "voice_name": null,
             "voice_profile": null,
             "speed": null,
