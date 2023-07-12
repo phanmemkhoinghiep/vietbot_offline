@@ -101,7 +101,7 @@
                 "say_reply": false,
                 "command": null,
                 "active": false
-            }
+            },
             {
                 "type": "porcupine",
                 "value": null,
