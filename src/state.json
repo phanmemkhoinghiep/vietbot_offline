@@ -1,10 +1,4 @@
 {
-	"vietbot_versions": {
-		"latest": "beta 12-07-2023"
-	},
-	"ui_versions": {
-		"latest": "beta 11-07-2023"
-	},
 	"volume": 65,
 	"running_count": 0
 }
