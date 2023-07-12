@@ -95,6 +95,26 @@
             {
                 "type": "porcupine",
                 "value": null,
+                "lang": "eng",
+                "file_name": "ok-vi-bot_en_raspberry-pi.ppn",
+                "sensitive": 0.4,
+                "say_reply": false,
+                "command": null,
+                "active": false
+            }
+            {
+                "type": "porcupine",
+                "value": null,
+                "lang": "eng",
+                "file_name": "hey-vi-bot_en_raspberry-pi.ppn",
+                "sensitive": 0.4,
+                "say_reply": false,
+                "command": null,
+                "active": false
+            },
+            {
+                "type": "porcupine",
+                "value": null,
                 "lang": "vi",
                 "file_name": "chào-chị_raspberry-pi.ppn",
                 "sensitive": 0.1,
