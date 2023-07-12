@@ -116,16 +116,6 @@
                 "type": "porcupine",
                 "value": null,
                 "lang": "vi",
-                "file_name": "chào-chị_raspberry-pi.ppn",
-                "sensitive": 0.1,
-                "say_reply": false,
-                "command": null,
-                "active": true
-            },
-            {
-                "type": "porcupine",
-                "value": null,
-                "lang": "vi",
                 "file_name": "em-ơi_raspberry-pi.ppn",
                 "sensitive": 0.1,
                 "say_reply": false,
@@ -137,16 +127,6 @@
                 "value": null,
                 "lang": "vi",
                 "file_name": "người-đẹp-ơi_raspberry-pi.ppn",
-                "sensitive": 0.1,
-                "say_reply": false,
-                "command": null,
-                "active": true
-            },
-            {
-                "type": "porcupine",
-                "value": null,
-                "lang": "vi",
-                "file_name": "hà-nội-ơi_raspberry-pi.ppn",
                 "sensitive": 0.1,
                 "say_reply": false,
                 "command": null,
