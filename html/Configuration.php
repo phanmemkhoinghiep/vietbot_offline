@@ -15,7 +15,7 @@ $Pass_Login = "admin";
 
 //Đường dẫn tới thư mục chứa các file json: /home/pi/vietbot_offline/src/
 $DuognDanThuMucJson = "/home/pi/vietbot_offline/src"; //Để Mặc Định
-$DuognDanUI_HTML = "/var/www/html"; 				   //Để Mặc Định
+$DuognDanUI_HTML = "/home/pi/vietbot_offline/html"; 				   //Để Mặc Định
 $directorySound = '/home/pi/vietbot_offline/src/sound/default/'; // Đường dẫn tới thư mục chứa các tệp tin .mp3
 
 //SSH Tải Khoản, Mật Khẩu Đăng Nhập SSH (Bắt Buộc Phải Nhập Để Dùng Các Lệnh Hệ Thống)
