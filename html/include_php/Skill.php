@@ -2,7 +2,7 @@
 //Code By: Vũ Tuyển
 //Facebook: https://www.facebook.com/TWFyaW9uMDAx
 include "../Configuration.php";
-$FileSkillJson = "$DuognDanThuMucJson"."skill.json";
+$FileSkillJson = "$DuognDanThuMucJson"."/skill.json";
 $skillData = file_get_contents($FileSkillJson);
 $skillArray = json_decode($skillData, true);
 ?>
@@ -236,8 +236,8 @@ if (isset($_POST['set_full_quyen'])) {
 $connection = ssh2_connect($serverIP, $SSH_Port);
 if (!$connection) {die('Không thể kết nối tới máy chủ.');}
 if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die('Đăng nhập không thành công.');}
-$stream1 = ssh2_exec($connection, 'sudo chmod -R 0777 /var/www/html/');
-$stream2 = ssh2_exec($connection, 'sudo chmod -R 0777 /home/pi/vietbot_offline/src/');
+$stream1 = ssh2_exec($connection, "sudo chmod -R 0777 $DuognDanUI_HTML");
+$stream2 = ssh2_exec($connection, "sudo chmod -R 0777 $DuognDanThuMucJson");
 stream_set_blocking($stream1, true); stream_set_blocking($stream2, true);
 $stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO); $stream_out2 = ssh2_fetch_stream($stream2, SSH2_STREAM_STDIO);
 stream_get_contents($stream_out1); stream_get_contents($stream_out2);

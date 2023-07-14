@@ -95,12 +95,22 @@
             {
                 "type": "porcupine",
                 "value": null,
-                "lang": "vi",
-                "file_name": "chào-chị_raspberry-pi.ppn",
-                "sensitive": 0.1,
+                "lang": "eng",
+                "file_name": "ok-vi-bot_en_raspberry-pi.ppn",
+                "sensitive": 0.4,
                 "say_reply": false,
                 "command": null,
-                "active": true
+                "active": false
+            },
+            {
+                "type": "porcupine",
+                "value": null,
+                "lang": "eng",
+                "file_name": "hey-vi-bot_en_raspberry-pi.ppn",
+                "sensitive": 0.4,
+                "say_reply": false,
+                "command": null,
+                "active": false
             },
             {
                 "type": "porcupine",
@@ -117,16 +127,6 @@
                 "value": null,
                 "lang": "vi",
                 "file_name": "người-đẹp-ơi_raspberry-pi.ppn",
-                "sensitive": 0.1,
-                "say_reply": false,
-                "command": null,
-                "active": true
-            },
-            {
-                "type": "porcupine",
-                "value": null,
-                "lang": "vi",
-                "file_name": "hà-nội-ơi_raspberry-pi.ppn",
                 "sensitive": 0.1,
                 "say_reply": false,
                 "command": null,
@@ -158,7 +158,7 @@
         "continuous_asking": false,
         "stt": {
             "type": "stt_gg_ass",
-            "token": "google_stt.json",
+            "token": "",
             "stt_gg_ass_mode": "default",
             "credentials_file": "credentials.json",
             "device_config_file": "device_config.json",
@@ -183,7 +183,7 @@
         },
         "tts": {
             "type": "tts_gg_free",
-            "token": "google_tts.json",
+            "token": "",
             "voice_name": null,
             "voice_profile": null,
             "speed": null,

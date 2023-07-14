@@ -262,14 +262,14 @@ if (isset($_POST['set_full_quyen'])) {
 $connection = ssh2_connect($serverIP, $SSH_Port);
 if (!$connection) {die('Không thể kết nối tới máy chủ.');}
 if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die('Đăng nhập không thành công.');}
-$stream1 = ssh2_exec($connection, 'sudo chmod -R 0777 /var/www/html/');
-$stream2 = ssh2_exec($connection, 'sudo chmod -R 0777 /home/pi/vietbot_offline/src/');
+$stream1 = ssh2_exec($connection, "sudo chmod -R 0777 $DuognDanUI_HTML");
+$stream2 = ssh2_exec($connection, "sudo chmod -R 0777 $DuognDanThuMucJson");
 stream_set_blocking($stream1, true); stream_set_blocking($stream2, true);
 $stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO); 
 $stream_out2 = ssh2_fetch_stream($stream2, SSH2_STREAM_STDIO);
-$output = "$GET_current_USER@$HostName:~$ sudo chmod -R 0777 /var/www/html/\n";
+$output = "$GET_current_USER@$HostName:~$ sudo chmod -R 0777 $DuognDanUI_HTML\n";
 $output .= stream_get_contents($stream_out1); 
-$output .= "$GET_current_USER@$HostName:~$ sudo chmod -R 0777 /home/pi/vietbot_offline/src/\n";
+$output .= "$GET_current_USER@$HostName:~$ sudo chmod -R 0777 $DuognDanThuMucJson\n";
 $output .= stream_get_contents($stream_out2);
 $output .= "$GET_current_USER@$HostName:~$ >Lệnh Được Thực Hiện Thành Công";
 }
@@ -277,8 +277,16 @@ $output .= "$GET_current_USER@$HostName:~$ >Lệnh Được Thực Hiện Thành
 //Command
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['commandd'])) {
 	$commandnd = @$_POST['commandnd'];
-	$output = "$GET_current_USER@$HostName:~ $ $commandnd\n\n";
-    $output .= shell_exec($commandnd);
+//	$output = "$GET_current_USER@$HostName:~ $ $commandnd\n\n";
+//   $output .= shell_exec($commandnd);
+$connection = ssh2_connect($serverIP, $SSH_Port);
+if (!$connection) {die($E_rror_HOST);}
+if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
+$stream = ssh2_exec($connection, $commandnd);
+stream_set_blocking($stream, true);
+$stream_out = ssh2_fetch_stream($stream, SSH2_STREAM_STDIO);
+$output = "$GET_current_USER@$HostName:~ssh$: $commandnd\n";
+$output .=  stream_get_contents($stream_out);
 }
 
 ?>

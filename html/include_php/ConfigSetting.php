@@ -2,8 +2,8 @@
 //Code By: Vũ Tuyển
 //Facebook: https://www.facebook.com/TWFyaW9uMDAx
 include "../Configuration.php";
-	$FileConfigJson = "$DuognDanThuMucJson"."config.json";
-	$FileVolumeJson = "$DuognDanThuMucJson"."state.json";
+	$FileConfigJson = "$DuognDanThuMucJson"."/config.json";
+	$FileVolumeJson = "$DuognDanThuMucJson"."/volume_state.json";
 	$json_volume_data = file_get_contents($FileVolumeJson);
     $json_config_data = file_get_contents($FileConfigJson);
 	$data_volume = json_decode($json_volume_data);
@@ -339,7 +339,9 @@ chmod($backupFile, 0777);
 	$data_config['smart_answer']['tts']['voice_name'] = $TTS_Voice_CheckINPUT;
 	//Sound Start Finish
 	$data_config['smart_answer']['sound']['default']['start'] = @$_POST['startsound'];
+	//$data_config['smart_answer']['sound']['default']['start'] = ltrim($_POST['startsound'], "/");
 	$data_config['smart_answer']['sound']['default']['finish'] = @$_POST['finishsound'];
+	//$data_config['smart_answer']['sound']['default']['finish'] = ltrim($_POST['finishsound'], "/");
 	//console_ouput
 	if (strcasecmp(@$_POST['console_ouput'], "Null") === 0) {$console_ouputrepl = null;
     } else {$console_ouputrepl = @$_POST['console_ouput'];}
@@ -403,8 +405,8 @@ if (isset($_POST['set_full_quyen'])) {
 $connection = ssh2_connect($serverIP, $SSH_Port);
 if (!$connection) {die('Không thể kết nối tới máy chủ.');}
 if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die('Đăng nhập không thành công.');}
-$stream1 = ssh2_exec($connection, 'sudo chmod -R 0777 /var/www/html/');
-$stream2 = ssh2_exec($connection, 'sudo chmod -R 0777 /home/pi/vietbot_offline/src/');
+$stream1 = ssh2_exec($connection, "sudo chmod -R 0777 $DuognDanUI_HTML");
+$stream2 = ssh2_exec($connection, "sudo chmod -R 0777 $DuognDanThuMucJson");
 stream_set_blocking($stream1, true); stream_set_blocking($stream2, true);
 $stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO); $stream_out2 = ssh2_fetch_stream($stream2, SSH2_STREAM_STDIO);
 stream_get_contents($stream_out1); stream_get_contents($stream_out2);
@@ -507,7 +509,8 @@ a {
 	  transform: translate(-50%, -50%);
 }
 </style>
-   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+   <script src="../assets/js/11.0.18_dist_sweetalert2.all.min.js"></script>
+  
 </head>
 <body>
 <form method="post" id="my-form" onsubmit="return validateInputs();" action="<?php echo $PHP_SELF ?>"> 
@@ -801,7 +804,7 @@ $mp3Files = array_filter($mp3Files, function($mp3File) {
 	  echo '<select class="custom-select" name="startsound">';
 	foreach ($mp3Files as $mp3File) {
     $fileName = basename($mp3File);
-	$result_MP3 = str_replace($DuognDanThuMucJson, '', $mp3File);
+	$result_MP3 = str_replace($DuognDanThuMucJson.'/', '', $mp3File);
     echo '<option value="'.$result_MP3.'" '.(($data_config['smart_answer']['sound']['default']['start'] === $result_MP3) ? 'selected' : '').'>'.$fileName.'</option>';
 }
 	echo '</select>';
@@ -810,9 +813,9 @@ $mp3Files = array_filter($mp3Files, function($mp3File) {
 <?php  
 	echo '<select class="custom-select" name="finishsound">';
 	foreach ($mp3Files as $mp3File) {
-    $fileName = basename($mp3File);
-	$result_NAME = str_replace($DuognDanThuMucJson, '', $mp3File);
-    echo '<option value="'.$result_NAME.'" '.(($data_config['smart_answer']['sound']['default']['finish'] === $result_NAME) ? 'selected' : '').'>'.$fileName.'</option>';
+    $fileNamee = basename($mp3File);
+	$result_NAME = str_replace($DuognDanThuMucJson.'/', '', $mp3File);
+    echo '<option value="'.$result_NAME.'" '.(($data_config['smart_answer']['sound']['default']['finish'] === $result_NAME) ? 'selected' : '').'>'.$fileNamee.'</option>';
 	}
 	echo '</select>';
 ?></center></td></tr><tbody></table></div></div><hr/>

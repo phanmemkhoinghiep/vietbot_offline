@@ -28,6 +28,7 @@ Chạy các lệnh sau để cài Apache, php, thư viện ssh:
 	$: sudo apt-get upgrade
 	$: sudo apt install apache2 -y
 	$: sudo apt install php -y
+ 	$: sudo apt-get install php-curl -y
 
 - Cài thư viện ssh2 cho php bằng lệnh dưới (hoặc bỏ 6 phút ngồi xem hướng dẫn cài: https://www.youtube.com/watch?v=ZFgd2CjUtko)
 
@@ -44,9 +45,10 @@ B2: Xóa Toàn Bộ File Trong Thư Mục html Của Bạn
 B3: Tải về -> Giải Nén -> Upload hết tất cả các file và thư mục VỪA GIẢI NÉN 
 vào trong thư mục "html" theo đường dẫn: "var/www/html" của bạn trên ssh
 
-	- Bắt Buộc Phải Chạy 2 Lệnh Này bằng quyền sudo: Lệnh Sét Quyền 777 Các  File Và Thư Mục Con
+	- Bắt Buộc Phải Chạy vài Lệnh Này bằng quyền sudo: Lệnh Sét Quyền 777 Các  File Và Thư Mục Con
 	$: sudo chmod -R 0777 /var/www/html/
 	$: sudo chmod -R 0777 /home/pi/vietbot_offline/src/
+ 	$: sudo chmod -R 0777 /home/pi/vietbot_offline/html/
 	
 	- BẮT BUỘC: 
 		- Cấu Hình Bắt Buộc Nhập "$SSH_TaiKhoan" và "$SSH_MatKhau" trong file:
@@ -56,3 +58,14 @@ B5: Cấu Hình Chỉnh Một Vài Tùy Chọn Khác Theo Ý Bạn Trong File Co
 
 	- Các File Backup Config sẽ nằm trong: var/www/html/include_php/Backup_Config
 
+Chuyển UI từ "var/www/html" sang "home/pi/vietbot_offline/html/"
+
+ - đi tới: /etc/apache2/apache2.conf 
+	- tìm tới dòng: <Directory /var/www/html> thay thành: <Directory /home/pi/vietbot_offline>
+	
+ - đi tới: /etc/apache2/sites-available/000-default.conf
+	- tìm tới dòng: "DocumentRoot /var/www/html/" thay thành: "DocumentRoot /home/pi/vietbot_offline/html/"\
+ 
+ - chạy lệnh restart apache2:
+   
+	$: sudo systemctl restart apache2.service

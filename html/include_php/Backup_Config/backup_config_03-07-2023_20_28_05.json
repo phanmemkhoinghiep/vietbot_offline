@@ -43,20 +43,24 @@
         "web_interface": {
             "port": 5000
         },
+        "location": {
+            "lon": 105.804817,
+            "lat": 21.028511
+        },
         "user_info": {
             "name": "Vũ Tuyển",
             "address": {
-                "wards": "Xã Vĩnh Khúc",
+                "ward": "Xã Vĩnh Khúc",
                 "district": "Huyện Văn Giang",
                 "province": "Tỉnh Hưng Yên"
             }
         },
-        "console_ouput": null
+        "console_ouput": "full"
     },
     "smart_wakeup": {
         "hotword_engine": {
             "type": "porcupine",
-            "key": "iB0kfsdfsdf+w=="
+            "key": "iB0k3SrHnf0j1hvf89nkuQSsc4T7fEMuaW6lOXqU4Jy7sA3bArwy+w=="
         },
         "wakeup_reply": [
             {
@@ -81,84 +85,14 @@
                 "value": "vâng anh"
             }
         ],
-        "hotword": [
-            {
-                "type": "porcupine",
-                "value": null,
-                "file_name": "hey siri_raspberry-pi.ppn",
-                "lang": "eng",
-                "sensitive": 0.4,
-                "say_reply": false,
-                "command": null,
-                "active": false
-            },
-            {
-                "type": "porcupine",
-                "value": null,
-                "lang": "eng",
-                "file_name": "ok-vi-bot_en_raspberry-pi.ppn",
-                "sensitive": 0.4,
-                "say_reply": false,
-                "command": null,
-                "active": false
-            },
-            {
-                "type": "porcupine",
-                "value": null,
-                "lang": "eng",
-                "file_name": "hey-vi-bot_en_raspberry-pi.ppn",
-                "sensitive": 0.4,
-                "say_reply": false,
-                "command": null,
-                "active": false
-            },
-            {
-                "type": "porcupine",
-                "value": null,
-                "lang": "vi",
-                "file_name": "em-ơi_raspberry-pi.ppn",
-                "sensitive": 0.1,
-                "say_reply": false,
-                "command": null,
-                "active": true
-            },
-            {
-                "type": "porcupine",
-                "value": null,
-                "lang": "vi",
-                "file_name": "người-đẹp-ơi_raspberry-pi.ppn",
-                "sensitive": 0.1,
-                "say_reply": false,
-                "command": null,
-                "active": true
-            },
-            {
-                "type": "porcupine",
-                "value": null,
-                "lang": "vi",
-                "file_name": "vợ-đâu-rồi_raspberry-pi.ppn",
-                "sensitive": 0.1,
-                "say_reply": false,
-                "command": null,
-                "active": true
-            },
-            {
-                "type": "porcupine",
-                "value": null,
-                "lang": "vi",
-                "file_name": "con-mụ-kia_raspberry-pi.ppn",
-                "sensitive": 0.1,
-                "say_reply": false,
-                "command": null,
-                "active": true
-            }
-        ]
+        "hotword": []
     },
     "smart_request": {
-        "continuous_asking": false,
+        "continuous_asking": true,
         "stt": {
-            "type": "stt_gg_ass",
-            "token": "",
+            "type": "stt_gg_cloud",
+            "token": null,
+            "token_file": "google.json",
             "stt_gg_ass_mode": "default",
             "credentials_file": "credentials.json",
             "device_config_file": "device_config.json",
@@ -176,14 +110,15 @@
                 "start": "sound/custom/"
             },
             "welcome": {
-                "mode": "text",
-                "path": "sound/welcome/welcome.mp3",
-                "text": "Xin chào mời đọc khẩu lệnh, để ra lệnh"
+                "mode": "path",
+                "path": "sound/welcome/nokia-startup.wav",
+                "text": "Chào bạn Mình là loa Thông Minh"
             }
         },
         "tts": {
             "type": "tts_gg_free",
-            "token": "",
+            "token": "Sz7Uw0HaVxCHoHfo0JceRlrpoeDYYXxi",
+            "token_file": "google.json",
             "voice_name": null,
             "voice_profile": null,
             "speed": null,
@@ -191,16 +126,17 @@
         },
         "external_bot_priority_1": "gg_ass",
         "external_bot_priority_2": "chatGPT",
-        "pre_answer_timeout": 8,
+        "external_bot_priority_3": "SIMSIM",
+        "pre_answer_timeout": 7,
         "pre_answer": [
             {
                 "value": "Cần thêm thời gian, vui lòng đợi"
             },
             {
-                "value": "Vui lòng chờ thêm"
+                "value": "Vui Lòng Chờ Thêm"
             },
             {
-                "value": "Cần thêm thời gian để xử lý"
+                "value": "Đang Tìm Dữ Liệu"
             }
         ],
         "number_characters_to_switch_mode": 300

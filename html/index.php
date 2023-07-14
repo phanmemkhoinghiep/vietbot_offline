@@ -29,6 +29,21 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
     <link rel="stylesheet" href="assets/css/magnific-popup.css">
     <link rel="stylesheet" href="assets/css/style.css">
 	  <script src="assets/js/ajax_jquery_3.6.0_jquery.min.js"></script>
+	  <style>
+    .blinking-container {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #f1f1f1;
+      text-align: center;
+      z-index: 9999;
+    }
+    .ptexxt {
+	  margin-bottom: 0rem;
+    }
+    
+
+	  </style>
 </head>
 <body>
     <script>
@@ -157,6 +172,7 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
         <div class="menu-footer">
           <a class="download-cv primary-button mt-3 mb-4 d-lg-none" href="#LogServiceCMD" title="Kiểm Tra Log, Các Hoạt Động Của Hệ Thống, Command">Log/Service/CMD</a>
         </div>
+	
       </div>
     </div>
     <!--  Left Side End  -->
@@ -371,6 +387,18 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
  <iframe src="./include_php/ChatBot.php" width="100%" height="570px"></iframe>
       </section>
       <!--  Blog End  -->
+	  
+	        <section id="vietbot_update" class="section blog bg-gray-400 text-white">
+			        <div class="container">
+          <h3 class="subtitle">Firmware Vietbot Upgrade</h3>
+ <iframe src="./backup_update/index.php" width="100%" height="570px"></iframe>
+      </section>
+  	        <section id="UI_update" class="section blog bg-gray-400 text-white">
+			        <div class="container">
+          <h3 class="subtitle">UI Upgrade</h3>
+<br/><h1><center class="text-danger">UI Upgrade Đang Được Xây Dựng</center></h1>
+      </section>
+	  
       <!-- Contact Start -->
       <section id="Skill" class="section contact w-100 bg-gray-400 text-white">
         <div class="container">
@@ -408,7 +436,15 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
     <!--  Color Pallet  -->
     <div id="color-switcher" class="color-switcher">
       <div class="text-center color-pallet hide">
-        <h6 class="text-center theme-skin-title">Thay Đổi Màu Dao Diện</h6>
+	  
+	  <a class="btn btn-success" href="#vietbot_update" role="button">Kiểm Tra Cập Nhật Firmware </a>
+
+	  <a class="btn btn-warning" href="#UI_update" role="button">Kiểm Tra Cập Nhật UI </a>
+
+<hr/>
+	 
+	 
+        <h6 class="text-center theme-skin-title">Đổi Màu Dao Diện</h6>
         <div class="colors text-center">
           <span class="WhiteBg" id="colorss"></span>
           <span class="01Bg" id="colorss"></span>
@@ -422,7 +458,70 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
       <div class="pallet-button hide" title="Đổi Màu Dao Diện">
           <a href="javascript:void(0)" class="cp-toggle"><i class="bi bi-gear"></i></a>
       </div>
+	
     </div>
+	
+	
+	  
+    <!-- Văn bản nằm ở cuối trang -->
+  <?php
+$curl = curl_init();
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'http://'.$serverIP.':5000',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_POSTFIELDS =>'{"type": 3,"data": "vietbot_version"}',
+  CURLOPT_HTTPHEADER => array(
+    'Accept: */*',
+    'Accept-Language: vi',
+    'Connection: keep-alive',
+    'Content-Type: application/json',
+    'DNT: 3',
+    'Origin: http://'.$serverIP,
+    'Referer: http://'.$serverIP.'/',
+    'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'
+  ),
+));
+$response = curl_exec($curl);
+curl_close($curl);
+$data = json_decode($response, true);
+// Kiểm tra kết quả từ yêu cầu cURL
+if (!empty($data) && isset($data['result'])) {
+  $currentresult = $data['result'];
+} else {
+  // Lấy dữ liệu "latest" từ tệp tin version.json cục bộ
+  $localJson = file_get_contents($DuognDanThuMucJson.'/version.json');
+  $localData = json_decode($localJson, true);
+  $currentresult = $localData['vietbot_version']['latest'];
+}
+// Lấy dữ liệu "latest" từ tệp tin version.json trên GitHub
+//$gitJson = file_get_contents('https://raw.githubusercontent.com/phanmemkhoinghiep/vietbot_offline/beta/src/version.json');
+$gitJson = file_get_contents($Vietbot_Version);
+$gitData = json_decode($gitJson, true);
+$latestVersion = $gitData['vietbot_version']['latest'];
+//echo $currentresult."<br/>";
+//echo $latestVersion."<br/>";
+//echo $gitJson."<br/>";
+//$currentresult1 = "beta 12-07-2023";
+//$latestVersion1 = "beta 13-07-2023";
+// So sánh giá trị "vietbot_version" từ cURL và từ GitHub
+if ($currentresult === $latestVersion) {
+  //echo "Bạn đang sử dụng phiên bản mới nhất: " . $currentresult;
+} else {
+  //$messagee .= "Có phiên bản mới: " . $latestVersion.'\n';
+  echo '<div class="blinking-container"><p class="ptexxt"><font color="red"><b>Có phiên bản Vietbot mới: '.$latestVersion.' </font><a href="#vietbot_update"> Kiểm Tra</b></a></p></div>';
+}
+
+  
+  // echo '<div class="blinking-container"><p class="ptexxt"><font color="red"><b>Có phiên bản Vietbot mới: '.$github_latest_version.' </font><a href="#vietbot_update"> Kiểm Tra</b></a></p></div>';
+  
+  ?>
+ 
 
     <!-- Mouase Magic Cursor Start -->
     <div class="m-magic-cursor mmc-outer"></div>
