@@ -412,6 +412,8 @@ $stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO); $stream_out2 = ss
 stream_get_contents($stream_out1); stream_get_contents($stream_out2);
 header("Location: $PHP_SELF"); exit;
 }
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -513,7 +515,9 @@ a {
   
 </head>
 <body>
-<form method="post" id="my-form" onsubmit="return validateInputs();" action="<?php echo $PHP_SELF ?>"> 
+<div id="loading-overlay"><img id="loading-icon" src="../assets/img/Loading.gif" alt="Loading...">
+<div id="loading-message">- Đang Thực Hiện<br/>- Bạn Cần Restart Lại VietBot Để Áp Dụng Dữ Liệu Mới</div>
+</div>
 <?php
 // Thư mục cần kiểm tra
 $directories = array(
@@ -529,10 +533,20 @@ function checkPermissions($path, &$hasPermissionIssue) {
         $permissions = fileperms($filePath);
         if ($permissions !== false && ($permissions & 0777) !== 0777) {
             if (!$hasPermissionIssue) {
-                echo "<br/><center><h3 class='text-danger'>Một Số File,Thư Mục Trong <b>$path</b> Không Có Quyền Can Thiệp.<h3><br/>";
-			echo " <button type='submit' name='set_full_quyen' class='btn btn-success'>Cấp Quyền Cho File, Thư Mục</button></center><hr/>";
+				echo "<br/><br/><br/>";
+               // echo "<br/><center><h3 class='text-danger'>Một Số File,Thư Mục Trong <b>$path</b> Không Có Quyền Can Thiệp.<h3><br/>";
+			echo '<center>Phát hiện thấy một số nội dung bị thay đổi quyền hạn.<br/><br/> <form id="myForm" action="" method="POST"><button type="submit" name="set_full_quyen" class="btn btn-success" onclick="showLoading()">Cấp Quyền</button></center></form>';
+			echo '<div id="loadingIcon" style="display: none;"><img id="loading-icon" src="../assets/img/Loading.gif" alt="Loading...">
+			<div id="loading-message" class="text-danger">- Đang Cấp Quyền<br/>- Vui Lòng Chờ</div></div>';
+			echo '<script>
+			function showLoading() {
+			document.getElementById("loadingIcon").style.display = "block";
+			document.getElementById("myForm").submit.disabled = true;
+			}
+			</script></body>';
+			
                 $hasPermissionIssue = true;
-				//exit();
+				exit();
 			}	
             break;}
         if (is_dir($filePath)) {
@@ -544,11 +558,15 @@ foreach ($directories as $directory) {
     checkPermissions($directory, $hasPermissionIssue);
 }
 ?>
+<div id="loading-overlay"><img id="loading-icon" src="../assets/img/Loading.gif" alt="Loading...">
+<div id="loading-message">- Đang Thực Hiện<br/>- Bạn Cần Restart Lại VietBot Để Áp Dụng Dữ Liệu Mới</div>
+</div>
+<form method="post" id="my-form" onsubmit="return validateInputs();" action="<?php echo $PHP_SELF ?>"> 
 <h5> Thông Tin Người Dùng:</h5><div class="row g-3 d-flex justify-content-center"><div class="col-auto"> 
 <table class="table align-middle">
 <tbody><tr>
 <th scope="row">Tên Người Dùng:</th><td colspan="3">
-<input type="text" class="form-control" name="my_user_name_input" value="<?php echo $MY_USER_NAME; ?>" placeholder="Nhập Tên Người Dùng Của Bạn" maxlength="10" required></td></tr>
+<input type="text" class="form-control" name="my_user_name_input" value="<?php echo $MY_USER_NAME; ?>" placeholder="Nhập Tên Người Dùng Của Bạn" maxlength="14" required></td></tr>
  <tr><th scope="row">Địa Chỉ:</th>
 <td><select class="custom-select" id="city" name="city"><option name="city" value="<?php echo $Address_City; ?>" selected><?php echo $Address_City; ?></option></select></td>
 <td><select class="custom-select" id="district" name="district"><option name="district" value="<?php echo $Address_district; ?>" selected><?php echo $Address_district; ?></option></select></td>
@@ -916,7 +934,25 @@ None (Không Dùng)</label></center>
 - <b>Thư Viện Hotwork:</b> <a href="https://github.com/Picovoice/porcupine/tree/master/lib/common" target="_bank">Picovoice HotWord Lib</a>
 <br/></div></div>
 <div id="myDivzxchw" style="display: none;">
-<div class="row justify-content-center"><div class="col-auto">
+<div class="row justify-content-center">
+
+
+
+<div class="col-auto">
+<table style="border-color:black;" class="table table-sm table-bordered table-responsive align-middle">
+<thead><tr>
+<th colspan="2"><center class="text-success">Thay Đổi Ngôn Ngữ Hotword <i class="bi bi-info-circle-fill" onclick="togglePopuphwlang()" title="Nhấn Để Tìm Hiểu Thêm"></i></center></th>
+</tr></thead><tbody><tr> 
+<td  scope="col" colspan="2"><center><font color="red">Bạn Đang Dùng: <b><?php echo $hotwords_get_lang; ?></b></font></center></td>
+<tr><tr><td><center><b>Tiếng Việt</b></center></td><td><center><b>Tiếng Anh</b></center></td>
+</tr><tr><td> <center><input type="radio" name="language_hotword" id="language_hotwordddd" value="vi"></center></td>
+<td><center><input type="radio" name="language_hotword" id="language_hotwordddd1" value="eng"></center></td>
+</tr><tr><th><center><button type="submit" name="language_hotword_submit" class="btn btn-success">Lưu Cài Đặt</button></th> 
+<th><p onclick="uncheckRadiolanguage_hotwordddd()" class="btn btn-danger">Bỏ Chọn</p></th></center></th></tr></tbody></table></div>
+
+
+
+<div class="col-auto">
 <table style="border-color:black;" class="table table-responsive table-bordered align-middle">
 <thead><tr> <th scope="col" colspan="4"><center class="text-success">Cài Đặt Hotword</center></th> </tr>
 <tr><th scope="col"><label for="" class="form-label">Tên Hotword</label></th>
@@ -939,17 +975,11 @@ None (Không Dùng)</label></center>
 <center><input type="text" id="command" name="command" placeholder="Nhập Lệnh Vào Đây" title="Nhập Lệnh Của Bạn" class="form-control"></center></div></td></tr>
 </tr></tbody> </tr></thead></table> 
 </div>
-<div class="col-auto">
-<table style="border-color:black;" class="table table-sm table-bordered table-responsive align-middle">
-<thead><tr>
-<th colspan="2"><center class="text-success">Thay Đổi Ngôn Ngữ Hotword <i class="bi bi-info-circle-fill" onclick="togglePopuphwlang()" title="Nhấn Để Tìm Hiểu Thêm"></i></center></th>
-</tr></thead><tbody><tr> 
-<td  scope="col" colspan="2"><center><font color="red">Bạn Đang Dùng: <b><?php echo $hotwords_get_lang; ?></b></font></center></td>
-<tr><tr><td><center><b>Tiếng Việt</b></center></td><td><center><b>Tiếng Anh</b></center></td>
-</tr><tr><td> <center><input type="radio" name="language_hotword" id="language_hotwordddd" value="vi"></center></td>
-<td><center><input type="radio" name="language_hotword" id="language_hotwordddd1" value="eng"></center></td>
-</tr><tr><th><center><button type="submit" name="language_hotword_submit" class="btn btn-success">Lưu Cài Đặt</button></th> 
-<th><p onclick="uncheckRadiolanguage_hotwordddd()" class="btn btn-danger">Bỏ Chọn</p></th></center></th></tr></tbody></table></div></div></div>
+
+
+
+
+</div></div>
 <div id="popupContainerhwlang" class="popup-container" onclick="hidePopuphwlang()"><div id="popupContent" onclick="preventEventPropagationhwlang(event)">
 <p><center><b>Thay Đổi Ngôn Ngữ Gọi Hotword</b></center><br/>
 - <b>1: </b> 2 file thư viện <a href="https://github.com/Picovoice/porcupine/blob/master/lib/common/porcupine_params.pv" target="_bank">tiếng anh</a> 
@@ -1041,11 +1071,9 @@ else {
 <!-- </div> -->
 <!--Kết Thúc mục  Wake Up Reply --> 		
 <center>
-<input type="submit" class="btn btn-success" name="config_setting" value="Lưu Cấu Hình">  <a href="<?php echo $PHP_SELF ?>"><button type="button" class="btn btn-danger">Hủy Bỏ/Làm Mới</button></a>
+<input type="submit" class="btn btn-success" name="config_setting" value="Lưu Cấu Hình">  <a href="<?php echo $PHP_SELF ?>"><button type="submit" class="btn btn-danger">Hủy Bỏ/Làm Mới</button></a>
  <button type="submit" name="restart_vietbot" class="btn btn-warning">Khởi Động Lại VietBot</button></center></form><hr/>    
-<div id="loading-overlay"><img id="loading-icon" src="../assets/img/Loading.gif" alt="Loading...">
-<div id="loading-message">- Đang Thực Hiện<br/>- Bạn Cần Restart Lại VietBot Để Áp Dụng Dữ Liệu Mới</div>
-</div><center><h5>Khôi Phục File config.json: <i class="bi bi-info-circle-fill" onclick="togglePopupConfigRecovery()" title="Nhấn Để Tìm Hiểu Thêm"></i></h5></center>
+<center><h5>Khôi Phục File config.json: <i class="bi bi-info-circle-fill" onclick="togglePopupConfigRecovery()" title="Nhấn Để Tìm Hiểu Thêm"></i></h5></center>
 <div class="form-check form-switch d-flex justify-content-center"> 
 <div id="toggleIcon" onclick="toggleDivConfigRecovery()">
 <i id="upIconConfigRecovery" title="Nhấn Để Mở Cấu Hình Cài Đặt Wake Up Reply" class="bi bi-arrow-up-circle-fill" style="display: none;"></i>
@@ -1868,6 +1896,10 @@ function validateInputs() {
     }
 	
 	
+	
+
+	
+	
 	// aanrh iện pre_answer 
     function toggleDivzxcans() {
       var div = document.getElementById("myDivzxcans");
@@ -1883,16 +1915,7 @@ function validateInputs() {
         downIcon.style.display = "inline-block";
       }
     }
-	//icon Loading
-$(document).ready(function() {
-    $('#my-form').on('submit', function() {
-        // Hiển thị biểu tượng loading
-        $('#loading-overlay').show();
 
-        // Vô hiệu hóa nút gửi
-        $('#submit-btn').attr('disabled', true);
-    });
-});
 //button xóa check vào radio thay đổi ngôn ngữ hw
 	function uncheckRadiolanguage_hotwordddd() {
   var radio = document.getElementById("language_hotwordddd");
@@ -1994,7 +2017,17 @@ function renderCity(data) {
             document.getElementById("myTextip").textContent = text;
         }
 		*/
-	</script>
+
+	//icon Loading
+$(document).ready(function() {
+    $('#my-form').on('submit', function() {
+        // Hiển thị biểu tượng loading
+        $('#loading-overlay').show();
+        // Vô hiệu hóa nút gửi
+        $('#submit-btn').attr('disabled', true);
+    });
+});
+</script>
 	  
 </body>
 </html>

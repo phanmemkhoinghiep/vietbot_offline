@@ -362,7 +362,7 @@ foreach ($directories as $directory) {
 </div></div>
 <div class="row justify-content-center"><div class="col-auto">	 
         <div class="custom-control custom-switch" title="Bật/Tắt để kích hoạt/huỷ kích hoạt">
-            <input type="checkbox" class="custom-control-input" id="gg_ass_Mode" name="gg_ass_Mode" <?php echo $skillArray['gg_ass']['mode'] ? 'checked' : ''; ?>>
+            <input type="checkbox" class="custom-control-input" id="gg_ass_Mode" name="gg_ass_Mode" <?php echo $skillArray['gg_ass']['mode'] === 'default' ? 'checked' : ''; ?>>
             <label class="custom-control-label" for="gg_ass_Mode"></label>
 </div></div></div>
 <hr/>

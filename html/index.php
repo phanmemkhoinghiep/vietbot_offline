@@ -437,13 +437,20 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
     <div id="color-switcher" class="color-switcher">
       <div class="text-center color-pallet hide">
 	  
+<<<<<<< Updated upstream
+=======
+	     
+>>>>>>> Stashed changes
 	  <a class="btn btn-success" href="#vietbot_update" role="button">Kiểm Tra Cập Nhật Firmware </a>
 
 	  <a class="btn btn-warning" href="#UI_update" role="button">Kiểm Tra Cập Nhật UI </a>
 
 <hr/>
 	 
+<<<<<<< Updated upstream
 	 
+=======
+>>>>>>> Stashed changes
         <h6 class="text-center theme-skin-title">Đổi Màu Dao Diện</h6>
         <div class="colors text-center">
           <span class="WhiteBg" id="colorss"></span>
