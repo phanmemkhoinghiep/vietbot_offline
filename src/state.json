@@ -2,9 +2,6 @@
 	"vietbot_version": {
 		"current": "beta 12-07-2023"
 	},
-	"ui_version": {
-		"current": "beta 11-07-2023"
-	},
 	"volume": 65,
 	"running_count": 0,
 	"hostname": "pizero2w",
