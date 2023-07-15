@@ -438,6 +438,10 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
       <div class="text-center color-pallet hide">
 	  
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+	     
+>>>>>>> Stashed changes
 =======
 	     
 >>>>>>> Stashed changes
@@ -448,7 +452,10 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
 <hr/>
 	 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	 
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
         <h6 class="text-center theme-skin-title">Đổi Màu Dao Diện</h6>

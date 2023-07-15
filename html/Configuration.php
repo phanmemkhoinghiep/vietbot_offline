@@ -31,6 +31,12 @@ $E_rror_HOST = "<center><h1>Không thể kết nối tới máy chủ SSH, Kiể
 $maxBackupFiles = 10;
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+//Giới hạn file backup UI  Vietbot tar.gz (Khi Cập Nhật Firmware)
+$maxBackupFilesUI = "5";
+
+>>>>>>> Stashed changes
 =======
 //Giới hạn file backup UI  Vietbot tar.gz (Khi Cập Nhật Firmware)
 $maxBackupFilesUI = "5";
