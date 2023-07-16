@@ -1,0 +1,21 @@
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0
+100  4626  100  4626    0     0   2030      0  0:00:02  0:00:02 --:--:--  2030100  4626  100  4626    0     0   1933      0  0:00:02  0:00:02 --:--:--     0
+[1mWiFi Connect Raspbian Installer:[0m Retrieving latest release from https://api.github.com/repos/balena-os/wifi-connect/releases/45509064...
+[1mWiFi Connect Raspbian Installer:[0m Downloading and extracting https://github.com/balena-os/wifi-connect/releases/download/v4.4.6/wifi-connect-v4.4.6-linux-rpi.tar.gz...
+[1mWiFi Connect Raspbian Installer:[0m Successfully installed wifi-connect 4.4.6
+[1mWiFi Connect Raspbian Installer:[0m NetworkManager is already installed
+[1mWiFi Connect Raspbian Installer:[0m Deactivating and disabling dhcpcd...
+Removed /etc/systemd/system/multi-user.target.wants/dhcpcd.service.
+[1mWiFi Connect Raspbian Installer:[0m dhcpcd successfully deactivated and disabled
+[1mWiFi Connect Raspbian Installer:[0m Activating NetworkManager...
+Created symlink /etc/systemd/system/multi-user.target.wants/NetworkManager.service → /lib/systemd/system/NetworkManager.service.
+Created symlink /etc/systemd/system/dbus-org.freedesktop.nm-dispatcher.service → /lib/systemd/system/NetworkManager-dispatcher.service.
+Created symlink /etc/systemd/system/network-online.target.wants/NetworkManager-wait-online.service → /lib/systemd/system/NetworkManager-wait-online.service.
+[1mWiFi Connect Raspbian Installer:[0m Run 'wifi-connect --help' for available options
+[network_manager::dbus_api:ERROR] org.freedesktop.NetworkManager.Settings::ListConnections method call failed on /org/freedesktop/NetworkManager/Settings
+[1;31mError: Deleting access point connection profile failed[0m
+  caused by: D-Bus failure: org.freedesktop.NetworkManager.Settings::ListConnections method call failed on /org/freedesktop/NetworkManager/Settings
+  caused by: "No such interface “org.freedesktop.NetworkManager.Settings” on object at path /org/freedesktop/NetworkManager/Settings"
