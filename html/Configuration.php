@@ -4,11 +4,13 @@
 //Bỏ qua hiển thị lỗi trên màn hình nếu có
 @error_reporting(0);
 @date_default_timezone_set('Asia/Ho_Chi_Minh');
-//Nhóm Facebook và GITHUB, UI VietBot
+
+//Nhóm Facebook và GITHUB, UI VietBot, Version
 $FacebookGroup = "https://www.facebook.com/groups/1082404859211900";
 $GitHub_VietBot_OFF = "https://github.com/phanmemkhoinghiep/vietbot_offline";
 $UI_VietBot = "https://github.com/marion001/UI_VietBot";
 $Vietbot_Version = "https://raw.githubusercontent.com/phanmemkhoinghiep/vietbot_offline/beta/src/version.json";
+$UI_Version = "https://raw.githubusercontent.com/marion001/UI_VietBot/main/version.json";
 
 //Mật Khẩu Đăng Nhập Phần Quản Lý File
 $Pass_Login = "admin";
@@ -17,10 +19,11 @@ $Pass_Login = "admin";
 $DuognDanThuMucJson = "/home/pi/vietbot_offline/src"; //Để Mặc Định
 $DuognDanUI_HTML = "/home/pi/vietbot_offline/html"; 				   //Để Mặc Định
 $directorySound = '/home/pi/vietbot_offline/src/sound/default/'; // Đường dẫn tới thư mục chứa các tệp tin .mp3
+$Lib_Hotword = '/home/pi/vietbot_offline/resources/picovoice/lib'; // Đường dẫn tới thư mục chứa các thư viện hotword
 
 //SSH Tải Khoản, Mật Khẩu Đăng Nhập SSH (Bắt Buộc Phải Nhập Để Dùng Các Lệnh Hệ Thống)
 $SSH_TaiKhoan = "pi"; //Tài Khoản Đăng Nhập pi SSH Của Bạn
-$SSH_MatKhau = "vietbot"; //Nật Khẩu Đăng Nhập pi SSH Của Bạn
+$SSH_MatKhau = "vietbot"; //Mật Khẩu Đăng Nhập pi SSH Của Bạn
 $SSH_Port = "22"; //Mặc Định: "22"
 
 //Thông Báo Lỗi Khi Kết Nối SSH
@@ -30,18 +33,9 @@ $E_rror_HOST = "<center><h1>Không thể kết nối tới máy chủ SSH, Kiể
 //Giới hạn file backup Firmware src Vietbot tar.gz (Khi Cập Nhật Firmware)
 $maxBackupFiles = 10;
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
 //Giới hạn file backup UI  Vietbot tar.gz (Khi Cập Nhật Firmware)
 $maxBackupFilesUI = "5";
 
->>>>>>> Stashed changes
-=======
-//Giới hạn file backup UI  Vietbot tar.gz (Khi Cập Nhật Firmware)
-$maxBackupFilesUI = "5";
-
->>>>>>> Stashed changes
 //Giới hạn ngày kỷ niệm: 10 giá trị
 $Limit_NgayKyNiem = "15"; 
 
@@ -64,14 +58,14 @@ $Limit_Radio = "10";
 //Limit Nội Dung Thông Báo Chờ
 $Limit_Pre_Answer = "3";
 
+
+///////////////////////////////////////////////////////////////////////////////
 //Đọc, lấy vài dữ liệu của config.json
 $jsonSKILL = file_get_contents("$DuognDanThuMucJson"."/skill.json");
 $Data_Json_Skill = json_decode($jsonSKILL);
 
-
 $jsonDatazXZ = file_get_contents("$DuognDanThuMucJson"."/config.json");
 $dataVTGET = json_decode($jsonDatazXZ);
-
 
 $PORT_CHATBOT = $dataVTGET->smart_config->web_interface->port;
 $MYUSERNAME = $dataVTGET->smart_config->user_info->name;

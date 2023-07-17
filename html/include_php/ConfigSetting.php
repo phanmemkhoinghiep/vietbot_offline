@@ -169,9 +169,10 @@ foreach ($keywordsTTS as $keywordTTS => $replacementTTS) {
 	$hotword_lib_language = "porcupine_params.pv";
 	}
 	$connection = ssh2_connect($serverIP, $SSH_Port);
-	if (!$connection) {die('Không thể kết nối tới máy chủ.');}
-	if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die('Đăng nhập không thành công.');}
-	$stream2 = ssh2_exec($connection, "sudo cp /home/pi/$hotword_lib_language /home/pi/.local/lib/python3.9/site-packages/pvporcupine/lib/common/porcupine_params.pv");
+	if (!$connection) {die($E_rror_HOST);}
+	if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
+	//$stream2 = ssh2_exec($connection, "sudo cp /home/pi/$hotword_lib_language /home/pi/.local/lib/python3.9/site-packages/pvporcupine/lib/common/porcupine_params.pv");
+	$stream2 = ssh2_exec($connection, "sudo cp $Lib_Hotword/$hotword_lib_language /home/pi/.local/lib/python3.9/site-packages/pvporcupine/lib/common/porcupine_params.pv");
 	stream_set_blocking($stream2, true);
 	$stream_out2 = ssh2_fetch_stream($stream2, SSH2_STREAM_STDIO);
 	stream_get_contents($stream_out2);
@@ -391,8 +392,8 @@ exit;
 	//restart vietbot
 if (isset($_POST['restart_vietbot'])) {
 $connection = ssh2_connect($serverIP, $SSH_Port);
-if (!$connection) {die('Không thể kết nối tới máy chủ SSH');}
-if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die('Đăng nhập SSH thất bại');}
+if (!$connection) {die($E_rror_HOST);}
+if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
 $stream = ssh2_exec($connection, 'systemctl --user restart vietbot');
 stream_set_blocking($stream, true);
 $stream_out = ssh2_fetch_stream($stream, SSH2_STREAM_STDIO);
@@ -403,8 +404,8 @@ exit;
 	//Chmod sét full quyền
 if (isset($_POST['set_full_quyen'])) {
 $connection = ssh2_connect($serverIP, $SSH_Port);
-if (!$connection) {die('Không thể kết nối tới máy chủ.');}
-if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die('Đăng nhập không thành công.');}
+if (!$connection) {die($E_rror_HOST);}
+if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
 $stream1 = ssh2_exec($connection, "sudo chmod -R 0777 $DuognDanUI_HTML");
 $stream2 = ssh2_exec($connection, "sudo chmod -R 0777 $DuognDanThuMucJson");
 stream_set_blocking($stream1, true); stream_set_blocking($stream2, true);

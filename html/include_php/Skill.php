@@ -101,6 +101,21 @@ $skillArray = json_decode($skillData, true);
   </style>
 	</head>
 	<body>
+	    <div id="loading-overlay">
+          <img id="loading-icon" src="../assets/img/Loading.gif" alt="Loading...">
+		  <div id="loading-message">Đang Thực Thi...</div>
+    </div>
+	<script>
+	$(document).ready(function() {
+    $('#my-form').on('submit', function() {
+        // Hiển thị biểu tượng loading
+        $('#loading-overlay').show();
+
+        // Vô hiệu hóa nút gửi
+        $('#submit-btn').attr('disabled', true);
+    });
+});
+</script>
 <?php
 // Kiểm tra nếu form đã được gửi
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -234,8 +249,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	//Chmod sét full quyền
 if (isset($_POST['set_full_quyen'])) {
 $connection = ssh2_connect($serverIP, $SSH_Port);
-if (!$connection) {die('Không thể kết nối tới máy chủ.');}
-if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die('Đăng nhập không thành công.');}
+if (!$connection) {die($E_rror_HOST);}
+if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
 $stream1 = ssh2_exec($connection, "sudo chmod -R 0777 $DuognDanUI_HTML");
 $stream2 = ssh2_exec($connection, "sudo chmod -R 0777 $DuognDanThuMucJson");
 stream_set_blocking($stream1, true); stream_set_blocking($stream2, true);
@@ -262,9 +277,11 @@ function checkPermissions($path, &$hasPermissionIssue) {
         $permissions = fileperms($filePath);
         if ($permissions !== false && ($permissions & 0777) !== 0777) {
             if (!$hasPermissionIssue) {
-                echo "<br/><center><h3 class='text-danger'>Một Số File,Thư Mục Trong <b>$path</b> Không Có Quyền Can Thiệp.<h3><br/>";
-			echo " <button type='submit' name='set_full_quyen' class='btn btn-success'>Cấp Quyền Cho File, Thư Mục</button></center><hr/>";
+               // echo "<br/><center><h3 class='text-danger'>Một Số File,Thư Mục Trong <b>$path</b> Không Có Quyền Can Thiệp.<h3><br/>";
+			   echo "<br/><br/><br/><center>Phát hiện thấy một số nội dung bị thay đổi quyền hạn.<br/>";
+			echo " <button type='submit' name='set_full_quyen' class='btn btn-success'>Cấp Quyền Cho File, Thư Mục</button></center>";
                 $hasPermissionIssue = true;
+				exit();
 			}	
             break;}
         if (is_dir($filePath)) {
@@ -650,10 +667,7 @@ stream_get_contents($stream_out);
 
 </div>
 </form>
-    <div id="loading-overlay">
-          <img id="loading-icon" src="../assets/img/Loading.gif" alt="Loading...">
-		  <div id="loading-message">Đang Thực Thi...</div>
-    </div>
+
 <script>
 //check button ẩn hiện thẻ div OpenWeatherMap
     $(document).ready(function() {
@@ -795,15 +809,6 @@ stream_get_contents($stream_out);
   }
 });
 //Khởi động Lại vietbot
-$(document).ready(function() {
-    $('#my-form').on('submit', function() {
-        // Hiển thị biểu tượng loading
-        $('#loading-overlay').show();
-
-        // Vô hiệu hóa nút gửi
-        $('#submit-btn').attr('disabled', true);
-    });
-});
 </script>
 	<script src="../assets/js/bootstrap.js"></script>
 	<script src="../assets/js/jquery.min.js"></script>

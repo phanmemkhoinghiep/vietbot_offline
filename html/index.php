@@ -38,6 +38,7 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
       text-align: center;
       z-index: 9999;
     }
+
     .ptexxt {
 	  margin-bottom: 0rem;
     }
@@ -386,17 +387,17 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
       <section id="ChatBot" class="section blog bg-gray-400 text-white">
  <iframe src="./include_php/ChatBot.php" width="100%" height="570px"></iframe>
       </section>
-      <!--  Blog End  -->
-	  
+      <!--  Blog End  --> 
+	   
 	        <section id="vietbot_update" class="section blog bg-gray-400 text-white">
 			        <div class="container">
-          <h3 class="subtitle">Firmware Vietbot Upgrade</h3>
+          <h3 class="subtitle">Cập Nhật Trương Trình</h3>
  <iframe src="./backup_update/index.php" width="100%" height="570px"></iframe>
       </section>
   	        <section id="UI_update" class="section blog bg-gray-400 text-white">
 			        <div class="container">
-          <h3 class="subtitle">UI Upgrade</h3>
-<br/><h1><center class="text-danger">UI Upgrade Đang Được Xây Dựng</center></h1>
+          <h3 class="subtitle">Cập Nhật Giao Diện</h3>
+ <iframe src="./ui_update/index.php" width="100%" height="570px"></iframe>
       </section>
 	  
       <!-- Contact Start -->
@@ -436,29 +437,11 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
     <!--  Color Pallet  -->
     <div id="color-switcher" class="color-switcher">
       <div class="text-center color-pallet hide">
-	  
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-	     
->>>>>>> Stashed changes
-=======
-	     
->>>>>>> Stashed changes
-	  <a class="btn btn-success" href="#vietbot_update" role="button">Kiểm Tra Cập Nhật Firmware </a>
+	  <a class="btn btn-danger" href="#vietbot_update" role="button">Cập Nhật Chương Trình</a>
+	  <a class="btn btn-success" href="#UI_update" role="button">Cập Nhật Giao Diện</a>
 
-	  <a class="btn btn-warning" href="#UI_update" role="button">Kiểm Tra Cập Nhật UI </a>
-
-<hr/>
 	 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-	 
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-        <h6 class="text-center theme-skin-title">Đổi Màu Dao Diện</h6>
+      <!--  <h6 class="text-center theme-skin-title">Đổi Màu Giao Diện</h6> -->
         <div class="colors text-center">
           <span class="WhiteBg" id="colorss"></span>
           <span class="01Bg" id="colorss"></span>
@@ -468,8 +451,9 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
           <span class="GG02Bg" id="colorss"></span>
 
         </div>
+		
       </div>
-      <div class="pallet-button hide" title="Đổi Màu Dao Diện">
+      <div class="pallet-button hide" title="Đổi Màu Giao Diện">
           <a href="javascript:void(0)" class="cp-toggle"><i class="bi bi-gear"></i></a>
       </div>
 	
@@ -531,9 +515,25 @@ if ($currentresult === $latestVersion) {
   echo '<div class="blinking-container"><p class="ptexxt"><font color="red"><b>Có phiên bản Vietbot mới: '.$latestVersion.' </font><a href="#vietbot_update"> Kiểm Tra</b></a></p></div>';
 }
 
-  
-  // echo '<div class="blinking-container"><p class="ptexxt"><font color="red"><b>Có phiên bản Vietbot mới: '.$github_latest_version.' </font><a href="#vietbot_update"> Kiểm Tra</b></a></p></div>';
-  
+//UI
+$localFile = $DuognDanUI_HTML.'/version.json';
+// Lấy nội dung JSON từ URL
+$remoteJsonData = file_get_contents($UI_Version);
+$remoteData = json_decode($remoteJsonData, true);
+// Đọc nội dung JSON từ tệp tin cục bộ
+$localJsonData = file_get_contents($localFile);
+$localDataa = json_decode($localJsonData, true);
+// Lấy giá trị 'value' từ cả hai nguồn dữ liệu
+$remoteValue = $remoteData['ui_version']['latest'];
+$localValue = $localDataa['ui_version']['current'];
+// So sánh giá trị
+if ($remoteValue !== $localValue) {
+   echo '<div class="blinking-container"><p class="ptexxt"><font color="red"><b>Có phiên bản giao diện mới: '.$remoteValue.' </font><a href="#UI_update"> Kiểm Tra</b></a></p></div>';
+    //$messagee .= 'Phiên bản hiện tại của bạn: '.$localValue.' Vui lòng cập nhật.';
+} else {
+    //$messagee .= 'Bạn đang sử dụng phiên bản mới nhất: '.$localValue;
+}
+
   ?>
  
 
@@ -602,7 +602,34 @@ function time() {
       return i;
    }
 }
+
+
+
+
+
+
+// Lấy phần tử <div>, phần tử liên kết và phần tử nút bấm
+const divElement = document.querySelector('.text-center.color-pallet');
+const linkElement = document.querySelector('.btn-success');
+const buttonElement = document.querySelector('.btn-danger');
+
+buttonElement.addEventListener('click', function() {
+  // Loại bỏ lớp "show" và thêm lớp "hide" cho phần tử divElement
+  divElement.classList.remove('show');
+  divElement.classList.add('hide');
+});
+// Gắn sự kiện click vào liên kết
+linkElement.addEventListener('click', function() {
+  // Loại bỏ lớp "show" và thêm lớp "hide" cho phần tử divElement
+  divElement.classList.remove('show');
+  divElement.classList.add('hide');
+});
+
+
+
+
 </script>
+
 
 
 </body>

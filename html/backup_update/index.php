@@ -1,4 +1,6 @@
 <?php
+//Code By: Vũ Tuyển
+//Facebook: https://www.facebook.com/TWFyaW9uMDAx
 include "../Configuration.php";
 ?>
 <!DOCTYPE html>
@@ -153,8 +155,8 @@ function copyFiles($sourceDirectory, $destinationDirectory, $excludedFiles, &$co
 	//restart vietbot
 if (isset($_POST['restart_vietbot'])) {
 $connection = ssh2_connect($serverIP, $SSH_Port);
-if (!$connection) {die('Không thể kết nối tới máy chủ SSH');}
-if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die('Đăng nhập SSH thất bại');}
+if (!$connection) {die($E_rror_HOST);}
+if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
 $stream = ssh2_exec($connection, 'systemctl --user restart vietbot');
 stream_set_blocking($stream, true);
 $stream_out = ssh2_fetch_stream($stream, SSH2_STREAM_STDIO);
@@ -165,8 +167,8 @@ exit;
 //Chmod 777
 if (isset($_POST['set_full_quyen'])) {
 $connection = ssh2_connect($serverIP, $SSH_Port);
-if (!$connection) {die('Không thể kết nối tới máy chủ.');}
-if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die('Đăng nhập không thành công.');}
+if (!$connection) {die($E_rror_HOST);}
+if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
 $stream1 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$DuognDanUI_HTML);
 $stream2 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$DuognDanThuMucJson);
 stream_set_blocking($stream1, true); stream_set_blocking($stream2, true);
@@ -185,8 +187,9 @@ function checkPermissions($path, &$hasPermissionIssue) {
         $permissions = fileperms($filePath);
         if ($permissions !== false && ($permissions & 0777) !== 0777) {
             if (!$hasPermissionIssue) {
-                echo "<br/><center><h3 class='text-danger'>Một Số File,Thư Mục Trong <b>$path</b> Không Có Quyền Can Thiệp.<h3><br/>";
-			echo "<form method='post' id='my-form' action='".$PHP_SELF."'> <button type='submit' name='set_full_quyen' class='btn btn-success'>Cấp Quyền Cho File, Thư Mục</button></form></center><hr/>";
+               // echo "<br/><center><h3 class='text-danger'>Một Số File,Thư Mục Trong <b>$path</b> Không Có Quyền Can Thiệp.<h3><br/>";
+			   echo "<center>Phát hiện thấy một số nội dung bị thay đổi quyền hạn.<br/>";
+			echo "<form method='post' id='my-form' action='".$PHP_SELF."'> <button type='submit' name='set_full_quyen' class='btn btn-success'>Cấp Quyền</button></form></center>";
                 $hasPermissionIssue = true;
 				exit();
 			}	
@@ -220,7 +223,7 @@ if (!is_dir($DuognDanThuMucJson)) {
             <th scope="row">config.json</th>
 			<td><input type="checkbox" class="form-check-input" name="exclude[]" value="config.json" checked></td>
             <th scope="row">tts_saved</th>
-            <td> <input type="checkbox" class="form-check-input" name="exclude[]" value="tts_saved"></td>
+            <td> <input type="checkbox" class="form-check-input" name="exclude[]" value="tts_saved" checked></td>
 
         </tr>
         <tr>
@@ -243,16 +246,23 @@ if (!is_dir($DuognDanThuMucJson)) {
             <td><input type="checkbox" class="form-check-input" name="exclude[]" value="mp3" checked></td>
         </tr>
 		<tr>
-           <th scope="row">state.json</th>
-           <td><input type="checkbox" class="form-check-input" name="exclude[]" value="state.json"></td>
+           <th scope="row">credentials.json</th>
+           <td><input type="checkbox" class="form-check-input" name="exclude[]" value="credentials.json"></td>
             <th scope="row">__pycache__</th>
              <td><input type="checkbox" class="form-check-input" name="exclude[]" value="__pycache__"></td>
 
         </tr>
 				<tr>
+           <th scope="row">device_config.json</th>
+           <td><input type="checkbox" class="form-check-input" name="exclude[]" value="device_config.json"></td>
+            <th scope="row">-</th>
+             <td>-</td>
+
+        </tr>
+				<tr>
            <th scope="row" colspan="4"><div class="form-check form-switch d-flex justify-content-center"> <div class="input-group">
-		  <input type="submit" name="checkforupdates" class="btn btn-success" value="Kiểm tra">
-		   <input type="submit" name="backup_update" class="btn btn-warning" value="Bắt Đầu Cập Nhật">
+		  <input type="submit" name="checkforupdates" class="btn btn-success" value="Kiểm Tra">
+		   <input type="submit" name="backup_update" class="btn btn-warning" value="Cập Nhật">
 		   <a class="btn btn-danger" href="<?php echo $PHP_SELF; ?>" role="button">Làm Mới</a>
 		    <button type="submit" name="restart_vietbot" class="btn btn-dark">Restart VietBot</button>
 	
@@ -470,8 +480,8 @@ if (isset($_POST['backup_update'])) {
 
 //Chmod 777 khi chạy xong backup
 $connection = ssh2_connect($serverIP, $SSH_Port);
-if (!$connection) {die('Không thể kết nối tới máy chủ.');}
-if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die('Đăng nhập không thành công.');}
+if (!$connection) {die($E_rror_HOST);}
+if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
 $stream1 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$DuognDanUI_HTML);
 $stream2 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$DuognDanThuMucJson);
 stream_set_blocking($stream1, true); stream_set_blocking($stream2, true);
