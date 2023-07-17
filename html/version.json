@@ -1,14 +1,6 @@
 {
-<<<<<<< Updated upstream
-	"ui_version": {
-		"latest": "beta 11-07-2023",
-
-		"current": "beta 11-07-2023"
-	}
-=======
   "ui_version": {
     "latest": "beta 16-07-2023-02",
     "current": "beta 16-07-2023-02"
   }
->>>>>>> Stashed changes
 }
