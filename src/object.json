@@ -318,7 +318,7 @@
         },
         {
             "code": "A",
-            "name": "am pe"
+            "name": "ăm pe"
         },
         {
             "code": "kW",
@@ -488,20 +488,24 @@
             "value_eng": "medium"
         },
         {
-            "value": "giữa",
-            "value_eng": "middle"
+            "value": "lớn nhất",
+            "value_eng": "max"
         },
         {
-            "value": "yếu",
+            "value": "thấp",
             "value_eng": "low"
         },
         {
-            "value": "phe phẩy",
-            "value_eng": "both"
+            "value": "nhỏ nhất",
+            "value_eng": "min"
+        },
+        {
+            "value": "tự động",
+            "value_eng": "auto"
         }
     ],
     "hvac_swing": [{
-            "value": "đứng",
+            "value": "đảo chiều",
             "value_eng": "vertical"
         },
         {
@@ -513,7 +517,7 @@
             "value_eng": "both"
         },
         {
-            "value": "kín",
+            "value": "đứng yên",
             "value_eng": "off"
         }
     ],
