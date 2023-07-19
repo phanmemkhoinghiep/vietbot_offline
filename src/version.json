@@ -1,6 +1,7 @@
 {
 	"vietbot_version": {
-		"latest": "beta 18-07-2023-01"
+		"latest": "beta 17-07-2023-01",
+		"current": "beta 18-07-2023-01"
 	},
 	"ui_version": {
 		"latest": "beta 11-07-2023",
