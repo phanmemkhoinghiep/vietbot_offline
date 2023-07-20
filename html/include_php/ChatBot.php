@@ -196,14 +196,17 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx  -->
 
 
 <div class="input-group mb-3">
+ <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Chỉ đọc: &nbsp;<input title="Chỉ đọc nội dung văn bản bạn đã nhập ra loa và sẽ không hiển thị trong dao diện chatbox" type="checkbox" class="form-check-input" id="message-type-checkbox"></span>
+  </div>
+
+
  <input type="text" class="form-control" id="user-input" class="chat-input" placeholder="Nhập tin nhắn..." aria-label="Recipient's username" aria-describedby="basic-addon2">
   <div class="input-group-append">
    <button type="submit" class="btn btn-success">Gửi</button>
   </div>
 </div>
-<input title="Chỉ đọc nội dung văn bản bạn đã nhập ra loa và sẽ không hiển thị trong dao diện chatbox"  style="display: none;" type="checkbox" class="form-check-input" id="message-type-checkbox">
-
-       
+ 
 	  
     </form>
     <button id="delete-all-button" class="btn btn-danger">Xóa tất cả tin nhắn</button>

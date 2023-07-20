@@ -43,21 +43,20 @@ B1: Sao Lưu Lại toàn Bộ File Trong Thư Mục html của bạn lại nhé
 B2: Xóa Toàn Bộ File Trong Thư Mục html Của Bạn
 
 B3: Tải về -> Giải Nén -> Upload hết tất cả các file và thư mục VỪA GIẢI NÉN 
-vào trong thư mục "html" theo đường dẫn: "var/www/html" của bạn trên ssh
+vào trong thư mục "html" theo đường dẫn: "/home/pi/vietbot_offline/html" của bạn trên ssh
 
 	- Bắt Buộc Phải Chạy vài Lệnh Này bằng quyền sudo: Lệnh Sét Quyền 777 Các  File Và Thư Mục Con
-	$: sudo chmod -R 0777 /var/www/html/
-	$: sudo chmod -R 0777 /home/pi/vietbot_offline/src/
- 	$: sudo chmod -R 0777 /home/pi/vietbot_offline/html/
+ 	$: sudo chmod -R 0777 /home/pi/vietbot_offline
 	
 	- BẮT BUỘC: 
 		- Cấu Hình Bắt Buộc Nhập "$SSH_TaiKhoan" và "$SSH_MatKhau" trong file:
-			Configuration.php để dùng được các lệnh hệ thống /var/www/html/Configuration.php
+			Configuration.php để dùng được các lệnh hệ thống /home/pi/vietbot_offline/html/Configuration.php
 
 B5: Cấu Hình Chỉnh Một Vài Tùy Chọn Khác Theo Ý Bạn Trong File Configuration.php
 
 	- Các File Backup Config sẽ nằm trong: var/www/html/include_php/Backup_Config
-
+ 
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 Chuyển UI từ "var/www/html" sang "home/pi/vietbot_offline/html/"
 
  - đi tới: /etc/apache2/apache2.conf 

@@ -72,21 +72,29 @@ body {
     left: 50%;
 	  transform: translate(-50%, -50%);
 }
+    .my-div {
+        border: 1.5px solid black;
+        border-radius: 10px;
+        position: relative;
+        margin-left: 1px;
+        margin-right: 1px;
+    }
+    
+    .corner-text {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+    }
 
 	</style>
 </head>
 <body>
 	<br/>
-	<center> 
-	<div id="messagee"></div><br/>
-	<div id="message"></div>
-	</center>
+
 	  <script src="../assets/js/jquery.min.js"></script>
   <script src="../assets/js/popper.min.js"></script>
   <script src="../assets/js/bootstrap.min.js"></script>
    <script src="../assets/js/jquery-3.6.1.min.js"></script>
-
-	
   <script>
 $(document).ready(function() {
     $('#my-form').on('submit', function() {
@@ -208,7 +216,10 @@ if (!is_dir($DuognDanThuMucJson)) {
     exit;
 }
 ?>
-
+<div class="my-div">
+    <span class="corner-text"><h5>Cập Nhật:</h5></span><br/><br/>
+<center>
+<div id="messagee"></div></center><br/>
 
     <form method="POST" id="my-form" action="">
 	<div class="row g-3 d-flex justify-content-center"><div class="col-auto">
@@ -247,14 +258,14 @@ if (!is_dir($DuognDanThuMucJson)) {
         </tr>
 		<tr>
            <th scope="row">credentials.json</th>
-           <td><input type="checkbox" class="form-check-input" name="exclude[]" value="credentials.json"></td>
+           <td><input type="checkbox" class="form-check-input" name="exclude[]" value="credentials.json" checked></td>
             <th scope="row">__pycache__</th>
              <td><input type="checkbox" class="form-check-input" name="exclude[]" value="__pycache__"></td>
 
         </tr>
 				<tr>
            <th scope="row">device_config.json</th>
-           <td><input type="checkbox" class="form-check-input" name="exclude[]" value="device_config.json"></td>
+           <td><input type="checkbox" class="form-check-input" name="exclude[]" value="device_config.json" checked></td>
             <th scope="row">-</th>
              <td>-</td>
 
@@ -272,9 +283,14 @@ if (!is_dir($DuognDanThuMucJson)) {
     </table>
 </div>
 </div>
-   
+    </div><br/>
+<div class="my-div">
+    <span class="corner-text"><h5>Sao Lưu/Khôi Phục:</h5></span><br/><br/>
 
-
+	<center> 
+	<div id="message"></div>
+	
+	</center><br/>
 	<?php
 	    // Lấy danh sách các tệp tin sao lưu
     $files = glob($backupDir . '/*.tar.gz');
@@ -298,8 +314,8 @@ if (!is_dir($DuognDanThuMucJson)) {
     }
 	?>
 	</div></div>
-	</div>
-	
+	</div><br/>
+</div>
 	</form>
 	<?php
 // Xử lý tải xuống tệp tin được chọn
@@ -378,16 +394,16 @@ if ($currentresult === $latestVersion) {
 if (isset($_POST['backup_update'])) {
 /////////////////////
         // Tạo lệnh để nén thư mục
-        $tarCommand = 'tar -czvf ' . $backupFile . ' -C ' . dirname($DuognDanThuMucJson) . ' ' . basename($DuognDanThuMucJson);
-        // Thực thi lệnh
+       // $tarCommand = 'tar -czvf ' . $backupFile . ' -C ' . dirname($DuognDanThuMucJson) . ' ' . basename($DuognDanThuMucJson);
+		$tarCommand = "tar -czvf " . $backupFile . " -C $Path_Vietbot_src resources src";
+	  // Thực thi lệnh
         exec($tarCommand, $output, $returnCode);
         // Kiểm tra mã trạng thái trả về
         if ($returnCode === 0) {
             // Đặt quyền chmod 777 cho thư mục sao lưu
           //  chmod($backupDir, 0777);
             chmod($backupFile, 0777);
-            $message .= 'Tạo bản sao lưu thành công\n';
-            // Gọi hàm xóa các tệp tin và thư mục không cần thiết
+         //   $messagee .= 'Tạo bản sao lưu thành công\n';
             // Xóa các file cũ nếu số lượng tệp tin sao lưu vượt quá giới hạn
             $backupFiles = glob($backupDir . '/*.tar.gz');
             $numBackupFiles = count($backupFiles);
@@ -400,12 +416,12 @@ if (isset($_POST['backup_update'])) {
                 $filesToDelete = array_slice($backupFiles, 0, $numBackupFiles - $maxBackupFiles);
                 foreach ($filesToDelete as $file) {
                     unlink($file);
-                     $message .= 'Backup đã đạt giới hạn, đã xóa tệp tin cũ: ' . $file . '\n';
+                   //  $messaege .= 'Backup đã đạt giới hạn, đã xóa tệp tin cũ: ' . $file . '\n';
 				;
                 }
             }
         } else {
-            $message .= 'Có lỗi xảy ra khi tạo bản sao lưu.\n';
+            $messagee .= 'Có lỗi xảy ra khi tạo bản sao lưu.\n';
         }
 ///////////////////////
   //  $directory = '/home/pi/vietbot_offline/src';
@@ -435,9 +451,11 @@ if (isset($_POST['backup_update'])) {
             $zip->close();
             
             $sourceDirectory = $DuognDanUI_HTML.'/backup_update/extract/vietbot_offline-beta/src';
+			$sourceDirectoryyy = $DuognDanUI_HTML.'/backup_update/extract/vietbot_offline-beta/resources';
             copyFiles($sourceDirectory, $DuognDanThuMucJson, $excludedFiles, $copiedItems);
-            $message .= 'Đã tải xuống phiên bản Vietbot mới và cập nhật thành công!\n';
-            $message .= 'BẠN CẦN KHỞI ĐỘNG LẠI LOA THÔNG MINH ĐỂ ÁP DỤNG LẠI CÀI ĐẶT!\n';
+			copyFiles($sourceDirectoryyy, $PathResources, $excludedFiles, $copiedItems);
+            $messagee .= 'Đã tải xuống phiên bản Vietbot mới và cập nhật thành công!\n';
+            $messagee .= 'BẠN CẦN KHỞI ĐỘNG LẠI LOA THÔNG MINH ĐỂ ÁP DỤNG LẠI CÀI ĐẶT!\n';
 			?>
 			<div class="form-check form-switch d-flex justify-content-center"> 
 <div class="container">
@@ -445,9 +463,9 @@ if (isset($_POST['backup_update'])) {
    <div class="col div-div1 scrollable-menu">
 			<?php
             if (!empty($deletedItems)) {
-                echo '<font color="red"><b>Các file/thư mục đã xóa để cập nhật:</b></font><br/>';
+              //  echo '<font color="red"><b>Các file/thư mục đã xóa để cập nhật:</b></font><br/>';
                 foreach ($deletedItems as $item) {
-                    echo $item . '<br/>';
+                  //  echo $item . '<br/>';
                 }
               
             }
@@ -457,9 +475,9 @@ if (isset($_POST['backup_update'])) {
 			<?php
 
             if (!empty($copiedItems)) {
-                echo '<font color="green"><b>Các file/thư mục đã được cập nhật:</b></font><br>';
+              //  echo '<font color="green"><b>Các file/thư mục đã được cập nhật:</b></font><br>';
                 foreach ($copiedItems as $item) {
-                    echo $item . '<br/>';
+                //    echo $item . '<br/>';
                 }
             }
 			?>
@@ -470,29 +488,28 @@ if (isset($_POST['backup_update'])) {
 			<?php
 			
         } else {
-            $message .=  'Không thể giải nén tệp tin zip.\n';
+            $messagee .=  'Có lỗi xảy ra, không thể giải nén tệp tin cập nhật.\n';
         }
         
         unlink($zipFilePath);
     } else {
-        $message .=  'Không thể tải xuống tệp tin zip.\n';
+        $messagee .=  'Có lỗi xảy ra, không thể tải xuống tệp tin cập nhật.\n';
     }
-
 //Chmod 777 khi chạy xong backup
 $connection = ssh2_connect($serverIP, $SSH_Port);
 if (!$connection) {die($E_rror_HOST);}
 if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
-$stream1 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$DuognDanUI_HTML);
-$stream2 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$DuognDanThuMucJson);
-stream_set_blocking($stream1, true); stream_set_blocking($stream2, true);
-$stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO); $stream_out2 = ssh2_fetch_stream($stream2, SSH2_STREAM_STDIO);
-stream_get_contents($stream_out1); stream_get_contents($stream_out2);
+$stream1 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$Path_Vietbot_src);
+stream_set_blocking($stream1, true); 
+$stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO);
+stream_get_contents($stream_out1); 
 }
 //Dowload backup restor
 //Chọn file backup và restore
 if (isset($_POST['restore']) && isset($_POST['selectedFile'])) {
     $selectedFile = $_POST['selectedFile'];
 	$sourceDirectory = $DuognDanUI_HTML.'/backup_update/extract/src';
+	$sourceDirectoryyy = $DuognDanUI_HTML.'/backup_update/extract/resources';
  //   echo 'Tiến Hành Khôi Phục File: '.$selectedFile.'<br/>';
  if (!empty($selectedFile)) {
 //Giải nén backup
@@ -517,7 +534,9 @@ if (file_exists($archivePath)) {
     $message .= 'Tệp tin giải nén không tồn tại: '.$selectedFile.'\n';
 }
 //End giải nén backup
+
 //Chmod 777 thưu mục src restore
+/*
 if (is_dir($sourceDirectory)) {
     if (chmod($sourceDirectory, 0777)) {
      //   $message .= 'Thay đổi quyền truy cập thành công: '.$sourceDirectory.'\n';
@@ -527,10 +546,13 @@ if (is_dir($sourceDirectory)) {
 } else {
     $message .= 'Thư mục không tồn tại: '.$sourceDirectory.'\n';
 }
+*/
+
 $excludedFiles = array('excluded_file_VUTUYEN.txt'); //Bỏ Qua File không coppy giai đoạn thử nghiệm
 $copiedItems = array();
 copyFiles($sourceDirectory, $DuognDanThuMucJson, $excludedFiles, $copiedItems);
- $message .= 'Khôi phục thành công\n';
+copyFiles($sourceDirectoryyy, $DuognDanThuMucJson, $excludedFiles, $copiedItems);
+ $message .= 'Khôi phục bản sao lưu thành công\n';
 ?>
 <div class="form-check form-switch d-flex justify-content-center"> 
 <div class="container">
@@ -538,32 +560,42 @@ copyFiles($sourceDirectory, $DuognDanThuMucJson, $excludedFiles, $copiedItems);
  
  <div class="col div-div1 scrollable-menu">
 <?php
-echo  '<font color="green"><b>Đã khôi phục Firmware Vietbot thành công file:</b></font><br/>';
+//echo  '<font color="green"><b>Đã khôi phục Firmware Vietbot thành công file:</b></font><br/>';
 // Hiển thị danh sách các tệp tin đã được sao chép
 foreach ($copiedItems as $copiedItem) {
     //echo  '<font color="green">Đã khôi phục thành công file: </font>'.$copiedItem.'<br/>';
-    echo  $copiedItem.'<br/>';
+   // echo  $copiedItem.'<br/>';
 }
 ?>
 </div>
 <?php
 //Xóa Nội dung đã giải nén khi restore
-$excludedFilesrestore = array('excluded_file_VUTUYEN.txt'); //bỏ qua file không bị xóa giai đoạn thử nghiệm
+$excludedFilesrestore = array('README.md'); //bỏ qua file không bị xóa
 $excludedDirectories = array('excluded_file_VUTUYEN'); // bỏ qua thư mục không bị xóa giai đoạn thử nghiệm
 $deletedItems = array();
 deleteFiles($sourceDirectory, $excludedFilesrestore, $excludedDirectories, $deletedItems);
+deleteFiles($sourceDirectoryyy, $excludedFilesrestore, $excludedDirectories, $deletedItems);
 ?>
+
  <div class="col div-div1 scrollable-menu">
 <?php
-echo '<font color="red"><b>Đã xóa các file khôi phục trong bộ nhớ tạm:</b></font><br/>';
+//echo '<font color="red"><b>Đã xóa các file khôi phục trong bộ nhớ tạm:</b></font><br/>';
 // Hiển thị danh sách các tệp tin và thư mục đã bị xóa
 foreach ($deletedItems as $deletedItem) {
-    echo $deletedItem . '<br/>';
+   // echo $deletedItem . '<br/>';
 }
     } else {
         // Xử lý khi $selectedFile không có giá trị
         $message .= "Không có tệp tin được chọn để tiến hành khôi phục.";
     }	
+//Chmod 777 khi restor xong backup
+$connection = ssh2_connect($serverIP, $SSH_Port);
+if (!$connection) {die($E_rror_HOST);}
+if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
+$stream1 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$Path_Vietbot_src);
+stream_set_blocking($stream1, true); 
+$stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO);
+stream_get_contents($stream_out1); 
 }
 	?>
 </div>

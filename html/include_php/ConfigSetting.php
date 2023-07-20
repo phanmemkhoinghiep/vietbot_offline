@@ -3,7 +3,7 @@
 //Facebook: https://www.facebook.com/TWFyaW9uMDAx
 include "../Configuration.php";
 	$FileConfigJson = "$DuognDanThuMucJson"."/config.json";
-	$FileVolumeJson = "$DuognDanThuMucJson"."/volume_state.json";
+	$FileVolumeJson = "$DuognDanThuMucJson"."/state.json";
 	$json_volume_data = file_get_contents($FileVolumeJson);
     $json_config_data = file_get_contents($FileConfigJson);
 	$data_volume = json_decode($json_volume_data);
@@ -17,7 +17,7 @@ include "../Configuration.php";
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         if (isset($_GET['selectedFile']) && !empty($_GET['selectedFile'])) {
             $selectedFile = $_GET['selectedFile'];
-            $configFile = $backupDirz . "../config.json";
+            $configFile = $DuognDanThuMucJson . "/config.json";
             $fileContent = file_get_contents($selectedFile);
             file_put_contents($configFile, $fileContent);
 			header("Location: ".$PHP_SELF);
@@ -46,6 +46,7 @@ include "../Configuration.php";
     "stt_gg_cloud" => "Google Cloud",
     "stt_gg_ass" => "Google Assistant",
     "stt_fpt" => "FPT",
+    "stt_hpda" => "HPDA",
     "stt_viettel" => "Viettel"
 );
 // Thực hiện thay thế từng từ khóa
@@ -61,7 +62,6 @@ foreach ($keywordsSTT as $keywordSTT => $replacementSTT) {
 	} else {
 	$GET_Token_STT = $GET_Token_STTzz;
 	}
-	
     // Kiểm tra xem tệp google_stt.json có tồn tại hay không
 	 $jsonFile = "$DuognDanThuMucJson/google_stt.json";
     if (file_exists($jsonFile)) {
@@ -134,6 +134,11 @@ foreach ($keywordsTTS as $keywordTTS => $replacementTTS) {
 	$HOTWORD_ENGINE_TYPE = $data_config['smart_wakeup']['hotword_engine']['type'];
 	// Tiếp tục hỏi khi trả lời xong
 	$continuous_asking = $data_config['smart_request']['continuous_asking'];
+	//Đọc trạng thái sau khi khởi động
+	$startup_state_speaking = $data_config['smart_answer']['startup_state_speaking'];
+	
+	
+	
 	$Pre_Answer_Timeout = $data_config['smart_answer']['pre_answer_timeout'];
 	$numberCharactersToSwitchMode = $data_config["smart_answer"]["number_characters_to_switch_mode"];
 	//Thay ĐỔi Ngôn Ngữ hotword
@@ -262,7 +267,11 @@ chmod($backupFile, 0777);
 	// Lưu lại dữ liệu vào file config.json
 	//Hỏi liên tục\
 	 $data_config['smart_request']['continuous_asking'] = ($_POST['continuous_asking'] === 'true');
-	//end hỏi liên tục
+	 	//end hỏi liên tục
+		
+	//Đọc trạng thái sau khi khởi động
+	 $data_config['smart_answer']['startup_state_speaking'] = ($_POST['startup_state_speaking'] === 'true');
+
 	
 		//Chờ xử Lý Dữ Liệu
     $preAnswerList = $_POST["pre_answer"];
@@ -406,14 +415,34 @@ if (isset($_POST['set_full_quyen'])) {
 $connection = ssh2_connect($serverIP, $SSH_Port);
 if (!$connection) {die($E_rror_HOST);}
 if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
-$stream1 = ssh2_exec($connection, "sudo chmod -R 0777 $DuognDanUI_HTML");
-$stream2 = ssh2_exec($connection, "sudo chmod -R 0777 $DuognDanThuMucJson");
-stream_set_blocking($stream1, true); stream_set_blocking($stream2, true);
-$stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO); $stream_out2 = ssh2_fetch_stream($stream2, SSH2_STREAM_STDIO);
-stream_get_contents($stream_out1); stream_get_contents($stream_out2);
+$stream1 = ssh2_exec($connection, "sudo chmod -R 0777 $Path_Vietbot_src");
+stream_set_blocking($stream1, true); 
+$stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO); 
+stream_get_contents($stream_out1); 
 header("Location: $PHP_SELF"); exit;
 }
-
+//////////////////////////Khôi Phục Gốc Config.Json
+if (isset($_POST['restore_config_json'])) {
+$sourceFile = $DuognDanUI_HTML.'/assets/json/config.json';
+$destinationFile = $DuognDanThuMucJson.'/config.json';
+// Kiểm tra xem tệp nguồn tồn tại
+if (file_exists($sourceFile)) {
+	shell_exec("rm $destinationFile");
+    // Thực hiện sao chép bằng lệnh cp
+    $command = "cp $sourceFile $destinationFile";
+    $output = shell_exec($command);
+	shell_exec("chmod 0777 $destinationFile");
+    // Kiểm tra kết quả
+    if ($output === null) {
+        echo "<center>Khôi Phục Gốc <b>config.json</b> thành công!</center>";
+    } else {
+        echo "<center>Đã xảy ra lỗi khi khôi phục gốc <b>config.json</b> : $output</center>";
+    }
+} else {
+    echo "<center>Tệp gốc <b>config.json</b> không tồn tại!</center>";
+}
+header("Location: $PHP_SELF"); exit;
+}
 
 ?>
 <!DOCTYPE html>
@@ -428,89 +457,140 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx -->
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
     <link rel="stylesheet" href="../assets/css/bootstrap-icons.css">
  <link rel="stylesheet" href="../assets/css/4.5.2_css_bootstrap.min.css">
-    <style>
-	body {
-  background-color:#dbe0c9;
-}
-.slider {
-  width:200px;
-}
-.slider-value {
-  display:inline-block;
-  width:40px;
-  text-align:center;
-}
-.hidden-input {
-  display:none;
-}
-::-webkit-scrollbar {
-  width:5px;
-}
-::-webkit-scrollbar-track {
-  -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.3);
-  -webkit-border-radius:10px;
-  border-radius:10px;
-}
-::-webkit-scrollbar-thumb {
-  -webkit-border-radius:10px;
-  border-radius:10px;
-  background:rgb(251,255,7);
-  -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.5);
-}
-.popup-container {
-  display:none;
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background-color:rgba(0,0,0,0.5);
-  z-index:9999;
-}
-.popup-container.show {
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-#popupContent {
-  background-color:white;
-  padding:20px;
-  border:1px solid gray;
-  border-radius:5px;
-}
-a {
-  text-decoration:none;
-}
-
-#loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    display: none;
-}
-
-#loading-icon {
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    top: 42%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-#loading-message {
-	   position: absolute;
-    color: White;
-	  top: 60%;
-    left: 50%;
-	  transform: translate(-50%, -50%);
-}
+<style>
+    body {
+        background-color: #dbe0c9;
+    }
+    
+    .slider {
+        width: 200px;
+    }
+    
+    .slider-value {
+        display: inline-block;
+        width: 40px;
+        text-align: center;
+    }
+    
+    .hidden-input {
+        display: none;
+    }
+    
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+        background: rgb(251, 255, 7);
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+    }
+    
+    .popup-container {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+    }
+    
+    .popup-container.show {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    #popupContent {
+        background-color: white;
+        padding: 20px;
+        border: 1px solid gray;
+        border-radius: 5px;
+    }
+    
+    a {
+        text-decoration: none;
+    }
+    
+    #loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        display: none;
+    }
+    
+    #loading-icon {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: 42%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    
+    #loading-message {
+        position: absolute;
+        color: White;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    
+    .chatbox-container {
+        position: fixed;
+        top: 40%;
+        right: 0;
+        bottom: auto;
+        padding: 10px;
+        background-color: #f1f1f1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: right 0.5s;
+        border-top-left-radius: 999px;
+        border-bottom-left-radius: 999px;
+    }
+    
+    .chatbox-content {
+        position: fixed;
+        top: 40%;
+        right: -100%;
+        bottom: auto;
+        width: auto;
+        height: auto;
+        background-color: #f1f1f1;
+        padding: 0px;
+        transition: right 0.5s;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        border-top-right-radius: 10px;
+        z-index: 9999;
+    }
+    
+    .chatbox-container.open {
+        right: 280px;
+    }
+    
+    .chatbox-content.open {
+        right: 0;
+    }
 </style>
    <script src="../assets/js/11.0.18_dist_sweetalert2.all.min.js"></script>
   
@@ -522,8 +602,7 @@ a {
 <?php
 // Thư mục cần kiểm tra
 $directories = array(
-    "$DuognDanUI_HTML",
-    "$DuognDanThuMucJson"
+    "$Path_Vietbot_src"
 );
 function checkPermissions($path, &$hasPermissionIssue) {
     $files = scandir($path);
@@ -558,6 +637,37 @@ foreach ($directories as $directory) {
     $hasPermissionIssue = false;
     checkPermissions($directory, $hasPermissionIssue);
 }
+
+
+if (json_last_error() !== JSON_ERROR_NONE) {
+    echo "<center><h1> <font color=red>Phát hiện lỗi, cấu trúc tập tin config.json không hợp lệ!</font></h1><br/>- Mã Lỗi: <b>" . json_last_error_msg()."</b><br/><br/>";
+	echo "Hướng Dẫn Khắc Phục 1 Trong Các Gợi Ý Dưới Đây:<i><br>- Bạn cần sửa trực tiếp trên file<br/>- Chọn <b>các file sao lưu trước đó</b><br/>- Nhấn vào nút <b>Khôi Phục Gốc</b> bên dưới để về trạng thái khi mới flash</i>";
+	echo "<br/><i>(Lưu Ý: khi chọn <b>Khôi Phục Gốc</b> bạn cần cấu hình lại các cài đặt trong config.json đã lưu trước đó.)</i><br/>";
+	  echo '<br/><div class="form-check form-switch d-flex justify-content-center"><br/>';
+// Kiểm tra xem có file nào trong thư mục hay không
+if (count($fileLists) > 0) {
+    // Tạo dropdown list để hiển thị các file
+    echo '<form method="get"><div class="input-group">';
+    echo '<select class="custom-select" id="inputGroupSelect04" name="selectedFile">';
+    echo '<option value="">Chọn file backup config</option>'; // Thêm lựa chọn "Chọn file"
+    foreach ($fileLists as $file) {
+        $fileName = basename($file);
+        echo '<option value="' . $file . '">' . $fileName . '</option>';
+    }
+    echo '</select><div class="input-group-append">';
+    echo '<input type="submit" class="btn btn-warning" title="Khôi Phục Lại File config.json trước đó đã sao lưu" value="Khôi Phục/Recovery">';
+    echo ' </div></div></form>';
+	echo '<br/><br/><form id="my-form"  method="POST"><button type="submit" name="restore_config_json" class="btn btn-danger">Khôi Phục Gốc</button></center></form>';
+}
+ else {
+    echo "Không tìm thấy file backup config trong thư mục.";
+}
+echo '</div>';
+    exit(); // Kết thúc chương trình
+}
+
+
+
 ?>
 <div id="loading-overlay"><img id="loading-icon" src="../assets/img/Loading.gif" alt="Loading...">
 <div id="loading-message">- Đang Thực Hiện<br/>- Bạn Cần Restart Lại VietBot Để Áp Dụng Dữ Liệu Mới</div>
@@ -567,7 +677,7 @@ foreach ($directories as $directory) {
 <table class="table align-middle">
 <tbody><tr>
 <th scope="row">Tên Người Dùng:</th><td colspan="3">
-<input type="text" class="form-control" name="my_user_name_input" value="<?php echo $MY_USER_NAME; ?>" placeholder="Nhập Tên Người Dùng Của Bạn" maxlength="14" required></td></tr>
+<input type="text" class="form-control" name="my_user_name_input" value="<?php echo $MY_USER_NAME; ?>" placeholder="Nhập Tên Người Dùng Của Bạn" title="Nhập Tên Người Dùng Của Bạn" maxlength="14" required></td></tr>
  <tr><th scope="row">Địa Chỉ:</th>
 <td><select class="custom-select" id="city" name="city"><option name="city" value="<?php echo $Address_City; ?>" selected><?php echo $Address_City; ?></option></select></td>
 <td><select class="custom-select" id="district" name="district"><option name="district" value="<?php echo $Address_district; ?>" selected><?php echo $Address_district; ?></option></select></td>
@@ -588,7 +698,7 @@ foreach ($directories as $directory) {
 <th scope="col"><center>Card ID:</center></th>
 <th scope="col"><center>Âm lượng:</center></th></tr><tr>
 <td><input type="number" class="form-control" title="Từ 0 Đến 3" title="Từ 0 Đến 3" name="input_number_card_number" size="28" value="<?php echo $GET_Speaker_Amixer_ID; ?>"  min="0" max="3" required></td>
-<td><input type="range" name="volume_value" min="10" max="100" step="1" value="<?php echo $value_volume; ?>" class="slider" oninput="updateSliderValue(this.value)">
+<td><input type="range" title="Kéo Để Thay Đổi Âm Lượng Sau Đó Nhấn Lưu" name="volume_value" min="10" max="100" step="1" value="<?php echo $value_volume; ?>" class="slider" oninput="updateSliderValue(this.value)">
 <span id="slider-value" class="slider-value"><?php echo $value_volume; ?>%</span></div> </td></tr></table></div></div></center><hr/>
 <!-- Kết Thúc  Volume --> 
 <!-- mục  Web Interface --> 
@@ -625,14 +735,14 @@ foreach ($directories as $directory) {
 <div id="popupContainerTCLT" class="popup-container" onclick="hidePopupTCLT()">
 <div id="popupContent" onclick="preventEventPropagationTCLT(event)">
 <p><center><b>Continuous Asking/Hỏi Liên Tục:</b></center><br/>
--  Bật để hỏi tiếp sau khi bot trả lời hoặc thực hiện xong 1 hành động nào đó và ngược lại
+-  Bật để hỏi đáp liên tục mà ko cần gọi lại hotword
 <br/></div></div>
 
 <div class="row g-3 d-flex justify-content-center"><div class="col-auto">
 			<div class="custom-control custom-switch mt-3" title="Bật để hỏi tiếp sau khi bot trả lời hoặc thực hiện xong 1 hành động nào đó và ngược lại">
                 <input type="hidden" name="continuous_asking" value="false">
-                <input type="checkbox" name="continuous_asking" class="custom-control-input" id="continuous-asking-toggle" value="true" <?php echo ($continuous_asking) ? 'checked' : ''; ?>>
-                <label class="custom-control-label" for="continuous-asking-toggle"></label>
+                <input type="checkbox" name="continuous_asking" class="custom-control-input" id="continuous-asking" value="true" <?php echo ($continuous_asking) ? 'checked' : ''; ?>>
+                <label class="custom-control-label" for="continuous-asking"></label>
             </div></div></div>
 <hr/>
 <!-- END Trò Chuyện Liên Tục -->
@@ -641,7 +751,9 @@ foreach ($directories as $directory) {
 <div id="popupContainerSTT" class="popup-container" onclick="hidePopupSTT()">
 <div id="popupContent" onclick="preventEventPropagationSTT(event)">
 <center><b>Cấu Hình STT</b></center><br/>
-- Chuyển giọng nói thành văn bản</div></div>
+- Chuyển Giọng Nói Thành Văn Bản
+- <b>Thời Gian Chờ:</b> nếu bọi bot dậy, hết thời gian chờ mà không ra lệnh cho bot, thì bot sẽ quay trở lại trạng thái sleep và chờ gọi hotword.
+</div></div>
 <center><b>Bạn Đang Dùng STT: <font color="red"><?php echo $GET_STT_Replacee; ?></font></b></center>
 <label><input type="radio" name="stt_type" title="Chuyển Giọng Nói Thành Văn Bản Server Google Cloud" value="stt_gg_cloud" <?php if ($GET_STT === 'stt_gg_cloud') echo 'checked'; ?> required  onchange="toggleTokenInput(this)">
 Google Cloud</label><label>
@@ -652,12 +764,18 @@ Google Free</label><label>
 <input type="radio" name="stt_type" title="Chuyển Giọng Nói Thành Văn Bản Server FPT" value="stt_fpt" <?php if ($GET_STT === 'stt_fpt') echo 'checked'; ?> required onchange="toggleTokenInput(this)">
 FPT</label><label>
 <input type="radio" name="stt_type" title="Chuyển Giọng Nói Thành Văn Bản Server Viettel" value="stt_viettel" <?php if ($GET_STT === 'stt_viettel') echo 'checked'; ?> required onchange="toggleTokenInput(this)">
-Viettel</label><br/>
+Viettel</label>
+
+<label>
+<input type="radio" name="stt_type" title="Chuyển Giọng Nói Thành Văn Bản Server HPDA" value="stt_hpda" <?php if ($GET_STT === 'stt_hpda') echo 'checked'; ?> required onchange="toggleTokenInput(this)">
+HPDA</label>
+
+<br/>
 <div id="tokenInputContainer" style="display: none;">
 <div class="row g-3 d-flex justify-content-center"><div class="col-auto">
 <table class="table table-responsive align-middle"><tbody>
 <tr><th scope="row">Token:</th>
-<td> <input type="text" class="form-control" title="Nhập, Thay Đổi Token" name="token_stt" id="tokenInput" value="<?php echo $GET_Token_STT; ?>" required placeholder="Nhập Token STT" required></td></tr>
+<td> <input type="text" class="form-control" title="Nhập, Thay Đổi Token" name="token_stt" id="tokenInput" value="<?php echo $GET_Token_STT; ?>" placeholder="Nhập Token STT"></td></tr>
 </tbody></table></div>
 </div>
 </div>
@@ -680,8 +798,8 @@ Viettel</label><br/>
 <td><center><input type="radio" name="stt_gg_ass_mode" title="Google Assistatn Mode default" value="default" <?php if ($GET_STT_GG_ASS_MODE === 'default') echo 'checked'; ?>></center></td>
 <td><center><input type="radio" name="stt_gg_ass_mode" title="Google Assistatn Mode manual" value="manual" <?php if ($GET_STT_GG_ASS_MODE === 'manual') echo 'checked'; ?>></center></td>
 </tr></tbody></table></div></div></div>
-<br/><label for="volume">Thời Gian Chờ:</label>
-<input type="range" name="stt_time_out" title="Thời Gian Chờ" min="3000" max="8000" step="100" value="<?php echo $GET_TimeOut_STT; ?>" class="slider" oninput="updateSliderValueSTT(this.value)">
+<br/><label title="Nếu bọi bot dậy, hết thời gian chờ mà không ra lệnh cho bot, thì bot sẽ quay trở lại trạng thái sleep"> Thời Gian Chờ:</label>
+<input type="range" name="stt_time_out" title="Nếu bọi bot dậy, hết thời gian chờ mà không ra lệnh cho bot, thì bot sẽ quay trở lại trạng thái sleep" min="3000" max="8000" step="100" value="<?php echo $GET_TimeOut_STT; ?>" class="slider" oninput="updateSliderValueSTT(this.value)">
 <span id="slider-stt" class="slider-stt"><?php echo $GET_TimeOut_STT,"ms"; ?> </span><br/>(1000 = 1 Giây)</center><hr/>
 <!--Kết thúc STT Speak To Text --> 
 <!--Text to Speech Engine --> 
@@ -731,19 +849,19 @@ Zalo</label>
 <input type="radio" id="myRadio5"  title="Nữ Miền Nam" name="tts_voice" value="female_southern_voice" <?php if ($GET_TTS_Voice_Name === 'female_southern_voice') echo 'checked'; ?> required>Nữ Miền Nam</label><label>
 <input type="radio" id="myRadio6" title="Viettel Nam Miền Nam" id="myRadio2" name="tts_voice" value="male_southern_voice" <?php if ($GET_TTS_Voice_Name === 'male_southern_voice') echo 'checked'; ?> required>Nam Miền Nam</label><label>
 
-<input type="radio" id="myRadio7" name="tts_voice" value="null" <?php if ($GET_TTS_Voice_Name === null) echo 'checked'; ?> required>Mặc Định</label></center><hr/>
+<input type="radio" id="myRadio7" name="tts_voice" value="null" <?php if ($GET_TTS_Voice_Name === null) echo 'checked'; ?>>Mặc Định</label></center><hr/>
 <!-- -->
 <h5>Console Ouput:</h5> 
 <div class="row g-3 d-flex justify-content-center"><div class="col-auto"> 
 <table class="table">
  <thead>
      <tr>
-      <th scope="col" colspan="3"><center>Đầu Ra Bảng Điều Khiển</center></th>
+      <th scope="col" colspan="3"><center title="Cách hiển thị log trong terminal">Đầu Ra Bảng Điều Khiển</center></th>
     </tr>
     <tr>
-      <th scope="col"><center>Không</center></th>
-      <th scope="col"><center>Đầy Đủ</center></th>
-      <th scope="col"><center>Xem Tức Thời</center></th>
+      <th scope="col"><center title="Không hiển thị log trong terminal">Không</center></th>
+      <th scope="col"><center title="Hiển thị đầy đủ log trong terminal">Đầy Đủ</center></th>
+      <th scope="col"><center title="Xuất log đè lên nhau trong terminal">Xem Tức Thời</center></th>
     </tr>
   </thead>
    <tbody>
@@ -770,7 +888,18 @@ Zalo</label>
 ?>
 <h5 title="Thông Báo Chào Mừng Khi Thiết Bị Khởi Động Xong">Thông Báo/Âm Thanh:</h5>
 <div class="row g-3 d-flex justify-content-center"><div class="col-auto">
-  <table style="border-color:black;" class="table table-bordered align-middle">
+  <table class="table table-bordered align-middle">
+  <thead><tr><th colspan="2"><center>Đọc Trạng Thái Ngay Sau Khi Khởi Động:</center></th></tr></thead>
+<tbody><tr><td colspan="2">
+<center>
+			<div class="custom-control custom-switch mt-3" title="Đọc Trạng Thái Khi Mà Loa Được Khởi Động">
+                <input type="hidden" name="startup_state_speaking" value="false">
+                <input type="checkbox" name="startup_state_speaking" class="custom-control-input" id="continuous-asking-toggle" value="true" <?php echo ($startup_state_speaking) ? 'checked' : ''; ?>>
+                <label class="custom-control-label" for="continuous-asking-toggle"></label>
+            </div></center>
+			</td>
+			</tr>
+</tbody>
   <thead><tr><th colspan="2"><center>Thông Báo Khi Khởi Động<c/enter></th></tr></thead>
   <thead><tr>
       <th scope="col"><center>Đọc Văn Bản</center></th>
@@ -799,7 +928,6 @@ Zalo</label>
     echo "Không tìm thấy file mp3 và wav trong thư mục 'welcome'.";
   }
   ?>
-
   </center></td></tr>
  <!-- <tr id="text-inputt">
   <td><b>Đọc địa chỉ ip:</b> <input type="checkbox"  name="welcome_ip" value=", | địa chỉ ai pi của mình là: <?php //echo $serverIP; ?>" <?php /* if ($Welcome_Text === $Welcome_Text_ip.', | địa chỉ ai pi của mình là: '.$serverIP) echo 'checked'; */ ?>>
@@ -816,8 +944,8 @@ $mp3Files = array_filter($mp3Files, function($mp3File) {
   <thead><tr>
 <th scope="col" colspan="2"><center>Âm Thanh Phản Hồi</center></th>
 </tr></thead><thead><tr>
-<th scope="col"><center>Khi Được Đánh Thức</center></th>
-<th scope="col"><center>Khi Kết Thúc</center></th>
+<th scope="col"><center title="Khi bạn gọi bot thì sẽ có âm thanh phát ra để nghe lệnh">Khi Được Đánh Thức</center></th>
+<th scope="col"><center title="Khi kết thúc nghe lệnh bot sẽ phát âm thanh">Khi Kết Thúc</center></th>
 </tr></thead><tbody><tr><td><center>
 	  <?php
 	  echo '<select class="custom-select" name="startsound">';
@@ -904,17 +1032,17 @@ None (Không Dùng)</label></center>
 <div class="row justify-content-center">
 <div class="col-auto">
 <table class="table table-responsive table-striped table-bordered align-middle">
-<tr><th scope="col">Nút Nhấn</th>
-<th scope="col">GPIO</th>
-<th scope="col" title="Tích Để Kéo Nút Nhấn Lên Mức Cao (3.3V), Bỏ Tích Kéo Xuống Mức Thấp GND">Kéo Mức Cao</th>
-<th scope="col" title="Tích Vào Để Kích Hoạt Chức Năng Của Nút Nhấn, Bỏ Tích Nút Nhấn Sẽ Bị Vô Hiệu">Kích Hoạt</th></tr>
+<tr><th scope="col"><center>Nút Nhấn</center></th>
+<th scope="col"><center>GPIO</center></th>
+<th scope="col" title="Tích Để Kéo Nút Nhấn Lên Mức Cao (3.3V), Bỏ Tích Kéo Xuống Mức Thấp GND"><center>Kéo Mức Cao</center></th>
+<th scope="col" title="Tích Vào Để Kích Hoạt Chức Năng Của Nút Nhấn, Bỏ Tích Nút Nhấn Sẽ Bị Vô Hiệu"><center>Kích Hoạt</center></th></tr>
 <?php
     foreach ($data_config['smart_config']['button'] as $buttonName => $buttonData) {
 		echo '<tr>';
         echo '<th scope="row">' . $buttonName . ':</th>';
-        echo '<td><!-- GPIO --><input type="number" class="form-control" style="width: 70px;" min="3" max="26" title="Cấu Hình Chân Chức Năng Của GPIO" style="width: 40px;" name="button[' . $buttonName . '][gpio]" value="' . $buttonData['gpio'] . '" placeholder="' . $buttonData['gpio'] . '"></td>';
-        echo '<td><!-- Pulled High --><input type="checkbox" title="Tích Để Kéo Nút Nhấn Lên Mức Cao (3.3V), Bỏ Tích Kéo Xuống Mức Thấp GND" name="button[' . $buttonName . '][pulled_high]"' . ($buttonData['pulled_high'] ? ' checked' : '') . '></td>';
-        echo '<td><!-- Active --><input type="checkbox" title="Tích Vào Để Kích Hoạt Chức Năng Của Nút Nhấn, Bỏ Tích Nút Nhấn Sẽ Bị Vô Hiệu" name="button[' . $buttonName . '][active]"' . ($buttonData['active'] ? ' checked' : '') . '></td></tr>';
+        echo '<td><center><!-- GPIO --><input type="number" class="form-control" style="width: 70px;" min="3" max="26" title="Cấu Hình Chân Chức Năng Của GPIO" style="width: 40px;" name="button[' . $buttonName . '][gpio]" value="' . $buttonData['gpio'] . '" placeholder="' . $buttonData['gpio'] . '"></center></td>';
+        echo '<td><center><!-- Pulled High --><input type="checkbox" title="Tích Để Kéo Nút Nhấn Lên Mức Cao (3.3V), Bỏ Tích Kéo Xuống Mức Thấp GND" name="button[' . $buttonName . '][pulled_high]"' . ($buttonData['pulled_high'] ? ' checked' : '') . '></center></td>';
+        echo '<td><center><!-- Active --><input type="checkbox" title="Tích Vào Để Kích Hoạt Chức Năng Của Nút Nhấn, Bỏ Tích Nút Nhấn Sẽ Bị Vô Hiệu" name="button[' . $buttonName . '][active]"' . ($buttonData['active'] ? ' checked' : '') . '></center></td></tr>';
 	}
 ?>
 </table></div></div></div><hr/>
@@ -939,26 +1067,13 @@ None (Không Dùng)</label></center>
 
 
 
-<div class="col-auto">
-<table style="border-color:black;" class="table table-sm table-bordered table-responsive align-middle">
-<thead><tr>
-<th colspan="2"><center class="text-success">Thay Đổi Ngôn Ngữ Hotword <i class="bi bi-info-circle-fill" onclick="togglePopuphwlang()" title="Nhấn Để Tìm Hiểu Thêm"></i></center></th>
-</tr></thead><tbody><tr> 
-<td  scope="col" colspan="2"><center><font color="red">Bạn Đang Dùng: <b><?php echo $hotwords_get_lang; ?></b></font></center></td>
-<tr><tr><td><center><b>Tiếng Việt</b></center></td><td><center><b>Tiếng Anh</b></center></td>
-</tr><tr><td> <center><input type="radio" name="language_hotword" id="language_hotwordddd" value="vi"></center></td>
-<td><center><input type="radio" name="language_hotword" id="language_hotwordddd1" value="eng"></center></td>
-</tr><tr><th><center><button type="submit" name="language_hotword_submit" class="btn btn-success">Lưu Cài Đặt</button></th> 
-<th><p onclick="uncheckRadiolanguage_hotwordddd()" class="btn btn-danger">Bỏ Chọn</p></th></center></th></tr></tbody></table></div>
-
-
 
 <div class="col-auto">
 <table style="border-color:black;" class="table table-responsive table-bordered align-middle">
 <thead><tr> <th scope="col" colspan="4"><center class="text-success">Cài Đặt Hotword</center></th> </tr>
-<tr><th scope="col"><label for="" class="form-label">Tên Hotword</label></th>
-<th scope="col"><label for="" title="Độ Nhạy Sensitive" class="form-label">Độ Nhạy</label></th>
-<th scope="col"><label for="" title="Tích Để Bật/Tắt Hotword" class="form-label">Kích Hoạt</label></th>
+<tr><th scope="col"><label for="" class="form-label"><center>Tên Hotword</center></label></th>
+<th scope="col"><label for="" title="Độ Nhạy Sensitive" class="form-label"><center>Độ Nhạy</center></label></th>
+<th scope="col"><label for="" title="Tích Để Bật/Tắt Hotword" class="form-label"><center>Kích Hoạt</center></label></th>
 <th scope="col"><label for="" title="Bật/Tắt Phản Hồi Của Bot Khi Được Đánh Thức" class="form-label"><center>Phản Hồi Lại</center></label></th>
 <tbody><tr><td><div>
 <select id="file_name" name="file_name" class="custom-select" onchange="showSensitiveInput(this.value)">
@@ -967,13 +1082,21 @@ None (Không Dùng)</label></center>
 <option value="<?php echo $hotword['file_name']; ?>"><?php echo substr($hotword['file_name'], 0, strpos($hotword['file_name'], "_")); ?></option>
 <?php endforeach; ?>
 </select></div></td><td><div>
-<input type="number" id="sensitive" name="sensitive" title="Chỉ Được Nhập Số Từ 0.1 Đến 1" placeholder="0.1 -> 1" class="form-control" step="0.1" min="0" max="1">
+<input type="number" id="sensitive" name="sensitive" style="width: 90px;" title="Chỉ Được Nhập Số Từ 0.1 Đến 1" placeholder="0.1->1" class="form-control" step="0.1" min="0.1" max="1">
 </div></td><td><div>
 <center><input type="checkbox" id="active" name="active" title="Tích vào để kích hoạt" class="form-check-input"></center>
 </div></td><td><div>
-<center><input type="checkbox" id="say_reply" name="say_reply" title="Tích vào để kích hoạt" class="form-check-input"></center></div></td><tr>
-<th scope="row"><center class="input-group-text">Kèm câu lệnh:</center></th><td colspan="3"><div>
-<center><input type="text" id="command" name="command" placeholder="Nhập Lệnh Vào Đây" title="Nhập Lệnh Của Bạn" class="form-control"></center></div></td></tr>
+<center><input type="checkbox" id="say_reply" name="say_reply" title="Tích vào để kích hoạt" class="form-check-input"></center></div></td>
+
+<tr>
+<td colspan="4">
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Kèm câu lệnh:</span>
+  </div>
+  <input type="text" id="command" name="command" placeholder="Nhập Lệnh Vào Đây" title="Nhập Lệnh Của Bạn" class="form-control">
+</div>
+</td></tr>
 </tr></tbody> </tr></thead></table> 
 </div>
 
@@ -985,7 +1108,7 @@ None (Không Dùng)</label></center>
 <p><center><b>Thay Đổi Ngôn Ngữ Gọi Hotword</b></center><br/>
 - <b>1: </b> 2 file thư viện <a href="https://github.com/Picovoice/porcupine/blob/master/lib/common/porcupine_params.pv" target="_bank">tiếng anh</a> 
 	<b>"porcupine_params.pv"</b> và <a href="https://github.com/Picovoice/porcupine/blob/master/lib/common/porcupine_params_vn.pv" target="_bank">tiếng việt</a> 
-	<b>"porcupine_params_vn.pv"</b><br/>phải nằm cùng trong đường dẫn sau: "/home/pi"<br/>
+	<b>"porcupine_params_vn.pv"</b><br/>phải nằm cùng trong đường dẫn sau: "<b><?php echo $Lib_Hotword; ?></b>"<br/>
 - <b>2: </b>các file thư viện hotword, file hotword, thư viện picovoice phải cùng phiên bản.<br/>
 - <i>Khi thay đổi ngôn ngữ bạn sẽ cần phải cấu hình lại các Hotword ở mục <b>Cài Đặt Hotword</b></i>
 </div></div>
@@ -1055,7 +1178,7 @@ None (Không Dùng)</label></center>
 if (count($GET_wakeupReply) > $Limit_Wakeup_Reply) {
     echo "<center><h5> Wake Up Reply Không Được Hiển Thị Do <b>config.json<b/> Không Phù Hợp, Vượt Quá $Limit_Wakeup_Reply Giá Trị</h5></center>";
 	    foreach ($GET_wakeupReply as $index => $reply) {
-        echo '<div style="display: none;"><input type="hidden" name="wakeup_reply[]" id="input' . ($index + 1) . '" value="' . $reply['value'] . '" placeholder="' . $reply['value'] . '" class="form-control" aria-label="Username" aria-describedby="basic-addon1" required>
+        echo '<div style="display: none;"><input type="hidden" name="wakeup_reply[]" id="input' . ($index + 1) . '" value="' . $reply['value'] . '" placeholder="' . $reply['value'] . '" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
 			</div>';
     }
 } 
@@ -1063,7 +1186,7 @@ else {
     foreach ($GET_wakeupReply as $index => $reply) {
         echo '<div class="input-group mb-3 d-flex justify-content-center"><div class="input-group-prepend">
 			<span class="input-group-text" id="basic-addon1">Câu Trả Lời ' . ($index + 1) . ':</span></div>  <div class="col-md-6">
-            <div class="form-outline"> <input type="text" name="wakeup_reply[]" id="input' . ($index + 1) . '" value="' . $reply['value'] . '" placeholder="' . $reply['value'] . '" class="form-control" aria-label="Username" aria-describedby="basic-addon1" required></div>         </div>
+            <div class="form-outline"> <input type="text" name="wakeup_reply[]" id="input' . ($index + 1) . '" value="' . $reply['value'] . '" placeholder="' . $reply['value'] . '" class="form-control" aria-label="Username" aria-describedby="basic-addon1"></div>         </div>
 			</div>';
     }
     }
@@ -1073,7 +1196,32 @@ else {
 <!--Kết Thúc mục  Wake Up Reply --> 		
 <center>
 <input type="submit" class="btn btn-success" name="config_setting" value="Lưu Cấu Hình">  <a href="<?php echo $PHP_SELF ?>"><button type="submit" class="btn btn-danger">Hủy Bỏ/Làm Mới</button></a>
- <button type="submit" name="restart_vietbot" class="btn btn-warning">Khởi Động Lại VietBot</button></center></form><hr/>    
+ <button type="submit" name="restart_vietbot" class="btn btn-warning">Khởi Động Lại VietBot</button></center>
+
+
+
+
+     <div class="chatbox-container" onclick="toggleChatbox()" title="Nhấn Để Thay Đổi Ngôn Ngữ Gọi Hotword"><center><b>Ngôn <br/>Ngữ</b></center></div>
+    <div id="chatbox-content" class="chatbox-content"><br/>
+<div class="col-auto">
+<table class="table table-sm table-bordered table-responsive align-middle">
+<thead><tr>
+<th colspan="2"><center class="text-success">Thay Đổi Ngôn Ngữ Hotword <i class="bi bi-info-circle-fill" onclick="togglePopuphwlang()" title="Nhấn Để Tìm Hiểu Thêm"></i></center></th>
+</tr></thead><tbody><tr> 
+<td  scope="col" colspan="2"><center><font color="red">Bạn Đang Dùng: <b><?php echo $hotwords_get_lang; ?></b></font></center></td>
+<tr><tr><td><center><b>Tiếng Việt</b></center></td><td><center><b>Tiếng Anh</b></center></td>
+</tr><tr><td> <center><input type="radio" name="language_hotword" id="language_hotwordddd" value="vi"></center></td>
+<td><center><input type="radio" name="language_hotword" id="language_hotwordddd1" value="eng"></center></td>
+</tr><tr><th><center><button type="submit" name="language_hotword_submit" class="btn btn-success">Lưu Cài Đặt</button></th> 
+<th><p onclick="uncheckRadiolanguage_hotwordddd()" class="btn btn-danger">Bỏ Chọn</p></th></center></th></tr></tbody></table></div>
+
+
+
+
+    </div>
+ 
+ 
+ </form><hr/>    
 <center><h5>Khôi Phục File config.json: <i class="bi bi-info-circle-fill" onclick="togglePopupConfigRecovery()" title="Nhấn Để Tìm Hiểu Thêm"></i></h5></center>
 <div class="form-check form-switch d-flex justify-content-center"> 
 <div id="toggleIcon" onclick="toggleDivConfigRecovery()">
@@ -1106,6 +1254,12 @@ if (count($fileLists) > 0) {
     echo "Không tìm thấy file backup config trong thư mục.";
 }
 ?></div></div>
+
+
+
+
+
+
 	<script src="../assets/js/bootstrap.js"></script>
 	<script src="../assets/js/jquery.min.js"></script>
 	<script src="../assets/js/axios_0.21.1.min.js"></script>
@@ -1656,7 +1810,15 @@ function validateInputs() {
     otherDiv.style.display = "none";
 	otherDivgcloud.style.display = "none";
     tokenInput.value = "Null";
-  } else {
+  }
+else if (radio.value === "stt_hpda") {
+    tokenInputContainer.style.display = "none";
+    otherDiv.style.display = "none";
+	otherDivgcloud.style.display = "none";
+    tokenInput.value = "Null";
+  }
+
+  else {
     tokenInputContainer.style.display = "none";
     otherDiv.style.display = "none";
 	otherDivgcloud.style.display = "none";
@@ -2029,6 +2191,22 @@ $(document).ready(function() {
     });
 });
 </script>
-	  
+	      <script>
+        var chatboxContainer = document.querySelector('.chatbox-container');
+        var chatboxContent = document.querySelector('.chatbox-content');
+
+        document.addEventListener('click', function(event) {
+            var target = event.target;
+            if (!chatboxContainer.contains(target) && !chatboxContent.contains(target)) {
+                chatboxContainer.classList.remove('open');
+                chatboxContent.classList.remove('open');
+            }
+        });
+
+        function toggleChatbox() {
+            chatboxContainer.classList.toggle('open');
+            chatboxContent.classList.toggle('open');
+        }
+    </script>
 </body>
 </html>

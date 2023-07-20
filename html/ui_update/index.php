@@ -71,21 +71,29 @@ body {
     left: 50%;
 	  transform: translate(-50%, -50%);
 }
+    .my-div {
+        border: 1.5px solid black;
+        border-radius: 10px;
+        position: relative;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    
+    .corner-text {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+    }
 
 	</style>
 </head>
 <body>
-	<br/>
-	<center> 
-	<div id="messagee"></div><br/>
-	<div id="message"></div>
-	</center>
-	  <script src="../assets/js/jquery.min.js"></script>
+<br/>
+</center>
+<script src="../assets/js/jquery.min.js"></script>
   <script src="../assets/js/popper.min.js"></script>
   <script src="../assets/js/bootstrap.min.js"></script>
    <script src="../assets/js/jquery-3.6.1.min.js"></script>
-
-	
   <script>
 $(document).ready(function() {
     $('#my-form').on('submit', function() {
@@ -103,8 +111,6 @@ $(document).ready(function() {
     </div>
 
 <?php
-
-
     // Hàm đệ quy để sao chép tất cả các tệp và thư mục
     function copyRecursive($source, $destination) {
         $dir = opendir($source);
@@ -177,12 +183,10 @@ function deleteDirectory($directory) {
     if (!file_exists($directory)) {
         return;
     }
-
     $iterator = new RecursiveIteratorIterator(
         new RecursiveDirectoryIterator($directory, RecursiveDirectoryIterator::SKIP_DOTS),
         RecursiveIteratorIterator::CHILD_FIRST
     );
-
     foreach ($iterator as $file) {
         if ($file->isDir()) {
             rmdir($file->getPathname());
@@ -190,10 +194,8 @@ function deleteDirectory($directory) {
             unlink($file->getPathname());
         }
     }
-
     rmdir($directory);
 }
-
 //Chmod 777
 if (isset($_POST['set_full_quyen'])) {
 $connection = ssh2_connect($serverIP, $SSH_Port);
@@ -262,7 +264,7 @@ $tarCommand = 'tar -czvf ' . $backupFile . ' ' . $excludeArgs . ' -C ' . dirname
 exec($tarCommand, $output, $returnCode);
 if ($returnCode === 0) {
     chmod($backupFile, 0777);
-    $message .= 'Tạo bản sao lưu giao diện thành công, hãy tải lại trang để áp dụng\n';
+  //  $messagee .= 'Tạo bản sao lưu giao diện thành công, hãy tải lại trang để áp dụng\n';
     $backupFiles = glob($backupDir . '/*.tar.gz');
     $numBackupFiles = count($backupFiles);
 
@@ -275,13 +277,12 @@ if ($returnCode === 0) {
         foreach ($filesToDelete as $file) {
             unlink($file);
 			$basenameeee = basename($file);
-            $message .= 'Backup đạt giới hạn, đã xóa tệp tin sao lưu cũ: ' . $basenameeee . '\n';
+           // $messagee .= 'Backup đạt giới hạn, đã xóa tệp tin sao lưu cũ: ' . $basenameeee . '\n';
         }
     }
 } else {
-    $message .= 'Có lỗi xảy ra khi tạo bản sao lưu.\n';
+    $messagee .= 'Có lỗi xảy ra khi tạo bản sao lưu.\n';
 }
-
 //END sao Lưu
 $url = $UI_VietBot.'/archive/master.zip';
 $zipFile = $DuognDanUI_HTML.'/ui_update/dowload_extract/UI_VietBot.zip';
@@ -299,47 +300,41 @@ if ($zip) {
     while ($zipEntry = zip_read($zip)) {
         $entryName = zip_entry_name($zipEntry);
         $entryPath = $extractPath . '/' . $entryName;
-
         // Tạo các thư mục cha nếu chưa tồn tại
         $dirPath = dirname($entryPath);
         if (!is_dir($dirPath)) {
             mkdir($dirPath, 0777, true);
         }
-
         // Mở mục trong tập tin zip
         if (zip_entry_open($zip, $zipEntry, "r")) {
             // Đọc nội dung mục trong tập tin zip
             $entryContent = zip_entry_read($zipEntry, zip_entry_filesize($zipEntry));
-
             // Lưu nội dung vào đường dẫn cụ thể
             file_put_contents($entryPath, $entryContent);
-
             // Đóng mục trong tập tin zip
             zip_entry_close($zipEntry);
         }
     }
     // Đóng tập tin zip
     zip_close($zip);
-    $message .= 'Đã tải xuống và giải nén giao diện mới thành công!\n';
+  //  $messagee .= 'Đã tải xuống và giải nén giao diện mới thành công!\n';
     // Gọi hàm sao chép đệ quy
     copyRecursive($sourceDirectory, $DuognDanUI_HTML);
-    $message .= 'Sửa đổi các tệp tin cũ thành công!\n';
+    $messagee .= 'Cập nhật giao diện mới thành công!\n';
+    $messagee .= 'Bạn Hãy Tắt Trang Và Truy Cập Lại Để Áp Dụng, (Hoặc F5 Để Áp Dụng)....!\n';
     // Gọi hàm xóa đệ quy
     deleteRecursive($sourceDirectory);
-    $message .= 'Đã xóa nội dung trong bộ nhớ tạm thành công!\n\n';
 } else {
-    $message .= 'Không thể mở tập tin zip!\n\n';
+    $messagee .= 'Có lỗi xảy ra, không thể mở tập tin dao diện đã tải về!\n';
 }
-
 //Chmod 777 khi chạy xong backup
 $connection = ssh2_connect($serverIP, $SSH_Port);
 if (!$connection) {die($E_rror_HOST);}
 if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
 $stream1 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$DuognDanUI_HTML);
-$stream2 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$DuognDanThuMucJson);
-stream_set_blocking($stream1, true); stream_set_blocking($stream2, true);
-$stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO); $stream_out2 = ssh2_fetch_stream($stream2, SSH2_STREAM_STDIO);
-stream_get_contents($stream_out1); stream_get_contents($stream_out2);
+stream_set_blocking($stream1, true); 
+$stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO); 
+stream_get_contents($stream_out1);
 }
 if (isset($_POST['restors_ui'])) {
     $selectedFile = $_POST['tarFile'];
@@ -356,13 +351,13 @@ if (isset($_POST['restors_ui'])) {
         copyRecursiveExclude($extractDirectory . '/html', $DuognDanUI_HTML, array('.zip', '.tar.gz'));
         // Xóa thư mục /home/pi/vietbot_offline/html/ui_update/extract/html
         deleteDirectory($deleteDirectory);
-         $message .= 'Đã giải nén, sao chép và xóa thư mục thành công! \n';
+         $message .= 'Đã khôi phục dao diện backup thành công! \n';
+         $message .= 'Bạn Hãy Tải Lại Trang Để Áp Dụng....! \n';
     }
 }
 if (isset($_POST['download']) && isset($_POST['tarFile'])) {
     $selectedFile = $_POST['tarFile'];
     $filePath = '/ui_update/backup/' . $selectedFile; // Đường dẫn đến thư mục chứa tệp tin
-
     if ($selectedFile === "....") {
          $message .= 'Vui lòng chọn file cần tải xuống!\n\n';
     } else {
@@ -373,20 +368,25 @@ if (isset($_POST['download']) && isset($_POST['tarFile'])) {
 }
 ?>
   <form method="POST" id="my-form" action="">
-   
+   	<div class="my-div">
+    <span class="corner-text"><h5>Cập Nhật:</h5></span><br/><br/>
+	<center> 
+	<div id="messagee"></div><br/></center>
   <div class="row justify-content-center"><div class="col-auto"><div class="input-group">
-  
     		  <input type="submit" name="checkforupdates_ui" class="btn btn-success" value="Kiểm tra">
 		   <input type="submit" name="ui_update" class="btn btn-warning" value="Cập Nhật">
 		   <a class="btn btn-danger" href="<?php echo $PHP_SELF; ?>" role="button">Làm Mới</a>
 		   </div>
 		   </div>
-		   </div><br/>
-		   <div class="row justify-content-center"><div class="col-auto"><div class="input-group">
-  
+		   </div>  <br/></div>
+	<br/>   <div class="my-div">
+    <span class="corner-text"><h5>Sao Lưu/Khôi Phục:</h5></span><br/><br/>
+
+<center><div id="message"></div></center>
+
+	   <div class="row justify-content-center"><div class="col-auto"><div class="input-group">
 <?php
 $directory = $DuognDanUI_HTML.'/ui_update/backup';
-
 // Lấy danh sách các tệp .tar.gz trong thư mục
 $files = glob($directory . '/*.tar.gz');
 // Tạo đoạn mã HTML cho select dropdown
@@ -398,20 +398,16 @@ foreach ($files as $file) {
     // Thêm mục vào select dropdown
     $selectDropdown .= '<option value="' . $filename . '">' . $filename . '</option>';
 }
-
 $selectDropdown .= '</select>';
-
 // Hiển thị select dropdown
 echo $selectDropdown;
 ?>
-
-
-    <input type="submit" name="download" class="btn btn-primary" value="Tải xuống">
-  		  <input type="submit" name="restors_ui" class="btn btn-warning" value="Khôi Phục">
+<input type="submit" name="download" class="btn btn-primary" value="Tải xuống">
+<input type="submit" name="restors_ui" class="btn btn-warning" value="Khôi Phục">
 </div>
 </div>
-</div>
-  
+</div><br/>
+  </div>
   </form>
   
   	    <script>

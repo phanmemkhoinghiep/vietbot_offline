@@ -5,7 +5,6 @@ $jsonDatazXZzz = file_get_contents("assets/json/List_Lat_Lon_Huyen_VN.json");
 $dataVTGETtt = json_decode($jsonDatazXZzz);
 $latitude = $dataVTGETtt->$wards_Tinh->latitude;
 $longitude = $dataVTGETtt->$wards_Tinh->longitude;
-
 ?>
 <!DOCTYPE html>
 <html lang="en" class="max-width-d">
@@ -122,10 +121,10 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
     <div class="left-side  nav-close">
       <div class="menu-content-align">
         <div class="left-side-image">
-          <a href="./"><img src="assets/img/VietBot128.png" alt="/"></a>
+          <a href="./"><img src="assets/img/VietBot128.png" alt="/" title="Nhấn Để Về Trang Chủ"></a>
         </div>
       <h1 class="mt-1" style="font-size: 14px;"><?php echo $MYUSERNAME; ?></h1>
-			<a class="download-cv btn btn-warning d-none d-lg-inline-block" href="#LogServiceCMD" style="opacity: 1; font-size: 16px; padding: 10px 30px;">Log/Service/CMD</a>
+			<a class="download-cv btn btn-warning d-none d-lg-inline-block" href="#LogServiceCMD" style="opacity: 1; font-size: 16px; padding: 10px 30px;" title="Nhấn để kiểm tra log, các tác vụ, và nhập lệnh cần thiết">Log/Service/CMD</a>
       </div>
       <div class="menu-align">
         <ul class="list-group menu text-center " id="menu">
@@ -219,8 +218,15 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
       <!--  About Start  -->
       <section id="about" class="section about bg-gray-400 text-black">
         <div class="container">
+		
+<!--
+				  <div class="count-icon">🖥️</div>
+                <span><a href="http://<?php echo gethostname(); ?>" target="_bank"><?php echo gethostname(); ?></a></span>
+                <p class="mb-0">Host Name</p>
+			-->
           <!--  Count up  -->
           <div id="count-up" class="count-up text-center box-border">
+
             <div class="row">
               <!-- Item-01 -->
 			                <div class="col-6 col-lg-3 my-4 count-item">
@@ -254,6 +260,7 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
             <div class="col-lg-6">
               <h3 class="subtitle">Thông Tin Máy Chủ</h3>
               <div id="skills">
+			   
                 <!-- Item 01 -->
                 <div class="col-lg-12 skill-box">
                   <div class="skill-text">
@@ -354,68 +361,68 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
 		<span class="description">💽 Dung Lượng Ổ Đĩa:</span> <span class="result"><?php echo $disktotal; ?> GB</span> |  
 		<span class="description">💽 Dung Lượng Đã Dùng:</span> <span class="result"><?php echo $diskused; ?> GB</span> | 
 		<span class="description">💽 Dung Lượng Còn Lại:</span> <span class="result"><?php echo $diskfree; ?> GB</span></p>
-                  </div>
-                </div>
-              </div>
+</div>
+</div>
+</div>
 
-            </div>
-          </div>
-        </div>
-      </section>
-      <!--  About End  -->
+</div>
+</div>
+</div>
+</section>
+<!--  About End  -->
 
-      <!--  Resume Start  -->
-      <section id="config" class="bg-gray-400 text-white section">
-        <div class="container">
-          <!-- Servises -->
-          <div class="services  mb-6">
+<!--  Resume Start  -->
+<section id="config" class="bg-gray-400 text-white section">
+    <div class="container">
+        <!-- Servises -->
+        <div class="services  mb-6">
             <div class="boxes">
-              <h3 class="subtitle">Config/Cấu Hình</h3>
-<iframe src="./include_php/ConfigSetting.php" width="100%" height="470px"></iframe>
+                <h3 class="subtitle">Config/Cấu Hình</h3>
+                <iframe src="./include_php/ConfigSetting.php" width="100%" height="470px"></iframe>
             </div>
-          <!--  Resume  -->
+            <!--  Resume  -->
         </div>
-        </div>
-      </section>
-      <!--  Resume End  -->
-      <!--  Portfolio Start  -->
-      <section id="File_Shell" class="section portfolio bg-gray-400 text-white">
- <iframe src="./include_php/Shell.php" width="100%" height="470px"></iframe>
-      </section>
-      <!--  Portfolio End  -->
-      <!--  Blog Start  -->
-      <section id="ChatBot" class="section blog bg-gray-400 text-white">
- <iframe src="./include_php/ChatBot.php" width="100%" height="570px"></iframe>
-      </section>
-      <!--  Blog End  --> 
-	   
-	        <section id="vietbot_update" class="section blog bg-gray-400 text-white">
-			        <div class="container">
-          <h3 class="subtitle">Cập Nhật Trương Trình</h3>
- <iframe src="./backup_update/index.php" width="100%" height="570px"></iframe>
-      </section>
-  	        <section id="UI_update" class="section blog bg-gray-400 text-white">
-			        <div class="container">
-          <h3 class="subtitle">Cập Nhật Giao Diện</h3>
- <iframe src="./ui_update/index.php" width="100%" height="570px"></iframe>
-      </section>
-	  
-      <!-- Contact Start -->
-      <section id="Skill" class="section contact w-100 bg-gray-400 text-white">
-        <div class="container">
-          <h3 class="subtitle">VietBot Skill</h3>
- <iframe src="./include_php/Skill.php" width="100%" height="470px"></iframe>
- 
- 
-        </div>
-      </section>
-      <!--  Contact End  -->
+    </div>
+</section>
+<!--  Resume End  -->
+<!--  Portfolio Start  -->
+<section id="File_Shell" class="section portfolio bg-gray-400 text-white">
+    <iframe src="./include_php/Shell.php" width="100%" height="470px"></iframe>
+</section>
+<!--  Portfolio End  -->
+<!--  Blog Start  -->
+<section id="ChatBot" class="section blog bg-gray-400 text-white">
+    <iframe src="./include_php/ChatBot.php" width="100%" height="570px"></iframe>
+</section>
+<!--  Blog End  -->
 
-    </main>
-    <!--  Main End  -->
+<section id="vietbot_update" class="section blog bg-gray-400 text-white">
+    <div class="container">
+        <h3 class="subtitle">Cập Nhật Chương Trình</h3>
+        <iframe src="./backup_update/index.php" width="100%" height="570px"></iframe>
+</section>
+<section id="UI_update" class="section blog bg-gray-400 text-white">
+    <div class="container">
+        <h3 class="subtitle">Cập Nhật Giao Diện</h3>
+        <iframe src="./ui_update/index.php" width="100%" height="570px"></iframe>
+</section>
 
-    <!--  Mobile Next and Prev Button Start -->
-	
+<!-- Contact Start -->
+<section id="Skill" class="section contact w-100 bg-gray-400 text-white">
+    <div class="container">
+        <h3 class="subtitle">VietBot Skill</h3>
+        <iframe src="./include_php/Skill.php" width="100%" height="470px"></iframe>
+
+
+    </div>
+</section>
+<!--  Contact End  -->
+
+</main>
+<!--  Main End  -->
+
+<!--  Mobile Next and Prev Button Start -->
+<!--
     <div class="next-prev-page d-block d-lg-none">
 	
    <div class="btn-group">   <button type="button" class="prev-page bg-base-color hstack">      
@@ -425,39 +432,39 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
         <i class="bi bi-chevron-compact-right mx-auto"></i>
       </button></div>
     </div>
-	
-    <!--  Mobile Next and Prev Button End -->
-    <!--  Navbar Button Mobile Start -->
-    <div class="menu-toggle">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <!--  Navbar Button Mobile End -->
-    <!--  Color Pallet  -->
-    <div id="color-switcher" class="color-switcher">
-      <div class="text-center color-pallet hide">
-	  <a class="btn btn-danger" href="#vietbot_update" role="button">Cập Nhật Chương Trình</a>
-	  <a class="btn btn-success" href="#UI_update" role="button">Cập Nhật Giao Diện</a>
+	-->
+<!--  Mobile Next and Prev Button End -->
+<!--  Navbar Button Mobile Start -->
+<div class="menu-toggle">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+<!--  Navbar Button Mobile End -->
+<!--  Color Pallet  -->
+<div id="color-switcher" class="color-switcher">
+    <div class="text-center color-pallet hide">
+        <a class="btn btn-danger" href="#vietbot_update" role="button" title="Nhấn Để Kiểm Tra, Cập Nhật Phầm Mềm">Cập Nhật Chương Trình</a>
+        <a class="btn btn-success" href="#UI_update" role="button" title="Nhấn Để Kiểm Tra, Cập Nhật Dao Diện">Cập Nhật Giao Diện</a>
 
-	 
-      <!--  <h6 class="text-center theme-skin-title">Đổi Màu Giao Diện</h6> -->
+
+        <!--  <h6 class="text-center theme-skin-title">Đổi Màu Giao Diện</h6> -->
         <div class="colors text-center">
-          <span class="WhiteBg" id="colorss"></span>
-          <span class="01Bg" id="colorss"></span>
-          <span class="03Bg" id="colorss"></span>
-          <span class="BlackBg" id="colorss"></span>
-          <span class="GG01Bg" id="colorss"></span>
-          <span class="GG02Bg" id="colorss"></span>
+            <span class="WhiteBg" id="colorss" title="Nhấn Để Đổi Màu Dao Diện"></span>
+            <span class="01Bg" id="colorss" title="Nhấn Để Đổi Màu Dao Diện"></span>
+            <span class="03Bg" id="colorss" title="Nhấn Để Đổi Màu Dao Diện"></span>
+            <span class="BlackBg" id="colorss" title="Nhấn Để Đổi Màu Dao Diện"></span>
+            <span class="GG01Bg" id="colorss" title="Nhấn Để Đổi Màu Dao Diện"></span>
+            <span class="GG02Bg" id="colorss" title="Nhấn Để Đổi Màu Dao Diện"></span>
 
         </div>
-		
-      </div>
-      <div class="pallet-button hide" title="Đổi Màu Giao Diện">
-          <a href="javascript:void(0)" class="cp-toggle"><i class="bi bi-gear"></i></a>
-      </div>
-	
+
     </div>
+    <div class="pallet-button hide" title="Nhấn Để Hiển Thị Cài Đặt">
+        <a href="javascript:void(0)" class="cp-toggle"><i class="bi bi-gear"></i></a>
+    </div>
+
+</div>
 	
 	
 	  
@@ -564,74 +571,96 @@ if ($remoteValue !== $localValue) {
 
 
 <script type="text/javascript">
-function time() {
-   var today = new Date();
-   var weekday=new Array(7);
-   weekday[0]="Chủ nhật";
-   weekday[1]="Thứ Hai";
-   weekday[2]="Thứ Ba";
-   weekday[3]="Thứ Tư";
-   weekday[4]="Thứ Năm";
-   weekday[5]="Thứ Sáu";
-   weekday[6]="Thứ Bảy";
-   var day = weekday[today.getDay()];
-   var dd = today.getDate();
-   var mm = today.getMonth()+1; //January is 0!
-   var yyyy = today.getFullYear();
-   var h=today.getHours();
-   var m=today.getMinutes();
-   var s=today.getSeconds();
-   m=checkTime(m);
-   s=checkTime(s);
-   nowTime = h+":"+m+":"+s;
-   if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} today = day+', '+ dd+'/'+mm+'/'+yyyy;
+    function time() {
+        var today = new Date();
+        var weekday = new Array(7);
+        weekday[0] = "Chủ nhật";
+        weekday[1] = "Thứ Hai";
+        weekday[2] = "Thứ Ba";
+        weekday[3] = "Thứ Tư";
+        weekday[4] = "Thứ Năm";
+        weekday[5] = "Thứ Sáu";
+        weekday[6] = "Thứ Bảy";
+        var day = weekday[today.getDay()];
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        nowTime = h + ":" + m + ":" + s;
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+        today = day + ', ' + dd + '/' + mm + '/' + yyyy;
 
-  tmptoday='<span class="date">'+today+'</span>';
-   tmp='<span class="date">'+nowTime+'</span>';
+        tmptoday = '<span class="date">' + today + '</span>';
+        tmp = '<span class="date">' + nowTime + '</span>';
 
-   document.getElementById("clock").innerHTML=tmp;
-   document.getElementById("clock1").innerHTML=tmp;
-   document.getElementById("tmptoday").innerHTML=tmptoday;
+        document.getElementById("clock").innerHTML = tmp;
+        document.getElementById("clock1").innerHTML = tmp;
+        document.getElementById("tmptoday").innerHTML = tmptoday;
 
-   clocktime=setTimeout("time()","1000","JavaScript");
-   function checkTime(i)
-   {
-      if(i<10){
-     i="0" + i;
-      }
-      return i;
-   }
-}
+        clocktime = setTimeout("time()", "1000", "JavaScript");
 
+        function checkTime(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+    }
+	
+    // Lấy phần tử <div>, phần tử liên kết và phần tử nút bấm
+    const divElement = document.querySelector('.text-center.color-pallet');
+    const linkElement = document.querySelector('.btn-success');
+    const buttonElement = document.querySelector('.btn-danger');
 
+    buttonElement.addEventListener('click', function() {
+        // Loại bỏ lớp "show" và thêm lớp "hide" cho phần tử divElement
+        divElement.classList.remove('show');
+        divElement.classList.add('hide');
+    });
+    // Gắn sự kiện click vào liên kết
+    linkElement.addEventListener('click', function() {
+        // Loại bỏ lớp "show" và thêm lớp "hide" cho phần tử divElement
+        divElement.classList.remove('show');
+        divElement.classList.add('hide');
+    });
 
+    function handleInteractionStart(event) {
+        // Kiểm tra xem người dùng đang bắt đầu tương tác với phần tử div hay không
+        const isInteractionInsideDiv = divElement.contains(event.target);
 
+        if (!isInteractionInsideDiv) {
+            // Thực hiện hành động mong muốn
+            divElement.classList.remove('show');
+            divElement.classList.add('hide');
+        }
+    }
 
+    function handleInteractionEnd(event) {
+        // Kiểm tra xem người dùng đã kết thúc tương tác với phần tử div hay không
+        const isInteractionInsideDiv = divElement.contains(event.target);
 
-// Lấy phần tử <div>, phần tử liên kết và phần tử nút bấm
-const divElement = document.querySelector('.text-center.color-pallet');
-const linkElement = document.querySelector('.btn-success');
-const buttonElement = document.querySelector('.btn-danger');
+        if (!isInteractionInsideDiv) {
+            // Thực hiện hành động mong muốn
+            divElement.classList.remove('show');
+            divElement.classList.add('hide');
+        }
+    }
 
-buttonElement.addEventListener('click', function() {
-  // Loại bỏ lớp "show" và thêm lớp "hide" cho phần tử divElement
-  divElement.classList.remove('show');
-  divElement.classList.add('hide');
-});
-// Gắn sự kiện click vào liên kết
-linkElement.addEventListener('click', function() {
-  // Loại bỏ lớp "show" và thêm lớp "hide" cho phần tử divElement
-  divElement.classList.remove('show');
-  divElement.classList.add('hide');
-});
+    document.addEventListener('mousedown', handleInteractionStart);
+    document.addEventListener('touchstart', handleInteractionStart);
 
-
-
-
+    document.addEventListener('mouseup', handleInteractionEnd);
+    document.addEventListener('touchend', handleInteractionEnd);
 </script>
-
-
-
 </body>
 
 </html>

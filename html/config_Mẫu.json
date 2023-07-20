@@ -52,6 +52,7 @@
             }
         },
         "console_ouput": null
+		
     },
     "smart_wakeup": {
         "hotword_engine": {
@@ -166,6 +167,7 @@
         }
     },
     "smart_answer": {
+	"startup_state_speaking": true,
         "sound": {
             "default": {
                 "start": "sound/default/ding.mp3",

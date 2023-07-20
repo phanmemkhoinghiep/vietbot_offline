@@ -262,15 +262,11 @@ if (isset($_POST['set_full_quyen'])) {
 $connection = ssh2_connect($serverIP, $SSH_Port);
 if (!$connection) {die($E_rror_HOST);}
 if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
-$stream1 = ssh2_exec($connection, "sudo chmod -R 0777 $DuognDanUI_HTML");
-$stream2 = ssh2_exec($connection, "sudo chmod -R 0777 $DuognDanThuMucJson");
-stream_set_blocking($stream1, true); stream_set_blocking($stream2, true);
+$stream1 = ssh2_exec($connection, "sudo chmod -R 0777 $Path_Vietbot_src");
+stream_set_blocking($stream1, true); 
 $stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO); 
-$stream_out2 = ssh2_fetch_stream($stream2, SSH2_STREAM_STDIO);
-$output = "$GET_current_USER@$HostName:~$ sudo chmod -R 0777 $DuognDanUI_HTML\n";
+$output = "$GET_current_USER@$HostName:~$ sudo chmod -R 0777 $Path_Vietbot_src\n";
 $output .= stream_get_contents($stream_out1); 
-$output .= "$GET_current_USER@$HostName:~$ sudo chmod -R 0777 $DuognDanThuMucJson\n";
-$output .= stream_get_contents($stream_out2);
 $output .= "$GET_current_USER@$HostName:~$ >Lệnh Được Thực Hiện Thành Công";
 }
 
@@ -353,7 +349,7 @@ $output .=  stream_get_contents($stream_out);
   <div class="dropdown-menu scrollable-menu">
  <center><button type="submit" name="restart_vietbot" class="btn btn-dark" title="Chỉ Khởi Động Lại Trợ Lý Ảo VietBot">Restart VietBot</button>
 <div class="dropdown-divider"></div>  <button type="submit" name="reboot_power" class="btn btn-dark" title="Khởi Động Lại Toàn Bộ Hệ Thống">Reboot OS</button>
- <div class="dropdown-divider"></div>  <button type='submit' name='set_full_quyen' class='btn btn-dark' title='Cấp Quyền Cho Các File Và Thư Mục Cần Thiết'>Chmod 777</button>
+ <div class="dropdown-divider"></div>  <button type='submit' name='set_full_quyen' class='btn btn-dark' title='Cấp Quyền Cho Các File Và Thư Mục Cần Thiết'>Cấp Quyền Chmod</button>
  </center></div></div>
     </form>
     <div id="loading-overlay">
