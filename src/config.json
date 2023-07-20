@@ -157,7 +157,7 @@
     "smart_request": {
         "continuous_asking": false,
         "stt": {
-            "type": "stt_gg_ass",
+            "type": "stt_gg_free",
             "token": "",
             "stt_gg_ass_mode": "default",
             "credentials_file": "credentials.json",
