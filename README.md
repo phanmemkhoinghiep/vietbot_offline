@@ -1,70 +1,50 @@
-# UI_VietBot
+# vietbot_offline
+Phiên bản Beta
 
-#Vũ Tuyển
+Xử lý hoàn toàn tại chỗ không liên kết tới máy chủ vietbot
 
-#Hướng Dẫn Cài VietBot: https://github.com/phanmemkhoinghiep/vietbot_offline
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+# Sơ đồ luồng xử lý của Vietbot
 
-B1:Tạo Mật Khẩu Cho Người Dùng root.
+```sh
++---+   +----------------+   +---+   +---+                           +---+
+|Mic|-->|Audio Processing|-->|KWS|-->|STT|-------------------------->|NLU|
++---+   +----------------+   +---+   +---+                           +-+-+
+                                                                       |
+                                                                       |
++-------+   +--------+   +-------------+    +----------------------+   |
+|Speaker|<--|Playback|<-- File Path/Link|<--|Knowledge/Skill/Action|<--+
++-------+   +--------+   +-------------+    +----------------------+
 
-	$: sudo passwd
- 
-	- Nhập Mật Khẩu root mới vào rồi nhấn enter, nhập lại tiếp mật khẩu rồi nhấn tiếp enter (1 lần check lặp lại mật khẩu)
+```
+Mic: Phần cứng để ghi âm, vietbot hỗ trợ tất cả các loại phần cứng Mic mà hệ điều hành Linux/Windows nhận diện được
 
-B2:Mở quyền truy cập ssh cho user root
+Audio Processing: Tùy chọn Có/Không có tùy thuộc vào phần cứng của Micro bao gồm Acoustic Echo Cancellation (AEC), Beamforming, Noise Suppression (NS)..vv 
 
-	$: sudo echo 'PermitRootLogin=yes'  | sudo tee -a /etc/ssh/sshd_config
-	$: sudo systemctl restart sshd 
+Keyword Spotting (KWS): Cơ chế phát hiện hotword để kích hoạt chế độ lắng nghe dòng lệnh. Vietbot sử dụng cơ chế của Picovoice(porcupine)
 
-B3:Đăng Nhập ssh bằng quyền Root để chạy các lệnh bên dưới
+Speech To Text (STT): Cơ chế lắng nghe âm thanh và trả về text tức thời. Vietbot sử dụng cơ chế STT của Google, Viettel
 
-	(Bước 1,2,3 sẽ không cần thực hiện nếu bạn tải về UI từ command của ssh và coppy sang thư mục html)
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Natural Language Understanding (NLU): Phân tách các text thành các cấu trúc ra lệnh. Vietbot sử dụng hai đối tượng Action/Object đã được khai báo sẵn, cũng như có thể bổ sung để phân tách các cấu trúc ra lệnh
 
+Knowledge/Skill/Action: Các Skill, chia thành Skill xử lý tại chỗ hoặc xử lý trên Cloud, các Skill là các Module xử lý để cho ra câu trả lời.
 
-Chạy các lệnh sau để cài Apache, php, thư viện ssh:
+File Path: Đường dẫn file sinh ra từ cơ chế tổng hợp âm thanh các câu trả lời hoặc đường dẫn File nhạc có sẵn trên thẻ dựa theo kết quả trả lời từ Skill
 
-	$: sudo apt-get update
-	$: sudo apt-get upgrade
-	$: sudo apt install apache2 -y
-	$: sudo apt install php -y
- 	$: sudo apt-get install php-curl -y
+Link: Link online theo kết quả trả về từ các Skill
 
-- Cài thư viện ssh2 cho php bằng lệnh dưới (hoặc bỏ 6 phút ngồi xem hướng dẫn cài: https://www.youtube.com/watch?v=ZFgd2CjUtko)
+Playback: Cơ chế phát nhạc theo đường dẫn File hoặc link, hỗ trợ tiếp tục nhận lệnh trong khi đang Playback
 
-	  $: sudo apt-get install libssh2-1 -y
+Speaker: Phần cứng phát âm thanh
 
-	  $: sudo apt-get install php-ssh2 -y
-	
-TIẾN HÀNH THỰC HIỆN Cài UI
-	
-B1: Sao Lưu Lại toàn Bộ File Trong Thư Mục html của bạn lại nhé
+![DANH SÁCH PHẦN CỨNG TƯƠNG THÍCH](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/hardware_guide/hardware_compatibility_list.md) =>
+![ĐỘ PHẦN CỨNG](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/diy_smart_speaker_guide/GH_Mini_Mod_Complete_Guide.md) =>
+![FLASH THẺ NHỚ](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/021_software_enviroment_installation_guide.md) => 
+![CÀI MỚI TỪ ĐẦU](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/022_software_enviroment_installation_guide.md) => 
+![CÀI ĐẶT, CẬP NHẬT PHẦN MỀM](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/03_software_install_update_guide.md) => 
+![CẤU HÌNH STT VÀ TTS](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/04_stt_and_tts_configuration_guide.md) => 
+![CẤU HÌNH HOTWORD](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/05_hotword_configuration.guide) =>
+![CÁCH CHẠY](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/06_running_guide.md) =>
+![WIFI-CONNECT](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/08_auto_wifi-connect.md)> =>
+![LOA TTS](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/09_real_time_tts.md)> =>
+![ĐIỀU KHIỂN HASS](https://github.com/phanmemkhoinghiep/vietbot_offline/blob/beta/12_homeassistant_configuration_guide.md)> =>
 
-B2: Xóa Toàn Bộ File Trong Thư Mục html Của Bạn
-
-B3: Tải về -> Giải Nén -> Upload hết tất cả các file và thư mục VỪA GIẢI NÉN 
-vào trong thư mục "html" theo đường dẫn: "/home/pi/vietbot_offline/html" của bạn trên ssh
-
-	- Bắt Buộc Phải Chạy vài Lệnh Này bằng quyền sudo: Lệnh Sét Quyền 777 Các  File Và Thư Mục Con
- 	$: sudo chmod -R 0777 /home/pi/vietbot_offline
-	
-	- BẮT BUỘC: 
-		- Cấu Hình Bắt Buộc Nhập "$SSH_TaiKhoan" và "$SSH_MatKhau" trong file:
-			Configuration.php để dùng được các lệnh hệ thống /home/pi/vietbot_offline/html/Configuration.php
-
-B5: Cấu Hình Chỉnh Một Vài Tùy Chọn Khác Theo Ý Bạn Trong File Configuration.php
-
-	- Các File Backup Config sẽ nằm trong: var/www/html/include_php/Backup_Config
- 
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-Chuyển UI từ "var/www/html" sang "home/pi/vietbot_offline/html/"
-
- - đi tới: /etc/apache2/apache2.conf 
-	- tìm tới dòng: <Directory /var/www/html> thay thành: <Directory /home/pi/vietbot_offline>
-	
- - đi tới: /etc/apache2/sites-available/000-default.conf
-	- tìm tới dòng: "DocumentRoot /var/www/html/" thay thành: "DocumentRoot /home/pi/vietbot_offline/html/"\
- 
- - chạy lệnh restart apache2:
-   
-	$: sudo systemctl restart apache2.service

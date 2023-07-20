@@ -1,0 +1,161 @@
+{
+    "on": {
+        "value": "bật"
+    },
+    "off": {
+        "value": "tắt"
+    },
+    "open": {
+        "value": "mở"
+    },
+    "close": {
+        "value": "đóng"
+    },
+    "enable": {
+        "value": "kích hoạt"
+    },
+    "disable": {
+        "value": "vô hiệu"
+    },
+    "display": {
+        "value": "hiển thị"
+    },
+    "check": {
+        "value": "kiểm tra"
+    },
+    "tell": {
+        "value": "kể"
+    },
+    "listen": {
+        "value": "nghe"
+    },
+    "read": {
+        "value": "đọc"
+    },
+    "adjust": {
+        "value": "điều chỉnh"
+    },
+    "change": {
+        "value": "thay đổi"
+    },
+    "continue": {
+        "value": "tiếp tục"
+    },
+    "incrase": {
+        "value": "tăng"
+    },
+    "decrase": {
+        "value": "giảm"
+    },
+    "up": {
+        "value": "lên"
+    },
+    "down": {
+        "value": "xuống"
+    },
+    "connect": {
+        "value": "nối"
+    },
+    "disconnect": {
+        "value": "ngắt"
+    },
+    "sing": {
+        "value": "hát"
+    },
+    "download": {
+        "value": "download"
+    },
+    "upload": {
+        "value": "upload"
+    },
+    "bigger": [{
+            "value": "to hơn"
+        },
+        {
+            "value": "lớn hơn"
+        }
+    ],
+    "smaller": [{
+            "value": "bé đi"
+        },
+        {
+            "value": "nhỏ đi"
+        }
+    ],
+    "play": [{
+            "value": "phát"
+        },
+        {
+            "value": "chơi"
+        }
+    ],
+    "pause": [{
+            "value": "tạm dừng"
+        },
+        {
+            "value": "tạm ngừng"
+        }
+    ],	
+    "stop": [{
+            "value": "stop"
+        },
+        {
+            "value": "dừng phát"
+        },
+        {
+            "value": "ngừng phát"
+        }
+    ],
+    "send": [{
+            "value": "gửi"
+        },
+        {
+            "value": "chuyển"
+        }
+    ],
+    "notice": [{
+            "value": "cảnh cáo"
+        },
+        {
+            "value": "cảnh báo"
+        },
+        {
+            "value": "nhắc"
+        }
+
+    ],
+    "schedule": [{
+            "value": "lập lịch"
+        },
+        {
+            "value": "đặt lịch"
+        },
+        {
+            "value": "lịch hẹn"
+        },
+        {
+            "value": "hẹn giờ"
+        }
+    ],
+    "setup": [{
+            "value": "cài"
+        },
+        {
+            "value": "đặt"
+        },
+        {
+            "value": "thiết lập"
+        }
+    ],
+    "execute": [{
+            "value": "thực hiện"
+        },
+        {
+            "value": "thực thi"
+        },
+        {
+            "value": "thi hành"
+        }
+    ]
+
+}

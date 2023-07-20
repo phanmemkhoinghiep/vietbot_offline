@@ -1,0 +1,208 @@
+{
+    "smart_config": {
+        "mic": {
+            "type": "default"
+        },
+        "speaker": {
+            "type": "default",
+            "amixer_id": 2
+        },
+        "led": {
+            "type": "Vietbot AIO Board V2.0",
+            "number_led": 12,
+            "effect_mode": 1,
+            "brightness": 210,
+            "wakeup_color": "03254b",
+            "muted_color": "FF3333",
+            "listen_effect": 1,
+            "think_effect": 2,
+            "speak_effect": 6
+        },
+        "button": {
+            "down": {
+                "gpio": 25,
+                "pulled_high": false,
+                "active": true
+            },
+            "up": {
+                "gpio": 5,
+                "pulled_high": false,
+                "active": true
+            },
+            "wakeup": {
+                "gpio": 26,
+                "pulled_high": false,
+                "active": true
+            },
+            "mic": {
+                "gpio": 6,
+                "pulled_high": false,
+                "active": true
+            }
+        },
+        "web_interface": {
+            "port": 5000
+        },
+        "user_info": {
+            "name": "Vũ Tuyển",
+            "address": {
+                "wards": "Xã Vĩnh Khúc",
+                "district": "Huyện Văn Giang",
+                "province": "Tỉnh Hưng Yên"
+            }
+        },
+        "console_ouput": null
+    },
+    "smart_wakeup": {
+        "hotword_engine": {
+            "type": "porcupine",
+            "key": "iB0kfsdfsdf+w=="
+        },
+        "wakeup_reply": [
+            {
+                "value": "có em"
+            },
+            {
+                "value": "em đây"
+            },
+            {
+                "value": "đây anh"
+            },
+            {
+                "value": "gì anh"
+            },
+            {
+                "value": "yes anh"
+            },
+            {
+                "value": "anh à"
+            },
+            {
+                "value": "vâng anh"
+            }
+        ],
+        "hotword": [
+            {
+                "type": "porcupine",
+                "value": null,
+                "file_name": "hey siri_raspberry-pi.ppn",
+                "lang": "eng",
+                "sensitive": 0.4,
+                "say_reply": false,
+                "command": null,
+                "active": false
+            },
+            {
+                "type": "porcupine",
+                "value": null,
+                "lang": "eng",
+                "file_name": "ok-vi-bot_en_raspberry-pi.ppn",
+                "sensitive": 0.4,
+                "say_reply": false,
+                "command": null,
+                "active": false
+            },
+            {
+                "type": "porcupine",
+                "value": null,
+                "lang": "eng",
+                "file_name": "hey-vi-bot_en_raspberry-pi.ppn",
+                "sensitive": 0.4,
+                "say_reply": false,
+                "command": null,
+                "active": false
+            },
+            {
+                "type": "porcupine",
+                "value": null,
+                "lang": "vi",
+                "file_name": "em-ơi_raspberry-pi.ppn",
+                "sensitive": 0.1,
+                "say_reply": false,
+                "command": null,
+                "active": true
+            },
+            {
+                "type": "porcupine",
+                "value": null,
+                "lang": "vi",
+                "file_name": "người-đẹp-ơi_raspberry-pi.ppn",
+                "sensitive": 0.1,
+                "say_reply": false,
+                "command": null,
+                "active": true
+            },
+            {
+                "type": "porcupine",
+                "value": null,
+                "lang": "vi",
+                "file_name": "vợ-đâu-rồi_raspberry-pi.ppn",
+                "sensitive": 0.1,
+                "say_reply": false,
+                "command": null,
+                "active": true
+            },
+            {
+                "type": "porcupine",
+                "value": null,
+                "lang": "vi",
+                "file_name": "con-mụ-kia_raspberry-pi.ppn",
+                "sensitive": 0.1,
+                "say_reply": false,
+                "command": null,
+                "active": true
+            }
+        ]
+    },
+    "smart_request": {
+        "continuous_asking": false,
+        "stt": {
+            "type": "stt_gg_ass",
+            "token": "",
+            "stt_gg_ass_mode": "default",
+            "credentials_file": "credentials.json",
+            "device_config_file": "device_config.json",
+            "time_out": 6000
+        }
+    },
+    "smart_answer": {
+        "sound": {
+            "default": {
+                "start": "sound/default/ding.mp3",
+                "finish": "sound/default/dong.mp3",
+                "volume_change": "sound/default/tut_tut.mp3"
+            },
+            "custom": {
+                "start": "sound/custom/"
+            },
+            "welcome": {
+                "mode": "text",
+                "path": "sound/welcome/welcome.mp3",
+                "text": "Xin chào mời đọc khẩu lệnh, để ra lệnh"
+            }
+        },
+        "tts": {
+            "type": "tts_gg_free",
+            "token": "",
+            "voice_name": null,
+            "voice_profile": null,
+            "speed": null,
+            "pitch": null
+        },
+        "external_bot_priority_1": "gg_ass",
+        "external_bot_priority_2": "chatGPT",
+        "pre_answer_timeout": 8,
+        "pre_answer": [
+            {
+                "value": "Cần thêm thời gian, vui lòng đợi"
+            },
+            {
+                "value": "Vui lòng chờ thêm"
+            },
+            {
+                "value": "Cần thêm thời gian để xử lý"
+            }
+        ],
+        "number_characters_to_switch_mode": 300
+    }
+}
