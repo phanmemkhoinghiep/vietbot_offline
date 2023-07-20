@@ -1,1 +1,0 @@
-Nơi đặt Hotword file
