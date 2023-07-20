@@ -425,6 +425,7 @@ header .navbar-brand b {
   transform: translate(-50%,-50%);
   width: 1.5rem;
 }
+
 .follow-label {
   padding-right: 5rem;
   position: absolute;
@@ -436,6 +437,7 @@ header .navbar-brand b {
   text-align: right;
   transform: rotate(90deg);
 }
+/*
 .follow-label::before {
   content: '';
   position: absolute;
@@ -446,6 +448,7 @@ header .navbar-brand b {
   background: linear-gradient(to bottom,#fc6e51,#e9573f);
  
 }
+*/
 .social i {
   display: block;
   margin-bottom: 0rem;
