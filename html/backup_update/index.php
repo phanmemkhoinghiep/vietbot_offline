@@ -421,8 +421,22 @@ if (isset($_POST['backup_update'])) {
                 }
             }
         } else {
-            $messagee .= 'Có lỗi xảy ra khi tạo bản sao lưu.\n';
+            $messagee .= 'Có lỗi xảy ra khi tạo bản sao lưu. Thư mục resources hoặc src không tồn tại .\n';
         }
+		
+	
+		
+		if (!file_exists($PathResources)) {
+    // Nếu không tồn tại, tạo mới thư mục
+    if (!mkdir($PathResources, 0777, true)) {
+       // die('Không thể tạo thư mục');
+    } else {
+        // Nếu tạo mới thành công, đặt quyền chmod 777 cho thư mục
+        chmod($PathResources, 0777);
+       // echo 'Tạo và đặt quyền thành công!';
+    }
+}
+		
 ///////////////////////
   //  $directory = '/home/pi/vietbot_offline/src';
     $excludedFiles = [];
