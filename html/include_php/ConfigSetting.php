@@ -119,6 +119,12 @@ foreach ($keywordsTTS as $keywordTTS => $replacementTTS) {
 	$Welcome_Path = $data_config['smart_answer']['sound']['welcome']['path'];
 	$Welcome_Text = $data_config['smart_answer']['sound']['welcome']['text'];
 	//address
+	//Get Ưu tiên Trợ Lý Ảo/ AI
+	$external_bot_priority_1 = $data_config['smart_answer']['external_bot_priority_1'];
+	$external_bot_priority_2 = $data_config['smart_answer']['external_bot_priority_2'];
+	$external_bot_priority_3 = $data_config['smart_answer']['external_bot_priority_3'];
+	
+	
 	//Led
 	$LED_TYPE = $data_config['smart_config']['led']['type'];
 	$LED_NUMBER_LED = $data_config['smart_config']['led']['number_led'];
@@ -136,9 +142,6 @@ foreach ($keywordsTTS as $keywordTTS => $replacementTTS) {
 	$continuous_asking = $data_config['smart_request']['continuous_asking'];
 	//Đọc trạng thái sau khi khởi động
 	$startup_state_speaking = $data_config['smart_answer']['startup_state_speaking'];
-	
-	
-	
 	$Pre_Answer_Timeout = $data_config['smart_answer']['pre_answer_timeout'];
 	$numberCharactersToSwitchMode = $data_config["smart_answer"]["number_characters_to_switch_mode"];
 	//Thay ĐỔi Ngôn Ngữ hotword
@@ -367,6 +370,10 @@ chmod($backupFile, 0777);
 	$data_config['smart_config']['user_info']['address']['province'] = @$_POST['city'];
 	$data_config['smart_config']['user_info']['address']['district'] = @$_POST['district'];
 	$data_config['smart_config']['user_info']['address']['wards'] = @$_POST['ward'];
+	//Lưu Chế Độ Ưu Tiên
+	$data_config['smart_answer']['external_bot_priority_1'] = @$_POST['priority1'];
+	$data_config['smart_answer']['external_bot_priority_2'] = @$_POST['priority2'];
+	$data_config['smart_answer']['external_bot_priority_3'] = @$_POST['priority3'];
 	//Welcome Mode
 	$data_config['smart_answer']['sound']['welcome']['mode'] = @$_POST['mode_options'];
 	$data_config['smart_answer']['sound']['welcome']['path'] = @$_POST['mode_path'];
@@ -416,9 +423,13 @@ $connection = ssh2_connect($serverIP, $SSH_Port);
 if (!$connection) {die($E_rror_HOST);}
 if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
 $stream1 = ssh2_exec($connection, "sudo chmod -R 0777 $Path_Vietbot_src");
+$stream2 = ssh2_exec($connection, "sudo chown -R pi:pi $Path_Vietbot_src");
 stream_set_blocking($stream1, true); 
+stream_set_blocking($stream2, true); 
 $stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO); 
+$stream_out2 = ssh2_fetch_stream($stream2, SSH2_STREAM_STDIO); 
 stream_get_contents($stream_out1); 
+stream_get_contents($stream_out2); 
 header("Location: $PHP_SELF"); exit;
 }
 //////////////////////////Khôi Phục Gốc Config.Json
@@ -856,7 +867,7 @@ Zalo</label>
 <table class="table">
  <thead>
      <tr>
-      <th scope="col" colspan="3"><center title="Cách hiển thị log trong terminal">Đầu Ra Bảng Điều Khiển</center></th>
+      <th scope="col" colspan="3"><center title="Cách hiển thị log trong terminal">Kiểu Hiển Thị Đầu Ra Bảng Điều Khiển</center></th>
     </tr>
     <tr>
       <th scope="col"><center title="Không hiển thị log trong terminal">Không</center></th>
@@ -966,6 +977,117 @@ $mp3Files = array_filter($mp3Files, function($mp3File) {
 	}
 	echo '</select>';
 ?></center></td></tr><tbody></table></div></div><hr/>
+
+	<!--HOT WORK --> 
+<h5>HotWord: <i class="bi bi-info-circle-fill" onclick="togglePopuphw()" title="Nhấn Để Tìm Hiểu Thêm"></i></h5>
+<!-- 
+<div class="form-check form-switch d-flex justify-content-center"> 
+<div id="toggleIcon" onclick="toggleDivzxchw()">
+<i id="upIconzxchw" title="Nhấn Để Mở Cấu Hình Cài Đặt HotWord" class="bi bi-arrow-up-circle-fill" style="display: none;"></i>
+<i id="downIconzxchw" title="Nhấn Để Đóng Cấu Hình Cài Đặt HotWord" class="bi bi-arrow-down-circle-fill" ></i></div>
+</div>  -->
+<div id="popupContainerhw" class="popup-container" onclick="hidePopuphw()"><div id="popupContent" onclick="preventEventPropagationhw(event)">
+<p><center><b>HotWord</b></center><br/>
+- <b>Tên Hotword:</b> Chọn tên hotword cần chỉnh sửa giá trị<br/>
+- <b>Độ Nhạy:</b> chỉnh dộ nhạy của HotWord khi được gọi từ 0.1 đến 1<br/>
+- <b>Kích Hoạt:</b> Tích để kích hoạt Hotword, bỏ tích Hotword đó sẽ bị vô hiệu<br/>
+- <b>Phản Hồi Của Bot Khi Được Đánh Thức:</b> Tích để kích hoạt, bỏ tích sẽ bị vô hiệu.<br/>
+- <b>Hotwork File:</b> <a href="https://github.com/Picovoice/porcupine/tree/master/resources" target="_bank">Picovoice HotWord File</a><br/>
+- <b>Thư Viện Hotwork:</b> <a href="https://github.com/Picovoice/porcupine/tree/master/lib/common" target="_bank">Picovoice HotWord Lib</a>
+<br/></div></div>
+<!-- <div id="myDivzxchw" style="display: none;"> -->
+<div class="row justify-content-center">
+<div class="col-auto">
+<table style="border-color:black;" class="table table-responsive table-bordered align-middle">
+<thead><tr> <th scope="col" colspan="4"><center class="text-success">Cài Đặt Hotword</center></th> </tr>
+<tr><th scope="col"><label for="" class="form-label"><center>Tên Hotword</center></label></th>
+<th scope="col"><label for="" title="Độ Nhạy Sensitive" class="form-label"><center>Độ Nhạy</center></label></th>
+<th scope="col"><label for="" title="Tích Để Bật/Tắt Hotword" class="form-label"><center>Kích Hoạt</center></label></th>
+<th scope="col"><label for="" title="Bật/Tắt Phản Hồi Của Bot Khi Được Đánh Thức" class="form-label"><center>Phản Hồi Lại</center></label></th>
+<tbody><tr><td><div>
+<select id="file_name" name="file_name" class="custom-select" onchange="showSensitiveInput(this.value)">
+<option value="">Chọn Hotword</option>
+<?php foreach ($data_config['smart_wakeup']['hotword'] as $hotword): ?>
+<option value="<?php echo $hotword['file_name']; ?>"><?php echo substr($hotword['file_name'], 0, strpos($hotword['file_name'], "_")); ?></option>
+<?php endforeach; ?>
+</select></div></td><td><div>
+<input type="number" id="sensitive" name="sensitive" style="width: 90px;" title="Chỉ Được Nhập Số Từ 0.1 Đến 1" placeholder="0.1->1" class="form-control" step="0.1" min="0.1" max="1">
+</div></td><td><div>
+<center><input type="checkbox" id="active" name="active" title="Tích vào để kích hoạt" class="form-check-input"></center>
+</div></td><td><div>
+<center><input type="checkbox" id="say_reply" name="say_reply" title="Tích vào để kích hoạt" class="form-check-input"></center></div></td>
+
+<tr>
+<td colspan="4">
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Kèm câu lệnh:</span>
+  </div>
+  <input type="text" id="command" name="command" placeholder="Nhập Lệnh Vào Đây" title="Nhập Lệnh Của Bạn" class="form-control">
+</div>
+</td></tr>
+</tr></tbody> </tr></thead></table> 
+</div>
+</div>
+<!-- </div> -->
+<div id="popupContainerhwlang" class="popup-container" onclick="hidePopuphwlang()"><div id="popupContent" onclick="preventEventPropagationhwlang(event)">
+<p><center><b>Thay Đổi Ngôn Ngữ Gọi Hotword</b></center><br/>
+- <b>1: </b> 2 file thư viện <a href="https://github.com/Picovoice/porcupine/blob/master/lib/common/porcupine_params.pv" target="_bank">tiếng anh</a> 
+	<b>"porcupine_params.pv"</b> và <a href="https://github.com/Picovoice/porcupine/blob/master/lib/common/porcupine_params_vn.pv" target="_bank">tiếng việt</a> 
+	<b>"porcupine_params_vn.pv"</b><br/>phải nằm cùng trong đường dẫn sau: "<b><?php echo $Lib_Hotword; ?></b>"<br/>
+- <b>2: </b>các file thư viện hotword, file hotword, thư viện picovoice phải cùng phiên bản.<br/>
+- <i>Khi thay đổi ngôn ngữ bạn sẽ cần phải cấu hình lại các Hotword ở mục <b>Cài Đặt Hotword</b></i>
+</div></div>
+<hr/>
+<!--END HOT WORK --> 
+
+<h5>Ưu Tiên Trợ Lý Ảo/AI:</h5>
+<div class="form-check form-switch d-flex justify-content-center">   <div class="col-auto">
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col" colspan="2"><center>Chọn Thứ Tự Ưu Tiên Trợ Lý Của Bạn</center></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Top 1:</th>
+      <td>    
+	  <select class="custom-select" name="priority1" id="priority1">
+        <option value="">-- Chọn Trợ Lý/AI 1 --</option>
+        <option value="gg_bard" <?php if ($external_bot_priority_1 === "gg_bard") echo "selected"; ?>>Google Bard</option>
+        <option value="gg_ass" <?php if ($external_bot_priority_1 === "gg_ass") echo "selected"; ?>>Google Assistant</option>
+        <option value="chatGPT" <?php if ($external_bot_priority_1 === "chatGPT") echo "selected"; ?>>Chat GPT</option>
+    </select></td>
+
+    </tr>
+    <tr>
+      <th scope="row">Top 2:</th>
+      <td>    
+	  <select class="custom-select" name="priority2" id="priority2">
+        <option value="">-- Chọn Trợ Lý/AI 2 --</option>
+        <option value="gg_bard" <?php if ($external_bot_priority_2 === "gg_bard") echo "selected"; ?>>Google Bard</option>
+        <option value="gg_ass" <?php if ($external_bot_priority_2 === "gg_ass") echo "selected"; ?>>Google Assistant</option>
+        <option value="chatGPT" <?php if ($external_bot_priority_2 === "chatGPT") echo "selected"; ?>>Chat GPT</option>
+    </select></td>
+
+    </tr>
+    <tr>
+      <th scope="row">Top 3:</th>
+      <td>    
+	  <select class="custom-select" name="priority3" id="priority3" onchange="validateInputs()">
+        <option value="">-- Chọn Trợ Lý/AI 3 --</option>
+        <option value="gg_bard" <?php if ($external_bot_priority_3 === "gg_bard") echo "selected"; ?>>Google Bard</option>
+        <option value="gg_ass" <?php if ($external_bot_priority_3 === "gg_ass") echo "selected"; ?>>Google Assistant</option>
+        <option value="chatGPT" <?php if ($external_bot_priority_3 === "chatGPT") echo "selected"; ?>>Chat GPT</option>
+    </select></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+<hr/>
 <!-- mục  Chọn Kiểu LED --> 
 <h5>Chọn Kiểu LED: <i class="bi bi-info-circle-fill" onclick="togglePopupLED()" title="Nhấn Để Tìm Hiểu Thêm"></i></h5>
 <div class="form-check form-switch d-flex justify-content-center">   <div class="col-auto">
@@ -1047,73 +1169,7 @@ None (Không Dùng)</label></center>
 ?>
 </table></div></div></div><hr/>
 <!-- END mục  Chọn Kiểu LED --> 
-	<!--HOT WORK --> 
-<h5>HotWord: <i class="bi bi-info-circle-fill" onclick="togglePopuphw()" title="Nhấn Để Tìm Hiểu Thêm"></i></h5>
-<div class="form-check form-switch d-flex justify-content-center"> 
-<div id="toggleIcon" onclick="toggleDivzxchw()">
-<i id="upIconzxchw" title="Nhấn Để Mở Cấu Hình Cài Đặt HotWord" class="bi bi-arrow-up-circle-fill" style="display: none;"></i>
-<i id="downIconzxchw" title="Nhấn Để Đóng Cấu Hình Cài Đặt HotWord" class="bi bi-arrow-down-circle-fill" ></i></div></div>  
-<div id="popupContainerhw" class="popup-container" onclick="hidePopuphw()"><div id="popupContent" onclick="preventEventPropagationhw(event)">
-<p><center><b>HotWord</b></center><br/>
-- <b>Tên Hotword:</b> Chọn tên hotword cần chỉnh sửa giá trị<br/>
-- <b>Độ Nhạy:</b> chỉnh dộ nhạy của HotWord khi được gọi từ 0.1 đến 1<br/>
-- <b>Kích Hoạt:</b> Tích để kích hoạt Hotword, bỏ tích Hotword đó sẽ bị vô hiệu<br/>
-- <b>Phản Hồi Của Bot Khi Được Đánh Thức:</b> Tích để kích hoạt, bỏ tích sẽ bị vô hiệu.<br/>
-- <b>Hotwork File:</b> <a href="https://github.com/Picovoice/porcupine/tree/master/resources" target="_bank">Picovoice HotWord File</a><br/>
-- <b>Thư Viện Hotwork:</b> <a href="https://github.com/Picovoice/porcupine/tree/master/lib/common" target="_bank">Picovoice HotWord Lib</a>
-<br/></div></div>
-<div id="myDivzxchw" style="display: none;">
-<div class="row justify-content-center">
 
-
-
-
-<div class="col-auto">
-<table style="border-color:black;" class="table table-responsive table-bordered align-middle">
-<thead><tr> <th scope="col" colspan="4"><center class="text-success">Cài Đặt Hotword</center></th> </tr>
-<tr><th scope="col"><label for="" class="form-label"><center>Tên Hotword</center></label></th>
-<th scope="col"><label for="" title="Độ Nhạy Sensitive" class="form-label"><center>Độ Nhạy</center></label></th>
-<th scope="col"><label for="" title="Tích Để Bật/Tắt Hotword" class="form-label"><center>Kích Hoạt</center></label></th>
-<th scope="col"><label for="" title="Bật/Tắt Phản Hồi Của Bot Khi Được Đánh Thức" class="form-label"><center>Phản Hồi Lại</center></label></th>
-<tbody><tr><td><div>
-<select id="file_name" name="file_name" class="custom-select" onchange="showSensitiveInput(this.value)">
-<option value="">Chọn Hotword</option>
-<?php foreach ($data_config['smart_wakeup']['hotword'] as $hotword): ?>
-<option value="<?php echo $hotword['file_name']; ?>"><?php echo substr($hotword['file_name'], 0, strpos($hotword['file_name'], "_")); ?></option>
-<?php endforeach; ?>
-</select></div></td><td><div>
-<input type="number" id="sensitive" name="sensitive" style="width: 90px;" title="Chỉ Được Nhập Số Từ 0.1 Đến 1" placeholder="0.1->1" class="form-control" step="0.1" min="0.1" max="1">
-</div></td><td><div>
-<center><input type="checkbox" id="active" name="active" title="Tích vào để kích hoạt" class="form-check-input"></center>
-</div></td><td><div>
-<center><input type="checkbox" id="say_reply" name="say_reply" title="Tích vào để kích hoạt" class="form-check-input"></center></div></td>
-
-<tr>
-<td colspan="4">
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">Kèm câu lệnh:</span>
-  </div>
-  <input type="text" id="command" name="command" placeholder="Nhập Lệnh Vào Đây" title="Nhập Lệnh Của Bạn" class="form-control">
-</div>
-</td></tr>
-</tr></tbody> </tr></thead></table> 
-</div>
-
-
-
-
-</div></div>
-<div id="popupContainerhwlang" class="popup-container" onclick="hidePopuphwlang()"><div id="popupContent" onclick="preventEventPropagationhwlang(event)">
-<p><center><b>Thay Đổi Ngôn Ngữ Gọi Hotword</b></center><br/>
-- <b>1: </b> 2 file thư viện <a href="https://github.com/Picovoice/porcupine/blob/master/lib/common/porcupine_params.pv" target="_bank">tiếng anh</a> 
-	<b>"porcupine_params.pv"</b> và <a href="https://github.com/Picovoice/porcupine/blob/master/lib/common/porcupine_params_vn.pv" target="_bank">tiếng việt</a> 
-	<b>"porcupine_params_vn.pv"</b><br/>phải nằm cùng trong đường dẫn sau: "<b><?php echo $Lib_Hotword; ?></b>"<br/>
-- <b>2: </b>các file thư viện hotword, file hotword, thư viện picovoice phải cùng phiên bản.<br/>
-- <i>Khi thay đổi ngôn ngữ bạn sẽ cần phải cấu hình lại các Hotword ở mục <b>Cài Đặt Hotword</b></i>
-</div></div>
-<hr/>
-<!--END HOT WORK --> 
 <h5>Thông Báo/Thời Gian Chờ:</h5>
 <div class="form-check form-switch d-flex justify-content-center"> 
 <div id="toggleIcon" onclick="toggleDivzxcans()">
@@ -1750,16 +1806,33 @@ else if (radio.value === "tts_gg_free") {
 //End Led Script
 //Kiểm tra các chân gpio không được giống nhau
 function validateInputs() {
+	    const priority1 = document.getElementById("priority1").value;
+        const priority2 = document.getElementById("priority2").value;
+        const priority3 = document.getElementById("priority3").value;
+        if (priority1 !== '' && priority2 !== '' && priority3 !== '') {
+            if (priority1 === priority2 || priority1 === priority3 || priority2 === priority3) {
+                alert("Lỗi: Các giá trị ưu tiên của Trợ Lý không được phép trùng nhau! \n\n Hệ thống sẽ tự động làm mới lại trang");
+			 event.preventDefault(); // Ngăn việc gửi form
+			  window.location.reload();
+                return false;
+
+            }
+        }
+        return true;
+		
     var name1 = document.getElementsByName("button[down][gpio]")[0].value.trim();
     var name2 = document.getElementsByName("button[up][gpio]")[0].value.trim();
     var name3 = document.getElementsByName("button[wakeup][gpio]")[0].value.trim();
     var name4 = document.getElementsByName("button[mic][gpio]")[0].value.trim();
     if (name1 === name2 || name1 === name3 || name1 === name4 || name2 === name3 || name2 === name4 || name3 === name4) {
-        alert("Cấu Hình Nút Nhấn:\n\nCác chân GPIO không được cấu hình giống nhau");
+        alert("Cấu Hình Nút Nhấn:\n\nCác chân GPIO không được cấu hình giống nhau \n\n Hệ thống sẽ tự động làm mới lại trang");
+		event.preventDefault(); // Ngăn việc gửi form
+		window.location.reload();
         return false;
     }
     return true;
 }
+/*
     function showPosition() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(updateInputValues);
@@ -1767,6 +1840,7 @@ function validateInputs() {
         alert("Trình duyệt của bạn không hỗ trợ Geolocation.");
       }
     }
+*/
     function updateInputValues(position) {
       var latitude = position.coords.latitude;
       var longitude = position.coords.longitude;
@@ -2208,5 +2282,24 @@ $(document).ready(function() {
             chatboxContent.classList.toggle('open');
         }
     </script>
+	<script>
+    // JavaScript để kiểm tra các giá trị ưu tiên khi người dùng đã chọn đủ cả 3 giá trị
+/*   
+   function checkDuplicate() {
+        const priority1 = document.getElementById("priority1").value;
+        const priority2 = document.getElementById("priority2").value;
+        const priority3 = document.getElementById("priority3").value;
+
+        if (priority1 !== '' && priority2 !== '' && priority3 !== '') {
+            if (priority1 === priority2 || priority1 === priority3 || priority2 === priority3) {
+                alert("Lỗi: Các giá trị ưu tiên không được trùng nhau!");
+                return false;
+            }
+        }
+
+        return true;
+    }
+	*/
+</script>
 </body>
 </html>

@@ -7,7 +7,7 @@ include "../Configuration.php";
 <head>
       <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title><?php echo $MYUSERNAME; ?>, Câp Nhật Dao Diện Vietbot</title>
+<title><?php echo $MYUSERNAME; ?>, Câp Nhật Giao Diện Vietbot</title>
     <link rel="shortcut icon" href="../assets/img/VietBot128.png">
   <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
 
@@ -325,7 +325,7 @@ if ($zip) {
     // Gọi hàm xóa đệ quy
     deleteRecursive($sourceDirectory);
 } else {
-    $messagee .= 'Có lỗi xảy ra, không thể mở tập tin dao diện đã tải về!\n';
+    $messagee .= 'Có lỗi xảy ra, không thể mở tập tin giao diện đã tải về!\n';
 }
 //Chmod 777 khi chạy xong backup
 $connection = ssh2_connect($serverIP, $SSH_Port);
@@ -351,7 +351,7 @@ if (isset($_POST['restors_ui'])) {
         copyRecursiveExclude($extractDirectory . '/html', $DuognDanUI_HTML, array('.zip', '.tar.gz'));
         // Xóa thư mục /home/pi/vietbot_offline/html/ui_update/extract/html
         deleteDirectory($deleteDirectory);
-         $message .= 'Đã khôi phục dao diện backup thành công! \n';
+         $message .= 'Đã khôi phục giao diện backup thành công! \n';
          $message .= 'Bạn Hãy Tải Lại Trang Để Áp Dụng....! \n';
     }
 }

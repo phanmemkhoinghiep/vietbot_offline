@@ -52,7 +52,6 @@
             }
         },
         "console_ouput": null
-		
     },
     "smart_wakeup": {
         "hotword_engine": {
@@ -167,7 +166,7 @@
         }
     },
     "smart_answer": {
-	"startup_state_speaking": true,
+        "startup_state_speaking": true,
         "sound": {
             "default": {
                 "start": "sound/default/ding.mp3",
@@ -178,21 +177,22 @@
                 "start": "sound/custom/"
             },
             "welcome": {
-                "mode": "text",
+                "mode": "path",
                 "path": "sound/welcome/welcome.mp3",
                 "text": "Xin chào mời đọc khẩu lệnh, để ra lệnh"
             }
         },
         "tts": {
             "type": "tts_gg_free",
-            "token": "",
+            "token": null,
             "voice_name": null,
             "voice_profile": null,
             "speed": null,
             "pitch": null
         },
         "external_bot_priority_1": "gg_ass",
-        "external_bot_priority_2": "chatGPT",
+        "external_bot_priority_2": "gg_bard",
+        "external_bot_priority_3": "chatGPT",
         "pre_answer_timeout": 8,
         "pre_answer": [
             {

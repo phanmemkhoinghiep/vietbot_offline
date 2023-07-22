@@ -266,6 +266,10 @@ chmod($backupFile, 0777);
     $activeHass = isset($_POST['activeHass']) && $_POST['activeHass'] === 'on' ? true : false;
 	//Chat GPT
 	$ChatGptKey = @$_POST['chatgpt_key'];
+	//Google Brand
+	$Google_bard_Secure1PSID = @$_POST['Secure-1PSID'];
+	$Google_bard_Secure_1PSIDTS = @$_POST['Secure_1PSIDTS'];
+	
 	//Telegram
 	$activeTelegram = isset($_POST['activeTelegram']) && $_POST['activeTelegram'] === 'on' ? true : false;
 	$TelegramKey = @$_POST['telegram_key'];
@@ -280,6 +284,9 @@ chmod($backupFile, 0777);
     $skillArray['hass']['active'] = $activeHass;
 	//ChatGPT
     $skillArray['chatgpt']['token'] = $ChatGptKey;
+	//Google Brand
+    $skillArray['gg_bard']['Secure-1PSID'] = $Google_bard_Secure1PSID;
+    $skillArray['gg_bard']['Secure_1PSIDTS'] = $Google_bard_Secure_1PSIDTS;
 	// Google Asssitant Mode
     $skillArray['gg_ass']['mode'] = $Google_Assistant_Mode;
 	//Telegram
@@ -298,9 +305,13 @@ $connection = ssh2_connect($serverIP, $SSH_Port);
 if (!$connection) {die($E_rror_HOST);}
 if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
 $stream1 = ssh2_exec($connection, "sudo chmod -R 0777 $Path_Vietbot_src");
+$stream2 = ssh2_exec($connection, "sudo chown -R pi:pi $Path_Vietbot_src");
 stream_set_blocking($stream1, true); 
+stream_set_blocking($stream2, true); 
 $stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO); 
-stream_get_contents($stream_out1);
+$stream_out2 = ssh2_fetch_stream($stream2, SSH2_STREAM_STDIO); 
+stream_get_contents($stream_out1); 
+stream_get_contents($stream_out2); 
 header("Location: $PHP_SELF"); exit;
 }
 //////////////////////////Khôi Phục Gốc Skill.Json
@@ -441,7 +452,33 @@ if (count($fileLists) > 0) {
 <th scope="row"> <label title="Câu Trả Lời Có Thêm Chi Tiết Về Thiết Bị">Display Full State:</label></th>
 <td><input type="checkbox" id="hass_display_full_state" name="hass_display_full_state" title="Tích Để Bật/Tắt" <?php echo $skillArray['hass']['display_full_state'] ? 'checked' : ''; ?>></td>
 </tr></tbody>
-</table></div></div></div></div>
+</table></div></div></div></div><hr/>
+<h5>Google Bard: <i class="bi bi-info-circle-fill" onclick="togglePopupggbard()" title="Nhấn Để Tìm Hiểu Thêm"></i></h5>
+      <div id="popupContainerggbard" class="popup-container" onclick="hidePopupggbard()">
+    <div id="popupContent" onclick="preventEventPropagationggbard(event)">
+      <center><b>Hướng Dẫn Lấy Session Authentication</b></center><br/>
+- Đi tới: <a href="https://bard.google.com/" target="_bank">https://bard.google.com/</a> và đăng nhập tài khoản google<br/>
+B1: Nhấn Vào <b>Dùng thử Bard</b> -> kéo hết điều khoản và sử dụng và chọn <b>Tôi Đồng Ý</b><br/>
+B2: khi hiện lên thông báo: <b>Bard là một thử nghiệm</b> Nhấn vào <b>Tiếp Tục</b><br/>
+B3: Nhấn F12 cho bảng điều khiển hoặc (nhấn chuột phải chọn Kiểm Tra Phần Tử)<br/>
+B4: Go to Application -> Cookies -> __Secure-1PSID and __Secure-1PSIDTS
+ 
+</div> </div>
+<div class="row justify-content-center"><div class="col-auto">	 
+ <table class="table table-responsive table-striped table-bordered align-middle">
+<tbody>
+<tr><th scope="row"colspan="2"><center>Session Google Bard</center></th>
+</tr>
+<tr><th scope="row"> <label for="hass_url">Secure-1PSID:</label></th>
+<td><input type="text" class="form-control" id="Secure-1PSID" name="Secure-1PSID" placeholder="Nhập Cookie Secure-1PSID Của Google bard" title="Nhập Cookie Secure-1PSID Của Google bard" value="<?php echo $skillArray['gg_bard']['Secure-1PSID']; ?>">
+</td>
+</tr><tr>
+<th scope="row"> <label for="hass_key">Secure_1PSIDTS:</label></th>
+<td><input type="text" class="form-control" id="Secure_1PSIDTS" name="Secure_1PSIDTS" placeholder="Nhập Cookie Secure_1PSIDTS Của Google bard" title="Nhập Cookie Secure_1PSIDTS Của Google bard" value="<?php echo $skillArray['gg_bard']['Secure_1PSIDTS']; ?>">
+</td>
+</tr></tbody>
+</table></div></div>
+	
 	<hr/>
 <h5>ChatGPT: <i class="bi bi-info-circle-fill" onclick="togglePopupGPT()" title="Nhấn Để Tìm Hiểu Thêm"></i></h5>
       <div id="popupContainerGPT" class="popup-container" onclick="hidePopupGPT()">
@@ -881,6 +918,19 @@ if (count($fileLists) > 0) {
       popupContainer.classList.remove("show");
     }
     function preventEventPropagationGPT(event) {
+      event.stopPropagation();
+    }
+	
+// togglePopupggbard
+    function togglePopupggbard() {
+      var popupContainer = document.getElementById("popupContainerggbard");
+      popupContainer.classList.toggle("show");
+    }
+    function hidePopupggbard() {
+      var popupContainer = document.getElementById("popupContainerggbard");
+      popupContainer.classList.remove("show");
+    }
+    function preventEventPropagationggbard(event) {
       event.stopPropagation();
     }
 // togglePopupGPT

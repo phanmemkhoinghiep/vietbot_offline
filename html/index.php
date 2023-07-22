@@ -7,7 +7,7 @@ $latitude = $dataVTGETtt->$wards_Tinh->latitude;
 $longitude = $dataVTGETtt->$wards_Tinh->longitude;
 ?>
 <!DOCTYPE html>
-<html lang="en" class="max-width-d">
+<html lang="vi" class="max-width-d">
 <!--
 Code By: Vũ Tuyển
 Facebook: https://www.facebook.com/TWFyaW9uMDAx
@@ -446,6 +446,7 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
     <div class="text-center color-pallet hide">
         <a class="btn btn-danger" href="#vietbot_update" role="button" title="Nhấn Để Kiểm Tra, Cập Nhật Phầm Mềm">Cập Nhật Chương Trình</a>
         <a class="btn btn-success" href="#UI_update" role="button" title="Nhấn Để Kiểm Tra, Cập Nhật Dao Diện">Cập Nhật Giao Diện</a>
+        <a class="btn btn-secondary" href="./Help_Support/index.php" role="button" target="_bank" title="Nhấn Để Kiểm Tra, Cập Nhật Dao Diện">Hướng Dẫn / Sử Dụng Vietbot</a>
 
 
         <!--  <h6 class="text-center theme-skin-title">Đổi Màu Giao Diện</h6> -->
@@ -620,8 +621,14 @@ if ($remoteValue !== $localValue) {
     const divElement = document.querySelector('.text-center.color-pallet');
     const linkElement = document.querySelector('.btn-success');
     const buttonElement = document.querySelector('.btn-danger');
+    const buttonnElement = document.querySelector('.btn-secondary');
 
     buttonElement.addEventListener('click', function() {
+        // Loại bỏ lớp "show" và thêm lớp "hide" cho phần tử divElement
+        divElement.classList.remove('show');
+        divElement.classList.add('hide');
+    });
+	    buttonnElement.addEventListener('click', function() {
         // Loại bỏ lớp "show" và thêm lớp "hide" cho phần tử divElement
         divElement.classList.remove('show');
         divElement.classList.add('hide');

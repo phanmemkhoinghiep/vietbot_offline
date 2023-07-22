@@ -54,7 +54,8 @@ vào trong thư mục "html" theo đường dẫn: "/home/pi/vietbot_offline/htm
 
 B5: Cấu Hình Chỉnh Một Vài Tùy Chọn Khác Theo Ý Bạn Trong File Configuration.php
 
-	- Các File Backup Config sẽ nằm trong: var/www/html/include_php/Backup_Config
+	- Các File Backup Config sẽ nằm trong: /home/pi/vietbot_offline/html/include_php/Backup_Config
+ 	- Các File Backup Skill sẽ nằm trong: /home/pi/vietbot_offline/html/include_php/Backup_Skill
  
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 Chuyển UI từ "var/www/html" sang "home/pi/vietbot_offline/html/"
