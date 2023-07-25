@@ -84,7 +84,10 @@ body {
         top: 10px;
         left: 10px;
     }
-
+        .right-align {
+            text-align: right;
+			 
+        }
 	</style>
 </head>
 <body>
@@ -201,11 +204,10 @@ if (isset($_POST['set_full_quyen'])) {
 $connection = ssh2_connect($serverIP, $SSH_Port);
 if (!$connection) {die($E_rror_HOST);}
 if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
-$stream1 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$DuognDanUI_HTML);
-$stream2 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$DuognDanThuMucJson);
-stream_set_blocking($stream1, true); stream_set_blocking($stream2, true);
-$stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO); $stream_out2 = ssh2_fetch_stream($stream2, SSH2_STREAM_STDIO);
-stream_get_contents($stream_out1); stream_get_contents($stream_out2);
+$stream1 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$Path_Vietbot_src);
+stream_set_blocking($stream1, true);
+$stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO);
+stream_get_contents($stream_out1);
 header("Location: $PHP_SELF"); exit;
 }
 // Thư mục cần kiểm tra 777
@@ -249,9 +251,10 @@ $localValue = $localData['ui_version']['current'];
 // So sánh giá trị
 if ($remoteValue !== $localValue) {
     $messagee .= 'Có phiên bản mới: '.$remoteValue.'\n';
-    $messagee .= 'Phiên bản hiện tại của bạn: '.$localValue.'\n Vui lòng cập nhật.';
+    $messagee .= 'Phiên bản hiện tại của bạn: '.$localValue.'\n Vui lòng cập nhật.\n';
+    $messagee .= $remoteData['ui_version']['notification'].'\n';
 } else {
-    $messagee .= 'Bạn đang sử dụng phiên bản mới nhất: '.$localValue;
+    $messagee .= 'Bạn đang sử dụng phiên bản mới nhất: '.$localValue.'\n';
 }
 }
 
@@ -267,12 +270,10 @@ if ($returnCode === 0) {
   //  $messagee .= 'Tạo bản sao lưu giao diện thành công, hãy tải lại trang để áp dụng\n';
     $backupFiles = glob($backupDir . '/*.tar.gz');
     $numBackupFiles = count($backupFiles);
-
     if ($numBackupFiles > $maxBackupFilesUI) {
         usort($backupFiles, function ($a, $b) {
             return filemtime($a) - filemtime($b);
         });
-
         $filesToDelete = array_slice($backupFiles, 0, $numBackupFiles - $maxBackupFilesUI);
         foreach ($filesToDelete as $file) {
             unlink($file);
@@ -324,6 +325,7 @@ if ($zip) {
     $messagee .= 'Bạn Hãy Tắt Trang Và Truy Cập Lại Để Áp Dụng, (Hoặc F5 Để Áp Dụng)....!\n';
     // Gọi hàm xóa đệ quy
     deleteRecursive($sourceDirectory);
+	shell_exec("rm $zipFile");
 } else {
     $messagee .= 'Có lỗi xảy ra, không thể mở tập tin giao diện đã tải về!\n';
 }
@@ -331,10 +333,14 @@ if ($zip) {
 $connection = ssh2_connect($serverIP, $SSH_Port);
 if (!$connection) {die($E_rror_HOST);}
 if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
-$stream1 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$DuognDanUI_HTML);
+$stream1 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$Path_Vietbot_src);
+$stream2 = ssh2_exec($connection, 'sudo chown -R pi:pi '.$Path_Vietbot_src);
 stream_set_blocking($stream1, true); 
+stream_set_blocking($stream2, true); 
 $stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO); 
+$stream_out2 = ssh2_fetch_stream($stream2, SSH2_STREAM_STDIO); 
 stream_get_contents($stream_out1);
+stream_get_contents($stream_out2);
 }
 if (isset($_POST['restors_ui'])) {
     $selectedFile = $_POST['tarFile'];
@@ -409,6 +415,7 @@ echo $selectDropdown;
 </div><br/>
   </div>
   </form>
+ <br/> <p class="right-align"><b>Phiên bản dao diện:  <font color=red><?php echo $dataVersionUI->ui_version->current; ?></font></b></p>
   
   	    <script>
         var messageElement = document.getElementById("message");

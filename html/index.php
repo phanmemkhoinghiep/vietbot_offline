@@ -41,7 +41,7 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
     .ptexxt {
 	  margin-bottom: 0rem;
     }
-    
+
 
 	  </style>
 </head>
@@ -405,6 +405,7 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
     <div class="container">
         <h3 class="subtitle">Cập Nhật Giao Diện</h3>
         <iframe src="./ui_update/index.php" width="100%" height="570px"></iframe>
+		
 </section>
 
 <!-- Contact Start -->
@@ -466,9 +467,11 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
     </div>
 
 </div>
-	
-	
-	  
+	<!--
+	  <div class="footer-text">
+     <?php echo "Phiên bản UI: ".$dataVersion->ui_version->current; ?>
+    </div>
+	  -->
     <!-- Văn bản nằm ở cuối trang -->
   <?php
 $curl = curl_init();

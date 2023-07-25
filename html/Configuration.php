@@ -77,6 +77,14 @@ $Data_Json_Skill = json_decode($jsonSKILL);
 $jsonDatazXZ = file_get_contents("$DuognDanThuMucJson"."/config.json");
 $dataVTGET = json_decode($jsonDatazXZ);
 
+$jsonDataVersionUI = file_get_contents("$DuognDanUI_HTML"."/version.json");
+$dataVersionUI = json_decode($jsonDataVersionUI);
+
+$jsonDataVersionVietbot = file_get_contents("$DuognDanThuMucJson"."/version.json");
+$dataVersionVietbot = json_decode($jsonDataVersionVietbot);
+
+
+
 $PORT_CHATBOT = $dataVTGET->smart_config->web_interface->port;
 $MYUSERNAME = $dataVTGET->smart_config->user_info->name;
 

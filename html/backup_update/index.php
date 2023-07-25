@@ -85,7 +85,10 @@ body {
         top: 10px;
         left: 10px;
     }
-
+        .right-align {
+            text-align: right;
+			 
+        }
 	</style>
 </head>
 <body>
@@ -177,11 +180,10 @@ if (isset($_POST['set_full_quyen'])) {
 $connection = ssh2_connect($serverIP, $SSH_Port);
 if (!$connection) {die($E_rror_HOST);}
 if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
-$stream1 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$DuognDanUI_HTML);
-$stream2 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$DuognDanThuMucJson);
-stream_set_blocking($stream1, true); stream_set_blocking($stream2, true);
-$stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO); $stream_out2 = ssh2_fetch_stream($stream2, SSH2_STREAM_STDIO);
-stream_get_contents($stream_out1); stream_get_contents($stream_out2);
+$stream1 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$Path_Vietbot_src);
+stream_set_blocking($stream1, true);
+$stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO);
+stream_get_contents($stream_out1);
 header("Location: $PHP_SELF"); exit;
 }
 // Thư mục cần kiểm tra 777
@@ -317,6 +319,7 @@ if (!is_dir($DuognDanThuMucJson)) {
 	</div><br/>
 </div>
 	</form>
+	<br/> <p class="right-align"><b>Phiên bản Vietbot:  <font color=red><?php echo $dataVersionVietbot->vietbot_version->latest; ?></font></b></p>
 	<?php
 // Xử lý tải xuống tệp tin được chọn
 if (isset($_POST['download']) && isset($_POST['selectedFile'])) {
@@ -470,6 +473,7 @@ if (isset($_POST['backup_update'])) {
 			copyFiles($sourceDirectoryyy, $PathResources, $excludedFiles, $copiedItems);
             $messagee .= 'Đã tải xuống phiên bản Vietbot mới và cập nhật thành công!\n';
             $messagee .= 'BẠN CẦN KHỞI ĐỘNG LẠI LOA THÔNG MINH ĐỂ ÁP DỤNG LẠI CÀI ĐẶT!\n';
+			shell_exec("rm -rf $DuognDanUI_HTML/backup_update/extract/vietbot_offline-beta");
 			?>
 			<div class="form-check form-switch d-flex justify-content-center"> 
 <div class="container">
@@ -514,9 +518,13 @@ $connection = ssh2_connect($serverIP, $SSH_Port);
 if (!$connection) {die($E_rror_HOST);}
 if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
 $stream1 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$Path_Vietbot_src);
+$stream2 = ssh2_exec($connection, 'sudo chown -R pi:pi '.$Path_Vietbot_src);
 stream_set_blocking($stream1, true); 
-$stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO);
-stream_get_contents($stream_out1); 
+stream_set_blocking($stream2, true); 
+$stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO); 
+$stream_out2 = ssh2_fetch_stream($stream2, SSH2_STREAM_STDIO); 
+stream_get_contents($stream_out1);
+stream_get_contents($stream_out2);
 }
 //Dowload backup restor
 //Chọn file backup và restore

@@ -762,7 +762,7 @@ echo '</div>';
 <div id="popupContainerSTT" class="popup-container" onclick="hidePopupSTT()">
 <div id="popupContent" onclick="preventEventPropagationSTT(event)">
 <center><b>Cấu Hình STT</b></center><br/>
-- Chuyển Giọng Nói Thành Văn Bản
+- Chuyển Giọng Nói Thành Văn Bản<br/>
 - <b>Thời Gian Chờ:</b> nếu bọi bot dậy, hết thời gian chờ mà không ra lệnh cho bot, thì bot sẽ quay trở lại trạng thái sleep và chờ gọi hotword.
 </div></div>
 <center><b>Bạn Đang Dùng STT: <font color="red"><?php echo $GET_STT_Replacee; ?></font></b></center>

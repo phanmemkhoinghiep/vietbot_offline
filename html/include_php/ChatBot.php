@@ -231,7 +231,7 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx  -->
         return;
       }
 
-      const messageType = messageTypeCheckbox.checked ? 1 : 2;
+      const messageType = messageTypeCheckbox.checked ? 1 : 4;
 
       displayMessage(userMessage, true);
 

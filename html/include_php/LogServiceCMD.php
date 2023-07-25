@@ -62,7 +62,18 @@ body {
 	</style>
 	</head>
 	<body>
+ <script src="../assets/js/jquery-3.6.1.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#my-form').on('submit', function() {
+        // Hiển thị biểu tượng loading
+        $('#loading-overlay').show();
 
+        // Vô hiệu hóa nút gửi
+        $('#submit-btn').attr('disabled', true);
+    });
+});
+</script>
 
 <?php
 //Code By: Vũ Tuyển
@@ -115,16 +126,18 @@ $output .=  stream_get_contents($stream_out);
 }
 //Chạy Manual Run
 if (isset($_POST['start_manual_run'])) {
+	//echo '<script>document.getElementById("loading-overlay").style.display = "none";</script>';
 // Lệnh cần chạy
 $connection = ssh2_connect($serverIP, $SSH_Port);
 if (!$connection) {die($E_rror_HOST);}
 if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
-$stream = ssh2_exec($connection, 'cd /home/pi/vietbot_offline/src && python3 start.py');
+$stream = ssh2_exec($connection, 'cd /home/pi/vietbot_offline/src && python3 start.py  2>/dev/null');
 stream_set_blocking($stream, false); //false chặn kết quả của luồng stream
-$stream_out = ssh2_fetch_stream($stream, SSH2_STREAM_STDIO);
-$output = "$GET_current_USER@$HostName:~$ cd /home/pi/vietbot_offline/src && python3 start.py\n\n";
-$output .=  "$GET_current_USER@$HostName:~$ Lệnh đã được thực thi, vui lòng đợi thiết bị khởi động\n\n";
+// Trả về đoạn mã JavaScript để thay đổi thuộc tính style của #loading-overlay
 
+$stream_out = ssh2_fetch_stream($stream, SSH2_STREAM_STDIO);
+$output = "$GET_current_USER@$HostName:~$ cd /home/pi/vietbot_offline/src && python3 start.py  2>/dev/null\n\n";
+$output .=  "$GET_current_USER@$HostName:~$ Lệnh đã được thực thi, vui lòng đợi thiết bị khởi động\n\n";
 
 }
 //Dừng Manual Run
@@ -339,7 +352,8 @@ $output .=  stream_get_contents($stream_out);
  <center><button  type="submit" name="check_manual_run" class="btn btn-primary">Kiểm Tra Manual Run</button>
 
 <div class="dropdown-divider"></div>  <button type="submit" name="start_manual_run" class="btn btn-primary" disabled>Chạy Manual Run</button>
- <div class="dropdown-divider"></div>  <button type="submit" name="stop_manual_run" class="btn btn-primary" disabled>Dừng Manual Run</button>
+
+ <div class="dropdown-divider"></div>  <button type="submit" name="stop_manual_run" class="btn btn-primary">Dừng Manual Run</button>
  </center></div></div>
 
 	
@@ -375,18 +389,7 @@ $output .=  stream_get_contents($stream_out);
     </div>
     <br/><br/><textarea  style="width: 95%; height: 340px;" class="text-info form-control bg-dark" disabled rows="10" cols="50"><?php echo $output; ?></textarea>
 </center>
- <script src="../assets/js/jquery-3.6.1.min.js"></script>
-<script>
-$(document).ready(function() {
-    $('#my-form').on('submit', function() {
-        // Hiển thị biểu tượng loading
-        $('#loading-overlay').show();
 
-        // Vô hiệu hóa nút gửi
-        $('#submit-btn').attr('disabled', true);
-    });
-});
-</script>
 
 </body>
 
