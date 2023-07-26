@@ -1,6 +1,7 @@
 {
   "ui_version": {
-    "latest": "beta 25-07-2023",
-    "current": "beta 25-07-2023"
+    "latest": "beta 26-07-2023",
+    "current": "beta 26-07-2023",
+    "notification": "Nội Dung Chính: Cập nhật luồng xử lý mới cho ChatBox"
   }
 }
