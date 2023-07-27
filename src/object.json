@@ -796,6 +796,16 @@
             "value": "khách sạn"
         }
     ],
+    "converstation": [{
+            "value": "hội thoại"
+        },
+        {
+            "value": "trò chuyện"
+        },
+        {
+            "value": "liên tục"
+        }
+    ],
     "mic": [{
             "value": "mic"
         },
