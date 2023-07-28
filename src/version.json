@@ -2,6 +2,9 @@
 	"vietbot_version": {
 		"latest": "beta 27-07-2023-03"
 	},
+	"update commands:" "python3 -m pip install --upgrade  GoogleBard edge_tts", 
+	"new_features": "Bổ sung tính năng trợ lý ảo Google bard và tổng hợp giọng nói Microsoft Edge",
+	"improvements": "Giảm tài nguyên và tăng tốc độ xử lý",	
 	"image_version": {
 		"latest": "20-07-2023"
 	}
