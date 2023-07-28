@@ -415,7 +415,7 @@ echo $selectDropdown;
 </div><br/>
   </div>
   </form>
- <br/> <p class="right-align"><b>Phiên bản dao diện:  <font color=red><?php echo $dataVersionUI->ui_version->current; ?></font></b></p>
+ <br/> <p class="right-align"><b>Phiên bản giao diện:  <font color=red><?php echo $dataVersionUI->ui_version->current; ?></font></b></p>
   
   	    <script>
         var messageElement = document.getElementById("message");

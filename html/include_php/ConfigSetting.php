@@ -78,19 +78,20 @@ foreach ($keywordsSTT as $keywordSTT => $replacementSTT) {
 	///
 	//Lấy Giá Trị TTS
 	$GET_TTS_Type = $data_config['smart_answer']['tts']['type'];
-	$GET_TTS_Type_Replace = $data_config['smart_answer']['tts']['type'];
+	//$GET_TTS_Type_Replace = $data_config['smart_answer']['tts']['type'];
 	// Mảng chứa từ khóa và giá trị thay thế tương ứng
 	$keywordsTTS = array(
     "tts_gg_free" => "Google Free",
     "tts_gg_cloud" => "Google Cloud",
     "tts_fpt" => "FPT",
     "tts_viettel" => "Viettel",
-    "tts_zalo" => "Zalo"
+    "tts_zalo" => "Zalo",
+    "tts_edge" => "Microsoft EDGE"
 	);
 // Thực hiện thay thế từng từ khóa
 foreach ($keywordsTTS as $keywordTTS => $replacementTTS) {
-    if (strpos($GET_TTS_Type_Replace, $keywordTTS) !== false) {
-        $GET_TTS_Type_Replacee = str_replace($keywordTTS, $replacementTTS, $GET_TTS_Type_Replace);
+    if (strpos($GET_TTS_Type, $keywordTTS) !== false) {
+        $GET_TTS_Type_Replacee = str_replace($keywordTTS, $replacementTTS, $GET_TTS_Type);
     }}
 	// In ra chuỗi đã được thay thế
 	$GET_TTS_Voice_Name = $data_config['smart_answer']['tts']['voice_name'];
@@ -767,17 +768,15 @@ echo '</div>';
 </div></div>
 <center><b>Bạn Đang Dùng STT: <font color="red"><?php echo $GET_STT_Replacee; ?></font></b></center>
 <label><input type="radio" name="stt_type" title="Chuyển Giọng Nói Thành Văn Bản Server Google Cloud" value="stt_gg_cloud" <?php if ($GET_STT === 'stt_gg_cloud') echo 'checked'; ?> required  onchange="toggleTokenInput(this)">
-Google Cloud</label><label>
+Google Cloud</label>&nbsp;<label>
 <input type="radio" name="stt_type" title="Chuyển Giọng Nói Thành Văn Bản Server Google Assistant" value="stt_gg_ass" <?php if ($GET_STT === 'stt_gg_ass') echo 'checked'; ?> required  onchange="toggleTokenInput(this)">
-Google Assistant</label><label>
+Google Assistant</label>&nbsp;<label>
 <input type="radio" name="stt_type" title="Chuyển Giọng Nói Thành Văn Bản Server Google Free" value="stt_gg_free" <?php if ($GET_STT === 'stt_gg_free') echo 'checked'; ?> required  onchange="toggleTokenInput(this)">
-Google Free</label><label>
+Google Free</label>&nbsp;<label>
 <input type="radio" name="stt_type" title="Chuyển Giọng Nói Thành Văn Bản Server FPT" value="stt_fpt" <?php if ($GET_STT === 'stt_fpt') echo 'checked'; ?> required onchange="toggleTokenInput(this)">
-FPT</label><label>
+FPT</label>&nbsp;<label>
 <input type="radio" name="stt_type" title="Chuyển Giọng Nói Thành Văn Bản Server Viettel" value="stt_viettel" <?php if ($GET_STT === 'stt_viettel') echo 'checked'; ?> required onchange="toggleTokenInput(this)">
-Viettel</label>
-
-<label>
+Viettel</label>&nbsp;<label>
 <input type="radio" name="stt_type" title="Chuyển Giọng Nói Thành Văn Bản Server HPDA" value="stt_hpda" <?php if ($GET_STT === 'stt_hpda') echo 'checked'; ?> required onchange="toggleTokenInput(this)">
 HPDA</label>
 
@@ -822,15 +821,17 @@ HPDA</label>
 </div></div>
 <center><b>Bạn Đang Dùng TTS: </b><b><font color="red"><?php echo $GET_TTS_Type_Replacee; ?></font></b></center>
 <label><input type="radio" onclick="disableRadio()" name="tts_company" value="tts_gg_cloud" <?php if ($GET_TTS_Type === 'tts_gg_cloud') echo 'checked'; ?> onchange="showTokenInputTTS(this)" required>
-Google Cloud</label><label>
+Google Cloud</label>&nbsp;<label>
 <input type="radio" onclick="disableRadio()" name="tts_company" value="tts_gg_free" <?php if ($GET_TTS_Type === 'tts_gg_free') echo 'checked'; ?> onchange="showTokenInputTTS(this)" required>
-Google Free</label><label>
+Google Free</label>&nbsp;<label>
 <input type="radio" onclick="disableRadio()" name="tts_company" value="tts_fpt" <?php if ($GET_TTS_Type === 'tts_fpt') echo 'checked'; ?> onchange="showTokenInputTTS(this)" required>
-FPT</label><label>
+FPT</label>&nbsp;<label>
 <input type="radio" onclick="disableRadio()" name="tts_company" value="tts_viettel" <?php if ($GET_TTS_Type === 'tts_viettel') echo 'checked'; ?> onchange="showTokenInputTTS(this)" required>
-Viettel</label><label>
+Viettel</label>&nbsp;<label>
 <input type="radio" onclick="disableRadio()" name="tts_company" value="tts_zalo" <?php if ($GET_TTS_Type === 'tts_zalo') echo 'checked'; ?> onchange="showTokenInputTTS(this)" required>
-Zalo</label>
+Zalo</label>&nbsp;<label>
+<input type="radio" onclick="disableRadio()" name="tts_company" value="tts_edge" <?php if ($GET_TTS_Type === 'tts_edge') echo 'checked'; ?> onchange="showTokenInputTTS(this)" required>
+Microsoft EDGE</label>
 <div id="tokenInputContainerTTS" style="display: none;"><div class="row g-3 d-flex justify-content-center">
 <div class="col-auto"><table class="table table-responsive align-middle">
 <tbody><tr><th scope="row">Token:</th>
@@ -849,18 +850,17 @@ Zalo</label>
 
 
 <br><b>Giọng Đọc:</b><br/><label>
-<input type="radio" id="myRadio1" title="Nữ miền Bắc" name="tts_voice" value="female_northern_voice" <?php if ($GET_TTS_Voice_Name === 'female_northern_voice') echo 'checked'; ?> required>Nữ miền Bắc</label><label>
-<input type="radio" id="myRadio2" title="Nam Miền Bắc" name="tts_voice" value="male_northern_voice" <?php if ($GET_TTS_Voice_Name === 'male_northern_voice') echo 'checked'; ?> required>Nam Miền Bắc</label><label>
+<input type="radio" id="myRadio1" title="Nữ miền Bắc" name="tts_voice" value="female_northern_voice" <?php if ($GET_TTS_Voice_Name === 'female_northern_voice') echo 'checked'; ?> required> Nữ miền Bắc</label>&nbsp;<label>
+<input type="radio" id="myRadio2" title="Nam Miền Bắc" name="tts_voice" value="male_northern_voice" <?php if ($GET_TTS_Voice_Name === 'male_northern_voice') echo 'checked'; ?> required> Nam Miền Bắc</label>&nbsp;<label>
 
 
-<input type="radio" id="myRadio3" title="Nữ Miền Trung"  name="tts_voice" value="female_middle_voice" <?php if ($GET_TTS_Voice_Name === 'female_middle_voice') echo 'checked'; ?> required>Nữ Miền Trung</label><label>
-<input type="radio" id="myRadio4" title="Nam Miền Trung"  name="tts_voice" value="male_middle_voice" <?php if ($GET_TTS_Voice_Name === 'male_middle_voice') echo 'checked'; ?> required>Nam Miền Trung</label><label>
+<input type="radio" id="myRadio3" title="Nữ Miền Trung"  name="tts_voice" value="female_middle_voice" <?php if ($GET_TTS_Voice_Name === 'female_middle_voice') echo 'checked'; ?> required> Nữ Miền Trung</label>&nbsp;<label>
+<input type="radio" id="myRadio4" title="Nam Miền Trung"  name="tts_voice" value="male_middle_voice" <?php if ($GET_TTS_Voice_Name === 'male_middle_voice') echo 'checked'; ?> required> Nam Miền Trung</label>&nbsp;<label>
 
 
-<input type="radio" id="myRadio5"  title="Nữ Miền Nam" name="tts_voice" value="female_southern_voice" <?php if ($GET_TTS_Voice_Name === 'female_southern_voice') echo 'checked'; ?> required>Nữ Miền Nam</label><label>
-<input type="radio" id="myRadio6" title="Viettel Nam Miền Nam" id="myRadio2" name="tts_voice" value="male_southern_voice" <?php if ($GET_TTS_Voice_Name === 'male_southern_voice') echo 'checked'; ?> required>Nam Miền Nam</label><label>
-
-<input type="radio" id="myRadio7" name="tts_voice" value="null" <?php if ($GET_TTS_Voice_Name === null) echo 'checked'; ?>>Mặc Định</label></center><hr/>
+<input type="radio" id="myRadio5"  title="Nữ Miền Nam" name="tts_voice" value="female_southern_voice" <?php if ($GET_TTS_Voice_Name === 'female_southern_voice') echo 'checked'; ?> required> Nữ Miền Nam</label>&nbsp;<label>
+<input type="radio" id="myRadio6" title="Viettel Nam Miền Nam" id="myRadio2" name="tts_voice" value="male_southern_voice" <?php if ($GET_TTS_Voice_Name === 'male_southern_voice') echo 'checked'; ?> required> Nam Miền Nam</label>&nbsp;<label>
+<input type="radio" id="myRadio7" name="tts_voice" value="null" <?php if ($GET_TTS_Voice_Name === null) echo 'checked'; ?>> Mặc Định</label></center><hr/>
 <!-- -->
 <h5>Console Ouput:</h5> 
 <div class="row g-3 d-flex justify-content-center"><div class="col-auto"> 
@@ -1447,6 +1447,15 @@ if (count($fileLists) > 0) {
                     }
                 });
             }
+			 else if (companyRadio.value === 'tts_edge') {
+                ttsVoiceRadios.forEach(voiceRadio => {
+                    if (voiceRadio.value === 'female_northern_voice' || voiceRadio.value === 'male_northern_voice' || voiceRadio.value === 'female_middle_voice' || voiceRadio.value === 'male_middle_voice' || voiceRadio.value === 'null') {
+                        voiceRadio.disabled = true;
+                    } else {
+                        voiceRadio.disabled = false;
+                    }
+                });
+            }
 			else if (companyRadio.value === 'tts_zalo') {
                 ttsVoiceRadios.forEach(voiceRadio => {
                     if (voiceRadio.value === 'null_tuyen') { //tts Google Free
@@ -1516,13 +1525,23 @@ function showTokenInputTTS(radio) {
   } else if (radio.value === "tts_gg_cloud") {
     tokenInputContainerTTS.style.display = "none";
     tokenInputContainerTTSGGCLOUD.style.display = "block";
-  //  otherDivgcloudTTS.style.display = "block";
+  // tự động checker myRadio1 khi chọn vào tts_gg_cloud
+      var targetRadio = document.getElementById("myRadio1"); 
+    targetRadio.checked = true;
   }
+  // tự đông đánh dấu checked khi tích vào tts_gg_free
 else if (radio.value === "tts_gg_free") {
     tokenInputContainerTTS.style.display = "none";
     tokenInputContainerTTSGGCLOUD.style.display = "none";
-  // tự đông đánh dấu checked khi tích vào tts_gg_free
+
     var targetRadio = document.getElementById("myRadio7"); 
+    targetRadio.checked = true;
+  }
+  else if (radio.value === "tts_edge") {
+    tokenInputContainerTTS.style.display = "none";
+    tokenInputContainerTTSGGCLOUD.style.display = "none";
+  // tự đông đánh dấu checked khi tích vào tts_gg_free
+    var targetRadio = document.getElementById("myRadio5"); 
     targetRadio.checked = true;
   }
   else {
@@ -2300,6 +2319,47 @@ $(document).ready(function() {
         return true;
     }
 	*/
+	
+	
+// Disable các giọng đọc của tts khi được chọn 1 trong các tts 
+function disableRadioButtons() {
+    // Lấy dữ liệu JSON từ file PHP (điều này cần được thực hiện thông qua AJAX trong ứng dụng thực tế)
+    // Để đơn giản, ta chỉ sử dụng biến jsonData để lưu dữ liệu JSON trong ví dụ này.
+    var jsonData = "<?php echo $GET_TTS_Type; ?>";
+    // Kiểm tra nếu giá trị trong JSON là "tts_edge" thì disable các radio button có id tương ứng
+    if (jsonData === "tts_edge") {
+        document.getElementById("myRadio1").disabled = true;
+        document.getElementById("myRadio2").disabled = true;
+        document.getElementById("myRadio3").disabled = true;
+        document.getElementById("myRadio4").disabled = true;
+        document.getElementById("myRadio7").disabled = true;
+    }else if (jsonData === "tts_gg_cloud") {
+        document.getElementById("myRadio3").disabled = true;
+        document.getElementById("myRadio4").disabled = true;
+        document.getElementById("myRadio5").disabled = true;
+        document.getElementById("myRadio6").disabled = true;
+        document.getElementById("myRadio7").disabled = true;
+    }else if (jsonData === "tts_gg_free") {
+        document.getElementById("myRadio1").disabled = true;
+        document.getElementById("myRadio2").disabled = true;
+        document.getElementById("myRadio3").disabled = true;
+        document.getElementById("myRadio4").disabled = true;
+        document.getElementById("myRadio5").disabled = true;
+        document.getElementById("myRadio6").disabled = true;
+    } 	else {
+        // Trường hợp còn lại (không phải), sẽ enable lại các radio button
+        document.getElementById("myRadio1").disabled = false;
+        document.getElementById("myRadio2").disabled = false;
+        document.getElementById("myRadio3").disabled = false;
+        document.getElementById("myRadio4").disabled = false;
+        document.getElementById("myRadio5").disabled = false;
+        document.getElementById("myRadio6").disabled = false;
+        document.getElementById("myRadio7").disabled = false;
+    }
+}
+// Gọi hàm để disable radio buttons khi trang được load
+disableRadioButtons();
+	
 </script>
 </body>
 </html>

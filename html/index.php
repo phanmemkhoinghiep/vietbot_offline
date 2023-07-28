@@ -446,18 +446,18 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
 <div id="color-switcher" class="color-switcher">
     <div class="text-center color-pallet hide">
         <a class="btn btn-danger" href="#vietbot_update" role="button" title="Nhấn Để Kiểm Tra, Cập Nhật Phầm Mềm">Cập Nhật Chương Trình</a>
-        <a class="btn btn-success" href="#UI_update" role="button" title="Nhấn Để Kiểm Tra, Cập Nhật Dao Diện">Cập Nhật Giao Diện</a>
-        <a class="btn btn-secondary" href="./Help_Support/index.php" role="button" target="_bank" title="Nhấn Để Kiểm Tra, Cập Nhật Dao Diện">Hướng Dẫn / Sử Dụng Vietbot</a>
+        <a class="btn btn-success" href="#UI_update" role="button" title="Nhấn Để Kiểm Tra, Cập Nhật Giao Diện">Cập Nhật Giao Diện</a>
+        <a class="btn btn-secondary" href="./Help_Support/index.php" role="button" target="_bank" title="Nhấn Để Kiểm Tra, Cập Nhật Giao Diện">Hướng Dẫn / Sử Dụng Vietbot</a>
 
 
         <!--  <h6 class="text-center theme-skin-title">Đổi Màu Giao Diện</h6> -->
         <div class="colors text-center">
-            <span class="WhiteBg" id="colorss" title="Nhấn Để Đổi Màu Dao Diện"></span>
-            <span class="01Bg" id="colorss" title="Nhấn Để Đổi Màu Dao Diện"></span>
-            <span class="03Bg" id="colorss" title="Nhấn Để Đổi Màu Dao Diện"></span>
-            <span class="BlackBg" id="colorss" title="Nhấn Để Đổi Màu Dao Diện"></span>
-            <span class="GG01Bg" id="colorss" title="Nhấn Để Đổi Màu Dao Diện"></span>
-            <span class="GG02Bg" id="colorss" title="Nhấn Để Đổi Màu Dao Diện"></span>
+            <span class="WhiteBg" id="colorss" title="Nhấn Để Đổi Màu Giao Diện"></span>
+            <span class="01Bg" id="colorss" title="Nhấn Để Đổi Màu Giao Diện"></span>
+            <span class="03Bg" id="colorss" title="Nhấn Để Đổi Màu Giao Diện"></span>
+            <span class="BlackBg" id="colorss" title="Nhấn Để Đổi Màu Giao Diện"></span>
+            <span class="GG01Bg" id="colorss" title="Nhấn Để Đổi Màu Giao Diện"></span>
+            <span class="GG02Bg" id="colorss" title="Nhấn Để Đổi Màu Giao Diện"></span>
 
         </div>
 

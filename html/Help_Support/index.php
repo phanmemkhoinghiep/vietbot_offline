@@ -98,8 +98,10 @@ Ví Dụ: <<b>Tắt</b>> <<b>quạt phòng khách</b>> hay: <<b>Bật</b>> <<b>�
 - <b>Method</b>: POST<br/><br/>
 <b>Truyền văn bản vào Vietbot để phát thành âm thanh:</b><br/><i>
 - <b>Cấu Trúc body</b>: {"type": 1,"data": "Nội Dung Cần Phát"}<br/><br/></i>
-<b>Truyền văn bản vào Vietbot để hỏi/đáp:</b><br/><i>
+<b>Truyền văn bản vào Vietbot để hỏi/đáp và đọc ra loa:</b><br/><i>
 - <b>Cấu Trúc body</b>: {"type": 2,"data": "Mấy giờ rồi"}<br/><br/></i>
+<b>Truyền văn bản vào Vietbot để hỏi/đáp:</b><br/><i>
+- <b>Cấu Trúc body</b>: {"type": 4,"data": "Mấy giờ rồi"}<br/><br/></i>
 <b>Kiểm tra phiên bản Vietbot:</b><br/><i>
 - <b>Cấu Trúc body</b>: {"type": 3,"data": "vietbot_version"}<br/><br/></i>
 
