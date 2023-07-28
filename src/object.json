@@ -79,6 +79,22 @@
             "value": "ngày mấy"
         }
     ],
+    "what_day_name": [{
+            "value": "thứ nào"
+        },
+        {
+            "value": "thứ gì"
+        },
+        {
+            "value": "thứ nhiêu"
+        },
+        {
+            "value": "thứ bao nhiêu"
+        },
+        {
+            "value": "thứ mấy"
+        }
+    ],
     "what_month": [{
             "value": "tháng nào"
         },
@@ -150,13 +166,16 @@
             "value": "thời tiết"
         },
         {
-            "value": "có mưa"
+            "value": "mưa"
         },
         {
-            "value": "có nắng"
+            "value": "nắng"
         },
         {
-            "value": "có bão"
+            "value": "gió"
+        },
+        {
+            "value": "ẩm"
         }
     ],
     "news": [{
@@ -315,7 +334,7 @@
         },
         {
             "code": "A",
-            "name": "ăm pe"
+            "name": "am pe"
         },
         {
             "code": "kW",
@@ -464,11 +483,11 @@
             "value_eng": "heat"
         },
         {
-            "value": "làm mát",
+            "value": "tuyết",
             "value_eng": "cool"
         },
         {
-            "value": "hút ẩm",
+            "value": "khô",
             "value_eng": "dry"
         },
         {
@@ -485,24 +504,20 @@
             "value_eng": "medium"
         },
         {
-            "value": "lớn nhất",
-            "value_eng": "max"
+            "value": "giữa",
+            "value_eng": "middle"
         },
         {
-            "value": "thấp",
+            "value": "yếu",
             "value_eng": "low"
         },
         {
-            "value": "nhỏ nhất",
-            "value_eng": "min"
-        },
-        {
-            "value": "tự động",
-            "value_eng": "auto"
+            "value": "phe phẩy",
+            "value_eng": "both"
         }
     ],
     "hvac_swing": [{
-            "value": "đảo chiều",
+            "value": "đứng",
             "value_eng": "vertical"
         },
         {
@@ -514,7 +529,7 @@
             "value_eng": "both"
         },
         {
-            "value": "đứng yên",
+            "value": "kín",
             "value_eng": "off"
         }
     ],
@@ -671,6 +686,16 @@
             "value": "ra sao"
         }
     ],  
+    "how_long": [{
+            "value": "bao lâu"
+        },
+        {
+            "value": "bao ngày"
+        },
+        {
+            "value": "mấy ngày"
+        }		
+    ], 
     "information": [{
         "value": "thông tin"
     }],
