@@ -4,7 +4,8 @@
 	},
 	"update_command": "python3 -m pip install --upgrade  GoogleBard edge_tts", 
 	"new_features": "",
-	"improvements": "Giảm tài nguyên và tăng tốc độ xử lý",	
+	"bug_fixed": "Đồng bộ trạng thái đèn LED",	
+	"improvements": "Giảm tài nguyên và tăng tốc độ đọc TTS khi có Text",	
 	"image_version": {
 		"latest": "20-07-2023"
 	}
