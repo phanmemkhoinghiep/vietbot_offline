@@ -117,7 +117,7 @@
                 "value": null,
                 "lang": "vi",
                 "file_name": "em-ơi_raspberry-pi.ppn",
-                "sensitive": 0.1,
+                "sensitive": 0.2,
                 "say_reply": false,
                 "command": null,
                 "active": true
@@ -127,27 +127,7 @@
                 "value": null,
                 "lang": "vi",
                 "file_name": "người-đẹp-ơi_raspberry-pi.ppn",
-                "sensitive": 0.1,
-                "say_reply": false,
-                "command": null,
-                "active": true
-            },
-            {
-                "type": "porcupine",
-                "value": null,
-                "lang": "vi",
-                "file_name": "vợ-đâu-rồi_raspberry-pi.ppn",
-                "sensitive": 0.1,
-                "say_reply": false,
-                "command": null,
-                "active": true
-            },
-            {
-                "type": "porcupine",
-                "value": null,
-                "lang": "vi",
-                "file_name": "con-mụ-kia_raspberry-pi.ppn",
-                "sensitive": 0.1,
+                "sensitive": 0.3,
                 "say_reply": false,
                 "command": null,
                 "active": true
