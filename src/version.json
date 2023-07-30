@@ -1,11 +1,11 @@
 {
 	"vietbot_version": {
-		"latest": "beta 29-07-2023-02"
+		"latest": "beta 30-07-2023-01"
 	},
 	"update_command": "python3 -m pip install --upgrade  GoogleBard edge_tts", 
 	"new_features": "",
-	"bug_fixed": "Đồng bộ trạng thái đèn LED",	
-	"improvements": "Giảm tài nguyên và tăng tốc độ đọc TTS khi có Text",	
+	"bug_fixed": "Bổ sung hiệu ứng Think của LED sau TTS, bỏ PorcupineException trong Modun xử lý Wakeup",	
+	"improvements": "",	
 	"image_version": {
 		"latest": "20-07-2023"
 	}
