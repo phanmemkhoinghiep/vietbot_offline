@@ -4,7 +4,7 @@
 	},
 	"update_command": "python3 -m pip install --upgrade bardapi, edge_tts", 
 	"new_features": "",
-	"bug_fixed": "Bổ sung hiệu ứng Think của LED sau TTS, bỏ PorcupineException trong Modun xử lý Wakeup",	
+	"bug_fixed": "Sửa lỗi Google Bard không trả về kết quả trên 1 số thiết bị",	
 	"improvements": "",	
 	"image_version": {
 		"latest": "20-07-2023"
