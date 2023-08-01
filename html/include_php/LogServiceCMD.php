@@ -299,6 +299,19 @@ $output .= stream_get_contents($stream_out1);
 $output .= "$GET_current_USER@$HostName:~$ >Lệnh Được Thực Hiện Thành Công";
 }
 
+//Restart Apache2
+if (isset($_POST['restart_appache2'])) {
+$connection = ssh2_connect($serverIP, $SSH_Port);
+if (!$connection) {die($E_rror_HOST);}
+if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
+$stream1 = ssh2_exec($connection, "sudo systemctl restart apache2.service");
+stream_set_blocking($stream1, true); 
+$stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO); 
+$output = "$GET_current_USER@$HostName:~$ sudo systemctl restart apache2.service\n";
+$output .= stream_get_contents($stream_out1); 
+$output .= "$GET_current_USER@$HostName:~$ >Lệnh Được Thực Hiện Thành Công";
+}
+
 //Command
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['commandd'])) {
 	$commandnd = @$_POST['commandnd'];
@@ -381,6 +394,7 @@ $output .=  stream_get_contents($stream_out);
 <div class="dropdown-divider"></div>  <button type="submit" name="reboot_power" class="btn btn-dark" title="Khởi Động Lại Toàn Bộ Hệ Thống">Reboot OS</button>
  <div class="dropdown-divider"></div>  <button type='submit' name='set_full_quyen' class='btn btn-dark' title='Cấp Quyền Cho Các File Và Thư Mục Cần Thiết'>Cấp Quyền Chmod</button>
  <div class="dropdown-divider"></div>  <button type='submit' name='set_owner' class='btn btn-dark' title='Chuyển các file và thư mục cần thiết về người dùng pi'>Change Owner</button>
+ <div class="dropdown-divider"></div>  <button type='submit' name='restart_appache2' class='btn btn-dark' title='Restart Apache2'>Restart Apache2</button>
  </center></div></div>
     </form>
     <div id="loading-overlay">

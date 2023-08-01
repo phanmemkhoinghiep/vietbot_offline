@@ -36,7 +36,10 @@ include "../Configuration.php";
 	//Lấy giá trị value trong file json
 	$value_volume = $data_volume->volume;
 	//lấy giá các trị wakeup_reply
+	
 	$GET_wakeupReply = $data_config['smart_wakeup']['wakeup_reply'];
+	
+	
 	//lấy giá các trị value của STT
 	$GET_STT = $data_config['smart_request']['stt']['type'];
 	$GET_STT_GG_ASS_MODE = $data_config['smart_request']['stt']['stt_gg_ass_mode'];
@@ -294,7 +297,7 @@ chmod($backupFile, 0777);
 	//End Chờ xử lý dữ liệu
     // Lấy giá trị từ input
     $Volume_Value = @$_POST['volume_value'];
-	$wakeup_reply = @$_POST['wakeup_reply'];
+	//$wakeup_reply = @$_POST['wakeup_reply'];
 	$STT_Type = @$_POST['stt_type'];
 	$STT_GG_Ass_Mode = @$_POST['stt_gg_ass_mode'];
     $STT_TimeOut = @$_POST['stt_time_out'];
@@ -336,10 +339,27 @@ chmod($backupFile, 0777);
 	file_put_contents($FileVolumeJson, $new_json_data_volume);
 	//Kết thúc lưu giá trị volume
 	// Cập nhật giá trị trong mảng Config.Json
-	$newWakeupReply = [];
-        foreach ($_POST['wakeup_reply'] as $value) {
-            $newWakeupReply[] = array('value' => $value);
-        }
+	 $wakeup_reply = [];
+    $input_values = $_POST["wakeup_reply"];
+	
+	  // Lọc và chỉ lấy các giá trị không rỗng
+    $input_values = array_filter($input_values, function ($value) {
+        return !empty(trim($value));
+    });
+    // Nếu không có giá trị nào thì tạo một giá trị mặc định
+    if (count($input_values) === 0) {
+        $input_values[] = $Limit_Wakeup_Reply_Default_Response;
+    }
+    // Giới hạn số lượng giá trị tối đa là 7
+    $input_values = array_slice($input_values, 0, $max_values);
+    // Tạo mảng "wakeup_reply" từ các giá trị đã được lọc
+    foreach ($input_values as $value) {
+        $wakeup_reply[] = ["value" => $value];
+    }
+    // Cập nhật lại mảng "wakeup_reply" trong dữ liệu
+    $data_config["smart_wakeup"]["wakeup_reply"] = $wakeup_reply;
+	
+		
 	//stt
 	$data_config['smart_request']['stt']['type'] = $STT_Type;
 	$data_config['smart_request']['stt']['stt_gg_ass_mode'] = $STT_GG_Ass_Mode;
@@ -393,7 +413,7 @@ chmod($backupFile, 0777);
 	$data_config['smart_config']['led']['speak_effect'] = intval($Led_Speak_Effect);
 	//Hotword_Engine_Key_Input
 	$data_config['smart_wakeup']['hotword_engine']['key'] = $Hotword_Engine_Key_Input;
-    $data_config['smart_wakeup']['wakeup_reply'] = $newWakeupReply;
+  //  $data_config['smart_wakeup']['wakeup_reply'] = $newWakeupReply;
 	// Cập nhật dữ liệu của từng button từ dữ liệu gửi lên
     foreach ($buttonData as $buttonName => $buttonAttributes) {
         if (isset($data_config['smart_config']['button'][$buttonName])) {
@@ -513,7 +533,7 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx -->
         width: 100%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.5);
-        z-index: 9999;
+        z-index: 99999;
     }
     
     .popup-container.show {
@@ -728,7 +748,6 @@ echo '</div>';
 - <b>Ví Dụ:</b> <a href="http://<?php echo $HostName; ?>:<?php echo $GET_Port_Web_Interface; ?>" target="bank">http://<?php echo $HostName; ?>:<?php echo $GET_Port_Web_Interface; ?></a>
 <br/></div></div><hr/>
 <!-- Kết Thúc  Interface -->  
-
 	<!-- mục  Hotword Engine --> 
 <h5>Hotword Engine KEY: <i class="bi bi-info-circle-fill" onclick="togglePopup()" title="Nhấn Để Tìm Hiểu Thêm"></i></h5>
 <div class="row g-3 d-flex justify-content-center"><div class="col-auto"> 
@@ -755,8 +774,7 @@ echo '</div>';
                 <input type="hidden" name="continuous_asking" value="false">
                 <input type="checkbox" name="continuous_asking" class="custom-control-input" id="continuous-asking" value="true" <?php echo ($continuous_asking) ? 'checked' : ''; ?>>
                 <label class="custom-control-label" for="continuous-asking"></label>
-            </div></div></div>
-<hr/>
+            </div></div></div><hr/>
 <!-- END Trò Chuyện Liên Tục -->
 <!--Bắt Đầu STT Speak To Text -->  
 <h5> Speech to Text Engine: <i class="bi bi-info-circle-fill" onclick="togglePopupSTT()" title="Nhấn Để Tìm Hiểu Thêm"></i></h5><center>
@@ -779,7 +797,6 @@ FPT</label>&nbsp;<label>
 Viettel</label>&nbsp;<label>
 <input type="radio" name="stt_type" title="Chuyển Giọng Nói Thành Văn Bản Server HPDA" value="stt_hpda" <?php if ($GET_STT === 'stt_hpda') echo 'checked'; ?> required onchange="toggleTokenInput(this)">
 HPDA</label>
-
 <br/>
 <div id="tokenInputContainer" style="display: none;">
 <div class="row g-3 d-flex justify-content-center"><div class="col-auto">
@@ -824,10 +841,13 @@ HPDA</label>
 Google Cloud</label>&nbsp;<label>
 <input type="radio" onclick="disableRadio()" name="tts_company" value="tts_gg_free" <?php if ($GET_TTS_Type === 'tts_gg_free') echo 'checked'; ?> onchange="showTokenInputTTS(this)" required>
 Google Free</label>&nbsp;<label>
-<input type="radio" onclick="disableRadio()" name="tts_company" value="tts_fpt" <?php if ($GET_TTS_Type === 'tts_fpt') echo 'checked'; ?> onchange="showTokenInputTTS(this)" required>
+<!--
+<input type="radio" onclick="disableRadio()" name="tts_company" value="tts_fpt" <?php //if ($GET_TTS_Type === 'tts_fpt') echo 'checked'; ?> onchange="showTokenInputTTS(this)" required>
 FPT</label>&nbsp;<label>
-<input type="radio" onclick="disableRadio()" name="tts_company" value="tts_viettel" <?php if ($GET_TTS_Type === 'tts_viettel') echo 'checked'; ?> onchange="showTokenInputTTS(this)" required>
+
+<input type="radio" onclick="disableRadio()" name="tts_company" value="tts_viettel" <?php //if ($GET_TTS_Type === 'tts_viettel') echo 'checked'; ?> onchange="showTokenInputTTS(this)" required>
 Viettel</label>&nbsp;<label>
+-->
 <input type="radio" onclick="disableRadio()" name="tts_company" value="tts_zalo" <?php if ($GET_TTS_Type === 'tts_zalo') echo 'checked'; ?> onchange="showTokenInputTTS(this)" required>
 Zalo</label>&nbsp;<label>
 <input type="radio" onclick="disableRadio()" name="tts_company" value="tts_edge" <?php if ($GET_TTS_Type === 'tts_edge') echo 'checked'; ?> onchange="showTokenInputTTS(this)" required>
@@ -1177,8 +1197,6 @@ None (Không Dùng)</label></center>
 <i id="downIconzxcans" title="Nhấn Để Đóng Cấu Hình Cài Đặt Wake Up Reply" class="bi bi-arrow-down-circle-fill" ></i>
 </div>
 </div>
-
-
  <div id="myDivzxcans" style="display: none;"> 
 <div class="row justify-content-center"><div class="col-auto">
 <table class="table table-bordered">
@@ -1204,13 +1222,7 @@ None (Không Dùng)</label></center>
         echo "</tr>";
     }
     ?>
-</tbody></table></div></div></div>
-	<hr/>
-	
-
-	
-	
-	
+</tbody></table></div></div></div><hr/>
 	<!-- mục  Wake Up Reply --> 
 	<!-- <div id="additionalDiv" class="hidden">  -->
 <h5>Phản Hồi Của Bot Khi Đánh Thức: <i class="bi bi-info-circle-fill" onclick="togglePopupWAKEUP()" title="Nhấn Để Tìm Hiểu Thêm"></i></h5>
@@ -1226,37 +1238,41 @@ None (Không Dùng)</label></center>
 - <i><b>Yêu Cầu:</b> Tích Vào <b>"Phản Hồi Của Bot Khi Đánh Thức"</b> Trong Mục Hotword Để Kích Hoạt Theo Từng Hotword<br/></i>
 - <i><b>Chức Năng:</b> Trả lời khi được gọi hoặc đánh thức<br/></i>
 - <i><b>Câu Trả Lời:</b> tự động chọn ngẫu nhiên 1 trong các câu trả lời để phản hồi lại.<br/></i>
+- <i><b>Muốn Xóa Câu trả Lời:</b> Xóa văn bản 1 hoặc nhiều ô rồi nhấn lưu.<br/></i>
 <i><center>Nếu Wake Up Reply không hiển thị để chỉnh sửa tức là nội dung trong <b>config.json</b> không phù hợp, vượt quá <?php echo $Limit_Wakeup_Reply; ?> giá trị</center></i>
 <br/></div></div>
  <div id="myDivzxc" style="display: none;"> 
-<?php
-// Kiểm tra số lượng giá trị và hiển thị kết quả
-if (count($GET_wakeupReply) > $Limit_Wakeup_Reply) {
-    echo "<center><h5> Wake Up Reply Không Được Hiển Thị Do <b>config.json<b/> Không Phù Hợp, Vượt Quá $Limit_Wakeup_Reply Giá Trị</h5></center>";
-	    foreach ($GET_wakeupReply as $index => $reply) {
-        echo '<div style="display: none;"><input type="hidden" name="wakeup_reply[]" id="input' . ($index + 1) . '" value="' . $reply['value'] . '" placeholder="' . $reply['value'] . '" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-			</div>';
+    <?php
+if (count($data_config['smart_wakeup']['wakeup_reply']) > $Limit_Wakeup_Reply) {
+	 echo "<center><h5> Wake Up Reply Không Được Hiển Thị Do <b>config.json<b/> Không Phù Hợp, Vượt Quá $Limit_Wakeup_Reply Giá Trị</h5></center>";
+    foreach ($data_config['smart_wakeup']['wakeup_reply'] as $index => $reply) {
+        $value = isset($reply['value']) ? $reply['value'] : '';
+        echo '<div style="display: none;">
+		<div class="input-group mb-3 d-flex justify-content-center"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">Câu Trả Lời ' . ($index + 1) . ':</span></div>
+		<div class="col-md-6"><div class="form-outline"><input type="text" name="wakeup_reply[]" value="' . htmlspecialchars($value) . '" class="form-control" aria-label="Username" aria-describedby="basic-addon1"></div></div></div></div>';
     }
 } 
 else {
-    foreach ($GET_wakeupReply as $index => $reply) {
-        echo '<div class="input-group mb-3 d-flex justify-content-center"><div class="input-group-prepend">
-			<span class="input-group-text" id="basic-addon1">Câu Trả Lời ' . ($index + 1) . ':</span></div>  <div class="col-md-6">
-            <div class="form-outline"> <input type="text" name="wakeup_reply[]" id="input' . ($index + 1) . '" value="' . $reply['value'] . '" placeholder="' . $reply['value'] . '" class="form-control" aria-label="Username" aria-describedby="basic-addon1"></div>         </div>
-			</div>';
+    // Hiển thị các giá trị vào các ô input
+    foreach ($data_config['smart_wakeup']['wakeup_reply'] as $index => $reply) {
+        $value = isset($reply['value']) ? $reply['value'] : '';
+        echo '<div class="input-group mb-3 d-flex justify-content-center"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">Câu Trả Lời ' . ($index + 1) . ':</span></div>
+		<div class="col-md-6"><div class="form-outline"><input type="text" name="wakeup_reply[]" value="' . htmlspecialchars($value) . '" class="form-control" aria-label="Username" aria-describedby="basic-addon1"></div></div></div>';
+    }
+    // Hiển thị thẻ input để nhập mới nếu mảng có ít hơn 7 giá trị
+    if (count($data_config['smart_wakeup']['wakeup_reply']) < $Limit_Wakeup_Reply) {
+        echo '<div class="input-group mb-3 d-flex justify-content-center"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">Thêm Mới Câu Trả Lời ' . ($index + 2) . ':</span></div>
+		<div class="col-md-6"><div class="form-outline">
+		<input type="text" name="wakeup_reply[]" value="" placeholder="Thêm Mới Câu trả Lời" class="form-control" aria-label="Username" aria-describedby="basic-addon1"></div></div></div>';
     }
     }
-?>
+    ?>
 </div><hr/>
 <!-- </div> -->
 <!--Kết Thúc mục  Wake Up Reply --> 		
 <center>
 <input type="submit" class="btn btn-success" name="config_setting" value="Lưu Cấu Hình">  <a href="<?php echo $PHP_SELF ?>"><button type="submit" class="btn btn-danger">Hủy Bỏ/Làm Mới</button></a>
  <button type="submit" name="restart_vietbot" class="btn btn-warning">Khởi Động Lại VietBot</button></center>
-
-
-
-
      <div class="chatbox-container" onclick="toggleChatbox()" title="Nhấn Để Thay Đổi Ngôn Ngữ Gọi Hotword"><center><b>Ngôn <br/>Ngữ</b></center></div>
     <div id="chatbox-content" class="chatbox-content"><br/>
 <div class="col-auto">
@@ -1269,15 +1285,7 @@ else {
 </tr><tr><td> <center><input type="radio" name="language_hotword" id="language_hotwordddd" value="vi"></center></td>
 <td><center><input type="radio" name="language_hotword" id="language_hotwordddd1" value="eng"></center></td>
 </tr><tr><th><center><button type="submit" name="language_hotword_submit" class="btn btn-success">Lưu Cài Đặt</button></th> 
-<th><p onclick="uncheckRadiolanguage_hotwordddd()" class="btn btn-danger">Bỏ Chọn</p></th></center></th></tr></tbody></table></div>
-
-
-
-
-    </div>
- 
- 
- </form><hr/>    
+<th><p onclick="uncheckRadiolanguage_hotwordddd()" class="btn btn-danger">Bỏ Chọn</p></th></center></th></tr></tbody></table></div></div></form><hr/>    
 <center><h5>Khôi Phục File config.json: <i class="bi bi-info-circle-fill" onclick="togglePopupConfigRecovery()" title="Nhấn Để Tìm Hiểu Thêm"></i></h5></center>
 <div class="form-check form-switch d-flex justify-content-center"> 
 <div id="toggleIcon" onclick="toggleDivConfigRecovery()">
@@ -1310,12 +1318,6 @@ if (count($fileLists) > 0) {
     echo "Không tìm thấy file backup config trong thư mục.";
 }
 ?></div></div>
-
-
-
-
-
-
 	<script src="../assets/js/bootstrap.js"></script>
 	<script src="../assets/js/jquery.min.js"></script>
 	<script src="../assets/js/axios_0.21.1.min.js"></script>

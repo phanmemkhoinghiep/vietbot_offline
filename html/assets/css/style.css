@@ -1635,7 +1635,7 @@ textarea:-moz-placeholder {
 
 /*------------------------- ColorPallet -------------------------*/
 .color-switcher .color-pallet {
-  top: 25px;
+  top: 40px;
   z-index: 1100;
   position: fixed;
   transition: all 0.3s ease;

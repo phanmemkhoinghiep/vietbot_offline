@@ -157,7 +157,7 @@
     "smart_request": {
         "continuous_asking": false,
         "stt": {
-            "type": "stt_gg_ass",
+            "type": "stt_gg_free",
             "token": "",
             "stt_gg_ass_mode": "default",
             "credentials_file": "credentials.json",
@@ -166,7 +166,7 @@
         }
     },
     "smart_answer": {
-        "startup_state_speaking": true,
+		"startup_state_speaking": true,        
         "sound": {
             "default": {
                 "start": "sound/default/ding.mp3",
@@ -177,21 +177,21 @@
                 "start": "sound/custom/"
             },
             "welcome": {
-                "mode": "path",
+                "mode": "text",
                 "path": "sound/welcome/welcome.mp3",
                 "text": "Xin chào mời đọc khẩu lệnh, để ra lệnh"
             }
         },
         "tts": {
             "type": "tts_gg_free",
-            "token": null,
+            "token": "",
             "voice_name": null,
             "voice_profile": null,
             "speed": null,
             "pitch": null
         },
-        "external_bot_priority_1": "gg_ass",
-        "external_bot_priority_2": "gg_bard",
+        "external_bot_priority_1": "gg_bard",
+        "external_bot_priority_2": "gg_ass",
         "external_bot_priority_3": "chatGPT",
         "pre_answer_timeout": 8,
         "pre_answer": [

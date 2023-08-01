@@ -20,20 +20,20 @@ include "../Configuration.php";
         /*  height: 100vh;*/
         
         background-color: #d2d8bb;
+		 
     }
     
-    .chat-container {
-        max-width: 70%;
-        width: 550px;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        height: 70vh;
-    }
-    
+        .chat-container {
+            max-width: 100%;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 70vh;
+        }
     #chatbox {
         flex-grow: 1;
         overflow-y: auto;

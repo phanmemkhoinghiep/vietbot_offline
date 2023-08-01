@@ -1,7 +1,7 @@
 {
   "ui_version": {
-    "latest": "beta 27-07-2023-2",
-    "current": "beta 27-07-2023-2",
-    "notification": "Nội Dung Chính: Cập nhật TTS Microsoft EDGE, Cập nhật Giọng Đọc EDGE"
+    "latest": "beta 31-07-2023",
+    "current": "beta 31-07-2023",
+    "notification": "Nội Dung Chính: Loại bỏ TTS Viettel và FPT (Fix Bug: Wake Up Reply)"
   }
 }

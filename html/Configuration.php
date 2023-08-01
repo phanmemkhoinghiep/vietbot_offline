@@ -55,6 +55,8 @@ $Limit_Telegram = "3";
 
 //Giới hạn Phản Hồi Khi Được Đánh Thức
 $Limit_Wakeup_Reply = "7";
+$Limit_Wakeup_Reply_Default_Response = "Dạ";
+
 
 //giới hạn số lượng file config cần backup (Khi Nội Dụng config.json bị thay đổi ở dao diện)
 $Limit_Config_Backup = "10";

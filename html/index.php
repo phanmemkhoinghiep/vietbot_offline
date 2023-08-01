@@ -28,22 +28,92 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
     <link rel="stylesheet" href="assets/css/magnific-popup.css">
     <link rel="stylesheet" href="assets/css/style.css">
 	  <script src="assets/js/ajax_jquery_3.6.0_jquery.min.js"></script>
-	  <style>
+<style>
     .blinking-container {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background-color: #f1f1f1;
-      text-align: center;
-      z-index: 9999;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: #f1f1f1;
+        text-align: center;
+        z-index: 9999;
     }
-
+    
     .ptexxt {
-	  margin-bottom: 0rem;
+        margin-bottom: 0rem;
     }
-
-
-	  </style>
+    
+    .contentt {
+        z-index: 9999999;
+        width: 100%;
+        padding: 20px;
+        position: relative;
+    }
+    
+    .right-sidebar {
+        border-radius: 10px;
+        position: fixed;
+        top: 10px;
+        right: -100%;
+        width: 40%;
+        height: auto;
+        background-color: #d2d8bb;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        transition: right 0.3s ease;
+        z-index: 1;
+    }
+    
+    @media (max-width: 768px) {
+        /* Media query for mobile devices */
+        
+        .right-sidebar {
+            width: 100%;
+            /* Width for mobile */
+        }
+    }
+    
+    .toggle-btnnn {
+        cursor: pointer;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        position: absolute;
+        top: 0;
+        right: 20px;
+        z-index: 2;
+        /* Ensure it appears above .right-sidebar */
+    }
+    
+    .toggle-btnnn:focus {
+        outline: none;
+    }
+    /* Add background overlay style */
+    
+    .background-overlay {
+        display: none;
+        /* Initially hidden */
+        
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        /* Semi-transparent background */
+        
+        z-index: 0;
+        /* Set a lower z-index to be behind .right-sidebar */
+    }
+    
+    a.cp-toggleee {
+        z-index: 1000;
+        transition: all 0.3s ease;
+        border-radius: 0.75rem;
+        background: rgb(255 255 255 / 20%);
+        border: 1px solid rgb(255 255 255 / 30%);
+        -webkit-backdrop-filter: blur(10px);
+    }
+</style>
 </head>
 <body>
     <script>
@@ -148,12 +218,12 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
               <span>Skill</span>
             </a>
           </li>
-		            <li class="list-group-item">
+		        <!--    <li class="list-group-item">
             <a href="#ChatBot">
               <i class="bi bi-chat-dots" title="Chat Bot"></i>
               <span>ChatBot</span>
             </a>
-          </li>
+          </li> -->
           <li class="list-group-item">
             <a href="#File_Shell">
               <i class="bi bi-file-earmark-code" title="Quản Lý File"></i>
@@ -405,9 +475,8 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
     <div class="container">
         <h3 class="subtitle">Cập Nhật Giao Diện</h3>
         <iframe src="./ui_update/index.php" width="100%" height="570px"></iframe>
-		
+	
 </section>
-
 <!-- Contact Start -->
 <section id="Skill" class="section contact w-100 bg-gray-400 text-white">
     <div class="container">
@@ -458,15 +527,35 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
             <span class="BlackBg" id="colorss" title="Nhấn Để Đổi Màu Giao Diện"></span>
             <span class="GG01Bg" id="colorss" title="Nhấn Để Đổi Màu Giao Diện"></span>
             <span class="GG02Bg" id="colorss" title="Nhấn Để Đổi Màu Giao Diện"></span>
-
         </div>
-
     </div>
-    <div class="pallet-button hide" title="Nhấn Để Hiển Thị Cài Đặt">
-        <a href="javascript:void(0)" class="cp-toggle"><i class="bi bi-gear"></i></a>
-    </div>
+    <div class="pallet-button hide" >
+        <a href="javascript:void(0)" class="cp-toggle"><i class="bi bi-gear" title="Nhấn Để Hiển Thị Cài Đặt"></i></a>
+		<div>
 
+ <a onclick="toggleSidebar()" class="cp-toggleee"><i class="bi bi-chat-dots" title="Nhấn Để Mở ChatBot"></i></a></div>
+	</div>
 </div>
+
+    <div class="contentt">
+        <!-- Content of your website goes here -->
+      
+
+        <!-- Add background overlay element -->
+        <div class="background-overlay" onclick="closeSidebar()"></div>
+
+        <div class="right-sidebar" id="sidebar" onclick="event.stopPropagation()">
+            <!-- Your sidebar content goes here -->
+            <div class="toggle-btnnn-container">
+            <center>   <a onclick="toggleSidebar()" class="cp-toggleee"><i class="bi bi-x-circle-fill" title="Nhấn để đóng"></i></a></center>
+		
+			
+				 <iframe src="./include_php/ChatBot.php" width="100%" height="570px"></iframe>
+               
+            </div>
+        </div>
+    </div>
+
 	<!--
 	  <div class="footer-text">
      <?php echo "Phiên bản UI: ".$dataVersion->ui_version->current; ?>
@@ -671,6 +760,40 @@ if ($remoteValue !== $localValue) {
     document.addEventListener('mouseup', handleInteractionEnd);
     document.addEventListener('touchend', handleInteractionEnd);
 </script>
+
+    <script>
+	//Chatbox Slide
+        let isSidebarOpen = false; // Variable to keep track of sidebar state
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+
+            // Check the current state of the sidebar
+            if (isSidebarOpen) {
+                sidebar.style.right = '-100%';
+                isSidebarOpen = false;
+            } else {
+                sidebar.style.right = '0';
+                isSidebarOpen = true;
+            }
+
+            // Show/hide the background overlay accordingly
+            const backgroundOverlay = document.querySelector('.background-overlay');
+            backgroundOverlay.style.display = isSidebarOpen ? 'block' : 'none';
+        }
+
+        function closeSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const sidebarWidth = sidebar.clientWidth;
+
+            if (isSidebarOpen) {
+                sidebar.style.right = `-${sidebarWidth}px`;
+                // Hide the background overlay
+                const backgroundOverlay = document.querySelector('.background-overlay');
+                backgroundOverlay.style.display = 'none';
+                isSidebarOpen = false;
+            }
+        }
+    </script>
 </body>
 
 </html>
