@@ -16,7 +16,7 @@
             "muted_color": "FF3333",
             "listen_effect": 1,
             "think_effect": 2,
-            "speak_effect": 6
+            "speak_effect": 3
         },
         "button": {
             "down": {
