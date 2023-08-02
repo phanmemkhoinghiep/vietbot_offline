@@ -166,16 +166,13 @@
             "value": "thời tiết"
         },
         {
-            "value": "mưa"
+            "value": "có mưa"
         },
         {
-            "value": "nắng"
+            "value": "có nắng"
         },
         {
-            "value": "gió"
-        },
-        {
-            "value": "ẩm"
+            "value": "có gió"
         }
     ],
     "news": [{
@@ -483,11 +480,11 @@
             "value_eng": "heat"
         },
         {
-            "value": "tuyết",
+            "value": "làm mát",
             "value_eng": "cool"
         },
         {
-            "value": "khô",
+            "value": "hút ẩm",
             "value_eng": "dry"
         },
         {
@@ -504,20 +501,24 @@
             "value_eng": "medium"
         },
         {
-            "value": "giữa",
-            "value_eng": "middle"
+            "value": "lớn nhất",
+            "value_eng": "max"
         },
         {
-            "value": "yếu",
+            "value": "thấp",
             "value_eng": "low"
         },
         {
-            "value": "phe phẩy",
-            "value_eng": "both"
+            "value": "nhỏ nhất",
+            "value_eng": "min"
+        },
+        {
+            "value": "tự động",
+            "value_eng": "auto"
         }
     ],
     "hvac_swing": [{
-            "value": "đứng",
+            "value": "đảo gió",
             "value_eng": "vertical"
         },
         {
@@ -529,7 +530,7 @@
             "value_eng": "both"
         },
         {
-            "value": "kín",
+            "value": "đứng yên",
             "value_eng": "off"
         }
     ],
