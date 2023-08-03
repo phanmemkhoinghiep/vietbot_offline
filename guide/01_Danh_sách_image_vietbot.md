@@ -1,3 +1,5 @@
+### Link image 24/07: Img dành riêng cho mạch AiO
+https://drive.google.com/file/d/1flgn0MO9yGwOl0r5_IRe4CvrveCz71CH/view?usp=drive_link
 ### Link image 11/07:
 https://drive.google.com/file/d/1Dtc-gEcgzj6AyF0ZMgz8GIMoQ4Tjavea/view?usp=drivesdk
 - Ngày 11/07, tối ưu từ bản 20/5
