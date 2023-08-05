@@ -1,9 +1,9 @@
 {
 	"vietbot_version": {
-		"latest": "beta 04-08-2023-02"
+		"latest": "beta 05-08-2023-01"
 	},
 	"update_command": "", 
-	"new_features": "",
+	"new_features": "Giữ phím không cần phải nhả tay vẫn có tác dụng",
 	"bug_fixed": "Tối ưu tốc độ xử lý",	
 	"improvements": "",	
 	"image_version": {
