@@ -1,10 +1,10 @@
 {
 	"vietbot_version": {
-		"latest": "beta 05-08-2023-01"
+		"latest": "beta 07-08-2023-01"
 	},
 	"update_command": "", 
-	"new_features": "Giữ phím không cần phải nhả tay vẫn có tác dụng",
-	"bug_fixed": "Tối ưu tốc độ xử lý",	
+	"new_features": "",
+	"bug_fixed": "Đèn Led Mute khi Playback",	
 	"improvements": "",	
 	"image_version": {
 		"latest": "2023-07-24"
