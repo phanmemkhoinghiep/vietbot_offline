@@ -488,6 +488,10 @@
             "value_eng": "dry"
         },
         {
+            "value": "quạt gió",
+            "value_eng": "fan_only"
+        },
+        {
             "value": "tự động",
             "value_eng": "auto"
         }
