@@ -15,6 +15,7 @@ $skillArray = json_decode($skillData, true);
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
     <link rel="stylesheet" href="../assets/css/bootstrap-icons.css">
     <link rel="stylesheet" href="../assets/css/4.5.2_css_bootstrap.min.css">
+	   <link rel="stylesheet" href="../assets/css/loading.css">
 		<script src="../assets/js/3.5.1_jquery.min.js"></script>
 		<script src="../assets/js/1.16.0_umd_popper.min.js"></script>
   <style>
@@ -65,34 +66,6 @@ $skillArray = json_decode($skillData, true);
       border: 1px solid gray;
       border-radius: 5px;
     }
-	#loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    display: none;
-}
-#loading-icon {
-    width: 30px;
-    height: 30px;
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-#loading-message {
-	   position: absolute;
-    color: white;
-	  top: 57%;
-    left: 50%;
-	  transform: translate(-50%, -50%);
-}
 .scrollable-divradio {
            
             height: 200px; 
@@ -162,9 +135,6 @@ copy($FileSkillJson, $backupFile);
 chmod($backupFile, 0777);
 	// echo "Đã sao chép thành công tệp tin skill.json sang $backupFile";
 	//END Backup Skill
-	
-		
-		
     $anniversary_data = $skillArray['anniversary_data'];
     $new_anniversary_data = [];
     $count = min(count($_POST['namei']), count($_POST['day']), count($_POST['month']));
@@ -289,6 +259,14 @@ chmod($backupFile, 0777);
     $skillArray['gg_bard']['Secure_1PSIDTS'] = $Google_bard_Secure_1PSIDTS;
 	// Google Asssitant Mode
     $skillArray['gg_ass']['mode'] = $Google_Assistant_Mode;
+	//Lưu Chế Độ Ưu Tiên
+	$skillArray['external_bot']['priority_1'] = @$_POST['priority1'];
+	$skillArray['external_bot']['priority_2'] = @$_POST['priority2'];
+	$skillArray['external_bot']['priority_3'] = @$_POST['priority3'];
+	//Lưu Chế Độ Ưu Tiên Media Player
+	$skillArray['music_source']['priority_1'] = @$_POST['music_source_priority1'];
+	$skillArray['music_source']['priority_2'] = @$_POST['music_source_priority2'];
+	$skillArray['music_source']['priority_3'] = @$_POST['music_source_priority3'];
 	//Telegram
     $skillArray['telegram']['token'] = $TelegramKey;
     $skillArray['telegram']['active'] = $activeTelegram;
@@ -392,7 +370,7 @@ if (count($fileLists) > 0) {
 }
 ?>
 <!-- Form để hiển thị và chỉnh sửa dữ liệu -->
-<form id="my-form"  method="POST">
+<form id="my-form" onsubmit="return vuTuyen();"  method="POST">
 <h5>Open Weather Map: <i class="bi bi-info-circle-fill" onclick="togglePopupOpenWeatherMap()" title="Nhấn Để Tìm Hiểu Thêm"></i></h5>
       <div id="popupContainerOpenWeatherMap" class="popup-container" onclick="hidePopupOpenWeatherMap()">
     <div id="popupContent" onclick="preventEventPropagationOpenWeatherMap(event)">
@@ -508,6 +486,118 @@ B4: Go to Application -> Cookies -> __Secure-1PSID and __Secure-1PSIDTS
             <label class="custom-control-label" for="gg_ass_Mode"></label>
 </div></div></div>
 <hr/>
+
+
+
+<h5>Ưu Tiên Trợ Lý Ảo/AI:</h5>
+<?php
+	//Get Ưu tiên Trợ Lý Ảo/ AI
+	$external_bot_priority_1 = $skillArray['external_bot']['priority_1'];
+	$external_bot_priority_2 = $skillArray['external_bot']['priority_2'];
+	$external_bot_priority_3 = $skillArray['external_bot']['priority_3'];
+?>
+<div class="form-check form-switch d-flex justify-content-center">   <div class="col-auto">
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col" colspan="2"><center>Chọn Thứ Tự Ưu Tiên Trợ Lý Của Bạn</center></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Top 1:</th>
+      <td>    
+	  <select class="custom-select" name="priority1" id="priority1">
+        <option value="">-- Chọn Trợ Lý/AI 1 --</option>
+        <option value="gg_bard" <?php if ($external_bot_priority_1 === "gg_bard") echo "selected"; ?>>Google Bard</option>
+        <option value="gg_ass" <?php if ($external_bot_priority_1 === "gg_ass") echo "selected"; ?>>Google Assistant</option>
+        <option value="chatGPT" <?php if ($external_bot_priority_1 === "chatGPT") echo "selected"; ?>>Chat GPT</option>
+    </select></td>
+
+    </tr>
+    <tr>
+      <th scope="row">Top 2:</th>
+      <td>    
+	  <select class="custom-select" name="priority2" id="priority2">
+        <option value="">-- Chọn Trợ Lý/AI 2 --</option>
+        <option value="gg_bard" <?php if ($external_bot_priority_2 === "gg_bard") echo "selected"; ?>>Google Bard</option>
+        <option value="gg_ass" <?php if ($external_bot_priority_2 === "gg_ass") echo "selected"; ?>>Google Assistant</option>
+        <option value="chatGPT" <?php if ($external_bot_priority_2 === "chatGPT") echo "selected"; ?>>Chat GPT</option>
+    </select></td>
+
+    </tr>
+    <tr>
+      <th scope="row">Top 3:</th>
+      <td>    
+	  <select class="custom-select" name="priority3" id="priority3" onchange="vuTuyen()">
+        <option value="">-- Chọn Trợ Lý/AI 3 --</option>
+        <option value="gg_bard" <?php if ($external_bot_priority_3 === "gg_bard") echo "selected"; ?>>Google Bard</option>
+        <option value="gg_ass" <?php if ($external_bot_priority_3 === "gg_ass") echo "selected"; ?>>Google Assistant</option>
+        <option value="chatGPT" <?php if ($external_bot_priority_3 === "chatGPT") echo "selected"; ?>>Chat GPT</option>
+    </select></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<hr/>
+
+
+<h5>Ưu Tiên Nguồn Phát Media Player:</h5>
+<?php
+	//Get Ưu tiên Trợ Lý Ảo/ AI
+	$music_source_priority_1 = $skillArray['music_source']['priority_1'];
+	$music_source_priority_2 = $skillArray['music_source']['priority_2'];
+	$music_source_priority_3 = $skillArray['music_source']['priority_3'];
+?>
+<div class="form-check form-switch d-flex justify-content-center">   <div class="col-auto">
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col" colspan="2"><center>Chọn Thứ Tự Nguồn Phát Media Player</center></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Top 1:</th>
+      <td>    
+	  <select class="custom-select" name="music_source_priority1" id="music_source_priority1">
+        <option value="">-- Chọn Trợ Lý/AI 1 --</option>
+        <option value="local" <?php if ($music_source_priority_1 === "local") echo "selected"; ?>>Local</option>
+        <option value="ZingMP3" <?php if ($music_source_priority_1 === "ZingMP3") echo "selected"; ?>>ZingMP3</option>
+        <option value="Youtube" <?php if ($music_source_priority_1 === "Youtube") echo "selected"; ?>>Youtube</option>
+    </select></td>
+
+    </tr>
+    <tr>
+      <th scope="row">Top 2:</th>
+      <td>    
+	  <select class="custom-select" name="music_source_priority2" id="music_source_priority2">
+        <option value="">-- Chọn Trợ Lý/AI 2 --</option>
+        <option value="local" <?php if ($music_source_priority_2 === "local") echo "selected"; ?>>Local</option>
+        <option value="ZingMP3" <?php if ($music_source_priority_2 === "ZingMP3") echo "selected"; ?>>ZingMP3</option>
+        <option value="Youtube" <?php if ($music_source_priority_2 === "Youtube") echo "selected"; ?>>Youtube</option>
+    </select></td>
+
+    </tr>
+    <tr>
+      <th scope="row">Top 3:</th>
+      <td>    
+	  <select class="custom-select" name="music_source_priority3" id="music_source_priority3" onchange="vuTuyen()">
+        <option value="">-- Chọn Trợ Lý/AI 3 --</option>
+        <option value="local" <?php if ($music_source_priority_3 === "local") echo "selected"; ?>>Local</option>
+        <option value="ZingMP3" <?php if ($music_source_priority_3 === "ZingMP3") echo "selected"; ?>>ZingMP3</option>
+        <option value="Youtube" <?php if ($music_source_priority_3 === "Youtube") echo "selected"; ?>>Youtube</option>
+    </select></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<hr/>
+
+
+
 <h5>Telegram: <i class="bi bi-info-circle-fill" onclick="togglePopupTelegram()" title="Nhấn Để Tìm Hiểu Thêm"></i></h5>
       <div id="popupContainerTelegram" class="popup-container" onclick="hidePopupTelegram()">
     <div id="popupContent" onclick="preventEventPropagationTelegram(event)">
@@ -965,7 +1055,38 @@ if (count($fileLists) > 0) {
     div.style.display = 'block'; // Hiển thị div khi có nội dung
   }
 });
-//Khởi động Lại vietbot
+//Check Thứ Tự Ưu Tiên
+function vuTuyen() {
+	    const priority1 = document.getElementById("priority1").value;
+        const priority2 = document.getElementById("priority2").value;
+        const priority3 = document.getElementById("priority3").value;
+        if (priority1 !== '' && priority2 !== '' && priority3 !== '') {
+            if (priority1 === priority2 || priority1 === priority3 || priority2 === priority3) {
+                alert("Lỗi: Các giá trị ưu tiên của Trợ Lý không được phép trùng nhau! \n\n Hệ thống sẽ tự động làm mới lại trang");
+			 event.preventDefault(); // Ngăn việc gửi form
+			  window.location.reload();
+                return false;
+
+            }
+        }
+        //return true;
+	    const music_source_priority1 = document.getElementById("music_source_priority1").value;
+        const music_source_priority2 = document.getElementById("music_source_priority2").value;
+        const music_source_priority3 = document.getElementById("music_source_priority3").value;
+        if (music_source_priority1 !== '' && music_source_priority2 !== '' && music_source_priority3 !== '') {
+            if (music_source_priority1 === music_source_priority2 || music_source_priority1 === music_source_priority3 || music_source_priority2 === music_source_priority3) {
+                alert("Lỗi: Các giá trị ưu tiên của Nguồn Phát Media Player không được phép trùng nhau! \n\n Hệ thống sẽ tự động làm mới lại trang");
+			 event.preventDefault(); // Ngăn việc gửi form
+			  window.location.reload();
+                return false;
+
+            }
+        }
+        return true;
+		
+	
+}
+
 </script>
 	<script src="../assets/js/bootstrap.js"></script>
 	<script src="../assets/js/jquery.min.js"></script>

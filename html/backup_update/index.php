@@ -11,6 +11,7 @@ include "../Configuration.php";
     <title><?php echo $MYUSERNAME; ?>, Update Vietbot src</title>
     <link rel="shortcut icon" href="../assets/img/VietBot128.png">
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/loading.css">
 
     <style>
         body {
@@ -51,37 +52,6 @@ include "../Configuration.php";
         .scrollable-menu {
             height: auto;
             max-height: 200px;
-        }
-        
-        #loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            display: none;
-        }
-        
-        #loading-icon {
-            width: 30px;
-            height: 30px;
-            position: absolute;
-            top: 45%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        
-        #loading-message {
-            position: absolute;
-            color: white;
-            top: 57%;
-            left: 50%;
-            transform: translate(-50%, -50%);
         }
         
         .my-div {
@@ -314,18 +284,38 @@ if (!is_dir($DuognDanThuMucJson)) {
                         <td>-</td>
 
                     </tr>
+					                  <br/>  <tr>
+									     <th colspan="4">
+                            <center class="text-danger">Lựa Chọn Nâng Cao Khi Cập Nhật Hoàn Tất</center>
+                        </th></tr><tr>
+                        <th>
+                            <center title="Khởi Động Lại Toàn Bộ Hệ Thống Loa Thông Minh Vietbot">Reboot Hệ Thống:</center>
+                        </th>
+						  <td>
+                           <input type="checkbox"  title="Khởi Động Lại Toàn Bộ Hệ Thống Loa Thông Minh Vietbot" name="reboot_checked" class="single-checkbox form-check-input" value="sudo_reboot">
+						
+                        </td>
+                        <th>
+                            <center  title="Chỉ Khởi Động Lại Trợ Lý Vietbot">Restart Vietbot:</center>
+                        </th>
+								  <td>
+                           <input type="checkbox" name="restart_vietbot_checked" class="single-checkbox form-check-input" title="Chỉ Khởi Động Lại Trợ Lý Vietbot" value="restart_vietbot_checked">
+                        </td>
+                    </tr>
                     <tr>
                         <th scope="row" colspan="4">
                             <div class="form-check form-switch d-flex justify-content-center">
                                 <div class="input-group">
-                                    <input type="submit" name="checkforupdates" class="btn btn-success" value="Kiểm Tra">
-                                    <input type="submit" name="backup_update" class="btn btn-warning" value="Cập Nhật">
+                                    <input type="submit" name="checkforupdates" class="btn btn-success" title="Kiểm Tra Phiên Bản Vietbot Mới" value="Kiểm Tra">
+                                    <input type="submit" name="backup_update" class="btn btn-warning" title="Cập Nhật Lên Phiên Bản Vietbot Mới" value="Cập Nhật">
                                     <a class="btn btn-danger" href="<?php echo $PHP_SELF; ?>" role="button">Làm Mới</a>
-                                    <button type="submit" name="restart_vietbot" class="btn btn-dark">Restart VietBot</button>
+                                    <button type="submit" name="restart_vietbot" class="btn btn-dark" title="Khởi Động Lại Trợ Lý VietBot">Restart VietBot</button>
                                 </div>
+								
                             </div>
                         </th>
                     </tr>
+					
                 </table>
             </div>
         </div>
@@ -473,6 +463,19 @@ exec("chmod 777 $DuognDanUI_HTML/backup_update/backup/skill_.json");
 }
 ///////////////////////
   //  $directory = '/home/pi/vietbot_offline/src';
+	//$reboot_checked = $_POST['reboot_checked'];
+	  if (@$_POST['reboot_checked'] === "sudo_reboot") {
+            $reboot_checked_cmd = "sudo reboot";
+        } else {
+            $reboot_checked_cmd = "uname"; //giá trị loại bỏ
+        }
+		
+	  if (@$_POST['restart_vietbot_checked'] === "restart_vietbot_checked") {
+            $restart_vietbot_checked = "systemctl --user restart vietbot";
+        } else {
+            $restart_vietbot_checked = "uname"; //giá trị loại bỏ
+        }
+		
     $excludedFiles = [];
     $excludedDirectories = [];
     $deletedItems = [];
@@ -582,18 +585,32 @@ recursiveReplaceSkill($newSkillData, $oldSkillData);
 $newSkillUpdatedContent = json_encode($newSkillData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 file_put_contents($newSkillPath, $newSkillUpdatedContent);
 /////////////////////////////////////////////////////////////
+////End thay thế các giá trị
 //Chmod 777 khi chạy xong backup
 $connection = ssh2_connect($serverIP, $SSH_Port);
 if (!$connection) {die($E_rror_HOST);}
 if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
 $stream1 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$Path_Vietbot_src);
 $stream2 = ssh2_exec($connection, 'sudo chown -R pi:pi '.$Path_Vietbot_src);
+$stream3 = ssh2_exec($connection, "$reboot_checked_cmd");
+$stream4 = ssh2_exec($connection, "$restart_vietbot_checked");
+
 stream_set_blocking($stream1, true); 
 stream_set_blocking($stream2, true); 
+stream_set_blocking($stream3, true); 
+stream_set_blocking($stream4, true); 
+
 $stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO); 
 $stream_out2 = ssh2_fetch_stream($stream2, SSH2_STREAM_STDIO); 
+$stream_out3 = ssh2_fetch_stream($stream3, SSH2_STREAM_STDIO); 
+$stream_out4 = ssh2_fetch_stream($stream4, SSH2_STREAM_STDIO); 
+
 stream_get_contents($stream_out1);
 stream_get_contents($stream_out2);
+stream_get_contents($stream_out3);
+stream_get_contents($stream_out4);
+
+
 exec("rm $DuognDanUI_HTML/backup_update/backup/config_.json");
 exec("rm $DuognDanUI_HTML/backup_update/backup/skill_.json");
 }
@@ -689,6 +706,21 @@ stream_get_contents($stream_out1);
         var messageElementt = document.getElementById("messagee");
         var messagee = "<?php echo $messagee; ?>";
         messageElementt.innerText = messagee;
+    </script>
+	 <script>
+        const checkboxes = document.querySelectorAll('.single-checkbox');
+        
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                if (checkbox.checked) {
+                    checkboxes.forEach(otherCheckbox => {
+                        if (otherCheckbox !== checkbox) {
+                            otherCheckbox.checked = false;
+                        }
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>

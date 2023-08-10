@@ -390,13 +390,13 @@
         "active": false
     },
     "weather": {
-        "openweathermap_key": "8473858601dabd3d2cbb24fb50840686",
+        "openweathermap_key": "847385b50840686",
         "error_answer": "Không thực hiện được tra cứu thời tiết khu vực, hãy kiểm tra lại",
         "active": true
     },
     "hass": {
         "url": "http://192.168.14.17:8123",
-        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI3MGJkNmMzOTNhYTY0ZTJhODQwZDE5ZGNjZGQzNDQwZSIsImlhdCI6MTY4Nzk3MDQ2OSwiZXhwIjoyMDAzMzMwNDY5fQ.Baz2jYShPIT4Mo7rGu_ekuRtqr07BnCGJKDfjG0ifzc",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
         "error_answer": "Không thực hiện được kết nối đến Hass, hãy kiểm tra lại",
         "display_full_state": true,
         "active": true
@@ -413,8 +413,8 @@
         "error_answer": "Không thực hiện được tra cứu Sim sim, hãy kiểm tra lại"
     },
     "gg_bard": {
-        "Secure-1PSID": "CjEBPu3jIQd9Veyd_",
-        "Secure_1PSIDTS": "sidts-CjEBPu3jIQd9Veyd_pPPJ93fzIL7A3P3aaaaaaaaaaaaa",
+        "Secure-1PSID": "Ywgi04O4B_h_kjGtNyX4SNnMxrRkl84e2nppgsG2Q0tXzxFbuo0n6iMIGV8EepL8nL74Zw.",
+        "Secure_1PSIDTS": "sidts-CjEBPu3jIQd9Veyd_pPPJ93fzIL7A3P3wGhjvAgQvfQvcOof5KZHXAxZ5yrdFgiNWjShEAA",
         "error_answer": "Không thực hiện được tra cứu Google Bard, hãy kiểm tra lại"
     },
     "gg_ass": {
@@ -452,5 +452,15 @@
     "schedule": {
         "error_answer": "Không thực hiện được tạo tác vụ lập lịch, hãy kiểm tra lại",
         "active": true
+    },
+    "external_bot": {
+        "priority_1": "gg_bard",
+        "priority_2": "gg_ass",
+        "priority_3": "chatGPT"
+    },
+    "music_source": {
+        "priority_1": "ZingMP3",
+        "priority_2": "Youtube",
+        "priority_3": "local"
     }
 }

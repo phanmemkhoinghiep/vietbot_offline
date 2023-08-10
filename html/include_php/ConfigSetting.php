@@ -123,6 +123,7 @@ foreach ($keywordsTTS as $keywordTTS => $replacementTTS) {
 	$Welcome_Path = $data_config['smart_answer']['sound']['welcome']['path'];
 	$Welcome_Text = $data_config['smart_answer']['sound']['welcome']['text'];
 	//address
+	
 	//Get Ưu tiên Trợ Lý Ảo/ AI
 	$external_bot_priority_1 = $data_config['smart_answer']['external_bot_priority_1'];
 	$external_bot_priority_2 = $data_config['smart_answer']['external_bot_priority_2'];
@@ -489,6 +490,7 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx -->
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
     <link rel="stylesheet" href="../assets/css/bootstrap-icons.css">
  <link rel="stylesheet" href="../assets/css/4.5.2_css_bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/loading.css">
 <style>
     body {
         background-color: #dbe0c9;
@@ -553,36 +555,7 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx -->
         text-decoration: none;
     }
     
-    #loading-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 9999;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        display: none;
-    }
-    
-    #loading-icon {
-        width: 50px;
-        height: 50px;
-        position: absolute;
-        top: 42%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-    
-    #loading-message {
-        position: absolute;
-        color: White;
-        top: 60%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
+
     
     .chatbox-container {
         position: fixed;
@@ -623,13 +596,17 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx -->
     .chatbox-content.open {
         right: 0;
     }
+	  /* Ẩn trình phát âm thanh */
+  audio {
+    display: none;
+  }
 </style>
    <script src="../assets/js/11.0.18_dist_sweetalert2.all.min.js"></script>
   
 </head>
 <body>
 <div id="loading-overlay"><img id="loading-icon" src="../assets/img/Loading.gif" alt="Loading...">
-<div id="loading-message">- Đang Thực Hiện<br/>- Bạn Cần Restart Lại VietBot Để Áp Dụng Dữ Liệu Mới</div>
+<div id="loading-message">- Đang Thực Hiện...</div>
 </div>
 <?php
 // Thư mục cần kiểm tra
@@ -948,7 +925,6 @@ Microsoft EDGE</label>
   $files = array_merge($files, glob($folderPath . '*.wav'));
   if (!empty($files)) {
     // Hiển thị dropdown list với danh sách các file
-  //  echo '<select id="path-dropdown" class="custom-select" style="display: none;">';
     echo '<select id="path-dropdown" name="mode_path" class="custom-select">';
     echo "<option value='$Welcome_Path'>".basename($Welcome_Path)."</option>";
     foreach ($files as $file) {
@@ -960,6 +936,18 @@ Microsoft EDGE</label>
   }
   ?>
   </center></td></tr>
+  
+  <tr>
+  <td><center>-</center>
+  </td> 
+<td> 
+ <audio id="audioPlayer" controls>
+  <source id="audioSource" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+<center><input type="button" id="playButtonWelcome" class="btn btn-warning" title="Nghe Thử Âm Thanh Khi Loa Khởi Động" value="Nghe Thử"></center></td></td>  <tr>
+  
+  
  <!-- <tr id="text-inputt">
   <td><b>Đọc địa chỉ ip:</b> <input type="checkbox"  name="welcome_ip" value=", | địa chỉ ai pi của mình là: <?php //echo $serverIP; ?>" <?php /* if ($Welcome_Text === $Welcome_Text_ip.', | địa chỉ ai pi của mình là: '.$serverIP) echo 'checked'; */ ?>>
 </td></tr> -->
@@ -979,7 +967,7 @@ $mp3Files = array_filter($mp3Files, function($mp3File) {
 <th scope="col"><center title="Khi kết thúc nghe lệnh bot sẽ phát âm thanh">Khi Kết Thúc</center></th>
 </tr></thead><tbody><tr><td><center>
 	  <?php
-	  echo '<select class="custom-select" name="startsound">';
+	  echo '<select class="custom-select" name="startsound" id="songSelect_start">';
 	foreach ($mp3Files as $mp3File) {
     $fileName = basename($mp3File);
 	$result_MP3 = str_replace($DuognDanThuMucJson.'/', '', $mp3File);
@@ -989,14 +977,31 @@ $mp3Files = array_filter($mp3Files, function($mp3File) {
 ?>
 </center></td><td><center>
 <?php  
-	echo '<select class="custom-select" name="finishsound">';
+	echo '<select class="custom-select" name="finishsound" id="songSelect_finish"> ';
 	foreach ($mp3Files as $mp3File) {
     $fileNamee = basename($mp3File);
 	$result_NAME = str_replace($DuognDanThuMucJson.'/', '', $mp3File);
     echo '<option value="'.$result_NAME.'" '.(($data_config['smart_answer']['sound']['default']['finish'] === $result_NAME) ? 'selected' : '').'>'.$fileNamee.'</option>';
 	}
 	echo '</select>';
-?></center></td></tr><tbody></table></div></div><hr/>
+?></center></td></tr>
+<tr><td>
+<audio id="audioPlayer" controls>
+  <source id="audioSource" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+<center><input type="button" id="playButtonstart" class="btn btn-warning" title="Nghe thử Âm Thanh Khi Được Đánh Thức" value="Nghe Thử"></center></td>
+<td>
+<audio id="audioPlayer" controls>
+  <source id="audioSource" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+<center><input type="button" id="playButtonfinish" class="btn btn-warning" title="Nghe Thử Âm Thanh Khi Kết Thúc" value="Nghe Thử"></center></td>
+</td>
+</tr>
+
+
+<tbody></table></div></div><hr/>
 
 	<!--HOT WORK --> 
 <h5>HotWord: <i class="bi bi-info-circle-fill" onclick="togglePopuphw()" title="Nhấn Để Tìm Hiểu Thêm"></i></h5>
@@ -1059,55 +1064,12 @@ $mp3Files = array_filter($mp3Files, function($mp3File) {
 - <i>Khi thay đổi ngôn ngữ bạn sẽ cần phải cấu hình lại các Hotword ở mục <b>Cài Đặt Hotword</b></i>
 </div></div>
 <hr/>
+
 <!--END HOT WORK --> 
 
-<h5>Ưu Tiên Trợ Lý Ảo/AI:</h5>
-<div class="form-check form-switch d-flex justify-content-center">   <div class="col-auto">
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th scope="col" colspan="2"><center>Chọn Thứ Tự Ưu Tiên Trợ Lý Của Bạn</center></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">Top 1:</th>
-      <td>    
-	  <select class="custom-select" name="priority1" id="priority1">
-        <option value="">-- Chọn Trợ Lý/AI 1 --</option>
-        <option value="gg_bard" <?php if ($external_bot_priority_1 === "gg_bard") echo "selected"; ?>>Google Bard</option>
-        <option value="gg_ass" <?php if ($external_bot_priority_1 === "gg_ass") echo "selected"; ?>>Google Assistant</option>
-        <option value="chatGPT" <?php if ($external_bot_priority_1 === "chatGPT") echo "selected"; ?>>Chat GPT</option>
-    </select></td>
+<!-- <h5>Ưu Tiên Trợ Lý Ảo/AI:</h5> <hr/>-->
 
-    </tr>
-    <tr>
-      <th scope="row">Top 2:</th>
-      <td>    
-	  <select class="custom-select" name="priority2" id="priority2">
-        <option value="">-- Chọn Trợ Lý/AI 2 --</option>
-        <option value="gg_bard" <?php if ($external_bot_priority_2 === "gg_bard") echo "selected"; ?>>Google Bard</option>
-        <option value="gg_ass" <?php if ($external_bot_priority_2 === "gg_ass") echo "selected"; ?>>Google Assistant</option>
-        <option value="chatGPT" <?php if ($external_bot_priority_2 === "chatGPT") echo "selected"; ?>>Chat GPT</option>
-    </select></td>
 
-    </tr>
-    <tr>
-      <th scope="row">Top 3:</th>
-      <td>    
-	  <select class="custom-select" name="priority3" id="priority3" onchange="validateInputs()">
-        <option value="">-- Chọn Trợ Lý/AI 3 --</option>
-        <option value="gg_bard" <?php if ($external_bot_priority_3 === "gg_bard") echo "selected"; ?>>Google Bard</option>
-        <option value="gg_ass" <?php if ($external_bot_priority_3 === "gg_ass") echo "selected"; ?>>Google Assistant</option>
-        <option value="chatGPT" <?php if ($external_bot_priority_3 === "chatGPT") echo "selected"; ?>>Chat GPT</option>
-    </select></td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-<hr/>
 <!-- mục  Chọn Kiểu LED --> 
 <h5>Chọn Kiểu LED: <i class="bi bi-info-circle-fill" onclick="togglePopupLED()" title="Nhấn Để Tìm Hiểu Thêm"></i></h5>
 <div class="form-check form-switch d-flex justify-content-center">   <div class="col-auto">
@@ -1827,6 +1789,7 @@ else if (radio.value === "tts_gg_free") {
 //End Led Script
 //Kiểm tra các chân gpio không được giống nhau
 function validateInputs() {
+/*
 	    const priority1 = document.getElementById("priority1").value;
         const priority2 = document.getElementById("priority2").value;
         const priority3 = document.getElementById("priority3").value;
@@ -1840,6 +1803,7 @@ function validateInputs() {
             }
         }
         return true;
+		*/
 		
     var name1 = document.getElementsByName("button[down][gpio]")[0].value.trim();
     var name2 = document.getElementsByName("button[up][gpio]")[0].value.trim();
@@ -2193,15 +2157,18 @@ else if (radio.value === "stt_hpda") {
       var textInput = document.getElementById("text-input");
     //  var textInputt = document.getElementById("text-inputt");
       var pathDropdown = document.getElementById("path-dropdown");
+      var playButtonWelcome = document.getElementById("playButtonWelcome");
 
       if (element.value === "text") {
         textInput.style.display = "block";
      //   textInputt.style.display = "block";
         pathDropdown.style.display = "none";
+        playButtonWelcome.style.display = "none";
       } else if (element.value === "path") {
         textInput.style.display = "none";
       //  textInputt.style.display = "none";
         pathDropdown.style.display = "block";
+        playButtonWelcome.style.display = "block";
       }
     }
 	
@@ -2362,6 +2329,90 @@ function disableRadioButtons() {
 // Gọi hàm để disable radio buttons khi trang được load
 disableRadioButtons();
 	
+</script>
+<script>
+    const audio = document.getElementById('audioPlayer');
+    const audioSource = document.getElementById('audioSource');
+    const songSelect_start = document.getElementById('songSelect_start');
+    const songSelect_finish = document.getElementById('songSelect_finish');
+    const playButtonstart = document.getElementById('playButtonstart');
+    const playButtonfinish = document.getElementById('playButtonfinish');
+    const songSelect_pathdropdown = document.getElementById('path-dropdown');
+    const playButtonWelcome = document.getElementById('playButtonWelcome');
+    //Nghe thử âm thanh khi được đánh thức
+    playButtonstart.addEventListener('click', () => {
+        if (audio.paused) {
+            document.getElementById("loading-overlay").style.display = "block";
+            const selectedSong = songSelect_start.value;
+            // Gửi giá trị đường dẫn tới tệp PHP để lấy mã Base64
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', 'Listen.php?song=' + selectedSong, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const base64Audio = xhr.responseText;
+                    audioSource.src = "data:audio/mpeg;base64," + base64Audio;
+                    audio.load();
+                    audio.play();
+                    document.getElementById("loading-overlay").style.display = "none";
+                }
+            };
+            xhr.send();
+        } else {
+            audio.pause();
+            audio.currentTime = 0;
+        }
+    });
+    //nghe thử âm thanh khi kết thúc 
+    playButtonfinish.addEventListener('click', () => {
+        if (audio.paused) {
+            document.getElementById("loading-overlay").style.display = "block";
+            const selectedSongsongSelect_finish = songSelect_finish.value;
+
+            // Gửi giá trị đường dẫn tới tệp PHP để lấy mã Base64
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', 'Listen.php?song=' + selectedSongsongSelect_finish, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const base64Audio = xhr.responseText;
+                    audioSource.src = "data:audio/mpeg;base64," + base64Audio;
+                    audio.load();
+                    audio.play();
+                    document.getElementById("loading-overlay").style.display = "none";
+                }
+            };
+            xhr.send();
+        } else {
+            audio.pause();
+            audio.currentTime = 0;
+        }
+    });
+
+    //nghe thử âm thanh khi Loa khởi Động
+    playButtonWelcome.addEventListener('click', () => {
+
+        if (audio.paused) {
+            document.getElementById("loading-overlay").style.display = "block";
+            const selectedSongsongSelect_pathdropdown = songSelect_pathdropdown.value;
+            // Gửi giá trị đường dẫn tới tệp PHP để lấy mã Base64
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', 'Listen.php?song=' + selectedSongsongSelect_pathdropdown, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const base64Audio = xhr.responseText;
+                    audioSource.src = "data:audio/mpeg;base64," + base64Audio;
+                    audio.load();
+                    audio.play();
+                    document.getElementById("loading-overlay").style.display = "none";
+                }
+            };
+            xhr.send();
+
+        } else {
+            audio.pause();
+            audio.currentTime = 0;
+        }
+
+    });
 </script>
 </body>
 </html>

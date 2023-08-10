@@ -4,6 +4,7 @@
 <title><?php echo $MYUSERNAME; ?>, Check Log, Services, CMD VietBot</title>
     <link rel="shortcut icon" href="../assets/img/VietBot128.png">
   <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+     <link rel="stylesheet" href="../assets/css/loading.css">
   <script src="../assets/js/jquery.min.js"></script>
   <script src="../assets/js/popper.min.js"></script>
   <script src="../assets/js/bootstrap.min.js"></script>
@@ -30,34 +31,6 @@ body {
     height: auto;
     max-height: 200px;
     overflow-x: hidden;
-}
-#loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    display: none;
-}
-#loading-icon {
-    width: 30px;
-    height: 30px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-#loading-message {
-	position: absolute;
-    color: white;
-	top: 57%;
-    left: 50%;
-	  transform: translate(-50%, -50%);
 }
 	</style>
 	</head>

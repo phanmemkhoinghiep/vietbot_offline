@@ -56,11 +56,11 @@
     "smart_wakeup": {
         "hotword_engine": {
             "type": "porcupine",
-            "key": "iB0kfsdfsdf+w=="
+            "key": "iB0k3SrHnf0j1hvf89nkuQSsc4T7fEMuaW6lOXqU4Jy7sA3bArwy+w=="
         },
         "wakeup_reply": [
             {
-                "value": "có em"
+                "value": "Dạ"
             },
             {
                 "value": "em đây"
@@ -85,38 +85,48 @@
             {
                 "type": "porcupine",
                 "value": null,
-                "file_name": "hey siri_raspberry-pi.ppn",
-                "lang": "eng",
-                "sensitive": 0.4,
+                "file_name": "chào-chị_raspberry-pi.ppn",
+                "lang": "vi",
+                "sensitive": 0.1,
                 "say_reply": false,
                 "command": null,
-                "active": false
+                "active": true
             },
             {
                 "type": "porcupine",
                 "value": null,
-                "lang": "eng",
-                "file_name": "ok-vi-bot_en_raspberry-pi.ppn",
-                "sensitive": 0.4,
+                "lang": "vi",
+                "file_name": "con-mụ-kia_raspberry-pi.ppn",
+                "sensitive": 0.1,
                 "say_reply": false,
                 "command": null,
-                "active": false
+                "active": true
             },
             {
                 "type": "porcupine",
                 "value": null,
-                "lang": "eng",
-                "file_name": "hey-vi-bot_en_raspberry-pi.ppn",
-                "sensitive": 0.4,
+                "lang": "vi",
+                "file_name": "e-cu_raspberry-pi.ppn",
+                "sensitive": 0.1,
                 "say_reply": false,
                 "command": null,
-                "active": false
+                "active": true
             },
             {
                 "type": "porcupine",
                 "value": null,
                 "lang": "vi",
                 "file_name": "em-ơi_raspberry-pi.ppn",
+                "sensitive": 0.1,
+                "say_reply": false,
+                "command": null,
+                "active": true
+            },
+            {
+                "type": "porcupine",
+                "value": null,
+                "lang": "vi",
+                "file_name": "hà-nội-ơi_raspberry-pi.ppn",
                 "sensitive": 0.1,
                 "say_reply": false,
                 "command": null,
@@ -141,23 +151,13 @@
                 "say_reply": false,
                 "command": null,
                 "active": true
-            },
-            {
-                "type": "porcupine",
-                "value": null,
-                "lang": "vi",
-                "file_name": "con-mụ-kia_raspberry-pi.ppn",
-                "sensitive": 0.1,
-                "say_reply": false,
-                "command": null,
-                "active": true
             }
         ]
     },
     "smart_request": {
-        "continuous_asking": false,
+        "continuous_asking": true,
         "stt": {
-            "type": "stt_gg_free",
+            "type": "stt_gg_cloud",
             "token": "",
             "stt_gg_ass_mode": "default",
             "credentials_file": "credentials.json",
@@ -166,7 +166,7 @@
         }
     },
     "smart_answer": {
-		"startup_state_speaking": true,        
+        "startup_state_speaking": false,
         "sound": {
             "default": {
                 "start": "sound/default/ding.mp3",
@@ -177,21 +177,21 @@
                 "start": "sound/custom/"
             },
             "welcome": {
-                "mode": "text",
-                "path": "sound/welcome/welcome.mp3",
+                "mode": "path",
+                "path": "sound/welcome/nokia-startup.wav",
                 "text": "Xin chào mời đọc khẩu lệnh, để ra lệnh"
             }
         },
         "tts": {
-            "type": "tts_gg_free",
+            "type": "tts_gg_cloud",
             "token": "",
-            "voice_name": null,
+            "voice_name": "female_northern_voice",
             "voice_profile": null,
             "speed": null,
             "pitch": null
         },
-        "external_bot_priority_1": "gg_bard",
-        "external_bot_priority_2": "gg_ass",
+        "external_bot_priority_1": "gg_ass",
+        "external_bot_priority_2": "gg_bard",
         "external_bot_priority_3": "chatGPT",
         "pre_answer_timeout": 8,
         "pre_answer": [

@@ -10,6 +10,7 @@ include "../Configuration.php";
 <title><?php echo $MYUSERNAME; ?>, Câp Nhật Giao Diện Vietbot</title>
     <link rel="shortcut icon" href="../assets/img/VietBot128.png">
   <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+     <link rel="stylesheet" href="../assets/css/loading.css">
 
 <style>
 body {
@@ -43,34 +44,7 @@ body {
    
 }
 
-	#loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    display: none;
-}
-#loading-icon {
-    width: 30px;
-    height: 30px;
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-#loading-message {
-	   position: absolute;
-    color: white;
-	  top: 57%;
-    left: 50%;
-	  transform: translate(-50%, -50%);
-}
+
     .my-div {
         border: 1.5px solid black;
         border-radius: 10px;
