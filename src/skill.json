@@ -447,5 +447,15 @@
     "schedule": {
         "error_answer": "Không thực hiện được tạo tác vụ lập lịch, hãy kiểm tra lại",
         "active": true
+    },
+    "external_bot": {
+        "priority_1": "gg_bard",
+        "priority_2": "gg_ass",
+        "priority_3": "chatGPT"
+    },
+    "music_source": {
+        "priority_1": "local",
+        "priority_2": "ZingMP3",
+        "priority_3": "Youtube"
     }
 }
