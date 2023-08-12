@@ -410,8 +410,9 @@
         "error_answer": "Không thực hiện được tra cứu Sim sim, hãy kiểm tra lại"
     },
 	"gg_bard": {
-		"Secure-1PSID": "Ywgi04O4B_h_kjGtNyX4SNnMxrRkl84e2nppgsG2Q0tXzxFbuo0n6iMIGV8EepL8nL74Zw.",
-		"Secure_1PSIDTS": "sidts-CjEBPu3jIQd9Veyd_pPPJ93fzIL7A3P3wGhjvAgQvfQvcOof5KZHXAxZ5yrdFgiNWjShEAA",
+		"Secure-1PSID": "Zwg7SzgZ-UXLnJ-qBu2iV6nDguEmwe9CzOiTeDQJxPgu0K0ZQ1HBj19kHg3geNf4Ye581w.",
+        	"Secure-1PSIDTS": "sidts-CjEBSAxbGdWnKLDXxUHIL7Y6HFZzWho-JyTiy7B9nmBEBhiDJkoXCro8aaEYOoJYhPYZEAA",
+        	"Secure-1PSIDCC": "APoG2W810OI76FUO_99gSQdbIfClAk6Aa_Iw1JMClsiTvLI2zNBTq4OBpTl8vdSRpRvvHrKHnA",
 		"error_answer": "Không thực hiện được tra cứu Google Bard, hãy kiểm tra lại"
 	},    
     "gg_ass": {
