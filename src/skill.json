@@ -401,7 +401,10 @@
         "error_answer": "Không thực hiện được Skill truyện cười, hãy kiểm tra lại",
         "active": true
     },
-
+    "fairy_tale": {
+	"error_answer": "Không thực hiện được Skill truyện cổ tích, hãy kiểm tra lại",
+	"active": true
+    },
     "wikipedia": {
         "error_answer": "Không thực hiện được tra cứu Wikipedia, hãy kiểm tra lại",
         "active": true
