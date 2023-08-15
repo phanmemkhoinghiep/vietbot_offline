@@ -845,5 +845,12 @@
         {
             "value": "microphone"
         }
+    ],
+	"fairy_tale": [{
+            "value": "cổ tích"
+        },
+        {
+            "value": "ngày xưa"
+        }
     ]
-}
+} 
