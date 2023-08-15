@@ -94,7 +94,7 @@
             },
             {
                 "type": "porcupine",
-                "custom_skill": true,
+                "custom_skill": false,
                 "lang": "eng",
                 "file_name": "ok-vi-bot_en_raspberry-pi.ppn",
                 "sensitive": 0.4,
@@ -104,7 +104,7 @@
             },
             {
                 "type": "porcupine",
-                "custom_skill": true,
+                "custom_skill": false,
                 "lang": "eng",
                 "file_name": "hey-vi-bot_en_raspberry-pi.ppn",
                 "sensitive": 0.4,
