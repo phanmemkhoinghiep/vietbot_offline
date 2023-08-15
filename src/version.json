@@ -3,9 +3,9 @@
 		"latest": "beta 15-08-2023-01"
 	},
 	"update_command": "", 
-	"new_features": "",
-	"bug_fixed": "Lỗi Google Bard",	
-	"improvements": "",	
+	"new_features": "Custom Skill",
+	"bug_fixed": "Skill lịch âm",	
+	"improvements": "Xử lý các skill nội bộ nhanh hơn",	
 	"image_version": {
 		"latest": "2023-07-24"
 	}
