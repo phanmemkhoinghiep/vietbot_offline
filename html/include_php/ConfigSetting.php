@@ -165,6 +165,7 @@ foreach ($keywordsTTS as $keywordTTS => $replacementTTS) {
 		$fileName = pathinfo($filePath, PATHINFO_FILENAME);
         $jsonData['smart_wakeup']['hotword'][] = [
             "type" => "porcupine",
+			"custom_skill" => false,
             "value" => null,
             "lang" => $selectedLanguage,
             "file_name" => $fileName.".ppn",
@@ -261,11 +262,13 @@ chmod($backupFile, 0777);
    $selectedSensitive = floatval($_POST['sensitive']);
     $selectedActive = isset($_POST['active']) ? true : false;
     $selectedSayReply = isset($_POST['say_reply']) ? true : false;
+    $selectedCustom_Skill = isset($_POST['custom_skill']) ? true : false;
     // Đọc dữ liệu từ file config.json
     // Tìm và cập nhật thông tin của hotword được chọn
     foreach ($data_config['smart_wakeup']['hotword'] as &$hotword) {
         if ($hotword['file_name'] === $selectedFileName) {
             $hotword['sensitive'] = $selectedSensitive;
+            $hotword['custom_skill'] = $selectedCustom_Skill;
             $hotword['active'] = $selectedActive;
             $hotword['command'] = $commandHW;
             $hotword['say_reply'] = $selectedSayReply;
@@ -491,9 +494,14 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx -->
     <link rel="stylesheet" href="../assets/css/bootstrap-icons.css">
  <link rel="stylesheet" href="../assets/css/4.5.2_css_bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/loading.css">
+    <link rel="stylesheet" href="../assets/css/11.3.1_styles_monokai-sublime.min.css">
+<script src="../assets/js/11.3.1_highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 <style>
-    body {
+    body, html {
         background-color: #dbe0c9;
+		overflow-x: hidden; /* Ẩn thanh cuộn ngang */
+		max-width: 100%; /* Ngăn cuộn ngang trang */
     }
     
     .slider {
@@ -555,8 +563,6 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx -->
         text-decoration: none;
     }
     
-
-    
     .chatbox-container {
         position: fixed;
         top: 40%;
@@ -600,6 +606,39 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx -->
   audio {
     display: none;
   }
+  
+
+          pre {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            white-space: pre-wrap;
+            overflow: auto; /* Thêm thuộc tính này */
+            
+        }
+        #popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            align-items: center;
+            justify-content: center;
+			 z-index: 9999;
+        }
+
+        #popup-content {
+            background-color: #ffffff00;
+            padding: 5px;
+            border-radius: 5px;
+            width: 100vw; /* Sử dụng đơn vị vw cho chiều rộng tối đa */
+            height: 100%;
+            overflow: auto;
+		
+		}
 </style>
    <script src="../assets/js/11.0.18_dist_sweetalert2.all.min.js"></script>
   
@@ -846,7 +885,7 @@ Microsoft EDGE</label>
 </div>
 
 
-<br><b>Giọng Đọc:</b><br/><label>
+<br><b><font color=red>Giọng Đọc:</font></b><br/><label>
 <input type="radio" id="myRadio1" title="Nữ miền Bắc" name="tts_voice" value="female_northern_voice" <?php if ($GET_TTS_Voice_Name === 'female_northern_voice') echo 'checked'; ?> required> Nữ miền Bắc</label>&nbsp;<label>
 <input type="radio" id="myRadio2" title="Nam Miền Bắc" name="tts_voice" value="male_northern_voice" <?php if ($GET_TTS_Voice_Name === 'male_northern_voice') echo 'checked'; ?> required> Nam Miền Bắc</label>&nbsp;<label>
 
@@ -864,7 +903,7 @@ Microsoft EDGE</label>
 <table class="table">
  <thead>
      <tr>
-      <th scope="col" colspan="3"><center title="Cách hiển thị log trong terminal">Kiểu Hiển Thị Đầu Ra Bảng Điều Khiển</center></th>
+      <th scope="col" colspan="3"><center title="Cách hiển thị log trong terminal"><font color=red>Kiểu Hiển Thị Đầu Ra Bảng Điều Khiển</font></center></th>
     </tr>
     <tr>
       <th scope="col"><center title="Không hiển thị log trong terminal">Không</center></th>
@@ -897,7 +936,7 @@ Microsoft EDGE</label>
 <h5 title="Thông Báo Chào Mừng Khi Thiết Bị Khởi Động Xong">Thông Báo/Âm Thanh:</h5>
 <div class="row g-3 d-flex justify-content-center"><div class="col-auto">
   <table class="table table-bordered align-middle">
-  <thead><tr><th colspan="2"><center>Đọc Trạng Thái Ngay Sau Khi Khởi Động:</center></th></tr></thead>
+  <thead><tr><th colspan="2"><center><font color=red>Đọc Trạng Thái Ngay Sau Khi Khởi Động:</font></center></th></tr></thead>
 <tbody><tr><td colspan="2">
 <center>
 			<div class="custom-control custom-switch mt-3" title="Đọc Trạng Thái Khi Mà Loa Được Khởi Động">
@@ -908,7 +947,7 @@ Microsoft EDGE</label>
 			</td>
 			</tr>
 </tbody>
-  <thead><tr><th colspan="2"><center>Thông Báo Khi Khởi Động<c/enter></th></tr></thead>
+  <thead><tr><th colspan="2"><center><font color=red>Thông Báo Khi Khởi Động</font></center></th></tr></thead>
   <thead><tr>
       <th scope="col"><center>Đọc Văn Bản</center></th>
       <th scope="col"><center>Dùng File Âm Thanh</center></th></tr></thead><tbody><tr>
@@ -961,7 +1000,7 @@ $mp3Files = array_filter($mp3Files, function($mp3File) {
 });
   ?>
   <thead><tr>
-<th scope="col" colspan="2"><center>Âm Thanh Phản Hồi</center></th>
+<th scope="col" colspan="2"><center><font color=red>Âm Thanh Phản Hồi</font></center></th>
 </tr></thead><thead><tr>
 <th scope="col"><center title="Khi bạn gọi bot thì sẽ có âm thanh phát ra để nghe lệnh">Khi Được Đánh Thức</center></th>
 <th scope="col"><center title="Khi kết thúc nghe lệnh bot sẽ phát âm thanh">Khi Kết Thúc</center></th>
@@ -1023,48 +1062,103 @@ $mp3Files = array_filter($mp3Files, function($mp3File) {
 <!-- <div id="myDivzxchw" style="display: none;"> -->
 <div class="row justify-content-center">
 <div class="col-auto">
-<table style="border-color:black;" class="table table-responsive table-bordered align-middle">
-<thead><tr> <th scope="col" colspan="4"><center class="text-success">Cài Đặt Hotword</center></th> </tr>
-<tr><th scope="col"><label for="" class="form-label"><center>Tên Hotword</center></label></th>
-<th scope="col"><label for="" title="Độ Nhạy Sensitive" class="form-label"><center>Độ Nhạy</center></label></th>
-<th scope="col"><label for="" title="Tích Để Bật/Tắt Hotword" class="form-label"><center>Kích Hoạt</center></label></th>
-<th scope="col"><label for="" title="Bật/Tắt Phản Hồi Của Bot Khi Được Đánh Thức" class="form-label"><center>Phản Hồi Lại</center></label></th>
-<tbody><tr><td><div>
+<!-- <table style="border-color:black;" class="table table-responsive table-bordered align-middle"> -->
+<table class="table table-responsive table-bordered align-middle">
+<thead><tr> <th scope="col" colspan="2"><center class="text-success"><font color=red>Cài Đặt Hotword</font></center></th> 
+</tr>
+ <tbody>
+    <tr>
+      <th scope="row"><label for="" class="form-label"><center>Tên Hotword:</center></label></th>
+      <td>
+	  <div>
 <select id="file_name" name="file_name" class="custom-select" onchange="showSensitiveInput(this.value)">
 <option value="">Chọn Hotword</option>
 <?php foreach ($data_config['smart_wakeup']['hotword'] as $hotword): ?>
 <option value="<?php echo $hotword['file_name']; ?>"><?php echo substr($hotword['file_name'], 0, strpos($hotword['file_name'], "_")); ?></option>
 <?php endforeach; ?>
-</select></div></td><td><div>
-<input type="number" id="sensitive" name="sensitive" style="width: 90px;" title="Chỉ Được Nhập Số Từ 0.1 Đến 1" placeholder="0.1->1" class="form-control" step="0.1" min="0.1" max="1">
-</div></td><td><div>
-<center><input type="checkbox" id="active" name="active" title="Tích vào để kích hoạt" class="form-check-input"></center>
-</div></td><td><div>
-<center><input type="checkbox" id="say_reply" name="say_reply" title="Tích vào để kích hoạt" class="form-check-input"></center></div></td>
+</select></div>
+</td>
+</tr>
+<tr>
+    <th scope="row">
+        <label for="" title="Tích Để Bật/Tắt Hotword" class="form-label">
+            <center>Kích Hoạt:</center>
+        </label>
+    </th>
+    <td>
+        <div>
+            <center>
+                <input type="checkbox" id="active" name="active" title="Tích vào để kích hoạt" class="form-check-input">
+            </center>
+        </div>
+    </td>
+</tr>
 
 <tr>
-<td colspan="4">
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">Kèm câu lệnh:</span>
-  </div>
-  <input type="text" id="command" name="command" placeholder="Nhập Lệnh Vào Đây" title="Nhập Lệnh Của Bạn" class="form-control">
-</div>
-</td></tr>
-</tr></tbody> </tr></thead></table> 
+    <th scope="row">
+        <label for="" title="Bật/Tắt Phản Hồi Của Bot Khi Được Đánh Thức" class="form-label">
+            <center>Phản Hồi Lại:</center>
+        </label>
+    </th>
+    <td>
+        <div>
+            <center>
+                <input type="checkbox" id="say_reply" name="say_reply" title="Tích vào để kích hoạt" class="form-check-input">
+            </center>
+        </div>
+    </td>
+</tr>
+<tr>
+    <th scope="row">Dùng Cho Custom Skill:</th>
+    <td>
+        <div>
+            <center>
+                <input type="checkbox" id="custom_skill" name="custom_skill" title="Tích vào để kích hoạt" class="form-check-input">
+            </center>
+        </div>
+    </td>
+</tr>
+<tr>
+    <th scope="row">
+        <label for="" title="Độ Nhạy Sensitive" class="form-label">
+            <center>Độ Nhạy:</center>
+        </label>
+    </th>
+    <td>
+        <div>
+            <input type="number" id="sensitive" name="sensitive" title="Chỉ Được Nhập Số Từ 0.1 Đến 1" placeholder="0.1 -> 1" class="form-control" step="0.1" min="0.1" max="1">
+        </div>
+    </td>
+</tr>
+<tr>
+    <td colspan="2">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Kèm câu lệnh:</span>
+            </div>
+            <input type="text" id="command" name="command" placeholder="Nhập Lệnh Vào Đây" title="Nhập Lệnh Của Bạn" class="form-control">
+        </div>
+    </td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <!-- </div> -->
-<div id="popupContainerhwlang" class="popup-container" onclick="hidePopuphwlang()"><div id="popupContent" onclick="preventEventPropagationhwlang(event)">
-<p><center><b>Thay Đổi Ngôn Ngữ Gọi Hotword</b></center><br/>
-- <b>1: </b> 2 file thư viện <a href="https://github.com/Picovoice/porcupine/blob/master/lib/common/porcupine_params.pv" target="_bank">tiếng anh</a> 
-	<b>"porcupine_params.pv"</b> và <a href="https://github.com/Picovoice/porcupine/blob/master/lib/common/porcupine_params_vn.pv" target="_bank">tiếng việt</a> 
-	<b>"porcupine_params_vn.pv"</b><br/>phải nằm cùng trong đường dẫn sau: "<b><?php echo $Lib_Hotword; ?></b>"<br/>
-- <b>2: </b>các file thư viện hotword, file hotword, thư viện picovoice phải cùng phiên bản.<br/>
-- <i>Khi thay đổi ngôn ngữ bạn sẽ cần phải cấu hình lại các Hotword ở mục <b>Cài Đặt Hotword</b></i>
-</div></div>
+<div id="popupContainerhwlang" class="popup-container" onclick="hidePopuphwlang()">
+    <div id="popupContent" onclick="preventEventPropagationhwlang(event)">
+        <p>
+            <center><b>Thay Đổi Ngôn Ngữ Gọi Hotword</b>
+            </center>
+            <br/> - <b>1: </b> 2 file thư viện <a href="https://github.com/Picovoice/porcupine/blob/master/lib/common/porcupine_params.pv" target="_bank">tiếng anh</a>
+            <b>"porcupine_params.pv"</b> và <a href="https://github.com/Picovoice/porcupine/blob/master/lib/common/porcupine_params_vn.pv" target="_bank">tiếng việt</a>
+            <b>"porcupine_params_vn.pv"</b>
+            <br/>phải nằm cùng trong đường dẫn sau: "<b><?php echo $Lib_Hotword; ?></b>"
+            <br/> - <b>2: </b>các file thư viện hotword, file hotword, thư viện picovoice phải cùng phiên bản.
+            <br/> - <i>Khi thay đổi ngôn ngữ bạn sẽ cần phải cấu hình lại các Hotword ở mục <b>Cài Đặt Hotword</b></i>
+    </div>
+</div>
 <hr/>
-
 <!--END HOT WORK --> 
 
 <!-- <h5>Ưu Tiên Trợ Lý Ảo/AI:</h5> <hr/>-->
@@ -1073,10 +1167,10 @@ $mp3Files = array_filter($mp3Files, function($mp3File) {
 <!-- mục  Chọn Kiểu LED --> 
 <h5>Chọn Kiểu LED: <i class="bi bi-info-circle-fill" onclick="togglePopupLED()" title="Nhấn Để Tìm Hiểu Thêm"></i></h5>
 <div class="form-check form-switch d-flex justify-content-center">   <div class="col-auto">
-<div id="toggleIcon" onclick="toggleDivz()">
+<font color=red><div id="toggleIcon" onclick="toggleDivz()"><font color=red>
     <i id="upIconz" class="bi bi-arrow-up-circle-fill" title="Nhấn Để Ẩn Cài Đặt LED" style="display: none;"></i>
-    <i id="downIconz" class="bi bi-arrow-down-circle-fill" title="Nhấn Để Hiển Thị Cài Đặt LED"></i>
-</div></div></div> 
+    <i id="downIconz" class="bi bi-arrow-down-circle-fill" title="Nhấn Để Hiển Thị Cài Đặt LED"></i></font>
+</div></font></div></div> 
 <div id="popupContainerLED" class="popup-container" onclick="hidePopupLED()">
 <div id="popupContent" onclick="preventEventPropagationLED(event)">
 <center><b>Cấu Hình Đèn LED</b></center><br/>
@@ -1121,8 +1215,8 @@ None (Không Dùng)</label></center>
 	<!--Button -->
 <h5>Cấu Hình Nút Nhấn: <i class="bi bi-info-circle-fill" onclick="togglePopupGPIO()" title="Nhấn Để Tìm Hiểu Thêm"></i></h5>
 <div class="form-check form-switch d-flex justify-content-center"><div id="toggleIcon" onclick="toggleDivzx()">
-    <i id="upIconzx" title="Nhấn Để Đóng Cấu Hình Cài Đặt Nút Nhấn" class="bi bi-arrow-up-circle-fill" style="display: none;"></i>
-    <i id="downIconzx" title="Nhấn Để Mở Cấu Hình Cài Đặt Nút Nhấn" class="bi bi-arrow-down-circle-fill" ></i></div></div>
+ <font color=red> <i id="upIconzx" title="Nhấn Để Đóng Cấu Hình Cài Đặt Nút Nhấn" class="bi bi-arrow-up-circle-fill" style="display: none;"></i>
+    <i id="downIconzx" title="Nhấn Để Mở Cấu Hình Cài Đặt Nút Nhấn" class="bi bi-arrow-down-circle-fill" ></i></font></div></div>
 <div id="popupContainerGPIO" class="popup-container" onclick="hidePopupGPIO()">
 <div id="popupContent" onclick="preventEventPropagationGPIO(event)">
 <p><center><b>Cấu Hình Nút Nhấn GPIO</b></center><br/>
@@ -1154,9 +1248,9 @@ None (Không Dùng)</label></center>
 
 <h5>Thông Báo/Thời Gian Chờ:</h5>
 <div class="form-check form-switch d-flex justify-content-center"> 
-<div id="toggleIcon" onclick="toggleDivzxcans()">
+<div id="toggleIcon" onclick="toggleDivzxcans()"><font color=red>
 <i id="upIconzxcans" title="Nhấn Để Mở Cấu Hình Cài Đặt Wake Up Reply" class="bi bi-arrow-up-circle-fill" style="display: none;"></i>
-<i id="downIconzxcans" title="Nhấn Để Đóng Cấu Hình Cài Đặt Wake Up Reply" class="bi bi-arrow-down-circle-fill" ></i>
+<i id="downIconzxcans" title="Nhấn Để Đóng Cấu Hình Cài Đặt Wake Up Reply" class="bi bi-arrow-down-circle-fill" ></i></font>
 </div>
 </div>
  <div id="myDivzxcans" style="display: none;"> 
@@ -1189,9 +1283,9 @@ None (Không Dùng)</label></center>
 	<!-- <div id="additionalDiv" class="hidden">  -->
 <h5>Phản Hồi Của Bot Khi Đánh Thức: <i class="bi bi-info-circle-fill" onclick="togglePopupWAKEUP()" title="Nhấn Để Tìm Hiểu Thêm"></i></h5>
 <div class="form-check form-switch d-flex justify-content-center"> 
-<div id="toggleIcon" onclick="toggleDivzxc()">
+<div id="toggleIcon" onclick="toggleDivzxc()"><font color=red>
 <i id="upIconzxc" title="Nhấn Để Mở Cấu Hình Cài Đặt Wake Up Reply" class="bi bi-arrow-up-circle-fill" style="display: none;"></i>
-<i id="downIconzxc" title="Nhấn Để Đóng Cấu Hình Cài Đặt Wake Up Reply" class="bi bi-arrow-down-circle-fill" ></i></div></div>
+<i id="downIconzxc" title="Nhấn Để Đóng Cấu Hình Cài Đặt Wake Up Reply" class="bi bi-arrow-down-circle-fill" ></i></font></div></div>
 
 <div id="popupContainerWAKEUP" class="popup-container" onclick="hidePopupWAKEUP()">
 <div id="popupContent" onclick="preventEventPropagationWAKEUP(event)">
@@ -1234,7 +1328,19 @@ else {
 <!--Kết Thúc mục  Wake Up Reply --> 		
 <center>
 <input type="submit" class="btn btn-success" name="config_setting" value="Lưu Cấu Hình">  <a href="<?php echo $PHP_SELF ?>"><button type="submit" class="btn btn-danger">Hủy Bỏ/Làm Mới</button></a>
- <button type="submit" name="restart_vietbot" class="btn btn-warning">Khởi Động Lại VietBot</button></center>
+ <button type="submit" name="restart_vietbot" class="btn btn-warning">Khởi Động Lại VietBot</button>
+
+ <input type="button" id="view-button" class="btn btn-info" value="Json View">
+ 
+ </center>
+ 
+    <div id="popup">
+        <div id="popup-content">
+            <pre><code class="json"><?php echo file_get_contents("$DuognDanThuMucJson/config.json"); ?></code></pre>
+			 <center><input type="button"  class="btn btn-info" id="close-button" value="Đóng"></center>
+        </div>
+    </div>
+	
      <div class="chatbox-container" onclick="toggleChatbox()" title="Nhấn Để Thay Đổi Ngôn Ngữ Gọi Hotword"><center><b>Ngôn <br/>Ngữ</b></center></div>
     <div id="chatbox-content" class="chatbox-content"><br/>
 <div class="col-auto">
@@ -1248,11 +1354,11 @@ else {
 <td><center><input type="radio" name="language_hotword" id="language_hotwordddd1" value="eng"></center></td>
 </tr><tr><th><center><button type="submit" name="language_hotword_submit" class="btn btn-success">Lưu Cài Đặt</button></th> 
 <th><p onclick="uncheckRadiolanguage_hotwordddd()" class="btn btn-danger">Bỏ Chọn</p></th></center></th></tr></tbody></table></div></div></form><hr/>    
-<center><h5>Khôi Phục File config.json: <i class="bi bi-info-circle-fill" onclick="togglePopupConfigRecovery()" title="Nhấn Để Tìm Hiểu Thêm"></i></h5></center>
+<center><h5><font color=red>Khôi Phục File config.json: <i class="bi bi-info-circle-fill" onclick="togglePopupConfigRecovery()" title="Nhấn Để Tìm Hiểu Thêm"></i></h5></font></center>
 <div class="form-check form-switch d-flex justify-content-center"> 
-<div id="toggleIcon" onclick="toggleDivConfigRecovery()">
+<div id="toggleIcon" onclick="toggleDivConfigRecovery()"><font color=red>
 <i id="upIconConfigRecovery" title="Nhấn Để Mở Cấu Hình Cài Đặt Wake Up Reply" class="bi bi-arrow-up-circle-fill" style="display: none;"></i>
-<i id="downIconConfigRecovery" title="Nhấn Để Đóng Cấu Hình Cài Đặt Wake Up Reply" class="bi bi-arrow-down-circle-fill" ></i></div></div>
+<i id="downIconConfigRecovery" title="Nhấn Để Đóng Cấu Hình Cài Đặt Wake Up Reply" class="bi bi-arrow-down-circle-fill" ></i></font></div></div>
  <div id="popupContainerConfigRecovery" class="popup-container" onclick="hidePopupConfigRecovery()">
 <div id="popupContent" onclick="preventEventPropagationConfigRecovery(event)">
 <p><center><b>Khôi Phục File Config</b></center><br/>
@@ -1288,11 +1394,12 @@ if (count($fileLists) > 0) {
   <script>
        function showSensitiveInput(file_name) {
             var sensitiveInput = document.getElementById('sensitive');
-            var sensitiveLabel = document.querySelector('label[for="sensitive"]');
+           // var sensitiveLabel = document.querySelector('label[for="sensitive"]');
             var activeInput = document.getElementById('active');
             var sayReplyInput = document.getElementById('say_reply');
-             var commandInput = document.getElementById('command'); // Trường input command
-            var sayReplyLabel = document.querySelector('label[for="say_reply"]');
+            var customSkillInput = document.getElementById('custom_skill');
+            var commandInput = document.getElementById('command'); // Trường input command
+           // var sayReplyLabel = document.querySelector('label[for="say_reply"]');
             if (file_name !== '') {
                 sensitiveInput.classList.remove('hidden');
                 sensitiveInput.value = getSensitiveValue(file_name);
@@ -1300,9 +1407,11 @@ if (count($fileLists) > 0) {
                 activeInput.checked = getActiveValue(file_name);
                 sayReplyInput.classList.remove('hidden');
                 sayReplyInput.checked = getSayReplyValue(file_name);
-			         // Hiển thị dữ liệu command
-      commandInput.classList.remove('hidden');
-      commandInput.value = getCommandValue(file_name);
+				customSkillInput.classList.remove('hidden');
+                customSkillInput.checked = getCustomSkill(file_name);
+			    // Hiển thị dữ liệu command
+				commandInput.classList.remove('hidden');
+				commandInput.value = getCommandValue(file_name);
             } else {
                 sensitiveInput.classList.add('hidden');
                 sensitiveInput.value = '';
@@ -1310,9 +1419,12 @@ if (count($fileLists) > 0) {
                 activeInput.checked = false;
                 sayReplyInput.classList.add('hidden');
                 sayReplyInput.checked = false;
+				customSkillInput.classList.add('hidden');
+                customSkillInput.checked = false;
+				
 			    // Ẩn trường input command khi không có dữ liệu
-      commandInput.classList.add('hidden');
-      commandInput.value = '';
+				commandInput.classList.add('hidden');
+				commandInput.value = '';
             }
         }
         function getSensitiveValue(file_name) {
@@ -1342,16 +1454,25 @@ if (count($fileLists) > 0) {
             }
             return false;
         }
+        function getCustomSkill(file_name) {
+            var customSkillData = <?php echo json_encode($data_config['smart_wakeup']['hotword']); ?>;
+            for (var i = 0; i < customSkillData.length; i++) {
+                if (customSkillData[i]['file_name'] === file_name) {
+                    return customSkillData[i]['custom_skill'];
+                }
+            }
+            return false;
+        }
 		
 		function getCommandValue(file_name) {
-    var commandData = <?php echo json_encode($data_config['smart_wakeup']['hotword']); ?>;
-    for (var i = 0; i < commandData.length; i++) {
-      if (commandData[i]['file_name'] === file_name) {
-        return commandData[i]['command'];
-      }
-    }
-    return '';
-  }
+			var commandData = <?php echo json_encode($data_config['smart_wakeup']['hotword']); ?>;
+			for (var i = 0; i < commandData.length; i++) {
+				if (commandData[i]['file_name'] === file_name) {
+					return commandData[i]['command'];
+				}
+			}
+		return '';
+		}
   //ẩn hiện thẻ input của Wake Up
     $(document).ready(function() {
       $('#toggleButton').click(function() {
@@ -2414,5 +2535,18 @@ disableRadioButtons();
 
     });
 </script>
+    <script>
+        const viewButton = document.getElementById('view-button');
+        const popup = document.getElementById('popup');
+        const closeButton = document.getElementById('close-button');
+
+        viewButton.addEventListener('click', () => {
+            popup.style.display = 'flex';
+        });
+
+        closeButton.addEventListener('click', () => {
+            popup.style.display = 'none';
+        });
+    </script>
 </body>
 </html>

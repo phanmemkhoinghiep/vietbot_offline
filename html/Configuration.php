@@ -55,8 +55,8 @@ $Limit_Telegram = "3";
 
 //Giới hạn Phản Hồi Khi Được Đánh Thức
 $Limit_Wakeup_Reply = "7";
+//Cài Văn Bản Mặc Định Nếu Biến $Limit_Wakeup_Reply bị xóa hết
 $Limit_Wakeup_Reply_Default_Response = "Dạ";
-
 
 //giới hạn số lượng file config cần backup (Khi Nội Dụng config.json bị thay đổi ở dao diện)
 $Limit_Config_Backup = "10";
@@ -70,6 +70,8 @@ $Limit_Radio = "10";
 //Limit Nội Dung Thông Báo Chờ
 $Limit_Pre_Answer = "3";
 
+//Thời gian đếm ngược tải lại trang khi update UI và Vietbot
+$Page_Load_Time_Countdown = "3"; //Giây
 
 ///////////////////////////////////////////////////////////////////////////////
 //Đọc, lấy vài dữ liệu của config.json

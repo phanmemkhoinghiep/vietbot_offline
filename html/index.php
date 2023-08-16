@@ -17,8 +17,8 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title><?php echo $MYUSERNAME; ?>, VietBot Bảng Điều Khiển</title>
     <link rel="shortcut icon" href="assets/img/VietBot128.png">
-    <link href="assets/css/Font_Muli_300,400,600,700.css" rel="stylesheet">
-    <link href="assets/css/Font_Poppins_400,500,600,700.css" rel="stylesheet">
+ <!--   <link href="assets/css/Font_Muli_300,400,600,700.css" rel="stylesheet">
+    <link href="assets/css/Font_Poppins_400,500,600,700.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/css/all.min.css">
@@ -113,6 +113,10 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
         border: 1px solid rgb(255 255 255 / 30%);
         -webkit-backdrop-filter: blur(10px);
     }
+	  .rounded-iframe {
+    border-radius: 10px 10px 10px 10px;
+    overflow: hidden; /* Để làm tròn góc thì cần che phần dư thừa */
+  }
 </style>
 </head>
 <body>
@@ -445,10 +449,12 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
 <section id="config" class="bg-gray-400 text-white section">
     <div class="container">
         <!-- Servises -->
-        <div class="services  mb-6">
+        <div class="services">
             <div class="boxes">
                 <h3 class="subtitle">Config/Cấu Hình</h3>
+					<div class="rounded-iframe">
                 <iframe src="./include_php/ConfigSetting.php" width="100%" height="470px"></iframe>
+            </div>
             </div>
             <!--  Resume  -->
         </div>
@@ -469,20 +475,24 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
 <section id="vietbot_update" class="section blog bg-gray-400 text-white">
     <div class="container">
         <h3 class="subtitle">Cập Nhật Chương Trình</h3>
+			<div class="rounded-iframe">
         <iframe src="./backup_update/index.php" width="100%" height="570px"></iframe>
+		</div>
 </section>
 <section id="UI_update" class="section blog bg-gray-400 text-white">
     <div class="container">
         <h3 class="subtitle">Cập Nhật Giao Diện</h3>
+			<div class="rounded-iframe">
         <iframe src="./ui_update/index.php" width="100%" height="570px"></iframe>
-	
+	</div>
 </section>
 <!-- Contact Start -->
 <section id="Skill" class="section contact w-100 bg-gray-400 text-white">
     <div class="container">
         <h3 class="subtitle">VietBot Skill</h3>
+		<div class="rounded-iframe">
         <iframe src="./include_php/Skill.php" width="100%" height="470px"></iframe>
-
+</div>
 
     </div>
 </section>
@@ -602,11 +612,6 @@ if (!empty($data) && isset($data['result'])) {
 $gitJson = file_get_contents($Vietbot_Version);
 $gitData = json_decode($gitJson, true);
 $latestVersion = $gitData['vietbot_version']['latest'];
-//echo $currentresult."<br/>";
-//echo $latestVersion."<br/>";
-//echo $gitJson."<br/>";
-//$currentresult1 = "beta 12-07-2023";
-//$latestVersion1 = "beta 13-07-2023";
 // So sánh giá trị "vietbot_version" từ cURL và từ GitHub
 if ($currentresult === $latestVersion) {
   //echo "Bạn đang sử dụng phiên bản mới nhất: " . $currentresult;
@@ -614,7 +619,6 @@ if ($currentresult === $latestVersion) {
   //$messagee .= "Có phiên bản mới: " . $latestVersion.'\n';
   echo '<div class="blinking-container"><p class="ptexxt"><font color="red"><b>Có phiên bản Vietbot mới: '.$latestVersion.' </font><a href="#vietbot_update"> Kiểm Tra</b></a></p></div>';
 }
-
 //UI
 $localFile = $DuognDanUI_HTML.'/version.json';
 // Lấy nội dung JSON từ URL
@@ -794,6 +798,19 @@ if ($remoteValue !== $localValue) {
             }
         }
     </script>
+	 
+	<script>
+function reloadHostPage() {
+  window.location.reload();
+}
+
+// Lắng nghe thông điệp từ iframe
+window.addEventListener('message', function(event) {
+  if (event.data === 'reload') {
+    reloadHostPage();
+  }
+});
+</script>
 </body>
 
 </html>

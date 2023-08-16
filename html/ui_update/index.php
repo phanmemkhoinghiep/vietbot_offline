@@ -4,87 +4,109 @@
 include "../Configuration.php";
 ?>
 <html>
+
 <head>
-      <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title><?php echo $MYUSERNAME; ?>, Câp Nhật Giao Diện Vietbot</title>
+    <title>
+        <?php echo $MYUSERNAME; ?>, Câp Nhật Giao Diện Vietbot</title>
     <link rel="shortcut icon" href="../assets/img/VietBot128.png">
-  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-     <link rel="stylesheet" href="../assets/css/loading.css">
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/loading.css">
 
-<style>
-body {
-	background-color: #d2d8bb;
-	}
-    .div-div1 {
-      height: 200px; /* Chiều cao giới hạn của thẻ div */
-      overflow: auto; /* Hiển thị thanh cuộn khi nội dung vượt quá chiều cao */
-      border: 1px solid #ccc; /* Đường viền cho thẻ div */
-      padding: 2px; /* Khoảng cách giữa nội dung và đường viền */
-	
-    }
-	::-webkit-scrollbar {
-    width: 10px; 
-}
-::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    background: rgb(251, 255, 7); 
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
-}
-.scrollable-menu {
-    height: auto;
-    max-height: 200px;
-   
-}
-
-
-    .my-div {
-        border: 1.5px solid black;
-        border-radius: 10px;
-        position: relative;
-        margin-left: 5px;
-        margin-right: 5px;
-    }
-    
-    .corner-text {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-    }
+    <style>
+        body,
+        html {
+            background-color: #d2d8bb;
+            overflow-x: hidden;
+            /* Ẩn thanh cuộn ngang */
+            
+            max-width: 100%;
+            /* Ngăn cuộn ngang trang */
+        }
+        
+        .div-div1 {
+            height: 200px;
+            /* Chiều cao giới hạn của thẻ div */
+            
+            overflow: auto;
+            /* Hiển thị thanh cuộn khi nội dung vượt quá chiều cao */
+            
+            border: 1px solid #ccc;
+            /* Đường viền cho thẻ div */
+            
+            padding: 2px;
+            /* Khoảng cách giữa nội dung và đường viền */
+        }
+        
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            background: rgb(251, 255, 7);
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+        }
+        
+        .scrollable-menu {
+            height: auto;
+            max-height: 200px;
+        }
+        
+        .my-div {
+            border: 1.5px solid black;
+            border-radius: 10px;
+            position: relative;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+        
+        .corner-text {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        
         .right-align {
             text-align: right;
-			 
         }
-	</style>
+        
+        .inline-elements {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
 </head>
-<body>
-<br/>
-</center>
-<script src="../assets/js/jquery.min.js"></script>
-  <script src="../assets/js/popper.min.js"></script>
-  <script src="../assets/js/bootstrap.min.js"></script>
-   <script src="../assets/js/jquery-3.6.1.min.js"></script>
-  <script>
-$(document).ready(function() {
-    $('#my-form').on('submit', function() {
-        // Hiển thị biểu tượng loading
-        $('#loading-overlay').show();
 
-        // Vô hiệu hóa nút gửi
-        $('#submit-btn').attr('disabled', true);
-    });
-});
-  </script>
-      <div id="loading-overlay">
-          <img id="loading-icon" src="../assets/img/Loading.gif" alt="Loading...">
-		  <div id="loading-message">Đang tiến hành, vui lòng đợi...</div>
+<body>
+    <br/>
+    </center>
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/popper.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="../assets/js/jquery-3.6.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#my-form').on('submit', function() {
+                // Hiển thị biểu tượng loading
+                $('#loading-overlay').show();
+
+                // Vô hiệu hóa nút gửi
+                $('#submit-btn').attr('disabled', true);
+            });
+        });
+    </script>
+    <div id="loading-overlay">
+        <img id="loading-icon" src="../assets/img/Loading.gif" alt="Loading...">
+        <div id="loading-message">Đang tiến hành, vui lòng đợi...</div>
     </div>
 
 <?php
@@ -225,8 +247,13 @@ $localValue = $localData['ui_version']['current'];
 // So sánh giá trị
 if ($remoteValue !== $localValue) {
     $messagee .= 'Có phiên bản mới: '.$remoteValue.'\n';
-    $messagee .= 'Phiên bản hiện tại của bạn: '.$localValue.'\n Vui lòng cập nhật.\n';
-    $messagee .= $remoteData['ui_version']['notification'].'\n';
+    $messagee .= 'Phiên bản hiện tại của bạn: '.$localValue.'\n Vui lòng cập nhật.\n\n';
+    //$messagee .= $remoteData['ui_version']['notification'].'\n';
+	if (empty($remoteData['ui_version']['notification'])) {
+    //echo "Không có dữ liệu";
+	} else {
+    $messagee .= 'Nội Dung Cập Nhật: '.$remoteData['ui_version']['notification'].'\n';
+	}
 } else {
     $messagee .= 'Bạn đang sử dụng phiên bản mới nhất: '.$localValue.'\n';
 }
@@ -234,7 +261,8 @@ if ($remoteValue !== $localValue) {
 
 if (isset($_POST['ui_update'])) {
 $backupDir = $DuognDanUI_HTML.'/ui_update/backup'; // Đường dẫn thư mục sao lưu lại file sao lưu
-$timestamp = date('d_m_Y_His');
+$timestamp = date('d_m_Y_His'); 
+$startCheckboxReload = $_POST['startCheckboxReload'];
 $backupFile = $backupDir . '/ui_backup_' . $timestamp . '.tar.gz';
 $excludeArgs = '--exclude="*.tar.gz" --exclude="backup_update/extract/UI_VietBot-main/*"';
 $tarCommand = 'tar -czvf ' . $backupFile . ' ' . $excludeArgs . ' -C ' . dirname($DuognDanUI_HTML) . ' ' . basename($DuognDanUI_HTML);
@@ -255,7 +283,7 @@ if ($returnCode === 0) {
            // $messagee .= 'Backup đạt giới hạn, đã xóa tệp tin sao lưu cũ: ' . $basenameeee . '\n';
         }
     }
-} else {
+} else { 
     $messagee .= 'Có lỗi xảy ra khi tạo bản sao lưu.\n';
 }
 //END sao Lưu
@@ -296,7 +324,7 @@ if ($zip) {
     // Gọi hàm sao chép đệ quy
     copyRecursive($sourceDirectory, $DuognDanUI_HTML);
     $messagee .= 'Cập nhật giao diện mới thành công!\n';
-    $messagee .= 'Bạn Hãy Tắt Trang Và Truy Cập Lại Để Áp Dụng, (Hoặc F5 Để Áp Dụng)....!\n';
+   // $messagee .= 'Bạn Hãy Tắt Trang Và Truy Cập Lại Để Áp Dụng, (Hoặc F5 Để Áp Dụng)....!\n';
     // Gọi hàm xóa đệ quy
     deleteRecursive($sourceDirectory);
 	shell_exec("rm $zipFile");
@@ -315,6 +343,21 @@ $stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO);
 $stream_out2 = ssh2_fetch_stream($stream2, SSH2_STREAM_STDIO); 
 stream_get_contents($stream_out1);
 stream_get_contents($stream_out2);
+///////////////////
+if (@$_POST['audioo_playmp3_success'] === "playmp3_success") {
+	echo '<audio style="display: none;" id="myAudio_success" controls autoplay>';
+    echo '<source src="../assets/audio/ui_update_success.mp3" type="audio/mpeg">';
+    echo 'Your browser does not support the audio element.';
+    echo '</audio>';
+	echo '<script>';
+	echo 'var audio = document.getElementById("myAudio_success");';
+    echo 'audio.play();';
+	echo '</script>';
+}
+//echo $startCheckboxReload;
+?>
+
+<?php
 }
 if (isset($_POST['restors_ui'])) {
     $selectedFile = $_POST['tarFile'];
@@ -348,14 +391,35 @@ if (isset($_POST['download']) && isset($_POST['tarFile'])) {
 }
 ?>
   <form method="POST" id="my-form" action="">
+  
    	<div class="my-div">
     <span class="corner-text"><h5>Cập Nhật:</h5></span><br/><br/>
 	<center> 
 	<div id="messagee"></div><br/></center>
+	<div class="row justify-content-center"><div class="col-auto">
+	<table class="table table-bordered">
+  <thead> 
+    <tr>
+      <th scope="col" colspan="2"><font color=red>Lựa Chọn Nâng Cao Khi Cập Nhật Hoàn Tất</font></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Thông Báo Âm Thanh:</th>
+	  <td><input type="checkbox" name="audioo_playmp3_success" value="playmp3_success" checked></td>
+    </tr>
+    <tr>
+      <th><span class="inline-elements" title="Tự Động Tải Lại Trang Khi Cập Nhật Hoàn Tất">Tự Động Làm Mới Lại Trang: <font color=red><span id="countdown"></span></font></span></th>
+	  <td> <input type="checkbox" name="startCheckboxReload" id="startCheckbox" title="Tự Động Tải Lại Trang Khi Cập Nhật Hoàn Tất" value="start" checked></td>
+    </tr>
+  </tbody>
+</table>
+	</div></div>
   <div class="row justify-content-center"><div class="col-auto"><div class="input-group">
     		  <input type="submit" name="checkforupdates_ui" class="btn btn-success" value="Kiểm tra">
 		   <input type="submit" name="ui_update" class="btn btn-warning" value="Cập Nhật">
-		   <a class="btn btn-danger" href="<?php echo $PHP_SELF; ?>" role="button">Làm Mới</a>
+		   <a class="btn btn-primary" href="<?php echo $PHP_SELF; ?>" role="button">Làm Mới</a>
+		   <button class="btn btn-danger" id="reloadButton">Tải Lại Trang</button>
 		   </div>
 		   </div>
 		   </div>  <br/></div>
@@ -380,7 +444,7 @@ foreach ($files as $file) {
 }
 $selectDropdown .= '</select>';
 // Hiển thị select dropdown
-echo $selectDropdown;
+echo $selectDropdown; 
 ?>
 <input type="submit" name="download" class="btn btn-primary" value="Tải xuống">
 <input type="submit" name="restors_ui" class="btn btn-warning" value="Khôi Phục">
@@ -403,5 +467,57 @@ echo $selectDropdown;
         var messagee = "<?php echo $messagee; ?>";
         messageElementt.innerText = messagee;
     </script>
+	
+	<script>
+var reloadButton = document.getElementById('reloadButton');
+var startCheckbox = document.getElementById('startCheckbox');
+var countdownElement = document.getElementById('countdown');
+var requiredValue = "<?php echo $startCheckboxReload; ?>";
+var countdown = '3';
+var countdownInterval;
+ 
+function updateCountdown() {
+  countdownElement.textContent = countdown;
+} 
+
+function reloadHostPage() {
+  // Gửi thông điệp tới trang chính để yêu cầu tải lại
+  window.parent.postMessage('reload', '*');
+  // Tải lại trang chính (host page) bằng cách truy cập vào window cha và gọi hàm location.reload()
+  window.parent.location.reload();
+}
+
+function startCountdown() {
+  //countdown = 3;
+  updateCountdown();
+  countdownInterval = setInterval(function() {
+    if (countdown === 0) {
+      clearInterval(countdownInterval);
+      reloadHostPage();
+    } else {
+      countdown--;
+      updateCountdown();
+    }
+  }, 1000);
+}
+
+if (startCheckbox.checked && startCheckbox.value === requiredValue) {
+  startCountdown();
+}
+
+reloadButton.addEventListener('click', function() {
+  reloadHostPage();
+});
+
+startCheckbox.addEventListener('change', function() {
+  if (startCheckbox.checked && startCheckbox.value === requiredValue) {
+    startCountdown();
+  } else {
+    clearInterval(countdownInterval);
+    countdownElement.textContent = "";
+  }
+});
+</script>
+
 	</body>
 	</html>

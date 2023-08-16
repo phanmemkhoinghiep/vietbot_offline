@@ -14,22 +14,16 @@ include "../Configuration.php";
     <link rel="stylesheet" href="../assets/css/loading.css">
 
     <style>
-        body {
-            background-color: #d2d8bb;
-        }
-        
+		body, html {
+        background-color: #d2d8bb;
+		overflow-x: hidden;
+		max-width: 100%;
+    }
         .div-div1 {
             height: 200px;
-            /* Chiều cao giới hạn của thẻ div */
-            
             overflow: auto;
-            /* Hiển thị thanh cuộn khi nội dung vượt quá chiều cao */
-            
             border: 1px solid #ccc;
-            /* Đường viền cho thẻ div */
-            
             padding: 2px;
-            /* Khoảng cách giữa nội dung và đường viền */
         }
         
         ::-webkit-scrollbar {
@@ -71,12 +65,15 @@ include "../Configuration.php";
         .right-align {
             text-align: right;
         }
+		        .inline-elements {
+            display: inline-block;
+            vertical-align: middle;
+        }
     </style>
 </head>
 
 <body>
     <br/>
-
     <script src="../assets/js/jquery.min.js"></script>
     <script src="../assets/js/popper.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
@@ -180,7 +177,6 @@ function checkPermissions($path, &$hasPermissionIssue) {
         $permissions = fileperms($filePath);
         if ($permissions !== false && ($permissions & 0777) !== 0777) {
             if (!$hasPermissionIssue) {
-               // echo "<br/><center><h3 class='text-danger'>Một Số File,Thư Mục Trong <b>$path</b> Không Có Quyền Can Thiệp.<h3><br/>";
 			   echo "<center>Phát hiện thấy một số nội dung bị thay đổi quyền hạn.<br/>";
 			echo "<form method='post' id='my-form' action='".$PHP_SELF."'> <button type='submit' name='set_full_quyen' class='btn btn-success'>Cấp Quyền</button></form></center>";
                 $hasPermissionIssue = true;
@@ -209,7 +205,6 @@ if (!is_dir($DuognDanThuMucJson)) {
         <div id="messagee"></div>
     </center>
     <br/>
-
     <form method="POST" id="my-form" action="">
         <div class="row g-3 d-flex justify-content-center">
             <div class="col-auto">
@@ -299,27 +294,40 @@ if (!is_dir($DuognDanThuMucJson)) {
                             <center  title="Chỉ Khởi Động Lại Trợ Lý Vietbot">Restart Vietbot:</center>
                         </th>
 								  <td>
-                           <input type="checkbox" name="restart_vietbot_checked" class="single-checkbox form-check-input" title="Chỉ Khởi Động Lại Trợ Lý Vietbot" value="restart_vietbot_checked">
+                           <input type="checkbox" name="restart_vietbot_checked" class="single-checkbox form-check-input" title="Chỉ Khởi Động Lại Trợ Lý Vietbot" value="restart_vietbot_checked" checked>
                         </td>
                     </tr>
-                    <tr>
-                        <th scope="row" colspan="4">
-                            <div class="form-check form-switch d-flex justify-content-center">
-                                <div class="input-group">
-                                    <input type="submit" name="checkforupdates" class="btn btn-success" title="Kiểm Tra Phiên Bản Vietbot Mới" value="Kiểm Tra">
-                                    <input type="submit" name="backup_update" class="btn btn-warning" title="Cập Nhật Lên Phiên Bản Vietbot Mới" value="Cập Nhật">
-                                    <a class="btn btn-danger" href="<?php echo $PHP_SELF; ?>" role="button">Làm Mới</a>
-                                    <button type="submit" name="restart_vietbot" class="btn btn-dark" title="Khởi Động Lại Trợ Lý VietBot">Restart VietBot</button>
-                                </div>
-								
-                            </div>
-                        </th>
-                    </tr>
+					<tr>
+									     <th colspan="3">Thông Báo Âm Thanh:</th>
+						<td><input type="checkbox" class="form-check-input" title="Thông Báo Bằng Âm Thanh Khi Cập Nhật Được Hoàn Tất" name="audioo_playmp3_success" value="playmp3_success" checked></td>
+						</tr>
+						
+					<tr>
+					<th colspan="3"><span class="inline-elements" title="Tự Động Tải Lại Trang Khi Cập Nhật Hoàn Tất">Tự Động Làm Mới Lại Trang: <font color=red><span id="countdown"></span></font></span></th>
+						<td><input type="checkbox" class="form-check-input" name="startCheckboxReload" id="startCheckbox" title="Tự Động Tải Lại Trang Khi Cập Nhật Hoàn Tất" value="start"></td>
+						</tr>
+						
+             
 					
                 </table>
-            </div>
+				           
+            </div>            
         </div>
-</div>
+   <div class="row g-3 d-flex justify-content-center">
+            <div class="col-auto">
+                                <div class="input-group">
+								  
+                                    <input type="submit" name="checkforupdates" class="btn btn-success" title="Kiểm Tra Phiên Bản Vietbot Mới" value="Kiểm Tra">
+                                    <input type="submit" name="backup_update" class="btn btn-warning" title="Cập Nhật Lên Phiên Bản Vietbot Mới" value="Cập Nhật">
+                                    <a class="btn btn-primary" href="<?php echo $PHP_SELF; ?>" role="button">Làm Mới</a>
+									 <button class="btn btn-danger" id="reloadButton">Tải Lại Trang</button>
+                                    <button type="submit" name="restart_vietbot" class="btn btn-dark" title="Khởi Động Lại Trợ Lý VietBot">Restart VietBot</button>
+                                </div>
+                                </div>
+								
+                            </div><br/>
+							
+							</div>
 <br/>
 <div class="my-div">
     <span class="corner-text"><h5>Sao Lưu/Khôi Phục:</h5></span>
@@ -412,26 +420,48 @@ if ($currentresult === $latestVersion) {
 } else {
   $messagee .= "Có phiên bản mới: " . $latestVersion.'\n';
   $messagee .= "Phiên bản hiện tại: " . $currentresult.'\n\n';
-  $messagee .= $gitData['new_features'].'\n';
-  $messagee .= $gitData['improvements'].'\n';
-  $messagee .= "Lệnh Cần Bổ Sung $:> ".$gitData['update_command'].'\n';
+	if (empty($gitData['new_features'])) {
+    //echo "Không có dữ liệu";
+	} else {
+    $messagee .= 'Tính năng mới: '.$gitData['new_features'].'\n';
+	}
+	
+	if (empty($gitData['bug_fixed'])) {
+    //echo "Không có dữ liệu";
+	} else {
+    $messagee .= 'Sửa lỗi: '.$gitData['bug_fixed'].'\n';
+	}
+	
+	if (empty($gitData['improvements'])) {
+    //echo "Không có dữ liệu";
+	} else {
+    $messagee .= 'Cải thiện: '.$gitData['improvements'].'\n';
+	}
+	
+
+	if (empty($gitData['update_command'])) {
+    //echo "Không có dữ liệu";
+	} else {
+    $messagee .= 'Lệnh Cần Bổ Sung $:> '.$gitData['update_command'].'\n';
+	}
 }
 }
 if (isset($_POST['backup_update'])) {
 //Coppy file config, skill và chmod ra bộ nhớ tạm để lấy và thay thế các value giống nhau
 exec("cp $DuognDanThuMucJson/config.json $DuognDanUI_HTML/backup_update/backup/config_.json");
 exec("cp $DuognDanThuMucJson/skill.json $DuognDanUI_HTML/backup_update/backup/skill_.json");
+exec("cp $DuognDanThuMucJson/state.json $DuognDanUI_HTML/backup_update/backup/state_.json");
 exec("chmod 777 $DuognDanUI_HTML/backup_update/backup/config_.json");
 exec("chmod 777 $DuognDanUI_HTML/backup_update/backup/skill_.json");
+exec("chmod 777 $DuognDanUI_HTML/backup_update/backup/state_.json");
 //END Coppy
 /////////////////////
         // Tạo lệnh để nén thư mục
-       // $tarCommand = 'tar -czvf ' . $backupFile . ' -C ' . dirname($DuognDanThuMucJson) . ' ' . basename($DuognDanThuMucJson);
 		$tarCommand = "tar -czvf " . $backupFile . " -C $Path_Vietbot_src resources src";
         exec($tarCommand, $output, $returnCode);
         if ($returnCode === 0) {
             chmod($backupFile, 0777);
-         //   $messagee .= 'Tạo bản sao lưu thành công\n';
+         //$messagee .= 'Tạo bản sao lưu thành công\n';
             // Xóa các file cũ nếu số lượng tệp tin sao lưu vượt quá giới hạn
             $backupFiles = glob($backupDir . '/*.tar.gz');
             $numBackupFiles = count($backupFiles);
@@ -462,19 +492,6 @@ exec("chmod 777 $DuognDanUI_HTML/backup_update/backup/skill_.json");
     }
 }
 ///////////////////////
-  //  $directory = '/home/pi/vietbot_offline/src';
-	//$reboot_checked = $_POST['reboot_checked'];
-	  if (@$_POST['reboot_checked'] === "sudo_reboot") {
-            $reboot_checked_cmd = "sudo reboot";
-        } else {
-            $reboot_checked_cmd = "uname"; //giá trị loại bỏ
-        }
-		
-	  if (@$_POST['restart_vietbot_checked'] === "restart_vietbot_checked") {
-            $restart_vietbot_checked = "systemctl --user restart vietbot";
-        } else {
-            $restart_vietbot_checked = "uname"; //giá trị loại bỏ
-        }
 		
     $excludedFiles = [];
     $excludedDirectories = [];
@@ -503,7 +520,6 @@ exec("chmod 777 $DuognDanUI_HTML/backup_update/backup/skill_.json");
             copyFiles($sourceDirectory, $DuognDanThuMucJson, $excludedFiles, $copiedItems);
 			copyFiles($sourceDirectoryyy, $PathResources, $excludedFiles, $copiedItems);
             $messagee .= 'Đã tải xuống phiên bản Vietbot mới và cập nhật thành công!\n';
-            $messagee .= 'BẠN CẦN KHỞI ĐỘNG LẠI LOA THÔNG MINH ĐỂ ÁP DỤNG LẠI CÀI ĐẶT!\n';
 			shell_exec("rm -rf $DuognDanUI_HTML/backup_update/extract/vietbot_offline-beta");
 			?>
 			<div class="form-check form-switch d-flex justify-content-center"> 
@@ -534,6 +550,17 @@ exec("chmod 777 $DuognDanUI_HTML/backup_update/backup/skill_.json");
     } else {
         $messagee .=  'Có lỗi xảy ra, không thể tải xuống tệp tin cập nhật.\n';
     }
+/////////////////////////////
+if (@$_POST['restart_vietbot_checked'] === "restart_vietbot_checked") {
+    $actionCommand = "systemctl --user restart vietbot";
+    $messagee .= 'Đang Restart lại Vietbot, vui lòng chờ Vietbot khởi động lại!';
+} elseif (@$_POST['reboot_checked'] === "reboot_checked") {
+    $actionCommand = "sudo reboot";
+    $messagee .= 'Đang Reboot hệ thống, vui lòng chờ hệ thống khởi động lại!';
+} else {
+	$actionCommand = "uname";
+    $messagee .= 'Hãy Restart lại Vietbot để áp dụng cập nhật mới.';
+}
 ///////////////////////////////////////
 // thay thế các giá trị config từ cũ sang mới
 $oldConfigPath = $DuognDanUI_HTML.'/backup_update/backup/config_.json';
@@ -585,36 +612,56 @@ recursiveReplaceSkill($newSkillData, $oldSkillData);
 $newSkillUpdatedContent = json_encode($newSkillData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 file_put_contents($newSkillPath, $newSkillUpdatedContent);
 /////////////////////////////////////////////////////////////
+//Thay Thế Giá Trị Volume ở file state.json từ cũ sang mới
+$input_json = file_get_contents($DuognDanUI_HTML.'/backup_update/backup/state_.json');
+$data_State = json_decode($input_json, true);
+$volume_State_value = $data_State['volume'];
+$data_State['volume'] = $volume_State_value;
+$output_State_json = json_encode($data_State, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+file_put_contents($DuognDanThuMucJson.'/state.json', $output_State_json);
 ////End thay thế các giá trị
+
 //Chmod 777 khi chạy xong backup
 $connection = ssh2_connect($serverIP, $SSH_Port);
 if (!$connection) {die($E_rror_HOST);}
 if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
 $stream1 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$Path_Vietbot_src);
 $stream2 = ssh2_exec($connection, 'sudo chown -R pi:pi '.$Path_Vietbot_src);
-$stream3 = ssh2_exec($connection, "$reboot_checked_cmd");
-$stream4 = ssh2_exec($connection, "$restart_vietbot_checked");
+$stream3 = ssh2_exec($connection, "$actionCommand");
+//$stream4 = ssh2_exec($connection, "$restart_vietbot_checked");
 
 stream_set_blocking($stream1, true); 
 stream_set_blocking($stream2, true); 
 stream_set_blocking($stream3, true); 
-stream_set_blocking($stream4, true); 
+//stream_set_blocking($stream4, true); 
 
 $stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO); 
 $stream_out2 = ssh2_fetch_stream($stream2, SSH2_STREAM_STDIO); 
 $stream_out3 = ssh2_fetch_stream($stream3, SSH2_STREAM_STDIO); 
-$stream_out4 = ssh2_fetch_stream($stream4, SSH2_STREAM_STDIO); 
+//$stream_out4 = ssh2_fetch_stream($stream4, SSH2_STREAM_STDIO); 
 
 stream_get_contents($stream_out1);
 stream_get_contents($stream_out2);
 stream_get_contents($stream_out3);
-stream_get_contents($stream_out4);
-
+//stream_get_contents($stream_out4);
 
 exec("rm $DuognDanUI_HTML/backup_update/backup/config_.json");
 exec("rm $DuognDanUI_HTML/backup_update/backup/skill_.json");
-}
+exec("rm $DuognDanUI_HTML/backup_update/backup/state_.json");
 
+//Play Mp3 khi cập nhật hoàn tất
+if (@$_POST['audioo_playmp3_success'] === "playmp3_success") {
+	echo '<audio style="display: none;" id="myAudio_success" controls autoplay>';
+    echo '<source src="../assets/audio/vietbot_update_success.mp3" type="audio/mpeg">';
+    echo 'Your browser does not support the audio element.';
+    echo '</audio>';
+	echo '<script>';
+	echo 'var audio = document.getElementById("myAudio_success");';
+    echo 'audio.play();';
+	echo '</script>';
+}
+$startCheckboxReload = $_POST['startCheckboxReload'];
+}
 //Dowload backup restor
 //Chọn file backup và restore
 if (isset($_POST['restore']) && isset($_POST['selectedFile'])) {
@@ -709,7 +756,6 @@ stream_get_contents($stream_out1);
     </script>
 	 <script>
         const checkboxes = document.querySelectorAll('.single-checkbox');
-        
         checkboxes.forEach(checkbox => {
             checkbox.addEventListener('change', () => {
                 if (checkbox.checked) {
@@ -722,5 +768,56 @@ stream_get_contents($stream_out1);
             });
         });
     </script>
+	
+	<script>
+var reloadButton = document.getElementById('reloadButton');
+var startCheckbox = document.getElementById('startCheckbox');
+var countdownElement = document.getElementById('countdown');
+var requiredValue = "<?php echo $startCheckboxReload; ?>";
+var countdown = "<?php echo $Page_Load_Time_Countdown; ?>";
+var countdownInterval;
+ 
+function updateCountdown() {
+  countdownElement.textContent = countdown;
+} 
+
+function reloadHostPage() {
+  // Gửi thông điệp tới trang chính để yêu cầu tải lại
+  window.parent.postMessage('reload', '*');
+  // Tải lại trang chính (host page) bằng cách truy cập vào window cha và gọi hàm location.reload()
+  window.parent.location.reload();
+}
+
+function startCountdown() {
+  //countdown = 3;
+  updateCountdown();
+  countdownInterval = setInterval(function() {
+    if (countdown === 0) {
+      clearInterval(countdownInterval);
+      reloadHostPage();
+    } else {
+      countdown--;
+      updateCountdown();
+    }
+  }, 1000);
+}
+
+if (startCheckbox.checked && startCheckbox.value === requiredValue) {
+  startCountdown();
+}
+
+reloadButton.addEventListener('click', function() {
+  reloadHostPage();
+});
+
+startCheckbox.addEventListener('change', function() {
+  if (startCheckbox.checked && startCheckbox.value === requiredValue) {
+    startCountdown();
+  } else {
+    clearInterval(countdownInterval);
+    countdownElement.textContent = "";
+  }
+});
+</script>
 </body>
 </html>

@@ -9,9 +9,12 @@
   <script src="../assets/js/popper.min.js"></script>
   <script src="../assets/js/bootstrap.min.js"></script>
 	<style>
-body {
-	background-color: #6c757d;
-	}
+    body, html {
+        background-color: #6c757d;
+		overflow-x: hidden; /* Ẩn thanh cuộn ngang */
+		max-width: 100%; /* Ngăn cuộn ngang trang */
+    }
+    
 ::-webkit-scrollbar {
     width: 10px; 
 }

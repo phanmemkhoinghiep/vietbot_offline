@@ -52,6 +52,7 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
 	  </head>
 	 <body onclick="closePopup(event)">
 	  <h1><center>Menu Hướng Dẫn Về Các Chức Năng Và Sử Dụng Vietbot</center></h1>
+<h5><a href="https://drive.google.com/drive/folders/1c-I3fmMwNrbcWhXvCeuiyt-I5yH5gF8b" target="_bank">Link Google Dirver IMG Vietbot</a></h5>
 <h5>SSH:</h5>
  - username: <b>pi</b><br/>
  - password: <b>vietbot</b><hr/>
