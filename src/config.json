@@ -85,9 +85,74 @@
             {
                 "type": "porcupine",
                 "custom_skill": false,
-                "file_name": "hey siri_raspberry-pi.ppn",
+                "file_name": "alexa_raspberry-pi.ppn",
                 "lang": "eng",
+                "sensitive": 0.1,
+                "say_reply": false,
+                "command": null,
+                "active": false,
+                "value": null
+            },
+            {
+                "type": "porcupine",
+                "custom_skill": false,
+                "lang": "eng",
+                "file_name": "americano_raspberry-pi.ppn",
                 "sensitive": 0.4,
+                "say_reply": false,
+                "command": null,
+                "active": true,
+                "value": null
+            },
+            {
+                "type": "porcupine",
+                "custom_skill": false,
+                "lang": "eng",
+                "file_name": "hey google_raspberry-pi.ppn",
+                "sensitive": 0.1,
+                "say_reply": false,
+                "command": null,
+                "active": false,
+                "value": null
+            },
+            {
+                "type": "porcupine",
+                "custom_skill": false,
+                "lang": "eng",
+                "file_name": "hey siri_raspberry-pi.ppn",
+                "sensitive": 0.3,
+                "say_reply": true,
+                "command": null,
+                "active": true,
+                "value": null
+            },
+            {
+                "type": "porcupine",
+                "custom_skill": false,
+                "lang": "eng",
+                "file_name": "hey-vi-bot_en_raspberry-pi.ppn",
+                "sensitive": 0.1,
+                "say_reply": false,
+                "command": null,
+                "active": false,
+                "value": null
+            },
+            {
+                "type": "porcupine",
+                "custom_skill": false,
+                "lang": "eng",
+                "file_name": "hi-fen_en_raspberry-pi.ppn",
+                "sensitive": 0.1,
+                "say_reply": false,
+                "command": null,
+                "active": false
+            },
+            {
+                "type": "porcupine",
+                "custom_skill": false,
+                "lang": "eng",
+                "file_name": "ok google_raspberry-pi.ppn",
+                "sensitive": 0.1,
                 "say_reply": false,
                 "command": null,
                 "active": false
@@ -97,40 +162,10 @@
                 "custom_skill": false,
                 "lang": "eng",
                 "file_name": "ok-vi-bot_en_raspberry-pi.ppn",
-                "sensitive": 0.4,
+                "sensitive": 0.1,
                 "say_reply": false,
                 "command": null,
                 "active": false
-            },
-            {
-                "type": "porcupine",
-                "custom_skill": false,
-                "lang": "eng",
-                "file_name": "hey-vi-bot_en_raspberry-pi.ppn",
-                "sensitive": 0.4,
-                "say_reply": false,
-                "command": null,
-                "active": false
-            },
-            {
-                "type": "porcupine",
-                "custom_skill": false,
-                "lang": "vi",
-                "file_name": "em-ơi_raspberry-pi.ppn",
-                "sensitive": 0.2,
-                "say_reply": false,
-                "command": null,
-                "active": true
-            },
-            {
-                "type": "porcupine",
-                "custom_skill": true,
-                "lang": "vi",
-                "file_name": "người-đẹp-ơi_raspberry-pi.ppn",
-                "sensitive": 0.3,
-                "say_reply": false,
-                "command": null,
-                "active": true
             }
         ]
     },
