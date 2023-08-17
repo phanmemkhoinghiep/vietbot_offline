@@ -3,9 +3,9 @@
 		"latest": "beta 17-08-2023-01"
 	},
 	"update_command": "", 
-	"new_features": "Custom Skill",
-	"bug_fixed": "Skill lịch âm",	
-	"improvements": "Xử lý các skill nội bộ nhanh hơn",	
+	"new_features": null,
+	"bug_fixed": "Skill thời tiết",	
+	"improvements": "Xử lý các skill nội bộ nhanh hơn (Tiếp tục)",	
 	"image_version": {
 		"latest": "2023-07-24"
 	}
