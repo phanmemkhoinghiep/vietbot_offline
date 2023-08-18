@@ -1,10 +1,10 @@
 {
 	"vietbot_version": {
-		"latest": "beta 17-08-2023-03"
+		"latest": "beta 18-08-2023-01"
 	},
 	"update_command": "", 
 	"new_features": null,
-	"bug_fixed": "Chuyển đổi địa danh sang tọa độ trả về None với 1 số địa danh",	
+	"bug_fixed": "Lỗi câu lệnh có object Mic",	
 	"improvements": "Xử lý các skill nội bộ nhanh hơn (Tiếp tục)",	
 	"image_version": {
 		"latest": "2023-07-24"
