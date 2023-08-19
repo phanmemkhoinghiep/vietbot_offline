@@ -1,434 +1,434 @@
 {
-    "time": {
-        "error_answer": "Không thực hiện được tra cứu thời gian, hãy kiểm tra lại",
-        "active": true
-    },
-    "network": {
-        "error_answer": "Không thực hiện được kiểm tra mạng, hãy kiểm tra lại",
-        "active": true
-    },
-    "news": {
-        "error_answer": "Không thực hiện được đọc tin tức, hãy kiểm tra lại",
-        "active": true
-    },
-    "news_data": [{
-            "name": "Việt Nam net",
-            "link": "https://laodong.vn/rss/home.rss"
-        },
-        {
-            "name": "thanh niên",
-            "link": "https://thanhnien.vn/rss/home.rss"
-        }
-    ],
-    "radio": {
-        "error_answer": "Không thực hiện được phát Radio, hãy kiểm tra lại",
-        "active": true
-    },
-    "radio_data": [{
-            "name": "vov1",
-            "link": "https://str.vov.gov.vn/vovlive/vov1vov5Vietnamese.sdp_aac/playlist.m3u8"
-        },
-        {
-            "name": "vov2",
-            "link": "https://str.vov.gov.vn/vovlive/vov2.sdp_aac/playlist.m3u8"
-        },
-        {
-            "name": "vov3",
-            "link": "https://str.vov.gov.vn/vovlive/vov3.sdp_aac/playlist.m3u8"
-        },
-        {
-            "name": "vov giao thông hà nội",
-            "link": "https://str.vov.gov.vn/vovlive/vovGTHN.sdp_aac/playlist.m3u8"
-        },
-        {
-            "name": "vov giao thông sài gòn",
-            "link": "https://str.vov.gov.vn/vovlive/vovGTHCM.sdp_aac/playlist.m3u8"
-        }
-    ],
-    "music": {
-        "error_answer": "Không thực hiện được phát nhạc, hãy kiểm tra lại",
-        "active": true
-    },
-    "lunar_calendar": {
-        "error_answer": "Không thực hiện được tra cứu lịch âm, hãy kiểm tra lại",
-        "active": true
-    },
-    "anniversary": {
-        "error_answer": "Không thực hiện được tra cứu ngày kỉ niệm, hãy kiểm tra lại",
-        "active": true
-    },
-    "anniversary_data": [{
-            "name": "tết dương lịch",
-            "day": 1,
-            "month": 1,
-            "is_lunar_calendar": false
-        },
-        {
-            "name": "tết âm lịch",
-            "day": 1,
-            "month": 1,
-            "is_lunar_calendar": true
-        },
-        {
-            "name": "thành lập đảng cộng sản việt nam",
-            "day": 3,
-            "month": 2,
-            "is_lunar_calendar": false
-        },
-        {
-            "name": "lễ tình nhân",
-            "day": 14,
-            "month": 2,
-            "is_lunar_calendar": false
-        },
-        {
-            "name": "quốc tế phụ nữ",
-            "day": 8,
-            "month": 3,
-            "is_lunar_calendar": false
-        },
-        {
-            "name": "giỗ Tổ",
-            "day": 10,
-            "month": 3,
-            "is_lunar_calendar": true
-        },
-        {
-            "name": "test code",
-            "day": 22,
-            "month": 4,
-            "is_lunar_calendar": false
-        },
-        {
-            "name": "giải phóng miền Nam",
-            "day": 30,
-            "month": 4,
-            "is_lunar_calendar": false
-        },
-        {
-            "name": "quốc tế lao động",
-            "day": 1,
-            "month": 5,
-            "is_lunar_calendar": false
-        },
-        {
-            "name": "quốc khánh",
-            "day": 2,
-            "month": 9,
-            "is_lunar_calendar": false
-        },
-        {
-            "name": "phụ nữ Việt Nam",
-            "day": 20,
-            "month": 10,
-            "is_lunar_calendar": false
-        },
-        {
-            "name": "Giáng Sinh",
-            "day": 24,
-            "month": 12,
-            "is_lunar_calendar": false
-        }
-    ],
-    "history": {
-        "error_answer": "Không thực hiện được tra cứu ngày này năm xưa, hãy kiểm tra lại",
-        "active": true
-    },
-    "currency_rate": {
-        "error_answer": "Không thực hiện được tra cứu tỉ giá ngoại tệ, hãy kiểm tra lại",
-        "active": true
-    },
-    "currency_rate_data": [{
-            "name": "đô la",
-            "code": "USD"
-        },
-        {
-            "name": "Đô la",
-            "code": "USD"
-        },
-        {
-            "name": "Đôla",
-            "code": "USD"
-        },
-        {
-            "name": "bảng anh",
-            "code": "GBP"
-        },
-        {
-            "name": "ơ rô",
-            "code": "EUR"
-        },
-        {
-            "name": "yên",
-            "code": "JPY"
-        },
-        {
-            "name": "rúp",
-            "code": "RUB"
-        }
-    ],
-    "gold_rate": {
+	"time": {
+		"error_answer": "Không thực hiện được tra cứu thời gian, hãy kiểm tra lại",
+		"active": true
+	},
+	"network": {
+		"error_answer": "Không thực hiện được kiểm tra mạng, hãy kiểm tra lại",
+		"active": true
+	},
+	"news": {
+		"error_answer": "Không thực hiện được đọc tin tức, hãy kiểm tra lại",
+		"active": true
+	},
+	"news_data": [{
+			"name": "Việt Nam net",
+			"link": "https://laodong.vn/rss/home.rss"
+		},
+		{
+			"name": "thanh niên",
+			"link": "https://thanhnien.vn/rss/home.rss"
+		}
+	],
+	"radio": {
+		"error_answer": "Không thực hiện được phát Radio, hãy kiểm tra lại",
+		"active": true
+	},
+	"radio_data": [{
+			"name": "vov1",
+			"link": "https://str.vov.gov.vn/vovlive/vov1vov5Vietnamese.sdp_aac/playlist.m3u8"
+		},
+		{
+			"name": "vov2",
+			"link": "https://str.vov.gov.vn/vovlive/vov2.sdp_aac/playlist.m3u8"
+		},
+		{
+			"name": "vov3",
+			"link": "https://str.vov.gov.vn/vovlive/vov3.sdp_aac/playlist.m3u8"
+		},
+		{
+			"name": "vov giao thông hà nội",
+			"link": "https://str.vov.gov.vn/vovlive/vovGTHN.sdp_aac/playlist.m3u8"
+		},
+		{
+			"name": "vov giao thông sài gòn",
+			"link": "https://str.vov.gov.vn/vovlive/vovGTHCM.sdp_aac/playlist.m3u8"
+		}
+	],
+	"music": {
+		"error_answer": "Không thực hiện được phát nhạc, hãy kiểm tra lại",
+		"active": true
+	},
+	"lunar_calendar": {
+		"error_answer": "Không thực hiện được tra cứu lịch âm, hãy kiểm tra lại",
+		"active": true
+	},
+	"anniversary": {
+		"error_answer": "Không thực hiện được tra cứu ngày kỉ niệm, hãy kiểm tra lại",
+		"active": true
+	},
+	"anniversary_data": [{
+			"name": "tết dương lịch",
+			"day": 1,
+			"month": 1,
+			"is_lunar_calendar": false
+		},
+		{
+			"name": "tết âm lịch",
+			"day": 1,
+			"month": 1,
+			"is_lunar_calendar": true
+		},
+		{
+			"name": "thành lập đảng cộng sản việt nam",
+			"day": 3,
+			"month": 2,
+			"is_lunar_calendar": false
+		},
+		{
+			"name": "lễ tình nhân",
+			"day": 14,
+			"month": 2,
+			"is_lunar_calendar": false
+		},
+		{
+			"name": "quốc tế phụ nữ",
+			"day": 8,
+			"month": 3,
+			"is_lunar_calendar": false
+		},
+		{
+			"name": "giỗ Tổ",
+			"day": 10,
+			"month": 3,
+			"is_lunar_calendar": true
+		},
+		{
+			"name": "test code",
+			"day": 22,
+			"month": 4,
+			"is_lunar_calendar": false
+		},
+		{
+			"name": "giải phóng miền Nam",
+			"day": 30,
+			"month": 4,
+			"is_lunar_calendar": false
+		},
+		{
+			"name": "quốc tế lao động",
+			"day": 1,
+			"month": 5,
+			"is_lunar_calendar": false
+		},
+		{
+			"name": "quốc khánh",
+			"day": 2,
+			"month": 9,
+			"is_lunar_calendar": false
+		},
+		{
+			"name": "phụ nữ Việt Nam",
+			"day": 20,
+			"month": 10,
+			"is_lunar_calendar": false
+		},
+		{
+			"name": "Giáng Sinh",
+			"day": 24,
+			"month": 12,
+			"is_lunar_calendar": false
+		}
+	],
+	"history": {
+		"error_answer": "Không thực hiện được tra cứu ngày này năm xưa, hãy kiểm tra lại",
+		"active": true
+	},
+	"currency_rate": {
+		"error_answer": "Không thực hiện được tra cứu tỉ giá ngoại tệ, hãy kiểm tra lại",
+		"active": true
+	},
+	"currency_rate_data": [{
+			"name": "đô la",
+			"code": "USD"
+		},
+		{
+			"name": "Đô la",
+			"code": "USD"
+		},
+		{
+			"name": "Đôla",
+			"code": "USD"
+		},
+		{
+			"name": "bảng anh",
+			"code": "GBP"
+		},
+		{
+			"name": "ơ rô",
+			"code": "EUR"
+		},
+		{
+			"name": "yên",
+			"code": "JPY"
+		},
+		{
+			"name": "rúp",
+			"code": "RUB"
+		}
+	],
+	"gold_rate": {
 
-        "error_answer": "Không thực hiện được tra cứu giá vàng, hãy kiểm tra lại",
-        "active": true
-    },
-    "gold_rate_data": [{
-            "location": "Hà Nội"
-        },
-        {
-            "location": "Đà Nẵng"
-        },
-        {
-            "location": "Hồ Chí Minh"
-        },
-        {
-            "location": "Nha Trang"
-        },
-        {
-            "location": "Cà Mau"
-        },
-        {
-            "location": "Huế"
-        },
-        {
-            "location": "Bình Phước"
-        },
-        {
-            "location": "Miền Tây"
-        },
-        {
-            "location": "Biên Hòa"
-        },
-        {
-            "location": "Quảng Ngãi"
-        },
-        {
-            "location": "Long Xuyên"
-        },
-        {
-            "location": "Bạc Liêu"
-        },
-        {
-            "location": "Quy Nhơn"
-        },
-        {
-            "location": "Phan Rang"
-        },
-        {
-            "location": "Hạ Long"
-        },
-        {
-            "location": "Quảng Nam"
-        }
-    ],
-    "lottery": {
-        "error_answer": "Không thực hiện được tra cứu kết quả sổ xố, hãy kiểm tra lại",
-        "active": true
-    },
-    "lottery_data": [{
-            "location": "miền trung",
-            "link": " https://xskt.com.vn/rss-feed/mien-trung-xsmt.rss"
-        },
-        {
-            "location": "miền bắc",
-            "link": "https://xskt.com.vn/rss-feed/mien-bac-xsmb.rss"
-        },
-        {
-            "location": "an giang",
-            "link": "https://xskt.com.vn/rss-feed/an-giang-xsag.rss"
-        },
-        {
-            "location": "bình dương",
-            "link": "https://xskt.com.vn/rss-feed/binh-duong-xsbd.rss"
-        },
-        {
-            "location": "bình định",
-            "link": "https://xskt.com.vn/rss-feed/binh-dinh-xsbdi.rss"
-        },
-        {
-            "location": "bạc liêu",
-            "link": "https://xskt.com.vn/rss-feed/bac-lieu-xsbl.rss"
-        },
-        {
-            "location": "bình phước",
-            "link": "https://xskt.com.vn/rss-feed/binh-phuoc-xsbp.rss"
-        },
-        {
-            "location": "bến tre",
-            "link": "https://xskt.com.vn/rss-feed/ben-tre-xsbt.rss"
-        },
-        {
-            "location": "bình thuận",
-            "link": "https://xskt.com.vn/rss-feed/binh-thuan-xsbth.rss"
-        },
-        {
-            "location": "cà mau",
-            "link": "https://xskt.com.vn/rss-feed/ca-mau-xscm.rss"
-        },
-        {
-            "location": "cần thơ",
-            "link": "https://xskt.com.vn/rss-feed/can-tho-xsct.rss"
-        },
-        {
-            "location": "đắc lắc",
-            "link": "https://xskt.com.vn/rss-feed/dac-lac-xsdlk.rss"
-        },
-        {
-            "location": "đồng nai",
-            "link": "https://xskt.com.vn/rss-feed/dong-nai-xsdn.rss"
-        },
-        {
-            "location": "đà nẵng",
-            "link": "https://xskt.com.vn/rss-feed/da-nang-xsdng.rss"
-        },
-        {
-            "location": "đắc nông",
-            "link": "https://xskt.com.vn/rss-feed/dac-nong-xsdno.rss"
-        },
-        {
-            "location": "đồng tháp",
-            "link": "https://xskt.com.vn/rss-feed/dong-thap-xsdt.rss"
-        },
-        {
-            "location": "gia lai",
-            "link": "https://xskt.com.vn/rss-feed/gia-lai-xsgl.rss"
-        },
-        {
-            "location": "hồ chí minh",
-            "link": "https://xskt.com.vn/rss-feed/tp-hcm-xshcm.rss"
-        },
-        {
-            "location": "hậu giang",
-            "link": "https://xskt.com.vn/rss-feed/hau-giang-xshg.rss"
-        },
-        {
-            "location": "kiên giang",
-            "link": "https://xskt.com.vn/rss-feed/kien-giang-xskg.rss"
-        },
-        {
-            "location": "khánh hòa",
-            "link": "https://xskt.com.vn/rss-feed/khanh-hoa-xskh.rss"
-        },
-        {
-            "location": "con tum",
-            "link": "https://xskt.com.vn/rss-feed/kon-tum-xskt.rss"
-        },
-        {
-            "location": "long an",
-            "link": "https://xskt.com.vn/rss-feed/long-an-xsla.rss"
-        },
-        {
-            "location": "lâm đồng",
-            "link": "https://xskt.com.vn/rss-feed/lam-dong-xsld.rss"
-        },
-        {
-            "location": "ninh thuận",
-            "link": "https://xskt.com.vn/rss-feed/ninh-thuan-xsnt.rss"
-        },
-        {
-            "location": "phú yên",
-            "link": "https://xskt.com.vn/rss-feed/phu-yen-xspy.rss"
-        },
-        {
-            "location": "quảng bình",
-            "link": "https://xskt.com.vn/rss-feed/quang-binh-xsqb.rss"
-        },
-        {
-            "location": "quảng ngãi",
-            "link": "https://xskt.com.vn/rss-feed/quang-ngai-xsqng.rss"
-        },
-        {
-            "location": "quảng nam",
-            "link": "https://xskt.com.vn/rss-feed/quang-nam-xsqnm.rss"
-        },
-        {
-            "location": "quảng trị",
-            "link": "https://xskt.com.vn/rss-feed/quang-tri-xsqt.rss"
-        },
-        {
-            "location": "sóc trăng",
-            "link": "https://xskt.com.vn/rss-feed/soc-trang-xsst.rss"
-        },
-        {
-            "location": "tiền giang",
-            "link": "https://xskt.com.vn/rss-feed/tien-giang-xstg.rss"
-        },
-        {
-            "location": "tây ninh",
-            "link": "https://xskt.com.vn/rss-feed/tay-ninh-xstn.rss"
-        },
-        {
-            "location": "thừa thiên huế",
-            "link": "https://xskt.com.vn/rss-feed/thua-thien-hue-xstth.rss"
-        },
-        {
-            "location": "trà vinh",
-            "link": "https://xskt.com.vn/rss-feed/tra-vinh-xstv.rss"
-        },
-        {
-            "location": "vĩnh long",
-            "link": "https://xskt.com.vn/rss-feed/vinh-long-xsvl.rss"
-        },
-        {
-            "location": "vũng tàu",
-            "link": "https://xskt.com.vn/rss-feed/vung-tau-xsvt.rss"
-        }
-    ],
-    "distance_route": {
-        "error_answer": "Không thực hiện được tra cứu khoảng cách và tuyến đường, hãy kiểm tra lại",
-        "gg_geocoding_api": "AIzafsdfsdfF5golEU",      
-        "active": false
-    },
-    "nearby_place": {
-        "error_answer": "Không thực hiện được tra cứu địa điểm gần đây, hãy kiểm tra lại",
-        "gg_geocoding_api": "AIzaSsfsdfrrQ3F5golEU",      
-        "active": false
-    },
-    "weather": {
-        "openweathermap_key": "ffdsdfsdfsdf70b",
-        "error_answer": "Không thực hiện được tra cứu thời tiết khu vực, hãy kiểm tra lại",
-        "active": true
-    },
-    "hass": {
-        "url": "https://192.168.1.10:8123",
-        "token": "eyJhbGciOiJIU4543TM0fQ.88LpZcRQEeH_sdfsd2jhE1tE",
+		"error_answer": "Không thực hiện được tra cứu giá vàng, hãy kiểm tra lại",
+		"active": true
+	},
+	"gold_rate_data": [{
+			"location": "Hà Nội"
+		},
+		{
+			"location": "Đà Nẵng"
+		},
+		{
+			"location": "Hồ Chí Minh"
+		},
+		{
+			"location": "Nha Trang"
+		},
+		{
+			"location": "Cà Mau"
+		},
+		{
+			"location": "Huế"
+		},
+		{
+			"location": "Bình Phước"
+		},
+		{
+			"location": "Miền Tây"
+		},
+		{
+			"location": "Biên Hòa"
+		},
+		{
+			"location": "Quảng Ngãi"
+		},
+		{
+			"location": "Long Xuyên"
+		},
+		{
+			"location": "Bạc Liêu"
+		},
+		{
+			"location": "Quy Nhơn"
+		},
+		{
+			"location": "Phan Rang"
+		},
+		{
+			"location": "Hạ Long"
+		},
+		{
+			"location": "Quảng Nam"
+		}
+	],
+	"lottery": {
+		"error_answer": "Không thực hiện được tra cứu kết quả sổ xố, hãy kiểm tra lại",
+		"active": true
+	},
+	"lottery_data": [{
+			"location": "miền trung",
+			"link": " https://xskt.com.vn/rss-feed/mien-trung-xsmt.rss"
+		},
+		{
+			"location": "miền bắc",
+			"link": "https://xskt.com.vn/rss-feed/mien-bac-xsmb.rss"
+		},
+		{
+			"location": "an giang",
+			"link": "https://xskt.com.vn/rss-feed/an-giang-xsag.rss"
+		},
+		{
+			"location": "bình dương",
+			"link": "https://xskt.com.vn/rss-feed/binh-duong-xsbd.rss"
+		},
+		{
+			"location": "bình định",
+			"link": "https://xskt.com.vn/rss-feed/binh-dinh-xsbdi.rss"
+		},
+		{
+			"location": "bạc liêu",
+			"link": "https://xskt.com.vn/rss-feed/bac-lieu-xsbl.rss"
+		},
+		{
+			"location": "bình phước",
+			"link": "https://xskt.com.vn/rss-feed/binh-phuoc-xsbp.rss"
+		},
+		{
+			"location": "bến tre",
+			"link": "https://xskt.com.vn/rss-feed/ben-tre-xsbt.rss"
+		},
+		{
+			"location": "bình thuận",
+			"link": "https://xskt.com.vn/rss-feed/binh-thuan-xsbth.rss"
+		},
+		{
+			"location": "cà mau",
+			"link": "https://xskt.com.vn/rss-feed/ca-mau-xscm.rss"
+		},
+		{
+			"location": "cần thơ",
+			"link": "https://xskt.com.vn/rss-feed/can-tho-xsct.rss"
+		},
+		{
+			"location": "đắc lắc",
+			"link": "https://xskt.com.vn/rss-feed/dac-lac-xsdlk.rss"
+		},
+		{
+			"location": "đồng nai",
+			"link": "https://xskt.com.vn/rss-feed/dong-nai-xsdn.rss"
+		},
+		{
+			"location": "đà nẵng",
+			"link": "https://xskt.com.vn/rss-feed/da-nang-xsdng.rss"
+		},
+		{
+			"location": "đắc nông",
+			"link": "https://xskt.com.vn/rss-feed/dac-nong-xsdno.rss"
+		},
+		{
+			"location": "đồng tháp",
+			"link": "https://xskt.com.vn/rss-feed/dong-thap-xsdt.rss"
+		},
+		{
+			"location": "gia lai",
+			"link": "https://xskt.com.vn/rss-feed/gia-lai-xsgl.rss"
+		},
+		{
+			"location": "hồ chí minh",
+			"link": "https://xskt.com.vn/rss-feed/tp-hcm-xshcm.rss"
+		},
+		{
+			"location": "hậu giang",
+			"link": "https://xskt.com.vn/rss-feed/hau-giang-xshg.rss"
+		},
+		{
+			"location": "kiên giang",
+			"link": "https://xskt.com.vn/rss-feed/kien-giang-xskg.rss"
+		},
+		{
+			"location": "khánh hòa",
+			"link": "https://xskt.com.vn/rss-feed/khanh-hoa-xskh.rss"
+		},
+		{
+			"location": "con tum",
+			"link": "https://xskt.com.vn/rss-feed/kon-tum-xskt.rss"
+		},
+		{
+			"location": "long an",
+			"link": "https://xskt.com.vn/rss-feed/long-an-xsla.rss"
+		},
+		{
+			"location": "lâm đồng",
+			"link": "https://xskt.com.vn/rss-feed/lam-dong-xsld.rss"
+		},
+		{
+			"location": "ninh thuận",
+			"link": "https://xskt.com.vn/rss-feed/ninh-thuan-xsnt.rss"
+		},
+		{
+			"location": "phú yên",
+			"link": "https://xskt.com.vn/rss-feed/phu-yen-xspy.rss"
+		},
+		{
+			"location": "quảng bình",
+			"link": "https://xskt.com.vn/rss-feed/quang-binh-xsqb.rss"
+		},
+		{
+			"location": "quảng ngãi",
+			"link": "https://xskt.com.vn/rss-feed/quang-ngai-xsqng.rss"
+		},
+		{
+			"location": "quảng nam",
+			"link": "https://xskt.com.vn/rss-feed/quang-nam-xsqnm.rss"
+		},
+		{
+			"location": "quảng trị",
+			"link": "https://xskt.com.vn/rss-feed/quang-tri-xsqt.rss"
+		},
+		{
+			"location": "sóc trăng",
+			"link": "https://xskt.com.vn/rss-feed/soc-trang-xsst.rss"
+		},
+		{
+			"location": "tiền giang",
+			"link": "https://xskt.com.vn/rss-feed/tien-giang-xstg.rss"
+		},
+		{
+			"location": "tây ninh",
+			"link": "https://xskt.com.vn/rss-feed/tay-ninh-xstn.rss"
+		},
+		{
+			"location": "thừa thiên huế",
+			"link": "https://xskt.com.vn/rss-feed/thua-thien-hue-xstth.rss"
+		},
+		{
+			"location": "trà vinh",
+			"link": "https://xskt.com.vn/rss-feed/tra-vinh-xstv.rss"
+		},
+		{
+			"location": "vĩnh long",
+			"link": "https://xskt.com.vn/rss-feed/vinh-long-xsvl.rss"
+		},
+		{
+			"location": "vũng tàu",
+			"link": "https://xskt.com.vn/rss-feed/vung-tau-xsvt.rss"
+		}
+	],
+	"distance_route": {
+		"error_answer": "Không thực hiện được tra cứu khoảng cách và tuyến đường, hãy kiểm tra lại",
+		"gg_geocoding_api": "AIzafsdfsdfF5golEU",
+		"active": false
+	},
+	"nearby_place": {
+		"error_answer": "Không thực hiện được tra cứu địa điểm gần đây, hãy kiểm tra lại",
+		"gg_geocoding_api": "AIzaSsfsdfrrQ3F5golEU",
+		"active": false
+	},
+	"weather": {
+		"openweathermap_key": "ffdsdfsdfsdf70b",
+		"error_answer": "Không thực hiện được tra cứu thời tiết khu vực, hãy kiểm tra lại",
+		"active": true
+	},
+	"hass": {
+		"url": "https://192.168.1.10:8123",
+		"token": "eyJhbGciOiJIU4543TM0fQ.88LpZcRQEeH_sdfsd2jhE1tE",
 
-        "error_answer": "Không thực hiện được kết nối đến Hass, hãy kiểm tra lại",
-        "display_full_state": true,
-        "active": true
-    },
-    "funny_story": {
-        "error_answer": "Không thực hiện được Skill truyện cười, hãy kiểm tra lại",
-        "active": true
-    },
-    "fairy_tale": {
-	"error_answer": "Không thực hiện được Skill truyện cổ tích, hãy kiểm tra lại",
-	"active": true
-    },
-    "wikipedia": {
-        "error_answer": "Không thực hiện được tra cứu Wikipedia, hãy kiểm tra lại",
-        "active": true
-    },
-    "simsim": {
-        "error_answer": "Không thực hiện được tra cứu Sim sim, hãy kiểm tra lại"
-    },
+		"error_answer": "Không thực hiện được kết nối đến Hass, hãy kiểm tra lại",
+		"display_full_state": true,
+		"active": true
+	},
+	"funny_story": {
+		"error_answer": "Không thực hiện được Skill truyện cười, hãy kiểm tra lại",
+		"active": true
+	},
+	"fairy_tale": {
+		"error_answer": "Không thực hiện được Skill truyện cổ tích, hãy kiểm tra lại",
+		"active": true
+	},
+	"wikipedia": {
+		"error_answer": "Không thực hiện được tra cứu Wikipedia, hãy kiểm tra lại",
+		"active": true
+	},
+	"simsim": {
+		"error_answer": "Không thực hiện được tra cứu Sim sim, hãy kiểm tra lại"
+	},
 	"gg_bard": {
 		"Secure-1PSID": "Zwg7SzgZ-UXLnJ-qBu2iV6nDguEmwe9CzOiTeDQJxPgu0K0ZQ1HBj19kHg3geNf4Ye581w.",
-        	"Secure-1PSIDTS": "sidts-CjEBSAxbGdWnKLDXxUHIL7Y6HFZzWho-JyTiy7B9nmBEBhiDJkoXCro8aaEYOoJYhPYZEAA",
-        	"Secure-1PSIDCC": "APoG2W810OI76FUO_99gSQdbIfClAk6Aa_Iw1JMClsiTvLI2zNBTq4OBpTl8vdSRpRvvHrKHnA",
+		"Secure-1PSIDTS": "sidts-CjEBSAxbGdWnKLDXxUHIL7Y6HFZzWho-JyTiy7B9nmBEBhiDJkoXCro8aaEYOoJYhPYZEAA",
+		"Secure-1PSIDCC": "APoG2W810OI76FUO_99gSQdbIfClAk6Aa_Iw1JMClsiTvLI2zNBTq4OBpTl8vdSRpRvvHrKHnA",
 		"error_answer": "Không thực hiện được tra cứu Google Bard, hãy kiểm tra lại"
-	},    
-    "gg_ass": {
-        "mode": "default",      
-        "credentials_file": "credentials.json",
-        "device_config_file": "device_config.json",
-        "error_answer": "Không thực hiện được tra cứu Google Assistant, hãy kiểm tra lại"
-    },
-    "chatgpt": {
-        "token": "sk-8kFidsfsf4anlf",     
-        "engine": "text-davinci-003",
-        "error_answer": "Không thực hiện được tra cứu chatGPT, hãy kiểm tra lại"
-    },
+	},
+	"gg_ass": {
+		"mode": "default",
+		"credentials_file": "credentials.json",
+		"device_config_file": "device_config.json",
+		"error_answer": "Không thực hiện được tra cứu Google Assistant, hãy kiểm tra lại"
+	},
+	"chatgpt": {
+		"token": "sk-8kFidsfsf4anlf",
+		"engine": "text-davinci-003",
+		"error_answer": "Không thực hiện được tra cứu chatGPT, hãy kiểm tra lại"
+	},
 	"hanet": {
 		"agent": {
 			"number": 4,
@@ -450,31 +450,31 @@
 		},
 		"active": true
 	},
-    "telegram": {
-        "token": "60gfdgdfAeU",
-        "error_answer": "Không thực hiện được gửi Telegram, hãy kiểm tra lại",
-        "active": false
-    },
-    "telegram_data": [{
-        "name": "Nguyễn Duy",
-        "chat_id": 6059124493
-    }],
-    "countdown": {
-        "error_answer": "Không thực hiện được tạo tác vụ đếm ngược, hãy kiểm tra lại",
-        "active": true
-    },
-    "schedule": {
-        "error_answer": "Không thực hiện được tạo tác vụ lập lịch, hãy kiểm tra lại",
-        "active": true
-    },
-    "external_bot": {
-        "priority_1": "gg_bard",
-        "priority_2": "gg_ass",
-        "priority_3": "chatGPT"
-    },
-    "music_source": {
-        "priority_1": "local",
-        "priority_2": "ZingMP3",
-        "priority_3": "Youtube"
-    }
+	"telegram": {
+		"token": "60gfdgdfAeU",
+		"error_answer": "Không thực hiện được gửi Telegram, hãy kiểm tra lại",
+		"active": false
+	},
+	"telegram_data": [{
+		"name": "Nguyễn Duy",
+		"chat_id": 6059124493
+	}],
+	"countdown": {
+		"error_answer": "Không thực hiện được tạo tác vụ đếm ngược, hãy kiểm tra lại",
+		"active": true
+	},
+	"schedule": {
+		"error_answer": "Không thực hiện được tạo tác vụ lập lịch, hãy kiểm tra lại",
+		"active": true
+	},
+	"external_bot": {
+		"priority_1": "gg_bard",
+		"priority_2": "gg_ass",
+		"priority_3": "chatGPT"
+	},
+	"music_source": {
+		"priority_1": "local",
+		"priority_2": "ZingMP3",
+		"priority_3": "Youtube"
+	}
 }
