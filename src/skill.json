@@ -429,12 +429,27 @@
         "engine": "text-davinci-003",
         "error_answer": "Không thực hiện được tra cứu chatGPT, hãy kiểm tra lại"
     },
-    "hanet": {
-        "agent_annoucement": "Phát hiện người nhà hoặc nhân viên tên là",
-        "partner_annoucement": "Phát hiện khách hoặc nhân viên tên là",
-        "stranger_annoucement": "Phát hiện người lạ hoặc không nhận diện đủ gương mặt",
-        "active": false
-    },
+	"hanet": {
+		"agent": {
+			"number": 4,
+			"content": "Phát hiện người nhà hoặc nhân viên tên là",
+			"start_time": "00:00",
+			"end_time": "23:59"
+		},
+		"partner": {
+			"number": 4,
+			"content": "Phát hiện khách hoặc đối tác tên là",
+			"start_time": "00:00",
+			"end_time": "23:59"
+		},
+		"stranger": {
+			"number": 4,
+			"content": "Phát hiện người lạ hoặc không nhận diện đủ gương mặt",
+			"start_time": "00:00",
+			"end_time": "23:59"
+		},
+		"active": true
+	},
     "telegram": {
         "token": "60gfdgdfAeU",
         "error_answer": "Không thực hiện được gửi Telegram, hãy kiểm tra lại",
