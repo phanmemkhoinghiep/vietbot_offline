@@ -1,9 +1,9 @@
 {
 	"vietbot_version": {
-		"latest": "beta 20-08-2023-01"
+		"latest": "beta 21-08-2023-01"
 	},
 	"update_command": "", 
-	"new_features": "Tùy chỉnh số lần thông báo Hanet",
+	"new_features": "",
 	"bug_fixed": "",	
 	"improvements": "Xử lý các skill nội bộ nhanh hơn (Tiếp tục)",	
 	"image_version": {
