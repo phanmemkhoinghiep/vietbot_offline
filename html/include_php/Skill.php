@@ -108,6 +108,19 @@ $skillArray = json_decode($skillData, true);
             overflow: auto;
 		
 		}
+		.thoi-gian-container {
+  display: flex;
+  align-items: center;
+}
+
+.thoi-gian-container label {
+  margin-right: 10px;
+}
+
+.thoi-gian-container select {
+  padding: 5px;
+}
+
   </style>
 	</head>
 	<body>
@@ -281,6 +294,8 @@ chmod($backupFile, 0777);
 	//Telegram
 	$activeTelegram = isset($_POST['activeTelegram']) && $_POST['activeTelegram'] === 'on' ? true : false;
 	$TelegramKey = @$_POST['telegram_key'];
+
+
     // Cập nhật giá trị trong mảng 
 	//skillArray openweathermap
     $skillArray['weather']['openweathermap_key'] = $openweathermapKey;
@@ -292,6 +307,34 @@ chmod($backupFile, 0777);
     $skillArray['hass']['active'] = $activeHass;
 	//ChatGPT
     $skillArray['chatgpt']['token'] = $ChatGptKey;
+	//Camera hanet
+	$activeCameraHanet = isset($_POST['activeCameraHanet']) && $_POST['activeCameraHanet'] === 'on' ? true : false;
+	
+	$hanet_agent_start_time = $_POST['hanet_agent_start_time_hour'].':'.$_POST['hanet_agent_start_time_minute'];
+	$hanet_agent_end_time = $_POST['hanet_agent_end_time_hour'].':'.$_POST['hanet_agent_end_time_minute'];
+	
+	$hanet_partner_start_time = $_POST['hanet_partner_start_time_hour'].':'.$_POST['hanet_partner_start_time_minute'];
+	$hanet_partner_end_time = $_POST['hanet_partner_end_time_hour'].':'.$_POST['hanet_partner_end_time_minute'];
+	
+	$hanet_stranger_start_time = $_POST['hanet_stranger_start_time_hour'].':'.$_POST['hanet_stranger_start_time_minute'];
+	$hanet_stranger_end_time = $_POST['hanet_stranger_end_time_hour'].':'.$_POST['hanet_stranger_end_time_minute'];
+		//Người Nhà/Nhân Viên
+	$skillArray['hanet']['agent']['number'] = intval($_POST['hanet_agent_number']);
+	$skillArray['hanet']['agent']['content'] = $_POST['hanet_agent_content'];
+	$skillArray['hanet']['agent']['start_time'] = $hanet_agent_start_time;
+	$skillArray['hanet']['agent']['end_time'] = $hanet_agent_end_time;
+		//Người Quen/Đối Tác
+	$skillArray['hanet']['partner']['number'] = intval($_POST['hanet_partner_number']);
+	$skillArray['hanet']['partner']['content'] = $_POST['hanet_partner_content'];
+	$skillArray['hanet']['partner']['start_time'] = $hanet_partner_start_time;
+	$skillArray['hanet']['partner']['end_time'] = $hanet_partner_end_time;
+		//Người Lạ/Khách
+	$skillArray['hanet']['stranger']['number'] = intval($_POST['hanet_stranger_number']);
+	$skillArray['hanet']['stranger']['content'] = $_POST['hanet_stranger_content'];
+	$skillArray['hanet']['stranger']['start_time'] = $hanet_stranger_start_time;
+	$skillArray['hanet']['stranger']['end_time'] = $hanet_stranger_end_time;
+	
+	
 	//Google Brand
     $skillArray['gg_bard']['Secure-1PSID'] = $Google_bard_Secure1PSID;
     $skillArray['gg_bard']['Secure-1PSIDTS'] = $Google_bard_Secure_1PSIDTS;
@@ -309,6 +352,8 @@ chmod($backupFile, 0777);
 	//Telegram
     $skillArray['telegram']['token'] = $TelegramKey;
     $skillArray['telegram']['active'] = $activeTelegram;
+	//Camera Hanet
+    $skillArray['hanet']['active'] = $activeCameraHanet;
     // Chuyển đổi mảng PHP thành JSON
     //$updatedSkillData = json_encode($skillArray, JSON_PRETTY_PRINT);
     $updatedSkillData = json_encode($skillArray, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
@@ -652,8 +697,8 @@ B4: Go to Application -> Cookies -> "__Secure-1PSID" và "__Secure-1PSIDTS" và 
 <center><i><b>Danh Bạ Người Gửi: </b></i>Nếu Có Thông Báo Giá trị <b>'telegram_data'</b> trong skill.json đã vượt quá <b><?php echo $Limit_Telegram; ?></b> giá trị, bạn cần ssh sửa trực tiếp file skill.json</center><br/>
 - <b>Xóa Danh Bạ Người Gửi: </b> Để xóa danh bạ người gửi đã thêm, bạn hãy tìm tới người cần xóa, <br/>sau đó bỏ trống 1 trong 2 ô (<b>"Tên Người Nhận"</b> hoặc <b>"ID Người Nhận"</b>) sau đó nhấn Lưu Cài Đặt Skill.
 </div></div>
+
     <div class="form-group">
-       <!-- <label for="active">Active:</label> -->
 	      <div class="row justify-content-center">
     <div class="col-auto">
         <div class="custom-control custom-switch" title="Bật/Tắt để kích hoạt/huỷ kích hoạt">
@@ -777,8 +822,242 @@ if ($count_news > $Limit_BaoTinTuc ) {
 </tbody></table></div>
 </div>
 <hr/>
+<?php
 
+$value_hanet_agent_start_time_hour = explode(":", $skillArray['hanet']['agent']['start_time'])[0];
+$value_hanet_agent_start_time_minute = explode(":", $skillArray['hanet']['agent']['start_time'])[1];
 
+$value_hanet_agent_end_time_hour = explode(":", $skillArray['hanet']['agent']['end_time'])[0];
+$value_hanet_agent_end_time_minute = explode(":", $skillArray['hanet']['agent']['end_time'])[1];
+
+//echo $value_hanet_agent_start_time_hour;
+?>
+
+<!-- Start Camera Hanet -->
+<h5>Camera Hanet:</h5>
+
+    <div class="form-group">
+	      <div class="row justify-content-center">
+    <div class="col-auto">
+        <div class="custom-control custom-switch" title="Bật/Tắt để kích hoạt/huỷ kích hoạt">
+            <input type="checkbox" class="custom-control-input" id="activeCameraHanet" name="activeCameraHanet" <?php echo $skillArray['hanet']['active'] ? 'checked' : ''; ?>>
+            <label class="custom-control-label" for="activeCameraHanet"></label>
+</div></div></div></div>
+<div class="form-group" id="extraDataCameraHanet" <?php echo $skillArray['hanet']['active'] ? '' : 'style="display: none;"'; ?>>
+
+<div class="row justify-content-center"><div class="col-auto">
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col" colspan="2"><center><font color=red>Camera Hanet: Người Nhà/Nhân Viên</font></center></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Số Lần Thông Báo:</th>
+      <td><input class="form-control" type="number" placeholder="1->100" title="Nhập Số Lần Thông Báo" name="hanet_agent_number" min="1" max="100" step="1" value="<?php echo $skillArray['hanet']['agent']['number']; ?>"></td>
+    </tr>
+    <tr>
+      <th scope="row">Nội Dung:</th>
+      <td><input class="form-control" type="text" placeholder="Nhập Nội Dung Thông Báo" title="Nội Dung Thông Báo: <?php echo $skillArray['hanet']['agent']['content']; ?>" name="hanet_agent_content" value="<?php echo $skillArray['hanet']['agent']['content']; ?>"></td>
+    </tr>
+    <tr>
+      <th scope="row" title="Định Dạng = Giờ:Phút">Thời Gian Bắt Đầu:</th>
+      <td>
+<div class="thoi-gian-container">
+<select title="Giờ" class="form-select" name="hanet_agent_start_time_hour">
+  <?php
+    for ($hanet_agent_start_time_hour = 0; $hanet_agent_start_time_hour <= 11; $hanet_agent_start_time_hour++) {
+      $formattedHour_agent_start = str_pad($hanet_agent_start_time_hour, 2, "0", STR_PAD_LEFT);
+	  ?>
+      <option title="<?php echo $formattedHour_agent_start; ?> Giờ" value="<?php echo $formattedHour_agent_start; ?>" <?php if (explode(":", $skillArray['hanet']['agent']['start_time'])[0] === "$formattedHour_agent_start") echo "selected"; ?>><?php echo $formattedHour_agent_start; ?></option>
+	  <?php 
+    }
+  ?>
+</select>:<select title="Phút" class="form-select" name="hanet_agent_start_time_minute">
+  <?php
+    for ($hanet_agent_start_time_minute = 0; $hanet_agent_start_time_minute <= 59; $hanet_agent_start_time_minute++) {
+      $formattedMinute_agent_start = str_pad($hanet_agent_start_time_minute, 2, "0", STR_PAD_LEFT);
+	  ?>
+      <option title="<?php echo $formattedMinute_agent_start; ?> Phút" value="<?php echo $formattedMinute_agent_start; ?>" <?php if (explode(":", $skillArray['hanet']['agent']['start_time'])[1] === "$formattedMinute_agent_start") echo "selected"; ?>><?php echo $formattedMinute_agent_start; ?></option>
+   <?php 
+   }
+  ?>
+</select>
+</div>
+	  </td>
+    </tr>
+    <tr>
+      <th scope="row" title="Định Dạng = Giờ:Phút">Thời Gian Kết Thúc:</th>
+      <td>
+	  
+<div class="thoi-gian-container">
+<select class="form-select" title="Giờ" name="hanet_agent_end_time_hour">
+  <?php
+    for ($hanet_agent_end_time_hour = 0; $hanet_agent_end_time_hour <= 11; $hanet_agent_end_time_hour++) {
+      $formattedHour_agent_end_time_hour = str_pad($hanet_agent_end_time_hour, 2, "0", STR_PAD_LEFT);
+	  ?>
+     <option title="<?php echo $formattedHour_agent_end_time_hour; ?> Giờ" value="<?php echo $formattedHour_agent_end_time_hour; ?>" <?php if (explode(":", $skillArray['hanet']['agent']['end_time'])[0] === "$formattedHour_agent_end_time_hour") echo "selected"; ?>><?php echo $formattedHour_agent_end_time_hour; ?></option>
+	  <?php
+    }
+  ?>
+</select>:<select title="Phút" class="form-select" name="hanet_agent_end_time_minute">
+  <?php
+    for ($hanet_agent_end_time_minute = 0; $hanet_agent_end_time_minute <= 59; $hanet_agent_end_time_minute++) {
+      $formattedMinute_gent_end_time_minute = str_pad($hanet_agent_end_time_minute, 2, "0", STR_PAD_LEFT);
+	  ?>
+     <option title="<?php echo $formattedMinute_gent_end_time_minute; ?> Phút" value="<?php echo $formattedMinute_gent_end_time_minute; ?>" <?php if (explode(":", $skillArray['hanet']['agent']['end_time'])[1] === "$formattedMinute_gent_end_time_minute") echo "selected"; ?>><?php echo $formattedMinute_gent_end_time_minute; ?></option>
+	  <?php
+    }
+  ?>
+</select>
+</div>
+	  </td>
+	</tr>
+  </tbody>
+  <!-- -->
+  <thead>
+    <tr>
+      <th scope="col" colspan="2"><center><font color=red>Camera Hanet: Người Quen/Đối Tác</font></center></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Số Lần Thông Báo:</th>
+      <td><input class="form-control" type="number" placeholder="1->100" title="Nhập Số Lần Thông Báo" name="hanet_partner_number" min="1" max="100" step="1" value="<?php echo $skillArray['hanet']['partner']['number']; ?>"></td>
+    </tr>
+    <tr>
+      <th scope="row">Nội Dung:</th>
+      <td><input class="form-control" type="text" placeholder="Nhập Nội Dung Thông Báo" title="Nội Dung Thông Báo: <?php echo $skillArray['hanet']['partner']['content']; ?>" name="hanet_partner_content" value="<?php echo $skillArray['hanet']['partner']['content']; ?>"></td>
+    </tr>
+   <tr>
+      <th scope="row" title="Định Dạng = Giờ:Phút">Thời Gian Bắt Đầu:</th>
+      <td>
+<div class="thoi-gian-container">
+<select title="Giờ" class="form-select" name="hanet_partner_start_time_hour">
+  <?php
+    for ($hanet_partner_start_time_hour = 0; $hanet_partner_start_time_hour <= 11; $hanet_partner_start_time_hour++) {
+      $formattedHour_partner_start = str_pad($hanet_partner_start_time_hour, 2, "0", STR_PAD_LEFT);
+	  ?>
+      <option title="<?php echo $formattedHour_partner_start; ?> Giờ" value="<?php echo $formattedHour_partner_start; ?>" <?php if (explode(":", $skillArray['hanet']['partner']['start_time'])[0] === "$formattedHour_partner_start") echo "selected"; ?>><?php echo $formattedHour_partner_start; ?></option>
+	  <?php
+    }
+  ?>
+</select>:<select title="Phút" class="form-select" name="hanet_partner_start_time_minute">
+  <?php
+    for ($hanet_partner_start_time_minute = 0; $hanet_partner_start_time_minute <= 59; $hanet_partner_start_time_minute++) {
+      $formattedMinute_partner_start = str_pad($hanet_partner_start_time_minute, 2, "0", STR_PAD_LEFT);
+	  ?>
+      <option title="<?php echo $formattedMinute_partner_start; ?> Phút" value="<?php echo $formattedMinute_partner_start; ?>" <?php if (explode(":", $skillArray['hanet']['partner']['start_time'])[1] === "$formattedMinute_partner_start") echo "selected"; ?>><?php echo $formattedMinute_partner_start; ?></option>
+	  <?php
+    }
+  ?>
+</select>
+</div>
+	  </td>
+    </tr>
+    <tr>
+      <th scope="row" title="Định Dạng = Giờ:Phút">Thời Gian Kết Thúc:</th>
+      <td>
+	  
+<div class="thoi-gian-container">
+<select title="Giờ" class="form-select" name="hanet_partner_end_time_hour">
+  <?php
+    for ($hanet_partner_end_time_hour = 0; $hanet_partner_end_time_hour <= 11; $hanet_partner_end_time_hour++) {
+      $formattedHour_partner_end_time_hour = str_pad($hanet_partner_end_time_hour, 2, "0", STR_PAD_LEFT);
+	  ?>
+      <option title="<?php echo $formattedHour_partner_end_time_hour; ?> Giờ" value="<?php echo $formattedHour_partner_end_time_hour; ?>" <?php if (explode(":", $skillArray['hanet']['partner']['end_time'])[0] === "$formattedHour_partner_end_time_hour") echo "selected"; ?>><?php echo $formattedHour_partner_end_time_hour; ?></option>
+	  <?php
+    }
+  ?>
+</select>:<select title="Phút" class="form-select" name="hanet_partner_end_time_minute">
+  <?php
+    for ($hanet_partner_end_time_minute = 0; $hanet_partner_end_time_minute <= 59; $hanet_partner_end_time_minute++) {
+      $formattedMinute_partner_end_time_minute = str_pad($hanet_partner_end_time_minute, 2, "0", STR_PAD_LEFT);
+	  ?>
+      <option title="<?php echo $formattedMinute_partner_end_time_minute; ?> Phút" value="<?php echo $formattedMinute_partner_end_time_minute; ?>" <?php if (explode(":", $skillArray['hanet']['partner']['end_time'])[1] === "$formattedMinute_partner_end_time_minute") echo "selected"; ?>><?php echo $formattedMinute_partner_end_time_minute; ?></option>
+	  <?php
+    }
+  ?>
+</select>
+</div>
+	  </td>
+	</tr>
+  </tbody>
+  <thead>
+    <tr>
+      <th scope="col" colspan="2"><center><font color=red>Camera Hanet: Người Lạ/Khách</font></center></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Số Lần Thông Báo:</th>
+      <td><input class="form-control" type="number" placeholder="1->100" title="Nhập Số Lần Thông Báo" name="hanet_stranger_number" min="1" max="100" step="1" value="<?php echo $skillArray['hanet']['stranger']['number']; ?>"></td>
+    </tr>
+    <tr>
+      <th scope="row">Nội Dung:</th>
+      <td><input class="form-control" type="text" placeholder="Nhập Nội Dung Thông Báo" title="Nội Dung Thông Báo: <?php echo $skillArray['hanet']['stranger']['content']; ?>" name="hanet_stranger_content" value="<?php echo $skillArray['hanet']['stranger']['content']; ?>"></td>
+    </tr>
+   <tr>
+      <th scope="row" title="Định Dạng = Giờ:Phút">Thời Gian Bắt Đầu:</th>
+      <td>
+<div class="thoi-gian-container">
+<select title="Giờ" class="form-select" name="hanet_stranger_start_time_hour">
+  <?php
+    for ($hanet_stranger_start_time_hour = 0; $hanet_stranger_start_time_hour <= 11; $hanet_stranger_start_time_hour++) {
+      $formattedHour_stranger_start = str_pad($hanet_stranger_start_time_hour, 2, "0", STR_PAD_LEFT);
+	  ?>
+      <option title="<?php echo $formattedHour_stranger_start; ?> Giờ" value="<?php echo $formattedHour_stranger_start; ?>" <?php if (explode(":", $skillArray['hanet']['stranger']['start_time'])[0] === "$formattedHour_stranger_start") echo "selected"; ?>><?php echo $formattedHour_stranger_start; ?></option>
+	  <?php
+    }
+  ?>
+</select>:<select title="Phút" class="form-select" name="hanet_stranger_start_time_minute">
+  <?php
+    for ($hanet_stranger_start_time_minute = 0; $hanet_stranger_start_time_minute <= 59; $hanet_stranger_start_time_minute++) {
+      $formattedMinute_stranger_start = str_pad($hanet_stranger_start_time_minute, 2, "0", STR_PAD_LEFT);
+	  ?>
+      <option title="<?php echo $formattedMinute_stranger_start; ?> Phút" value="<?php echo $formattedMinute_stranger_start; ?>" <?php if (explode(":", $skillArray['hanet']['stranger']['start_time'])[1] === "$formattedMinute_stranger_start") echo "selected"; ?>><?php echo $formattedMinute_stranger_start; ?></option>
+	  <?php
+    }
+  ?>
+</select>
+</div>
+	  </td>
+    </tr>
+    <tr>
+      <th scope="row" title="Định Dạng = Giờ:Phút">Thời Gian Kết Thúc:</th>
+      <td>
+	  
+<div class="thoi-gian-container">
+<select title="Giờ" class="form-select" name="hanet_stranger_end_time_hour">
+  <?php
+    for ($hanet_stranger_end_time_hour = 0; $hanet_stranger_end_time_hour <= 11; $hanet_stranger_end_time_hour++) {
+      $formattedHour_stranger_end_time_hour = str_pad($hanet_stranger_end_time_hour, 2, "0", STR_PAD_LEFT);
+	  ?>
+      <option title="<?php echo $formattedHour_stranger_end_time_hour; ?> Giờ" value="<?php echo $formattedHour_stranger_end_time_hour; ?>" <?php if (explode(":", $skillArray['hanet']['stranger']['end_time'])[0] === "$formattedHour_stranger_end_time_hour") echo "selected"; ?>><?php echo $formattedHour_stranger_end_time_hour; ?></option>
+	  <?php
+    }
+  ?>
+</select>:<select title="Phút" class="form-select" name="hanet_stranger_end_time_minute">
+  <?php
+    for ($hanet_stranger_end_time_minute = 0; $hanet_stranger_end_time_minute <= 59; $hanet_stranger_end_time_minute++) {
+      $formattedMinute_stranger_end_time_minute = str_pad($hanet_stranger_end_time_minute, 2, "0", STR_PAD_LEFT);
+	  ?>
+      <option title="<?php echo $formattedMinute_stranger_end_time_minute; ?> Phút" value="<?php echo $formattedMinute_stranger_end_time_minute; ?>" <?php if (explode(":", $skillArray['hanet']['stranger']['end_time'])[1] === "$formattedMinute_stranger_end_time_minute") echo "selected"; ?>><?php echo $formattedMinute_stranger_end_time_minute; ?></option>
+	  <?php
+    }
+  ?>
+</select>
+</div>
+	  </td>
+	</tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<hr/>
+<!-- //END camera hanet -->
 <h5>Đài Báo/Radio: <i class="bi bi-info-circle-fill" onclick="togglePopupradio()" title="Nhấn Để Tìm Hiểu Thêm"></i></h5>
 
       <div id="popupContainerradio" class="popup-container" onclick="hidePopupradio()">
@@ -994,6 +1273,19 @@ if (count($fileLists) > 0) {
                 $('#extraDataTelegram').show();
             } else {
                 $('#extraDataTelegram').hide();
+            }
+        });
+    });
+	
+
+	//check button ẩn hiện thẻ div Camera hanet
+    $(document).ready(function() {
+        // Khi trạng thái nút bật/tắt thay đổi
+        $('#activeCameraHanet').change(function() {
+            if ($(this).is(':checked')) {
+                $('#extraDataCameraHanet').show();
+            } else {
+                $('#extraDataCameraHanet').hide();
             }
         });
     });

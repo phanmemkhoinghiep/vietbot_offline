@@ -5,7 +5,7 @@ include "../Configuration.php";
 	$FileConfigJson = "$DuognDanThuMucJson"."/config.json";
 	$FileVolumeJson = "$DuognDanThuMucJson"."/state.json";
 	$json_volume_data = file_get_contents($FileVolumeJson);
-    $json_config_data = file_get_contents($FileConfigJson);
+    	$json_config_data = file_get_contents($FileConfigJson);
 	$data_volume = json_decode($json_volume_data);
 	$data_config = json_decode($json_config_data, true);
 	$ttsCompany = '';
@@ -14,7 +14,7 @@ include "../Configuration.php";
 	// Đường dẫn đến thư mục "Backup_Config"
 	$backupDirz = "Backup_Config/";
 	$fileLists = glob($backupDirz . "*.json");
-    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    	if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         if (isset($_GET['selectedFile']) && !empty($_GET['selectedFile'])) {
             $selectedFile = $_GET['selectedFile'];
             $configFile = $DuognDanThuMucJson . "/config.json";
@@ -29,9 +29,9 @@ include "../Configuration.php";
 	$hotwords = $data_config['smart_wakeup']['hotword'];
 	$hotwords_get_langgg = $data_config['smart_wakeup']['hotword'][0]['lang'];
 	if ($hotwords_get_langgg === 'eng') {
-    $hotwords_get_lang = 'Tiếng Anh';
+    	$hotwords_get_lang = 'Tiếng Anh';
 	} elseif ($hotwords_get_langgg === 'vi') {
-    $hotwords_get_lang = 'Tiếng Việt';
+    	$hotwords_get_lang = 'Tiếng Việt';
 	}
 	//Lấy giá trị value trong file json
 	$value_volume = $data_volume->volume;
@@ -96,23 +96,27 @@ foreach ($keywordsTTS as $keywordTTS => $replacementTTS) {
     if (strpos($GET_TTS_Type, $keywordTTS) !== false) {
         $GET_TTS_Type_Replacee = str_replace($keywordTTS, $replacementTTS, $GET_TTS_Type);
     }}
-	// In ra chuỗi đã được thay thế
+	// In ra chuỗi đã được thay thế TTS
 	$GET_TTS_Voice_Name = $data_config['smart_answer']['tts']['voice_name'];
 	$GET_TTS_Token_Key = $data_config['smart_answer']['tts']['token'];
+	
+	if ($data_config['smart_answer']['tts']['speed'] === null) {
+		$Speed_TTS = "0";
+	} else {
+		$Speed_TTS = $data_config['smart_answer']['tts']['speed'];
+	}
 	//echo $GET_TTS_Token_Key;
 	$GET_Speaker_Amixer_ID = $data_config['smart_config']['speaker']['amixer_id'];
 	$GET_Port_Web_Interface = $data_config['smart_config']['web_interface']['port'];
 	//$GET_HostName_Web_Interface = $data_config['smart_config']['web_interface']['hostname'];
 	//my_user
 	$MY_USER_NAME = $data_config['smart_config']['user_info']['name'];
+	
 	//console_ouput
-	//$Get_Console_Ouput = $data_config['smart_config']['console_ouput'];
-	
-	
 	if ($data_config['smart_config']['console_ouput'] === null) {
-  $Get_Console_Ouput = "Null";
+		$Get_Console_Ouput = "Null";
 	} else {
-  $Get_Console_Ouput = $data_config['smart_config']['console_ouput'];
+		$Get_Console_Ouput = $data_config['smart_config']['console_ouput'];
 	}
 	//Address
 	$Address_City = $data_config['smart_config']['user_info']['address']['province'];
@@ -128,6 +132,8 @@ foreach ($keywordsTTS as $keywordTTS => $replacementTTS) {
 	$external_bot_priority_1 = $data_config['smart_answer']['external_bot_priority_1'];
 	$external_bot_priority_2 = $data_config['smart_answer']['external_bot_priority_2'];
 	$external_bot_priority_3 = $data_config['smart_answer']['external_bot_priority_3'];
+	
+	
 	
 	
 	//Led
@@ -307,6 +313,9 @@ chmod($backupFile, 0777);
     $STT_TimeOut = @$_POST['stt_time_out'];
 	if (strcasecmp(@$_POST['token_stt'], "Null") === 0) {$STT_Token = null;
     } else {$STT_Token = @$_POST['token_stt'];}
+	
+
+	
 	$TTS_Company = @$_POST['tts_company'];
 	$TTS_Voice = @$_POST['tts_voice'];
 	//$TTS_Token_Key = @$_POST['token_key_tts'];
@@ -375,6 +384,12 @@ chmod($backupFile, 0777);
 	$data_config['smart_answer']['tts']['type'] = $TTS_Company;
 	$data_config['smart_answer']['tts']['token'] = $TTS_Token_Key;
 	$data_config['smart_answer']['tts']['voice_name'] = $TTS_Voice_CheckINPUT;
+	
+	if (@$_POST['speed_tts'] === "0") {
+		$data_config['smart_answer']['tts']['speed'] = null;
+	} else {
+		$data_config['smart_answer']['tts']['speed'] = floatval($_POST['speed_tts']);
+	}
 	//Sound Start Finish
 	$data_config['smart_answer']['sound']['default']['start'] = @$_POST['startsound'];
 	//$data_config['smart_answer']['sound']['default']['start'] = ltrim($_POST['startsound'], "/");
@@ -747,7 +762,7 @@ echo '</div>';
 <th scope="col"><center>Âm lượng:</center></th></tr><tr>
 <td><input type="number" class="form-control" title="Từ 0 Đến 3" title="Từ 0 Đến 3" name="input_number_card_number" size="28" value="<?php echo $GET_Speaker_Amixer_ID; ?>"  min="0" max="3" required></td>
 <td><input type="range" title="Kéo Để Thay Đổi Âm Lượng Sau Đó Nhấn Lưu" name="volume_value" min="10" max="100" step="1" value="<?php echo $value_volume; ?>" class="slider" oninput="updateSliderValue(this.value)">
-<span id="slider-value" class="slider-value"><?php echo $value_volume; ?>%</span></div> </td></tr></table></div></div></center><hr/>
+<font color=red><span id="slider-value" class="slider-value"><?php echo $value_volume; ?>%</span></font></div> </td></tr></table></div></div></center><hr/>
 <!-- Kết Thúc  Volume --> 
 <!-- mục  Web Interface --> 
 <h5>Web Interface: <i class="bi bi-info-circle-fill" onclick="togglePopupWeb()" title="Nhấn Để Tìm Hiểu Thêm"></i></h5> 
@@ -843,7 +858,7 @@ HPDA</label>
 </tr></tbody></table></div></div></div>
 <br/><label title="Nếu bọi bot dậy, hết thời gian chờ mà không ra lệnh cho bot, thì bot sẽ quay trở lại trạng thái sleep"> Thời Gian Chờ:</label>
 <input type="range" name="stt_time_out" title="Nếu bọi bot dậy, hết thời gian chờ mà không ra lệnh cho bot, thì bot sẽ quay trở lại trạng thái sleep" min="3000" max="8000" step="100" value="<?php echo $GET_TimeOut_STT; ?>" class="slider" oninput="updateSliderValueSTT(this.value)">
-<span id="slider-stt" class="slider-stt"><?php echo $GET_TimeOut_STT,"ms"; ?> </span><br/>(1000 = 1 Giây)</center><hr/>
+<font color=red><span id="slider-stt" class="slider-stt"><?php echo $GET_TimeOut_STT,"ms"; ?> </span><br/>(1000 = 1 Giây)</font></center><hr/>
 <!--Kết thúc STT Speak To Text --> 
 <!--Text to Speech Engine --> 
 <h5>Text to Speech Engine: <i class="bi bi-info-circle-fill" onclick="togglePopupTTS()" title="Nhấn Để Tìm Hiểu Thêm"></i></h5>		  
@@ -896,7 +911,15 @@ Microsoft EDGE</label>
 
 <input type="radio" id="myRadio5"  title="Nữ Miền Nam" name="tts_voice" value="female_southern_voice" <?php if ($GET_TTS_Voice_Name === 'female_southern_voice') echo 'checked'; ?> required> Nữ Miền Nam</label>&nbsp;<label>
 <input type="radio" id="myRadio6" title="Viettel Nam Miền Nam" id="myRadio2" name="tts_voice" value="male_southern_voice" <?php if ($GET_TTS_Voice_Name === 'male_southern_voice') echo 'checked'; ?> required> Nam Miền Nam</label>&nbsp;<label>
-<input type="radio" id="myRadio7" name="tts_voice" value="null" <?php if ($GET_TTS_Voice_Name === null) echo 'checked'; ?>> Mặc Định</label></center><hr/>
+<input type="radio" id="myRadio7" name="tts_voice" value="null" <?php if ($GET_TTS_Voice_Name === null) echo 'checked'; ?>> Mặc Định</label>
+<br/><br/>
+Tốc Độ: <input type="range" name="speed_tts" id="slider_tts" title="Phù Hợp Nhất Từ 0.5-1.5" min="0" max="1.5" step="0.1" value="<?php echo $Speed_TTS; ?>" class="slider" oninput="updateSliderValueTTS(this.value)"><font color=red><span id="slider-tts" class="slider-tts"><?php echo $Speed_TTS; ?></span></font>
+</center><hr/>
+
+
+
+
+
 <!-- -->
 <h5>Console Ouput:</h5> 
 <div class="row g-3 d-flex justify-content-center"><div class="col-auto"> 
@@ -1641,6 +1664,11 @@ else if (radio.value === "tts_gg_free") {
 		        function updateSliderValueSTT(value) {
             document.getElementById('slider-stt').innerHTML = value + 'ms';
         }
+		
+				        function updateSliderValueTTS(value) {
+            document.getElementById('slider-tts').innerHTML = value + 'ms';
+        }
+		
 		/*
 		//Ghi giá trị vào input host name khi nhấn button
         function ghiGiaTriHostName() {
@@ -2548,5 +2576,24 @@ disableRadioButtons();
             popup.style.display = 'none';
         });
     </script>
+	<script>
+	//TTS slide Tốc Độ: 
+$(document).ready(function() {
+    var slider = document.getElementById("slider_tts");
+    var sliderValue = document.getElementById("slider-tts");
+
+    slider.addEventListener("input", function() {
+        var value = parseFloat(slider.value);
+        
+        if (value >= 0.1 && value <= 0.4) {
+            slider.value = 0.5; // Bỏ qua khoảng giá trị từ 0.1 đến 0.4
+            value = 0.5;
+        }
+        
+        sliderValue.innerHTML = value;
+    });
+});
+</script>
+
 </body>
 </html>

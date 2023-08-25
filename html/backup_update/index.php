@@ -121,6 +121,7 @@ function deleteFiles($directory, $excludedFiles, $excludedDirectories, &$deleted
         }
     }
 }
+/*
 function copyFiles($sourceDirectory, $destinationDirectory, $excludedFiles, &$copiedItems)
 {
     $files = glob($sourceDirectory . '/*');
@@ -143,6 +144,33 @@ function copyFiles($sourceDirectory, $destinationDirectory, $excludedFiles, &$co
         }
     }
 }
+*/
+
+function copyFiles($sourceDirectory, $destinationDirectory, $excludedFiles, $excludedDirectories, &$copiedItems)
+{
+    $files = glob($sourceDirectory . '/*');
+  
+    foreach ($files as $file) {
+        if (is_file($file)) {
+            $fileName = basename($file);
+            
+            if (!in_array($fileName, $excludedFiles)) {
+                copy($file, $destinationDirectory . '/' . $fileName);
+                $copiedItems[] = $destinationDirectory . '/' . $fileName ."\n";
+            }
+        } elseif (is_dir($file)) {
+            $dirName = basename($file);
+            
+            if (!in_array($dirName, $excludedDirectories)) {
+                $subDestinationDirectory = $destinationDirectory . '/' . $dirName;
+                mkdir($subDestinationDirectory);
+                copyFiles($file, $subDestinationDirectory, $excludedFiles, $excludedDirectories, $copiedItems);
+            }
+        }
+    }
+}
+
+
 	//restart vietbot
 if (isset($_POST['restart_vietbot'])) {
 $connection = ssh2_connect($serverIP, $SSH_Port);
@@ -160,10 +188,14 @@ if (isset($_POST['set_full_quyen'])) {
 $connection = ssh2_connect($serverIP, $SSH_Port);
 if (!$connection) {die($E_rror_HOST);}
 if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
-$stream1 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$Path_Vietbot_src);
-stream_set_blocking($stream1, true);
-$stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO);
-stream_get_contents($stream_out1);
+$stream1 = ssh2_exec($connection, "sudo chmod -R 0777 $Path_Vietbot_src");
+$stream2 = ssh2_exec($connection, "sudo chown -R pi:pi $Path_Vietbot_src");
+stream_set_blocking($stream1, true); 
+stream_set_blocking($stream2, true); 
+$stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO); 
+$stream_out2 = ssh2_fetch_stream($stream2, SSH2_STREAM_STDIO); 
+stream_get_contents($stream_out1); 
+stream_get_contents($stream_out2); 
 header("Location: $PHP_SELF"); exit;
 }
 // Thư mục cần kiểm tra 777
@@ -281,7 +313,7 @@ if (!is_dir($DuognDanThuMucJson)) {
                     </tr>
 					                  <br/>  <tr>
 									     <th colspan="4">
-                            <center class="text-danger">Lựa Chọn Nâng Cao Khi Cập Nhật Hoàn Tất</center>
+                            <center class="text-danger">Lựa Chọn Nâng Cao Khi Cập Nhật/Khôi Phục Hoàn Tất</center>
                         </th></tr><tr>
                         <th>
                             <center title="Khởi Động Lại Toàn Bộ Hệ Thống Loa Thông Minh Vietbot">Reboot Hệ Thống:</center>
@@ -517,8 +549,8 @@ exec("chmod 777 $DuognDanUI_HTML/backup_update/backup/state_.json");
             $zip->close();
             $sourceDirectory = $DuognDanUI_HTML.'/backup_update/extract/vietbot_offline-beta/src';
 			$sourceDirectoryyy = $DuognDanUI_HTML.'/backup_update/extract/vietbot_offline-beta/resources';
-            copyFiles($sourceDirectory, $DuognDanThuMucJson, $excludedFiles, $copiedItems);
-			copyFiles($sourceDirectoryyy, $PathResources, $excludedFiles, $copiedItems);
+            copyFiles($sourceDirectory, $DuognDanThuMucJson, $excludedFiles, $excludedDirectories, $copiedItems);
+			copyFiles($sourceDirectoryyy, $PathResources, $excludedFiles, $excludedDirectories, $copiedItems);
             $messagee .= 'Đã tải xuống phiên bản Vietbot mới và cập nhật thành công!\n';
 			shell_exec("rm -rf $DuognDanUI_HTML/backup_update/extract/vietbot_offline-beta");
 			?>
@@ -625,25 +657,18 @@ file_put_contents($DuognDanThuMucJson.'/state.json', $output_State_json);
 $connection = ssh2_connect($serverIP, $SSH_Port);
 if (!$connection) {die($E_rror_HOST);}
 if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
-$stream1 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$Path_Vietbot_src);
-$stream2 = ssh2_exec($connection, 'sudo chown -R pi:pi '.$Path_Vietbot_src);
+$stream1 = ssh2_exec($connection, "sudo chmod -R 0777 $Path_Vietbot_src");
+$stream2 = ssh2_exec($connection, "sudo chown -R pi:pi $Path_Vietbot_src");
 $stream3 = ssh2_exec($connection, "$actionCommand");
-//$stream4 = ssh2_exec($connection, "$restart_vietbot_checked");
-
 stream_set_blocking($stream1, true); 
 stream_set_blocking($stream2, true); 
 stream_set_blocking($stream3, true); 
-//stream_set_blocking($stream4, true); 
-
 $stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO); 
 $stream_out2 = ssh2_fetch_stream($stream2, SSH2_STREAM_STDIO); 
 $stream_out3 = ssh2_fetch_stream($stream3, SSH2_STREAM_STDIO); 
-//$stream_out4 = ssh2_fetch_stream($stream4, SSH2_STREAM_STDIO); 
-
-stream_get_contents($stream_out1);
-stream_get_contents($stream_out2);
-stream_get_contents($stream_out3);
-//stream_get_contents($stream_out4);
+stream_get_contents($stream_out1); 
+stream_get_contents($stream_out2); 
+stream_get_contents($stream_out3); 
 
 exec("rm $DuognDanUI_HTML/backup_update/backup/config_.json");
 exec("rm $DuognDanUI_HTML/backup_update/backup/skill_.json");
@@ -690,12 +715,14 @@ if (file_exists($archivePath)) {
     }
 } else {
     $message .= 'Tệp tin giải nén không tồn tại: '.$selectedFile.'\n';
+	
 }
 //End giải nén backup
 $excludedFiles = array('excluded_file_VUTUYEN.txt'); //Bỏ Qua File không coppy giai đoạn thử nghiệm
+$excludedDirectories = array('excluded_file_VUTUYEN'); //Bỏ Qua thư mục không coppy giai đoạn thử nghiệm
 $copiedItems = array();
-copyFiles($sourceDirectory, $DuognDanThuMucJson, $excludedFiles, $copiedItems);
-copyFiles($sourceDirectoryyy, $DuognDanThuMucJson, $excludedFiles, $copiedItems);
+copyFiles($sourceDirectory, $DuognDanThuMucJson, $excludedFiles, $excludedDirectories, $copiedItems);
+copyFiles($sourceDirectoryyy, $PathResources, $excludedFiles, $excludedDirectories, $copiedItems);
  $message .= 'Khôi phục bản sao lưu thành công\n';
 ?>
 <div class="form-check form-switch d-flex justify-content-center"> 
@@ -735,10 +762,19 @@ foreach ($deletedItems as $deletedItem) {
 $connection = ssh2_connect($serverIP, $SSH_Port);
 if (!$connection) {die($E_rror_HOST);}
 if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
-$stream1 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$Path_Vietbot_src);
+$stream1 = ssh2_exec($connection, "sudo chmod -R 0777 $Path_Vietbot_src");
+$stream2 = ssh2_exec($connection, "sudo chown -R pi:pi $Path_Vietbot_src");
 stream_set_blocking($stream1, true); 
-$stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO);
+stream_set_blocking($stream2, true); 
+$stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO); 
+$stream_out2 = ssh2_fetch_stream($stream2, SSH2_STREAM_STDIO); 
 stream_get_contents($stream_out1); 
+stream_get_contents($stream_out2); 
+
+
+
+
+
 }
 	?>
 </div>
