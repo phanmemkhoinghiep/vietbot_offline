@@ -29,7 +29,7 @@ adv_at_moment=[p['value'] for p in adv_data['at_moment']] #Khai báo toàn bộ 
 adv_at_time=[p['value'] for p in adv_data['at_time']]
 adv_from_now=[p['value'] for p in adv_data['from_now']]
 adv_nearby=[p['value'] for p in adv_data['nearby']]
-console_ouput=conf_data['smart_config']['console_ouput'] #Giá trị quy định đẩy console 
+
 
 def custom_data_process(player,led,volume,data):#Def này sẽ trả về kết quả để Vietbot đọc nội dung
     answer_text='Không có câu trả lời cho tình huống này' #Giá trị Default cho câu trả lời
@@ -82,7 +82,7 @@ def custom_data_process(player,led,volume,data):#Def này sẽ trả về kết 
                 answer_path=None
                 answer_link=str(value)
             except Exception as e:
-                libs.print_console(console_ouput,'[BOT]: CUSTOM SKILL, LỖI: '+str(e)+' '+ libs.datetime.datetime.today().strftime("%d/%m/%Y") + " " + libs.datetime.datetime.now().strftime("%H:%M:%S"), 'red')                            
+                libs.logging('left','CUSTOM SKILL, Có lỗi: '+str(e), 'red')                            
                 answer_text='Lỗi tìm kiếm bài hát'
                 answer_path=None
                 answer_link=None
