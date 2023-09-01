@@ -1,5 +1,5 @@
 <?php
-//Code By: Vũ Tuyển
+//Code By: Vũ Tuyển.
 //Facebook: https://www.facebook.com/TWFyaW9uMDAx
 include "../Configuration.php";
 	$FileConfigJson = "$DuognDanThuMucJson"."/config.json";
