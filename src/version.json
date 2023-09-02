@@ -4,7 +4,7 @@
 	},
 	"update_command": "", 
 	"new_features": "Log realtime qua Web",
-	"bug_fixed": "Sửa lỗi không thống nhất kết quả hỏi ngày",	
+	"bug_fixed": "Sửa lỗi không tương thích mạch ViPi",	
 	"improvements": "Xử lý các skill nội bộ nhanh hơn (Tiếp tục)",	
 	"image_version": {
 		"latest": "2023-07-24"
