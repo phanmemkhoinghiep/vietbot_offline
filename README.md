@@ -22,7 +22,7 @@ Audio Processing: Tùy chọn Có/Không có tùy thuộc vào phần cứng c�
 
 Keyword Spotting (KWS): Cơ chế phát hiện hotword để kích hoạt chế độ lắng nghe dòng lệnh. Vietbot sử dụng cơ chế của Picovoice(porcupine)
 
-Speech To Text (STT): Cơ chế lắng nghe âm thanh và trả về text tức thời. Vietbot sử dụng cơ chế STT của Google, Viettel
+Speech To Text (STT): Cơ chế lắng nghe âm thanh và trả về text tức thời. Vietbot sử dụng cơ chế STT của Google, Viettel...
 
 Natural Language Understanding (NLU): Phân tách các text thành các cấu trúc ra lệnh. Vietbot sử dụng hai đối tượng Action/Object đã được khai báo sẵn, cũng như có thể bổ sung để phân tách các cấu trúc ra lệnh
 
