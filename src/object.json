@@ -426,6 +426,13 @@
             "value": "âm lịch"
         }
     ],
+    "solar_day": [{
+            "value": "lịch dương"
+        },
+        {
+            "value": "dương lịch"
+        }
+    ],
     "history": [{
             "value": "lịch sử"
         },
