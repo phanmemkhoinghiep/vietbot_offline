@@ -16,6 +16,7 @@
         .log-container {
             max-height: 70vh; /* Limit the max height to 70% of viewport height */
             overflow: auto; /* Add scroll when content exceeds max height */
+            flex-direction: column-reverse; /* Reverse the order of children */
         }
 
         .log-entry {
@@ -45,7 +46,6 @@
                 type: "GET",
                 url: "/get_log",
                 success: function(data) {
-                    $("#log-container").empty();
                     data.forEach(function(item) {
                         const logEntry = $("<div class='log-entry " + item.position + "'></div>");
                         const messageElement = $("<p class='message'>" + item.message + "</p>");
@@ -53,7 +53,7 @@
                             messageElement.css("color", item.color);
                         }
                         logEntry.append(messageElement);
-                        $("#log-container").append(logEntry);
+                        $("#log-container").prepend(logEntry); // Prepend new log entry
                     });
                 },
                 error: function(xhr, status, error) {
