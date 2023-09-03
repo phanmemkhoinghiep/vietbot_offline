@@ -3,8 +3,8 @@
 		"latest": "beta 02-09-2023-02"
 	},
 	"update_command": "", 
-	"new_features": "Log realtime qua Web",
-	"bug_fixed": "Sửa lỗi không tương thích mạch ViPi",	
+	"new_features": "",
+	"bug_fixed": "Sửa lỗi khi chọn Log console là Null",	
 	"improvements": "Xử lý các skill nội bộ nhanh hơn (Tiếp tục)",	
 	"image_version": {
 		"latest": "2023-07-24"
