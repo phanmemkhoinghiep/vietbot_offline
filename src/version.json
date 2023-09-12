@@ -4,7 +4,7 @@
 	},
 	"update_command": "", 
 	"new_features": "",
-	"bug_fixed": "Sửa lỗi khi chọn Log console là Null",	
+	"bug_fixed": "Sửa lỗi khi kết quả Text trả về là None ",	
 	"improvements": "Xử lý các skill nội bộ nhanh hơn (Tiếp tục)",	
 	"image_version": {
 		"latest": "2023-07-24"
