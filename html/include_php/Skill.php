@@ -21,107 +21,162 @@ $skillArray = json_decode($skillData, true);
 	<script src="../assets/js/1.16.0_umd_popper.min.js"></script>
 	<script src="../assets/js/11.3.1_highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-  <style>
-    body, html {
+<style>
+    body,
+    html {
         background-color: #dbe0c9;
-		overflow-x: hidden; /* Ẩn thanh cuộn ngang */
-		max-width: 100%; /* Ngăn cuộn ngang trang */
+        overflow-x: hidden;
+        /* Ẩn thanh cuộn ngang */
+        
+        max-width: 100%;
+        /* Ngăn cuộn ngang trang */
     }
-.scrollable-content {
-  overflow-y: auto; 
-  max-height: 400px; 
-  display: none;
-}
-	::-webkit-scrollbar {
-    width: 5px; 
-}
-::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    background: rgb(251, 255, 7); 
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
-}
+    
+    .scrollable-content {
+        overflow-y: auto;
+        max-height: 400px;
+        display: none;
+    }
+    
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+        background: rgb(251, 255, 7);
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+    }
+    
     .popup-container {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 9999;
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
     }
-
+    
     .popup-container.show {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
-
+    
     #popupContent {
-      background-color: white;
-      padding: 20px;
-      border: 1px solid gray;
-      border-radius: 5px;
+        background-color: white;
+        padding: 20px;
+        border: 1px solid gray;
+        border-radius: 5px;
     }
-.scrollable-divradio {
-           
-            height: 200px; 
-            overflow: auto;
-        }
-		
-
-          pre {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            white-space: pre-wrap;
-            overflow: auto; /* Thêm thuộc tính này */
-            
-        }
-        #popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            align-items: center;
-            justify-content: center;
-			 z-index: 9999;
-        }
-
-        #popup-content {
-            background-color: #ffffff00;
-            padding: 5px;
-            border-radius: 5px;
-            width: 100vw; /* Sử dụng đơn vị vw cho chiều rộng tối đa */
-            height: 100%;
-            overflow: auto;
-		
-		}
-		.thoi-gian-container {
-  display: flex;
-  align-items: center;
-}
-
-.thoi-gian-container label {
-  margin-right: 10px;
-}
-
-.thoi-gian-container select {
-  padding: 5px;
-}
-
-  </style>
+    
+    .scrollable-divradio {
+        height: 200px;
+        overflow: auto;
+    }
+    
+    pre {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+        white-space: pre-wrap;
+        overflow: auto;
+        /* Thêm thuộc tính này */
+    }
+    
+    #popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+    }
+    
+    #popup-content {
+        background-color: #ffffff00;
+        padding: 5px;
+        border-radius: 5px;
+        width: 100vw;
+        /* Sử dụng đơn vị vw cho chiều rộng tối đa */
+        
+        height: 100%;
+        overflow: auto;
+    }
+    
+    .thoi-gian-container {
+        display: flex;
+        align-items: center;
+    }
+    
+    .thoi-gian-container label {
+        margin-right: 10px;
+    }
+    
+    .thoi-gian-container select {
+        padding: 5px;
+    }
+</style>
+<style>
+    /* CSS cho popup */
+    
+    .popup-hass {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 8;
+    }
+    /* CSS cho nội dung popup */
+    
+    .popup-hass-content {
+        margin: 10px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        /* Hiển thị nội dung dưới dạng cột */
+        
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        top: 50%;
+        /* Dịch phần trên của popup lên 50% của màn hình */
+        
+        transform: translateY(-50%);
+        /* Điều chỉnh phần trên của popup lên trên */
+    }
+    /* CSS cho nút đóng */
+    
+    .close-button {
+        cursor: pointer;
+        position: absolute;
+        bottom: 10px;
+        /* Đặt nút ở dưới cùng */
+        
+        right: 50%;
+    }
+</style>
 	</head>
 	<body>
 	    <div id="loading-overlay">
@@ -139,6 +194,21 @@ $skillArray = json_decode($skillData, true);
     });
 });
 </script>
+
+
+<?php
+// Kiểm tra xem người dùng đã đăng nhập hay chưa
+if (!isset($_SESSION['root_id'])) {
+    // Nếu chưa đăng nhập, chuyển hướng về trang đăng nhập (index.php)
+    //header("Location: ./index.php");
+	echo "<br/><center><h1>Có Vẻ Như Bạn Chưa Đăng Nhập!<br/><br>
+	- Nếu Bạn Đã Đăng Nhập, Hãy Nhấn Vào Nút Dưới<br/><br/><a href='$PHP_SELF'><button type='button' class='btn btn-danger'>Tải Lại</button></a></h1>
+	</center>";
+    exit();
+}
+?>
+
+
 <?php
 // Đường dẫn đến thư mục "Backup_Config"
 $backupDirz = "Backup_Skill/";
@@ -376,6 +446,36 @@ stream_get_contents($stream_out1);
 stream_get_contents($stream_out2); 
 header("Location: $PHP_SELF"); exit;
 }
+
+
+	//Chmod sét full quyền
+if (isset($_POST['check_home_assistant'])) {
+
+$homeAssistantUrl = 'http://192.168.14.17:8123/api'; // URL của Home Assistant API
+$accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI3MGJkNmMzOTNhYTY0ZTJhODQwZDE5ZGNjZGQzNDQwZSIsImlhdCI6MTY4Nzk3MDQ2OSwiZXhwIjoyMDAzMzMwNDY5fQ.Baz2jYShPIT4Mo7rGu_ekuRtqr07BnCGJKDfjG0ifzc'; // Token truy cập của bạn
+
+// Tạo một yêu cầu HTTP GET để lấy danh sách các thiết bị từ Home Assistant
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $homeAssistantUrl . '/config');
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Authorization: Bearer ' . $accessToken,
+]);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$response = curl_exec($ch);
+
+// Kiểm tra mã trạng thái HTTP
+$httpStatus = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+curl_close($ch);
+
+echo $response;
+
+
+}
+
+
+
 //////////////////////////Khôi Phục Gốc Skill.Json
 if (isset($_POST['restore_skill_json'])) {
 $sourceFile = $DuognDanUI_HTML.'/assets/json/skill.json';
@@ -453,6 +553,11 @@ if (count($fileLists) > 0) {
     exit(); // Kết thúc chương trình
 }
 ?>
+
+
+
+
+
 <!-- Form để hiển thị và chỉnh sửa dữ liệu -->
 <form id="my-form" onsubmit="return vuTuyen();"  method="POST">
 <h5>Open Weather Map: <i class="bi bi-info-circle-fill" onclick="togglePopupOpenWeatherMap()" title="Nhấn Để Tìm Hiểu Thêm"></i></h5>
@@ -510,11 +615,40 @@ if (count($fileLists) > 0) {
 </tr><tr>
 <th scope="row"> <label>Token Hass:</label></th>
 <td><input type="text" class="form-control" id="hass_key" name="hass_key" placeholder="Nhập Key Của HomeAssistant" title="Nhập Key Của HomeAssistant" value="<?php echo $skillArray['hass']['token']; ?>"></td>
-</tr><tr>
+</tr>
+<tr>
 <th scope="row"> <label title="Câu Trả Lời Có Thêm Chi Tiết Về Thiết Bị">Display Full State:</label></th>
 <td><input type="checkbox" id="hass_display_full_state" name="hass_display_full_state" title="Tích Để Bật/Tắt" <?php echo $skillArray['hass']['display_full_state'] ? 'checked' : ''; ?>></td>
-</tr></tbody>
-</table></div></div></div></div><hr/>
+</tr>
+
+<tr>
+<th scope="row" colspan="2"><center>
+
+
+ <input type="button" id="HomeAssistantshowPopup" class="btn btn-warning" value="Kiểm Tra Kết Nối">
+
+</center></th>
+</tr>
+
+</tbody>
+</table></div></div></div></div>
+
+
+	
+    <div id="popupHass" class="popup-hass">
+	
+        <div class="popup-hass-content" id="popupContentHass">
+            <!-- Nội dung JSON sẽ được hiển thị ở đây -->
+			 
+			   
+			  
+ 
+        </div>
+		 <input type="button"class="close-button btn btn-primary" id="closeButtonHass" value="Đóng">
+    </div>
+	
+	
+<hr/>
 <h5>Google Bard: <i class="bi bi-info-circle-fill" onclick="togglePopupggbard()" title="Nhấn Để Tìm Hiểu Thêm"></i></h5>
       <div id="popupContainerggbard" class="popup-container" onclick="hidePopupggbard()">
     <div id="popupContent" onclick="preventEventPropagationggbard(event)">
@@ -788,7 +922,6 @@ if ($count_news > $Limit_BaoTinTuc ) {
         }
 		echo "</div>";
 } else {
-
 ?>
 <table class="table table-responsive table-striped table-bordered align-middle">
   <thead> <tr>
@@ -1242,7 +1375,7 @@ if (count($fileLists) > 0) {
 
 
 <script>
-//check button ẩn hiện thẻ div OpenWeatherMap
+    //check button ẩn hiện thẻ div OpenWeatherMap
     $(document).ready(function() {
         // Khi trạng thái nút bật/tắt thay đổi
         $('#active').change(function() {
@@ -1253,7 +1386,7 @@ if (count($fileLists) > 0) {
             }
         });
     });
-	//check button ẩn hiện thẻ div HASS
+    //check button ẩn hiện thẻ div HASS
     $(document).ready(function() {
         // Khi trạng thái nút bật/tắt thay đổi
         $('#activeHass').change(function() {
@@ -1265,7 +1398,7 @@ if (count($fileLists) > 0) {
         });
     });
 
-	//check button ẩn hiện thẻ div Telegram
+    //check button ẩn hiện thẻ div Telegram
     $(document).ready(function() {
         // Khi trạng thái nút bật/tắt thay đổi
         $('#activeTelegram').change(function() {
@@ -1276,9 +1409,9 @@ if (count($fileLists) > 0) {
             }
         });
     });
-	
 
-	//check button ẩn hiện thẻ div Camera hanet
+
+    //check button ẩn hiện thẻ div Camera hanet
     $(document).ready(function() {
         // Khi trạng thái nút bật/tắt thay đổi
         $('#activeCameraHanet').change(function() {
@@ -1289,170 +1422,275 @@ if (count($fileLists) > 0) {
             }
         });
     });
-	
-// togglePopupOpenWeatherMap
+
+    // togglePopupOpenWeatherMap
     function togglePopupOpenWeatherMap() {
-      var popupContainer = document.getElementById("popupContainerOpenWeatherMap");
-      popupContainer.classList.toggle("show");
+        var popupContainer = document.getElementById("popupContainerOpenWeatherMap");
+        popupContainer.classList.toggle("show");
     }
+
     function hidePopupOpenWeatherMap() {
-      var popupContainer = document.getElementById("popupContainerOpenWeatherMap");
-      popupContainer.classList.remove("show");
+        var popupContainer = document.getElementById("popupContainerOpenWeatherMap");
+        popupContainer.classList.remove("show");
     }
+
     function preventEventPropagationOpenWeatherMap(event) {
-      event.stopPropagation();
-    }
-// togglePopupNKN Ngày Kỷ Niệm
+            event.stopPropagation();
+        }
+        // togglePopupNKN Ngày Kỷ Niệm
     function togglePopupNKN() {
-      var popupContainer = document.getElementById("popupContainerNKN");
-      popupContainer.classList.toggle("show");
+        var popupContainer = document.getElementById("popupContainerNKN");
+        popupContainer.classList.toggle("show");
     }
+
     function hidePopupNKN() {
-      var popupContainer = document.getElementById("popupContainerNKN");
-      popupContainer.classList.remove("show");
+        var popupContainer = document.getElementById("popupContainerNKN");
+        popupContainer.classList.remove("show");
     }
+
     function preventEventPropagationNKN(event) {
-      event.stopPropagation();
-    }
-	// togglePopupTINTUC  tin tức
+            event.stopPropagation();
+        }
+        // togglePopupTINTUC  tin tức
     function togglePopupTINTUC() {
-      var popupContainer = document.getElementById("popupContainerTINTUC");
-      popupContainer.classList.toggle("show");
+        var popupContainer = document.getElementById("popupContainerTINTUC");
+        popupContainer.classList.toggle("show");
     }
+
     function hidePopupTINTUC() {
-      var popupContainer = document.getElementById("popupContainerTINTUC");
-      popupContainer.classList.remove("show");
+        var popupContainer = document.getElementById("popupContainerTINTUC");
+        popupContainer.classList.remove("show");
     }
+
     function preventEventPropagationTINTUC(event) {
-      event.stopPropagation();
-    }
-// togglePopupTelegram
+            event.stopPropagation();
+        }
+        // togglePopupTelegram
     function togglePopupTelegram() {
-      var popupContainer = document.getElementById("popupContainerTelegram");
-      popupContainer.classList.toggle("show");
+        var popupContainer = document.getElementById("popupContainerTelegram");
+        popupContainer.classList.toggle("show");
     }
+
     function hidePopupTelegram() {
-      var popupContainer = document.getElementById("popupContainerTelegram");
-      popupContainer.classList.remove("show");
+        var popupContainer = document.getElementById("popupContainerTelegram");
+        popupContainer.classList.remove("show");
     }
+
     function preventEventPropagationTelegram(event) {
-      event.stopPropagation();
-    }
-// togglePopupTelegram
+            event.stopPropagation();
+        }
+        // togglePopupTelegram
     function togglePopupGGASS() {
-      var popupContainer = document.getElementById("popupContainerGGASS");
-      popupContainer.classList.toggle("show");
+        var popupContainer = document.getElementById("popupContainerGGASS");
+        popupContainer.classList.toggle("show");
     }
+
     function hidePopupGGASS() {
-      var popupContainer = document.getElementById("popupContainerGGASS");
-      popupContainer.classList.remove("show");
+        var popupContainer = document.getElementById("popupContainerGGASS");
+        popupContainer.classList.remove("show");
     }
+
     function preventEventPropagationGGASS(event) {
-      event.stopPropagation();
-    }
-// togglePopupGPT
+            event.stopPropagation();
+        }
+        // togglePopupGPT
     function togglePopupGPT() {
-      var popupContainer = document.getElementById("popupContainerGPT");
-      popupContainer.classList.toggle("show");
+        var popupContainer = document.getElementById("popupContainerGPT");
+        popupContainer.classList.toggle("show");
     }
+
     function hidePopupGPT() {
-      var popupContainer = document.getElementById("popupContainerGPT");
-      popupContainer.classList.remove("show");
+        var popupContainer = document.getElementById("popupContainerGPT");
+        popupContainer.classList.remove("show");
     }
+
     function preventEventPropagationGPT(event) {
-      event.stopPropagation();
+        event.stopPropagation();
     }
-	
-// togglePopupggbard
+
+    // togglePopupggbard
     function togglePopupggbard() {
-      var popupContainer = document.getElementById("popupContainerggbard");
-      popupContainer.classList.toggle("show");
+        var popupContainer = document.getElementById("popupContainerggbard");
+        popupContainer.classList.toggle("show");
     }
+
     function hidePopupggbard() {
-      var popupContainer = document.getElementById("popupContainerggbard");
-      popupContainer.classList.remove("show");
+        var popupContainer = document.getElementById("popupContainerggbard");
+        popupContainer.classList.remove("show");
     }
+
     function preventEventPropagationggbard(event) {
-      event.stopPropagation();
-    }
-// togglePopupGPT
+            event.stopPropagation();
+        }
+        // togglePopupGPT
     function togglePopupradio() {
-      var popupContainer = document.getElementById("popupContainerradio");
-      popupContainer.classList.toggle("show");
+        var popupContainer = document.getElementById("popupContainerradio");
+        popupContainer.classList.toggle("show");
     }
+
     function hidePopupradio() {
-      var popupContainer = document.getElementById("popupContainerradio");
-      popupContainer.classList.remove("show");
+        var popupContainer = document.getElementById("popupContainerradio");
+        popupContainer.classList.remove("show");
     }
+
     function preventEventPropagationradio(event) {
-      event.stopPropagation();
-    }
-// togglePopupHass
+            event.stopPropagation();
+        }
+        // togglePopupHass
     function togglePopupHass() {
-      var popupContainer = document.getElementById("popupContainerHass");
-      popupContainer.classList.toggle("show");
+        var popupContainer = document.getElementById("popupContainerHass");
+        popupContainer.classList.toggle("show");
     }
+
     function hidePopupHass() {
-      var popupContainer = document.getElementById("popupContainerHass");
-      popupContainer.classList.remove("show");
+        var popupContainer = document.getElementById("popupContainerHass");
+        popupContainer.classList.remove("show");
     }
+
     function preventEventPropagationHass(event) {
-      event.stopPropagation();
+        event.stopPropagation();
     }
-	
-	window.addEventListener('DOMContentLoaded', function() {
-  var div = document.getElementById('scrollable-div');
-  
-  if (div.innerHTML.trim() !== '') {
-    div.style.display = 'block'; // Hiển thị div khi có nội dung
-  }
-});
-//Check Thứ Tự Ưu Tiên
-function vuTuyen() {
-	    const priority1 = document.getElementById("priority1").value;
+
+    window.addEventListener('DOMContentLoaded', function() {
+        var div = document.getElementById('scrollable-div');
+
+        if (div.innerHTML.trim() !== '') {
+            div.style.display = 'block'; // Hiển thị div khi có nội dung
+        }
+    });
+    //Check Thứ Tự Ưu Tiên
+    function vuTuyen() {
+        const priority1 = document.getElementById("priority1").value;
         const priority2 = document.getElementById("priority2").value;
         const priority3 = document.getElementById("priority3").value;
         if (priority1 !== '' && priority2 !== '' && priority3 !== '') {
             if (priority1 === priority2 || priority1 === priority3 || priority2 === priority3) {
                 alert("Lỗi: Các giá trị ưu tiên của Trợ Lý không được phép trùng nhau! \n\n Hệ thống sẽ tự động làm mới lại trang");
-			 event.preventDefault(); // Ngăn việc gửi form
-			  window.location.reload();
+                event.preventDefault(); // Ngăn việc gửi form
+                window.location.reload();
                 return false;
 
             }
         }
         //return true;
-	    const music_source_priority1 = document.getElementById("music_source_priority1").value;
+        const music_source_priority1 = document.getElementById("music_source_priority1").value;
         const music_source_priority2 = document.getElementById("music_source_priority2").value;
         const music_source_priority3 = document.getElementById("music_source_priority3").value;
         if (music_source_priority1 !== '' && music_source_priority2 !== '' && music_source_priority3 !== '') {
             if (music_source_priority1 === music_source_priority2 || music_source_priority1 === music_source_priority3 || music_source_priority2 === music_source_priority3) {
                 alert("Lỗi: Các giá trị ưu tiên của Nguồn Phát Media Player không được phép trùng nhau! \n\n Hệ thống sẽ tự động làm mới lại trang");
-			 event.preventDefault(); // Ngăn việc gửi form
-			  window.location.reload();
+                event.preventDefault(); // Ngăn việc gửi form
+                window.location.reload();
                 return false;
 
             }
         }
         return true;
-		
-	
-}
 
+
+    }
 </script>
-    <script>
-        const viewButton = document.getElementById('view-button');
-        const popup = document.getElementById('popup');
-        const closeButton = document.getElementById('close-button');
+<script>
+    const viewButton = document.getElementById('view-button');
+    const popup = document.getElementById('popup');
+    const closeButton = document.getElementById('close-button');
 
-        viewButton.addEventListener('click', () => {
-            popup.style.display = 'flex';
-        });
+    viewButton.addEventListener('click', () => {
+        popup.style.display = 'flex';
+    });
 
-        closeButton.addEventListener('click', () => {
-            popup.style.display = 'none';
-        });
-    </script>
+    closeButton.addEventListener('click', () => {
+        popup.style.display = 'none';
+    });
+</script>
+<script>
+    var HomeAssistantshowPopupshowPopupButton = document.getElementById('HomeAssistantshowPopup');
+    var popupHass = document.getElementById('popupHass');
+    var popupContentHass = document.getElementById('popupContentHass');
+    var closeButtonHass = document.getElementById('closeButtonHass');
+    var urlInput = document.getElementById('hass_url');
+    var tokenInput = document.getElementById('hass_key');
+
+    //var loadingIcon = document.getElementById('loading-icon'); // Biểu tượng loading
+
+    HomeAssistantshowPopupshowPopupButton.addEventListener('click', function() {
+        $('#loading-overlay').show();
+
+        var apiUrl = urlInput.value;
+        var apiToken = tokenInput.value;
+        //console.log(apiUrl);
+
+        // Hiển thị popup
+        popupHass.style.display = 'block';
+        // Gửi yêu cầu AJAX đến tệp PHP
+        var xhr = new XMLHttpRequest();
+        //xhr.open('GET', 'Ajax/Check_Hass.php?url=' + apiUrl + '&token=' + apiToken, true);
+        xhr.open('GET', 'Ajax/Check_Hass.php?url=' + apiUrl + '/api/config&token=' + apiToken, true);
+        xhr.onload = function() {
+            $('#loading-overlay').hide();
+
+            if (xhr.status === 200) {
+                var responseData = JSON.parse(xhr.responseText);
+
+                // Kiểm tra xem có location_name trong JSON hay không
+                if (responseData.location_name) {
+                    var home_assistant_locationName = responseData.location_name;
+                    var home_assistant_time_zone = responseData.time_zone;
+                    var home_assistant_country = responseData.country;
+                    var home_assistant_language = responseData.language;
+
+                    var home_assistant_version = responseData.version;
+                    var home_assistant_state = responseData.state;
+                    var home_assistant_external_url = responseData.external_url;
+                    var home_assistant_internal_url = responseData.internal_url;
+
+                    var latitude = responseData.latitude;
+                    var longitude = responseData.longitude;
+                    // popupContent.textContent = 'Location Name: <span class="red-text">' + home_assistant_locationName + '</span><br>Time Zone: ' + home_assistant_time_zone;
+                    popupContentHass.innerHTML = '<center><h5>Kết Nối Tới HomeAssistant Thành Công</h5></center>';
+                    popupContentHass.innerHTML += '<font color=red>Tên: <b>' + home_assistant_locationName + '</b></font>';
+                    popupContentHass.innerHTML += '<font color=red>Múi Giờ:<b> ' + home_assistant_time_zone + '</b></font>';
+                    popupContentHass.innerHTML += '<font color=red>Quốc Gia:<b> ' + home_assistant_country + '</b></font>';
+                    popupContentHass.innerHTML += '<font color=red>Ngôn Ngữ:<b> ' + home_assistant_language + '</b></font>';
+                    popupContentHass.innerHTML += '<font color=red>Địa Chỉ URL Ngoài:<b> <a href="'+home_assistant_external_url+'" target="_bank">' + home_assistant_external_url + '</a></b></font>';
+                    popupContentHass.innerHTML += '<font color=red>Địa Chỉ URL Local:<b> <a href="'+home_assistant_internal_url+'" target="_bank">' + home_assistant_internal_url + '</a></b></font>';;
+                    popupContentHass.innerHTML += '<font color=red>Phiên Bản HomeAssistant:<b> ' + home_assistant_version + '</b></font>';
+                    popupContentHass.innerHTML += '<font color=red>Trạng Thái Hoạt Động:<b> ' + home_assistant_state + '</b></font>';
+                } else {
+                    var error_php = responseData.error
+                        //Thông báo lỗi
+                    popupContentHass.innerHTML = '<font color=red>' + error_php + '</font>';
+                }
+            } else if (xhr.status === 401) {
+                popupContentHass.innerHTML = '<font color=red>Lỗi [401], không có quyền truy cập, Hãy kiểm tra lại mã token</font>';
+            } else if (xhr.status === 404) {
+                popupContentHass.innerHTML = '<font color=red>Lỗi [404], không tìm thấy dữ liệu, hãy kiểm tra lại địa chỉ HomeAssistant hoặc Token</font>';
+            } else {
+                popupContentHass.innerHTML = '<font color=red>Lỗi khi gửi yêu cầu</font>';
+            }
+        };
+
+        xhr.onerror = function() {
+            //$('#loading-overlay').hidden();
+            popupContentHass.innerHTML = '<font color=red>Lỗi kết nối</font>';
+        };
+
+        xhr.send();
+    });
+
+    closeButtonHass.addEventListener('click', function() {
+        // Đóng popup khi nút đóng được nhấn
+        popupHass.style.display = 'none';
+    });
+
+    popupHass.addEventListener('click', function(event) {
+        if (event.target === popupHass) {
+            // Đóng popup khi bấm vào ngoài vùng popup
+            popupHass.style.display = 'none';
+        }
+    });
+</script>
+	
 	<script src="../assets/js/bootstrap.js"></script>
 	<script src="../assets/js/jquery.min.js"></script>
 	<script src="../assets/js/axios_0.21.1.min.js"></script>

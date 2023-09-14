@@ -291,8 +291,11 @@ $output .= "$GET_current_USER@$HostName:~$ >Lệnh Được Thực Hiện Thành
 //Command
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['commandd'])) {
 	$commandnd = @$_POST['commandnd'];
-//	$output = "$GET_current_USER@$HostName:~ $ $commandnd\n\n";
-//   $output .= shell_exec($commandnd);
+
+	if (empty($commandnd)) {
+            $output .= "Command:~> Hãy Nhập Lệnh Cần Thực Thi";
+        }
+else {
 $connection = ssh2_connect($serverIP, $SSH_Port);
 if (!$connection) {die($E_rror_HOST);}
 if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
@@ -302,14 +305,44 @@ $stream_out = ssh2_fetch_stream($stream, SSH2_STREAM_STDIO);
 $output = "$GET_current_USER@$HostName:~ssh$: $commandnd\n";
 $output .=  stream_get_contents($stream_out);
 }
+}
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hash_generator'])) {
+	$Hash_input = @$_POST['commandnd'];
+	if (empty($Hash_input)) {
+            $output .= "Hash Generator:~> Hãy Nhập Nội Dung";
+        }
+		else {
+	$Hash_MD5_Encode = md5($Hash_input); //MD5
+	$Hash_Base64_Encode = base64_encode($Hash_input); //base64_encode
+	
+	$output = "Hash Generator:~> $Hash_input\n\n";
+	$output .= "MD5: $Hash_MD5_Encode\n";
+	$output .= "Base64 Encode: $Hash_Base64_Encode\n";
+		}
+	
+}
+
+?>
+<?php
+// Kiểm tra xem người dùng đã đăng nhập hay chưa
+if (!isset($_SESSION['root_id'])) {
+    // Nếu chưa đăng nhập, chuyển hướng về trang đăng nhập (index.php)
+    //header("Location: ./index.php");
+	echo "<br/><center><h1>Có Vẻ Như Bạn Chưa Đăng Nhập!<br/><br>
+	- Nếu Bạn Đã Đăng Nhập, Hãy Nhấn Vào Nút Dưới<br/><br/><a href='$PHP_SELF'><button type='button' class='btn btn-danger'>Tải Lại</button></a></h1>
+	</center>";
+    exit();
+}
 ?>
     <form  id="my-form"  method="post">
 	<div class="row g-3 d-flex justify-content-center">
   <div class="col-auto"> 
-  <input type="text" name="commandnd" class="form-control input-sm" placeholder="Nhập Lệnh Ở Đây" aria-label="Recipient's username" aria-describedby="basic-addon2">
+  <input type="text" name="commandnd" class="form-control input-sm" placeholder="Nhập Lệnh/Nội Dung" aria-label="Recipient's username" aria-describedby="basic-addon2">
 </div> <div class="col-auto"> 
     <button class="btn btn-success" name="commandd" type="submit">Command</button>
+	
+    <button class="btn btn-success" name="hash_generator" type="submit">Hash Generator</button>
  </div>
 </div><br/><center>
 <div class="btn-group">

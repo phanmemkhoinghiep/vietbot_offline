@@ -1,7 +1,7 @@
 {
   "ui_version": {
-    "latest": "beta 21-08-2023",
-    "current": "beta 21-08-2023",
-    "notification": "Cập Nhật Skill Camera Hanet"
+    "latest": "beta 10-09-2023",
+    "current": "beta 10-09-2023",
+    "notification": "Cập Nhật: Kiểm tra kết nối tới home assistant, thêm mật khẩu quản lý Web UI (đảm bảo quyền, thông tin của người dùng)"
   }
 }

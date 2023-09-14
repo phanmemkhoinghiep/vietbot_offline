@@ -27,6 +27,7 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
     <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
     <link rel="stylesheet" href="assets/css/magnific-popup.css">
     <link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="assets/css/loading.css">
 	  <script src="assets/js/ajax_jquery_3.6.0_jquery.min.js"></script>
 <style>
     .blinking-container {
@@ -118,8 +119,51 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
     overflow: hidden; /* Để làm tròn góc thì cần che phần dư thừa */
   }
 </style>
+  <style>
+        /* CSS cho thông báo pop-up */
+        .popup {
+			border-radius: 10px;
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #000;
+            padding: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+    </style>
 </head>
 <body>
+	    <div id="loading-overlay">
+          <img id="loading-icon" src="../assets/img/Loading.gif" alt="Loading...">
+		  <div id="loading-message">Đang Thực Thi...</div>
+    </div>
+	<script>
+	$(document).ready(function() {
+    $('#my-form').on('submit', function() {
+        // Hiển thị biểu tượng loading
+        $('#loading-overlay').show();
+
+        // Vô hiệu hóa nút gửi
+        $('#submit-btn').attr('disabled', true);
+    });
+});
+</script>
+
+
+	<script>
+        // JavaScript để hiển thị và ẩn thông báo pop-up
+        function showPopup() {
+            var popup = document.getElementById("popup");
+            popup.style.display = "block";
+        }
+
+        function hidePopup() {
+            var popup = document.getElementById("popup");
+            popup.style.display = "none";
+        }
+    </script>
     <script>
     $(document).ready(function() {
         var apiKey = "<?php echo $apiKeyWeather; ?>";
@@ -258,19 +302,47 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
 							  <div class="p-2"><?php //echo "$wards_Duong $wards_Lang $wards_Huyen $wards_Tinh"; ?></div></div> -->
 							<div class="d-flex flex-row">
 				<div class="p-2"><div id="tmptoday"></div></div>  <div class="p-2"><div id="clock1"></div></div></div>
-		
-		
 <div class="d-flex flex-row">
   <div class="p-2"><div class="d-flex flex-row"> <div id="temperature" class="h1"></div> <img id="weather-icon" src="" alt="Weather Icon"></div></div>
-  
   <div class="d-flex flex-column">
   <div class="d-flex flex-row"><?php echo "$wards_Tinh".",<div id='country'></div>"; ?></div>
  <div class="d-flex flex-row">Độ ẩm: &nbsp;<div id="humidity"></div></div>
-  
  <div class="d-flex flex-row"> Tốc độ gió: &nbsp;<div id="wind-speed"></div></div>
 </div>
 </div>
-			<div class="info">
+<div class="info">
+<?php
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Kiểm tra xem người dùng đã đăng nhập hay chưa
+    if (isset($_SESSION['root_id'])) {
+		
+		if (isset($_POST['logout'])) {
+			// Xử lý đăng xuất
+			session_unset();
+			session_destroy();
+			echo "<br/><br/><center><i>Đăng xuất thành công!</i></center><br/>";
+		}
+    } else {
+        // Nếu chưa đăng nhập, xử lý đăng nhập
+        $password = $_POST["password"];
+        if (md5($password) === $Pass_Login_UI) {
+            $_SESSION['root_id'] = "$SESSION_ID_Name"; // Thêm biến root_id
+            $_SESSION['username'] = 'example_user';
+            echo "<i>Đăng nhập thành công!</i>";
+           // header("Location: ./index.php");
+            // Kết thúc thực thi của script sau khi đăng nhập
+            //exit();
+        } else {
+            echo "<br/><br/><center><i>Đăng nhập thất bại. Vui lòng kiểm tra lại mật khẩu</i></center><br/>";
+        }
+    }
+}
+?>
+    <?php
+    // Kiểm tra xem người dùng đã đăng nhập hay chưa
+    if (isset($_SESSION['root_id'])) {
+		?>
 				<center><h1>Xin chào, <?php echo $MYUSERNAME; ?>!</h1></center>
 				<p><b>Chào mừng bạn đến với trang quản trị VietBot</b><br/><br/><i>- Nền tảng loa thông minh tương tác hàng đầu!<br/>
 				- Tận hưởng trí tuệ nhân tạo tiên tiến và trải nghiệm âm thanh vượt trội với VietBot, 
@@ -282,8 +354,33 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
 				Hãy đồng hành cùng Vietbot và khám phá một thế giới mới của công nghệ âm thanh và trí tuệ nhân tạo.
 				Chúng tôi tin rằng bạn sẽ trải nghiệm những điều tuyệt vời và hài lòng với Vietbot.
 				Nếu có bất kỳ câu hỏi hoặc yêu cầu nào, chúng tôi luôn sẵn lòng <b><a class="text-white" href="https://www.facebook.com/groups/1082404859211900" target="_bank">hỗ trợ</a></b> bạn. </i>
+	  <?php
+	   } else {
+        // Nếu chưa đăng nhập, hiển thị biểu mẫu đăng nhập
+        ?>
+		 <br/><center>
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" id="my-form" method="post">
 		
-		</div>
+           <label for="password">Mật khẩu:</label>
+            <input placeholder="Nhập Mật Khẩu Vào Đây"  type="password" id="password" name="password" required> <i class="bi bi-info-circle-fill" onclick="showPopup()" title="Nhấn Để Tìm Hiểu Thêm"></i>
+			
+			
+			<br><br>
+            <input class="btn btn-success" type="submit" value="Đăng nhập">
+        </form></center>
+		 <!-- Thông báo pop-up -->
+    <div id="popup" class="popup">
+        - Mật khẩu mặc định: <font color=red><b>admin</b></font><br/>
+		- Thay đổi mật khẩu mặc định trong file: "<font color=red><b>Configuration.php</b></font>", tìm tới dòng: "<font color=red><b>$Pass_Login_UI</b></font>"<br/>
+		- Mật khẩu cần được mã hóa dạng <font color=red><b>MD5</b></font><br/>
+		- Nhấn Vào Đây Để Tới Link Mã Hóa: <a href="/Help_Support/MD5.php" target="_bank"><b>MD5 HASH</b></a>
+       <center> <br/><button class="btn btn-danger" onclick="hidePopup()">Đóng</button></center>
+    </div>
+
+    <?php } ?>
+	  
+	  
+	  	</div>
       </section>
       <!--  Hero End  -->
 	        <section id="LogServiceCMD" class="section about bg-secondary text-primary">
@@ -527,6 +624,10 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
         <a class="btn btn-danger" href="#vietbot_update" role="button" title="Nhấn Để Kiểm Tra, Cập Nhật Phầm Mềm">Cập Nhật Chương Trình</a>
         <a class="btn btn-success" href="#UI_update" role="button" title="Nhấn Để Kiểm Tra, Cập Nhật Giao Diện">Cập Nhật Giao Diện</a>
         <a class="btn btn-secondary" href="./Help_Support/index.php" role="button" target="_bank" title="Nhấn Để Kiểm Tra, Cập Nhật Giao Diện">Hướng Dẫn / Sử Dụng Vietbot</a>
+
+        <form action="" id="my-form" method="post">
+         <button class="btn btn-warning" type="submit" name="logout" title="Đăng Xuất">Đăng Xuất Hệ Thống</button>
+        </form>
 
 
         <!--  <h6 class="text-center theme-skin-title">Đổi Màu Giao Diện</h6> -->

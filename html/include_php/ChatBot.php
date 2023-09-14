@@ -44,10 +44,13 @@ include "../Configuration.php";
     
     .chat-form {
         display: flex;
-        padding: 10px;
+      /*  padding: 10px; */ 
+       background-color: #f0f0f0;
+    }
+        .chat-form-button {
+		padding-bottom: 10px; 
         background-color: #f0f0f0;
     }
-    
     .chat-input {
         flex-grow: 1;
         margin-right: 10px;
@@ -145,7 +148,7 @@ include "../Configuration.php";
     
     .chat-wrapper {
         background-color: #f0f0f0;
-        padding: 10px;
+     /*   padding: 10px; */
     }
     
     .message-content {
@@ -193,21 +196,58 @@ include "../Configuration.php";
         <div class="chat-wrapper">
             <div id="message-content" class="message-content">Chào bạn mình là loa thông minh Vietbot!</div>
         </div>
+		<?php
+// Kiểm tra xem người dùng đã đăng nhập hay chưa
+if (!isset($_SESSION['root_id'])) {
+    // Nếu chưa đăng nhập, chuyển hướng về trang đăng nhập (index.php)
+    //header("Location: ./index.php");
+	echo "<br/><center><h1>Có Vẻ Như Bạn Chưa Đăng Nhập!<br/><br>
+	- Nếu Bạn Đã Đăng Nhập, Hãy Nhấn Vào Nút Dưới<br/><br/><a href='$PHP_SELF'><button type='button' class='btn btn-danger'>Tải Lại</button></a></h1>
+	</center>";
+    exit();
+}
+?>
         <div id="chatbox" class="container-fluid"></div>
         <form id="chat-form" class="chat-form">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">Chỉ đọc: &nbsp;<input title="Chỉ đọc nội dung văn bản bạn đã nhập ra loa và sẽ không hiển thị trong giao diện chatbox" type="checkbox" class="form-check-input" id="message-type-checkbox"></span>
+                    
+				<!--	<span class="input-group-text" id="basic-addon1">Chỉ đọc: &nbsp;<input title="Chỉ đọc nội dung văn bản bạn đã nhập ra loa và sẽ không hiển thị trong giao diện chatbox" type="checkbox" class="form-check-input" id="message-type-checkbox">
+					
+					
+					</span> -->
+  <select id="message-type-checkbox" class="form-select">
+  <option  selected value="4" title="Chế Độ Hỏi Đáp Ở Chatbox Không Phát Ra Loa">Hỏi Đáp</option>
+  <option value="1" title="TTS Chuyển Văn Bản Thành Giọng Nói Để Đọc Ra Loa">Chỉ Đọc</option>
+  <option value="2" title="Full Chức Năng">Full</option>
+</select>
                 </div>
                 <input type="text" class="form-control" id="user-input" class="chat-input" placeholder="Nhập tin nhắn..." aria-label="Recipient's username" aria-describedby="basic-addon2">
-                <div class="input-group-append">
+
+
+            
+			  <div class="input-group-append">
                     <button type="submit" class="btn btn-success">Gửi</button>
                 </div>
             </div>
         </form>
-        <button id="delete-all-button" class="btn btn-danger">Xóa tất cả tin nhắn</button>
+
+<center>
+  <div class="btn-group-toggle chat-form-button" data-toggle="buttons">
+  <label class="btn btn-secondary">
+    <input type="checkbox" checked autocomplete="off" id="show-timestamp-checkbox"> Hiển thị thời gian
+  </label>
+  <button id="delete-all-button" class="btn btn-danger">Xóa tất cả tin nhắn</button>
+</div></center>
     </div>
 <script>
+function getTimestamp() {
+  const now = new Date();
+  const hours = now.getHours().toString().padStart(2, '0');
+  const minutes = now.getMinutes().toString().padStart(2, '0');
+  const seconds = now.getSeconds().toString().padStart(2, '0');
+  return `${hours}:${minutes}:${seconds}`;
+}
   const RESPONSE_TIMEOUT = 23000; // Thời gian chờ phản hồi cuối (21 giây) để hiển thị thông báo
   const WAIT_MESSAGE_TIMEOUT = 7000; // Thời gian chờ hiển thị thông báo "Vui lòng chờ thêm" (7 giây)
   const WAIT_MESSAGE = 'Vui lòng chờ thêm...'; // Nội dung thông báo chờ phản hồi
@@ -218,6 +258,7 @@ include "../Configuration.php";
   const userInput = document.getElementById('user-input');
   const deleteAllButton = document.getElementById('delete-all-button');
   const messageTypeCheckbox = document.getElementById('message-type-checkbox');
+
   let typingIndicator;
   let isBotReplying = false;
   let waitMessageTimer; // Biến đếm thời gian chờ hiển thị WAIT_MESSAGE
@@ -232,7 +273,14 @@ include "../Configuration.php";
       return;
     }
 	//1 = tts, 4 = hỏi đáp
-    const messageType = messageTypeCheckbox.checked ? 1 : 4;
+    //const messageType = messageTypeCheckbox.checked ? 1 : 4;
+	//parseInt chuyển đổi giá trị thành một số nguyên (integer) không nằm trong dấu nháy
+    const messageType = parseInt(messageTypeCheckbox.value);
+
+	   // Hiển thị giá trị đã chọn và giá trị đã nhập trong console
+   // console.log("Giá trị đã chọn là: " + messageType);
+    // console.log("Tin nhắn của người dùng là: " + userMessage);
+	
     // Kiểm tra kết nối tới API trước khi gửi yêu cầu để đưa ra thông báo
     try {
       const response = await axios.get('http://<?php echo $serverIP; ?>:5000');
@@ -315,7 +363,28 @@ include "../Configuration.php";
     }
   });
 
+
+const showTimestampCheckbox = document.getElementById('show-timestamp-checkbox');
+// Thêm một trình nghe sự kiện để xử lý sự thay đổi của ô kiểm
+showTimestampCheckbox.addEventListener('change', () => {
+  // Bật/tắt lớp 'hide-timestamp' trên khung chat dựa vào trạng thái của ô kiểm
+  chatContainer.classList.toggle('hide-timestamp', !showTimestampCheckbox.checked);
+});
+
+
   const displayMessage = (message, isUserMessage, isTimeoutMessage = false) => {
+	  
+	  //Nếu Giá trị là undefined
+	if (typeof message === 'undefined') {
+		message = 'Nội dung đã được đọc ra loa';
+	    //return;
+	}
+	  //Nếu Giá trị là null
+	if (message === null) {
+		message = 'Không có dữ liệu';
+	    //return;
+	}
+	
     const messageElement = document.createElement('div');
     messageElement.classList.add('message');
 
@@ -325,9 +394,23 @@ include "../Configuration.php";
       messageElement.classList.add('bot-message');
     }
 
-    const messageContent = document.createElement('div');
-    messageContent.classList.add('message-content');
-    messageContent.textContent = message;
+
+  const timestamp = getTimestamp(); // Lấy thời gian
+  //const timestampElement = document.createElement('div');
+ // timestampElement.classList.add('message-timestamp');
+  //timestampElement.textContent = `[${timestamp}]`; // Bao gồm thời gian
+
+
+  const messageContent = document.createElement('div');
+  messageContent.classList.add('message-content');
+   // Kiểm tra trạng thái của ô kiểm "show-timestamp-checkbox"
+ if (showTimestampCheckbox.checked) {
+	messageContent.textContent = `[${timestamp}] ${message}`; //  Thêm Hàm thời gian vào Chatbox khi được tích
+  }else {
+    messageContent.textContent = message; //nếu không được tích
+  }
+	
+	
 
     const deleteButton = document.createElement('button');
     deleteButton.classList.add('delete-button');

@@ -2,6 +2,10 @@
 
 #Vũ Tuyển
 
+#Hướng dẫn sử dụng sẽ nằm trong: cài đặt (của dao diện web ui) => Hướng Dẫn / Sử Dụng Vietbot
+
+#Hướng Dẫn Liên Kết Vào Home Assistant(Hass) Qua  API Web UI: https://github.com/marion001/UI_VietBot/blob/main/README_HomeAssistant.md
+
 #Hướng Dẫn Cài VietBot: https://github.com/phanmemkhoinghiep/vietbot_offline
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

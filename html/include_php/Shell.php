@@ -8,7 +8,8 @@ define('APP_TITLE', 'Tiny File Manager');
 $use_auth = true;
 $auth_users = array(
 //  'admin' => $MatKhauShell
-    'admin' => password_hash("$Pass_Login", PASSWORD_DEFAULT)
+    'admin' => password_hash("$Pass_Login_File_Manager", PASSWORD_DEFAULT)
+    
   //'user' => '$2y$10$Fg6Dz8oH9fPoZ2jJan5tZuv6Z4Kp7avtQ9bDfrdRntXtPeiMAZyGO' //12345
 );
 // Readonly users

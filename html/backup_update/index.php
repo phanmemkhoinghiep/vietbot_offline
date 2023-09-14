@@ -16,7 +16,7 @@ include "../Configuration.php";
     <style>
 		body, html {
         background-color: #d2d8bb;
-		overflow-x: hidden;
+		/* overflow-x: hidden; */
 		max-width: 100%;
     }
         .div-div1 {
@@ -227,6 +227,17 @@ foreach ($directories as $directory) {
 if (!is_dir($DuognDanThuMucJson)) {
     echo "<center>Thư mục nguồn $DuognDanThuMucJson không tồn tại.</center>";
     exit;
+}
+?>
+<?php
+// Kiểm tra xem người dùng đã đăng nhập hay chưa
+if (!isset($_SESSION['root_id'])) {
+    // Nếu chưa đăng nhập, chuyển hướng về trang đăng nhập (index.php)
+    //header("Location: ./index.php");
+	echo "<br/><center><h1>Có Vẻ Như Bạn Chưa Đăng Nhập!<br/><br>
+	- Nếu Bạn Đã Đăng Nhập Hãy Nhấn Vào Nút Dưới<br/><br/><a href='$PHP_SELF'><button type='button' class='btn btn-danger'>Tải Lại</button></a></h1>
+	</center>";
+    exit();
 }
 ?>
 <div class="my-div">
@@ -614,11 +625,20 @@ function recursiveReplace(&$oldArray, $newArray) {
 function replaceIfDifferent(&$oldValue, $newValue) {
     if (isset($newValue)) {
         $oldValue = $newValue;
-    }
+    } 
+	
+
+	
 }
 recursiveReplace($newConfigData, $oldConfigData);
 $newConfigUpdatedContent = json_encode($newConfigData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 file_put_contents($newConfigPath, $newConfigUpdatedContent);
+//Xử Lý Riêng logging_type chọn là Null
+//$GET_LOG_Null = $oldConfigData['smart_config']['logging_type'];
+$newConfigData['smart_config']['logging_type'] = $oldConfigData['smart_config']['logging_type'];
+    $new_json_data_config = json_encode($newConfigData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    file_put_contents($newConfigPath, $new_json_data_config);
+//END
 // thay thế các giá trị Skill từ cũ sang mới
 $oldSkillPath = $DuognDanUI_HTML.'/backup_update/backup/skill_.json';
 $oldSkillContent = file_get_contents($oldSkillPath);

@@ -4,6 +4,12 @@
 //Bỏ qua hiển thị lỗi trên màn hình nếu có
 @error_reporting(0);
 @date_default_timezone_set('Asia/Ho_Chi_Minh');
+// Khởi động session
+session_start();
+$session_expiration = 86400; //Cài đặt thời gian sống của session cookie thành 1 ngày 1 ngày (1 giờ = 3600 giây)
+session_set_cookie_params($session_expiration);
+
+$SESSION_ID_Name = "Marion001"; //để nguyên
 $HostName = gethostname();
 $PHP_SELF = $_SERVER['PHP_SELF'];
 $GET_current_USER = get_current_user();
@@ -16,8 +22,10 @@ $UI_VietBot = "https://github.com/marion001/UI_VietBot";
 $Vietbot_Version = "https://raw.githubusercontent.com/phanmemkhoinghiep/vietbot_offline/beta/src/version.json";
 $UI_Version = "https://raw.githubusercontent.com/marion001/UI_VietBot/main/version.json";
 
-//Mật Khẩu Đăng Nhập Phần Quản Lý File
-$Pass_Login = "admin";
+//Mật Khẩu Đăng Nhập Các Chức Năng Web UI
+$Pass_Login_UI = "21232f297a57a5a743894a0e4a801fc3"; //Mã hóa md5 = admin
+//Mật Khẩu Đăng Nhập Trình Quản Lý File Manager
+$Pass_Login_File_Manager = "admin"; // admin
 
 //ĐƯờng Dẫn VietBot Chính
 $Path_Vietbot_src = "/home/pi/vietbot_offline";
@@ -72,6 +80,13 @@ $Limit_Pre_Answer = "3";
 
 //Thời gian đếm ngược tải lại trang khi update UI và Vietbot
 $Page_Load_Time_Countdown = "3"; //Giây
+
+///////////////////////////////////////////////////////////////////////////////
+//API Config Setting
+$allowedCommands_ALL = "all"; //"all" Biến cho phép chạy tất cả các lệnh
+// Danh sách chỉ cho phép chạy các lệnh an toàn khi bỏ chữ "all" bên trên
+$allowedCommands = "ls,dir,touch,reboot,uname"; //Tester
+$apiKey = 'vietbot'; //api key, user cần mã hóa api key này dạng md5 3f406f61a2b5053b53cda80e0320a60b
 
 ///////////////////////////////////////////////////////////////////////////////
 //Đọc, lấy vài dữ liệu của config.json

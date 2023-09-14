@@ -1,5 +1,5 @@
 <?php
-//Code By: Vũ Tuyển.
+//Code By: Vũ Tuyển
 //Facebook: https://www.facebook.com/TWFyaW9uMDAx
 include "../Configuration.php";
 	$FileConfigJson = "$DuognDanThuMucJson"."/config.json";
@@ -36,9 +36,7 @@ include "../Configuration.php";
 	//Lấy giá trị value trong file json
 	$value_volume = $data_volume->volume;
 	//lấy giá các trị wakeup_reply
-	
 	$GET_wakeupReply = $data_config['smart_wakeup']['wakeup_reply'];
-	
 	
 	//lấy giá các trị value của STT
 	$GET_STT = $data_config['smart_request']['stt']['type'];
@@ -102,8 +100,10 @@ foreach ($keywordsTTS as $keywordTTS => $replacementTTS) {
 	
 	if ($data_config['smart_answer']['tts']['speed'] === null) {
 		$Speed_TTS = "0";
+		$Speed_TTS_MacDinh = "Mặc định";
 	} else {
 		$Speed_TTS = $data_config['smart_answer']['tts']['speed'];
+		$Speed_TTS_MacDinh = $data_config['smart_answer']['tts']['speed'];
 	}
 	//echo $GET_TTS_Token_Key;
 	$GET_Speaker_Amixer_ID = $data_config['smart_config']['speaker']['amixer_id'];
@@ -113,10 +113,10 @@ foreach ($keywordsTTS as $keywordTTS => $replacementTTS) {
 	$MY_USER_NAME = $data_config['smart_config']['user_info']['name'];
 	
 	//console_ouput
-	if ($data_config['smart_config']['console_ouput'] === null) {
+	if ($data_config['smart_config']['logging_type'] === null) {
 		$Get_Console_Ouput = "Null";
 	} else {
-		$Get_Console_Ouput = $data_config['smart_config']['console_ouput'];
+		$Get_Console_Ouput = $data_config['smart_config']['logging_type'];
 	}
 	//Address
 	$Address_City = $data_config['smart_config']['user_info']['address']['province'];
@@ -132,9 +132,6 @@ foreach ($keywordsTTS as $keywordTTS => $replacementTTS) {
 	$external_bot_priority_1 = $data_config['smart_answer']['external_bot_priority_1'];
 	$external_bot_priority_2 = $data_config['smart_answer']['external_bot_priority_2'];
 	$external_bot_priority_3 = $data_config['smart_answer']['external_bot_priority_3'];
-	
-	
-	
 	
 	//Led
 	$LED_TYPE = $data_config['smart_config']['led']['type'];
@@ -289,8 +286,7 @@ chmod($backupFile, 0777);
 	//Đọc trạng thái sau khi khởi động
 	 $data_config['smart_answer']['startup_state_speaking'] = ($_POST['startup_state_speaking'] === 'true');
 
-	
-		//Chờ xử Lý Dữ Liệu
+	//Chờ xử Lý Dữ Liệu
     $preAnswerList = $_POST["pre_answer"];
     $numberCharactersToSwitchMode = $_POST["number_characters_to_switch_mode"];
 	
@@ -312,10 +308,8 @@ chmod($backupFile, 0777);
 	$STT_GG_Ass_Mode = @$_POST['stt_gg_ass_mode'];
     $STT_TimeOut = @$_POST['stt_time_out'];
 	if (strcasecmp(@$_POST['token_stt'], "Null") === 0) {$STT_Token = null;
-    } else {$STT_Token = @$_POST['token_stt'];}
-	
-
-	
+    } else {
+	$STT_Token = @$_POST['token_stt'];}
 	$TTS_Company = @$_POST['tts_company'];
 	$TTS_Voice = @$_POST['tts_voice'];
 	//$TTS_Token_Key = @$_POST['token_key_tts'];
@@ -372,7 +366,6 @@ chmod($backupFile, 0777);
     // Cập nhật lại mảng "wakeup_reply" trong dữ liệu
     $data_config["smart_wakeup"]["wakeup_reply"] = $wakeup_reply;
 	
-		
 	//stt
 	$data_config['smart_request']['stt']['type'] = $STT_Type;
 	$data_config['smart_request']['stt']['stt_gg_ass_mode'] = $STT_GG_Ass_Mode;
@@ -395,10 +388,10 @@ chmod($backupFile, 0777);
 	//$data_config['smart_answer']['sound']['default']['start'] = ltrim($_POST['startsound'], "/");
 	$data_config['smart_answer']['sound']['default']['finish'] = @$_POST['finishsound'];
 	//$data_config['smart_answer']['sound']['default']['finish'] = ltrim($_POST['finishsound'], "/");
-	//console_ouput
-	if (strcasecmp(@$_POST['console_ouput'], "Null") === 0) {$console_ouputrepl = null;
-    } else {$console_ouputrepl = @$_POST['console_ouput'];}
-	$data_config['smart_config']['console_ouput'] = $console_ouputrepl;
+	//logging_type
+	if (strcasecmp(@$_POST['logging_type'], "Null") === 0) {$console_ouputrepl = null;
+    } else {$console_ouputrepl = @$_POST['logging_type'];}
+	$data_config['smart_config']['logging_type'] = $console_ouputrepl;
 	//speaker, card id
 	$data_config['smart_config']['speaker']['amixer_id'] = intval($GET_CARD_Speaker_Amixer_ID);
 	//web_interface
@@ -663,6 +656,17 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx -->
 <div id="loading-message">- Đang Thực Hiện...</div>
 </div>
 <?php
+// Kiểm tra xem người dùng đã đăng nhập hay chưa
+if (!isset($_SESSION['root_id'])) {
+    // Nếu chưa đăng nhập, chuyển hướng về trang đăng nhập (index.php)
+    //header("Location: ./index.php");
+	echo "<br/><center><h1>Có Vẻ Như Bạn Chưa Đăng Nhập!<br/><br>
+	- Nếu Bạn Đã Đăng Nhập, Hãy Nhấn Vào Nút Dưới<br/><br/><a href='$PHP_SELF'><button type='button' class='btn btn-danger'>Tải Lại</button></a></h1>
+	</center>";
+    exit();
+}
+?>
+<?php
 // Thư mục cần kiểm tra
 $directories = array(
     "$Path_Vietbot_src"
@@ -701,7 +705,6 @@ foreach ($directories as $directory) {
     checkPermissions($directory, $hasPermissionIssue);
 }
 
-
 if (json_last_error() !== JSON_ERROR_NONE) {
     echo "<center><h1> <font color=red>Phát hiện lỗi, cấu trúc tập tin config.json không hợp lệ!</font></h1><br/>- Mã Lỗi: <b>" . json_last_error_msg()."</b><br/><br/>";
 	echo "Hướng Dẫn Khắc Phục 1 Trong Các Gợi Ý Dưới Đây:<i><br>- Bạn cần sửa trực tiếp trên file<br/>- Chọn <b>các file sao lưu trước đó</b><br/>- Nhấn vào nút <b>Khôi Phục Gốc</b> bên dưới để về trạng thái khi mới flash</i>";
@@ -720,7 +723,7 @@ if (count($fileLists) > 0) {
     echo '</select><div class="input-group-append">';
     echo '<input type="submit" class="btn btn-warning" title="Khôi Phục Lại File config.json trước đó đã sao lưu" value="Khôi Phục/Recovery">';
     echo ' </div></div></form>';
-	echo '<br/><br/><form id="my-form"  method="POST"><button type="submit" name="restore_config_json" class="btn btn-danger">Khôi Phục Gốc</button></center></form>';
+	echo '<br/><br/><form id="my-form"  method="POST"><button type="submit" name="restore_config_json" class="btn btn-success">Khôi Phục Gốc</button><a href="'.$PHP_SELF.'"><button type="button" class="btn btn-danger">Tải Lại/Làm Mới</button></center></form>';
 }
  else {
     echo "Không tìm thấy file backup config trong thư mục.";
@@ -728,8 +731,6 @@ if (count($fileLists) > 0) {
 echo '</div>';
     exit(); // Kết thúc chương trình
 }
-
-
 
 ?>
 <div id="loading-overlay"><img id="loading-icon" src="../assets/img/Loading.gif" alt="Loading...">
@@ -913,35 +914,34 @@ Microsoft EDGE</label>
 <input type="radio" id="myRadio6" title="Viettel Nam Miền Nam" id="myRadio2" name="tts_voice" value="male_southern_voice" <?php if ($GET_TTS_Voice_Name === 'male_southern_voice') echo 'checked'; ?> required> Nam Miền Nam</label>&nbsp;<label>
 <input type="radio" id="myRadio7" name="tts_voice" value="null" <?php if ($GET_TTS_Voice_Name === null) echo 'checked'; ?>> Mặc Định</label>
 <br/><br/>
-Tốc Độ: <input type="range" name="speed_tts" id="slider_tts" title="Phù Hợp Nhất Từ 0.5-1.5" min="0" max="1.5" step="0.1" value="<?php echo $Speed_TTS; ?>" class="slider" oninput="updateSliderValueTTS(this.value)"><font color=red><span id="slider-tts" class="slider-tts"><?php echo $Speed_TTS; ?></span></font>
+Tốc Độ: <input type="range" name="speed_tts" id="slider_tts" title="Phù Hợp Nhất Từ 0.5-1.5" min="0" max="1.5" step="0.1" value="<?php echo $Speed_TTS; ?>" class="slider" oninput="updateSliderValueTTS(this.value)"><font color=red><span id="slider-tts" class="slider-tts"><?php echo $Speed_TTS_MacDinh; ?></span></font>
 </center><hr/>
-
-
-
-
-
 <!-- -->
-<h5>Console Ouput:</h5> 
+<h5>Log:</h5> 
 <div class="row g-3 d-flex justify-content-center"><div class="col-auto"> 
-<table class="table">
- <thead>
-     <tr>
-      <th scope="col" colspan="3"><center title="Cách hiển thị log trong terminal"><font color=red>Kiểu Hiển Thị Đầu Ra Bảng Điều Khiển</font></center></th>
-    </tr>
+<table class="table table-bordered">
+  <thead>
     <tr>
-      <th scope="col"><center title="Không hiển thị log trong terminal">Không</center></th>
-      <th scope="col"><center title="Hiển thị đầy đủ log trong terminal">Đầy Đủ</center></th>
-      <th scope="col"><center title="Xuất log đè lên nhau trong terminal">Xem Tức Thời</center></th>
+      <th scope="col" colspan="2"><center title="Cách hiển thị log trong terminal"><font color=red>Kiểu Hiển Thị Log</font></center></th>
     </tr>
   </thead>
-   <tbody>
+  <tbody>
     <tr>
-      <td><center><input type="radio" name="console_ouput" value="Null" <?php if ($Get_Console_Ouput === 'Null') echo 'checked'; ?> required></center></td>
-      <td><center><input type="radio" name="console_ouput" value="full" <?php if ($Get_Console_Ouput === 'full') echo 'checked'; ?> required></center></td>
-      <td><center><input type="radio" name="console_ouput" value="watching" <?php if ($Get_Console_Ouput === 'watching') echo 'checked'; ?> required></center></td>
+
+      <td colspan="2">
+	  <select name="logging_type" class="form-select" aria-label="Default select example">
+  <option value="Null" <?php if ($Get_Console_Ouput === 'Null') echo 'selected'; ?> title="Không hiển thị">Không hiển thị</option>
+  <option value="console" <?php if ($Get_Console_Ouput === 'console') echo 'selected'; ?> title="Hiển thị trên dao diện console ssh">Console</option>
+  <option value="web" <?php if ($Get_Console_Ouput === 'web') echo 'selected'; ?> title="Hiển thị trên dao diện web">Web</option>
+  <option value="both" <?php if ($Get_Console_Ouput === 'both') echo 'selected'; ?> title="Hiển thị trên cả 2 dao diện là Web và console">Cả hai</option>
+</select>
+</td>
+
     </tr>
-</tbody>
+  </tbody>
 </table>
+
+
 </div>
 </div>
 <hr/>
@@ -1758,15 +1758,15 @@ else if (radio.value === "tts_gg_free") {
 			} 
 			//APA102
 			else if (selectedLed === "APA102") {
-				disabledInputs["effect_mode_input"].disabled = false;
+		/*		disabledInputs["effect_mode_input"].disabled = false;
 				disabledInputs["effect_mode_input"].required = true;
                 //NumberModeLed.type = "text";
                 NumberModeLed.value = "";
 				EffectModeInput.type = "number";
 				EffectModeInput.value = "<?php echo $LED_EFFECT_MODE; ?>";
 				EffectModeInput.min = "1";
-				EffectModeInput.max = "2";
-				EffectModeInput.placeholder = "1->2"
+				EffectModeInput.max = "5";
+				EffectModeInput.placeholder = "1->5"
 				//BrightnessModeInput.type = "text";
 				BrightnessModeInput.value = "";
 				//WakeupColorModeInput.type = "text";
@@ -1782,6 +1782,48 @@ else if (radio.value === "tts_gg_free") {
 				//SpeakEffectModeInput.type = "text";
 				SpeakEffectModeInput.value = "";
 				SpeakEffectModeInput.placeholder = "";
+				*/
+				for (var i = 0; i < disabledInputs.length; i++) {
+				disabledInputs[i].disabled = false;
+					}
+					for (var i = 0; i < disabledInputs.length; i++) {
+				disabledInputs[i].required = true;
+					}
+				disabledInputs["effect_mode_input"].disabled = true;
+				disabledInputs["effect_mode_input"].required = false;
+				NumberModeLed.type = "number";
+				NumberModeLed.value = "<?php echo $LED_NUMBER_LED; ?>";
+				NumberModeLed.min = "0";
+				NumberModeLed.placeholder = "16";
+				EffectModeInput.type = "text";
+				EffectModeInput.value = "<?php echo $LED_EFFECT_MODE; ?>";
+				EffectModeInput.placeholder = ""
+				BrightnessModeInput.type = "number";
+				BrightnessModeInput.value = "<?php echo $LED_BRIGHTNESS; ?>";
+				BrightnessModeInput.min = "0";
+				BrightnessModeInput.placeholder = "150";
+				WakeupColorModeInput.type = "text";
+				WakeupColorModeInput.value = "<?php echo $LED_WAKEUP_COLOR; ?>";
+				MutedColorModeInput.type = "text";
+				MutedColorModeInput.value = "<?php echo $LED_MUTED_COLOR; ?>";
+				//ListenEffectModeInput.value = "";
+				ListenEffectModeInput.type = "number";
+				ListenEffectModeInput.value = "<?php echo $LED_LISTEN_EFFECT; ?>";
+				ListenEffectModeInput.min = "1";
+				ListenEffectModeInput.max = "3";
+				ListenEffectModeInput.placeholder = "1->3";
+				//ThinkEffectModeInput.value = "";
+				ThinkEffectModeInput.type = "number";
+				ThinkEffectModeInput.value = "<?php echo $LED_THINK_EFFECT; ?>";
+				ThinkEffectModeInput.min = "1";
+				ThinkEffectModeInput.max = "3";
+				ThinkEffectModeInput.placeholder = "1->3";
+				//SpeakEffectModeInput.value = "";
+				SpeakEffectModeInput.type = "number";
+				SpeakEffectModeInput.value = "<?php echo $LED_SPEAK_EFFECT; ?>";
+				SpeakEffectModeInput.min = "1";
+				SpeakEffectModeInput.max = "3";
+				SpeakEffectModeInput.placeholder = "1->3";
 			}
 			//ReSpeaker Mic Array v2.0 | ReSpeaker USB
 			else if (selectedLed === "ReSpeaker Mic Array v2.0") {
@@ -2495,7 +2537,7 @@ disableRadioButtons();
             const selectedSong = songSelect_start.value;
             // Gửi giá trị đường dẫn tới tệp PHP để lấy mã Base64
             const xhr = new XMLHttpRequest();
-            xhr.open('GET', 'Listen.php?song=' + selectedSong, true);
+            xhr.open('GET', 'Ajax/Listen.php?song=' + selectedSong, true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     const base64Audio = xhr.responseText;
@@ -2519,7 +2561,7 @@ disableRadioButtons();
 
             // Gửi giá trị đường dẫn tới tệp PHP để lấy mã Base64
             const xhr = new XMLHttpRequest();
-            xhr.open('GET', 'Listen.php?song=' + selectedSongsongSelect_finish, true);
+            xhr.open('GET', 'Ajax/Listen.php?song=' + selectedSongsongSelect_finish, true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     const base64Audio = xhr.responseText;
@@ -2544,7 +2586,7 @@ disableRadioButtons();
             const selectedSongsongSelect_pathdropdown = songSelect_pathdropdown.value;
             // Gửi giá trị đường dẫn tới tệp PHP để lấy mã Base64
             const xhr = new XMLHttpRequest();
-            xhr.open('GET', 'Listen.php?song=' + selectedSongsongSelect_pathdropdown, true);
+            xhr.open('GET', 'Ajax/Listen.php?song=' + selectedSongsongSelect_pathdropdown, true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     const base64Audio = xhr.responseText;
@@ -2576,8 +2618,7 @@ disableRadioButtons();
             popup.style.display = 'none';
         });
     </script>
-	<script>
-	//TTS slide Tốc Độ: 
+<script>
 $(document).ready(function() {
     var slider = document.getElementById("slider_tts");
     var sliderValue = document.getElementById("slider-tts");
@@ -2585,15 +2626,17 @@ $(document).ready(function() {
     slider.addEventListener("input", function() {
         var value = parseFloat(slider.value);
         
-        if (value >= 0.1 && value <= 0.4) {
+        if (value === 0) {
+            sliderValue.innerHTML = "Mặc định"; // Hiển thị "mặc định" khi giá trị là 0
+        } else if (value >= 0.1 && value <= 0.4) {
             slider.value = 0.5; // Bỏ qua khoảng giá trị từ 0.1 đến 0.4
             value = 0.5;
+            sliderValue.innerHTML = value;
+        } else {
+            sliderValue.innerHTML = value;
         }
-        
-        sliderValue.innerHTML = value;
     });
 });
 </script>
-
 </body>
 </html>
