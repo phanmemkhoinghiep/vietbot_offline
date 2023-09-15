@@ -1,10 +1,10 @@
 {
 	"vietbot_version": {
-		"latest": "beta 15-09-2023-01"
+		"latest": "beta 16-09-2023-01"
 	},
 	"update_command": "", 
 	"new_features": "",
-	"bug_fixed": "Sửa lỗi khi kết quả Text trả về là None ",	
+	"bug_fixed": "Sửa lỗi skill Zingmp3 dùng nhiều CPU Pi01W",	
 	"improvements": "Xử lý các skill nội bộ nhanh hơn (Tiếp tục)",	
 	"image_version": {
 		"latest": "2023-07-24"
