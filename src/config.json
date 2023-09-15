@@ -1,5 +1,9 @@
 {
     "smart_config": {
+        "block_updates": {
+            "vietbot_program": false,
+            "web_ui": false
+	},	    
         "mic": {
             "type": "default"
         },
