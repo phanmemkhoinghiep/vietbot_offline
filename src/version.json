@@ -4,8 +4,8 @@
 	},
 	"update_command": "", 
 	"new_features": "",
-	"bug_fixed": "Sửa lỗi skill Zingmp3 dùng nhiều CPU Pi01W",	
-	"improvements": "Xử lý các skill nội bộ nhanh hơn (Tiếp tục)",	
+	"bug_fixed": "Sửa thông báo không chính xác ZingMp3 Skill",	
+	"improvements": "Giảm số lượng thread sử dụng cho Pi01",	
 	"image_version": {
 		"latest": "2023-07-24"
 	}
