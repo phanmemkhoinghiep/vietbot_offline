@@ -3,6 +3,7 @@
         "block_updates": {
             "vietbot_program": false,
             "web_ui": false
+	    "web_ui_login": false
 	},	    
         "mic": {
             "type": "default"
