@@ -1,11 +1,11 @@
 {
 	"vietbot_version": {
-		"latest": "beta 16-09-2023-03"
+		"latest": "beta 18-09-2023-01"
 	},
 	"update_command": "", 
 	"new_features": "",
-	"bug_fixed": "Sửa thông báo không chính xác ZingMp3 Skill",	
-	"improvements": "Giảm số lượng thread sử dụng cho Pi01",	
+	"bug_fixed": "Sửa lỗi hỏi đáp test qua chatbot",	
+	"improvements": "",	
 	"image_version": {
 		"latest": "2023-07-24"
 	}
