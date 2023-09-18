@@ -4,7 +4,7 @@
 	},
 	"update_command": "", 
 	"new_features": "",
-	"bug_fixed": "Sửa lỗi hỏi đáp test qua chatbot",	
+	"bug_fixed": "Sửa lỗi hỏi đáp text qua chatbot",	
 	"improvements": "",	
 	"image_version": {
 		"latest": "2023-07-24"
