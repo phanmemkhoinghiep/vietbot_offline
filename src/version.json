@@ -4,7 +4,7 @@
 	},
 	"update_command": "", 
 	"new_features": "",
-	"bug_fixed": "Sửa lỗi hỏi đáp text qua chatbot",	
+	"bug_fixed": "Sửa lỗi Skill Homeassistant",	
 	"improvements": "",	
 	"image_version": {
 		"latest": "2023-07-24"
