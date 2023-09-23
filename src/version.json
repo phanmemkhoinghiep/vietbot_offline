@@ -5,7 +5,7 @@
 	"update_command": "", 
 	"new_features": "",
 	"bug_fixed": "Sửa lỗi Skill Nhắc nhở & Lập lịch",	
-	"improvements": "",	
+	"improvements": "Tối ưu luồng xử lý để ko chậm do custom skill",	
 	"image_version": {
 		"latest": "2023-07-24"
 	}
