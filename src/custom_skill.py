@@ -31,13 +31,17 @@ adv_from_now=[p['value'] for p in adv_data['from_now']]
 adv_nearby=[p['value'] for p in adv_data['nearby']]
 
 
-def custom_data_process(player,led,volume,data):#Def này sẽ trả về kết quả để Vietbot đọc nội dung
+def custom_data_process(player,led,volume):#Def này sẽ trả về kết quả để Vietbot đọc nội dung
     answer_text='Không có câu trả lời cho tình huống này' #Giá trị Default cho câu trả lời
-    answer_path=None #Giá trị Default cho link file âm thanh tại local
-    answer_link=None #Giá trị Default cho link file âm thanh dạng Stream  
+    answer_path=None #Giá trị Default cho link file âm thanh hoặc link stream
 
+    try:
+        data = stt_process().lower()    
+    except:
+        libs.logging('left','Không nhận dạng được lệnh','red') 
+        play_sound('FINISH') #Dong sound
+        answer_text='Không nhận dạng được lệnh'
     if any(item in data for item in obj_funny_story): #Nếu sử dụng keyword khác, cần khai báo trong obj.json và khai báo ở trên
-
         def get_story_content(url):
             headers = {
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
@@ -79,15 +83,14 @@ def custom_data_process(player,led,volume,data):#Def này sẽ trả về kết 
                         title = entry['title']
                         value = entry['url']
                 answer_text=title
-                answer_path=None
-                answer_link=str(value)
+                answer_path=str(value)
             except Exception as e:
                 libs.logging('left','CUSTOM SKILL, Có lỗi: '+str(e), 'red')                            
                 answer_text='Lỗi tìm kiếm bài hát'
                 answer_path=None
-                answer_link=None
+
                 
-    return answer_text,answer_path,answer_link
+    return answer_text,answer_path
 
 if __name__ == '__main__':  
     from speaker_process import Player, Volume
