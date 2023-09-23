@@ -1,10 +1,10 @@
 {
 	"vietbot_version": {
-		"latest": "beta 21-09-2023-01"
+		"latest": "beta 23-09-2023-01"
 	},
 	"update_command": "", 
 	"new_features": "",
-	"bug_fixed": "Sửa lỗi Skill Homeassistant",	
+	"bug_fixed": "Sửa lỗi Skill Nhắc nhở & Lập lịch",	
 	"improvements": "",	
 	"image_version": {
 		"latest": "2023-07-24"
