@@ -31,7 +31,7 @@ adv_from_now=[p['value'] for p in adv_data['from_now']]
 adv_nearby=[p['value'] for p in adv_data['nearby']]
 
 
-def custom_data_process(player,led,volume):#Def này sẽ trả về kết quả để Vietbot đọc nội dung
+def custom_data_process(player2,led,volume):#Def này sẽ trả về kết quả để Vietbot đọc nội dung
     answer_text='Không có câu trả lời cho tình huống này' #Giá trị Default cho câu trả lời
     answer_path=None #Giá trị Default cho link file âm thanh hoặc link stream
 
@@ -62,35 +62,8 @@ def custom_data_process(player,led,volume):#Def này sẽ trả về kết quả
         if not name_result:
             name_result, name_url = libs.random.choice(story_data)
         answer_text= get_story_content(name_url)
+    player2.play_and_wait(tts_process('answer_text',False)) #False - Phát câu trả lời TTS ko cache lại nội dung, True - Có cache lại để cho lần sau
 
-    elif any(item in data for item in obj_music):
-        if act_on in data or act_open in data or any(item in data for item in act_play) : #Nếu sử dụng keyword khác, cần khai báo trong obj.json và khai báo ở trên
-            title=''
-            value=None
-            try:
-                ydl_opts = {
-                    'format': 'bestaudio/best',
-                    'postprocessors': [{
-                        'key': 'FFmpegExtractAudio',
-                        'preferredcodec': 'mp3',
-                    }],
-                }
-                search_query = 'ytsearch:' + data        
-                with libs.youtube_dl.YoutubeDL(ydl_opts) as ydl: #lib youtube_dl này đã có trong libs, nên không cần phải import
-                    info = ydl.extract_info(search_query, download=False)
-                    if 'entries' in info:
-                        entry = info['entries'][0]
-                        title = entry['title']
-                        value = entry['url']
-                answer_text=title
-                answer_path=str(value)
-            except Exception as e:
-                libs.logging('left','CUSTOM SKILL, Có lỗi: '+str(e), 'red')                            
-                answer_text='Lỗi tìm kiếm bài hát'
-                answer_path=None
-
-                
-    return answer_text,answer_path
 
 if __name__ == '__main__':  
     from speaker_process import Player, Volume
