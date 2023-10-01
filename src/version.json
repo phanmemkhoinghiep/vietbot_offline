@@ -3,9 +3,9 @@
 		"latest": "beta 01-10-2023-01"
 	},
 	"update_command": "", 
-	"new_features": "",
-	"bug_fixed": "Sửa lỗi Skill Nhắc nhở & Lập lịch",	
-	"improvements": "Tối ưu luồng xử lý để ko chậm do custom skill",	
+	"new_features": "Mode cho Bot",
+	"bug_fixed": "",	
+	"improvements": "Giảm bớt biến trung gian xử lý LED và Data",	
 	"image_version": {
 		"latest": "2023-07-24"
 	}
