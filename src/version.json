@@ -1,11 +1,11 @@
 {
 	"vietbot_version": {
-		"latest": "beta 01-10-2023-01"
+		"latest": "beta 09-10-2023-01"
 	},
 	"update_command": "", 
-	"new_features": "Mode cho Bot",
+	"new_features": "",
 	"bug_fixed": "",	
-	"improvements": "Giảm bớt biến trung gian xử lý LED và Data",	
+	"improvements": "Giảm các điều kiện kiểm tra",	
 	"image_version": {
 		"latest": "2023-07-24"
 	}
