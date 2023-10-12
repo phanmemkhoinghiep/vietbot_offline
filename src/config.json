@@ -3,8 +3,8 @@
         "block_updates": {
             "vietbot_program": false,
             "web_ui": false
-	    "web_ui_login": false
-	},	    
+        },
+        "web_ui_login": false,
         "mic": {
             "type": "default"
         },
@@ -186,7 +186,7 @@
         }
     },
     "smart_answer": {
-		"startup_state_speaking": true,        
+        "startup_state_speaking": true,
         "sound": {
             "default": {
                 "start": "sound/default/ding.mp3",
