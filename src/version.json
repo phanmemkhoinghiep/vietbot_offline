@@ -4,7 +4,7 @@
 	},
 	"update_command": "", 
 	"new_features": "",
-	"bug_fixed": "Sửa lỗi Volume",	
+	"bug_fixed": "Sửa lỗi khi tăng giản Volume bằng Mic",	
 	"improvements": "",	
 	"image_version": {
 		"latest": "2023-07-24"
