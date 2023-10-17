@@ -4,7 +4,7 @@
 	},
 	"update_command": "", 
 	"new_features": "",
-	"bug_fixed": "Sửa lỗi khi tăng giản Volume bằng Mic",	
+	"bug_fixed": "Lỗi Hass ko truy cập được khi dùng Self site cert",	
 	"improvements": "",	
 	"image_version": {
 		"latest": "2023-07-24"
