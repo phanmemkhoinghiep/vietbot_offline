@@ -4,8 +4,8 @@
 	},
 	"update_command": "", 
 	"new_features": "",
-	"bug_fixed": "Lỗi Hass ko truy cập được khi dùng Self site cert",	
-	"improvements": "",	
+	"bug_fixed": "Lỗi hiển thị sensor tiền điện tháng này",	
+	"improvements": "giảm bớt điều kiện else",	
 	"image_version": {
 		"latest": "2023-07-24"
 	}
