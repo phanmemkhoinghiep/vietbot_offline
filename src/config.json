@@ -3,6 +3,7 @@
         "block_updates": {
             "vietbot_program": false,
             "web_ui": false
+            "web_ui_login": false
         },
         "web_ui_login": false,
         "mic": {
@@ -57,6 +58,8 @@
             }
         },
         "logging_type": "console"
+        "console_ouput": "full",
+        "bot_mode": "custom"
     },
     "smart_wakeup": {
         "hotword_engine": {
