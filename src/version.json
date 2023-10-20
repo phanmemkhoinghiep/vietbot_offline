@@ -1,11 +1,11 @@
 {
 	"vietbot_version": {
-		"latest": "beta 19-10-2023-01"
+		"latest": "beta 20-10-2023-01"
 	},
 	"update_command": "", 
 	"new_features": "",
-	"bug_fixed": "Lỗi hiển thị sensor tiền điện tháng này",	
-	"improvements": "giảm bớt điều kiện else",	
+	"bug_fixed": "Lỗi skill hẹn giờ/lập lịch",	
+	"improvements": "",	
 	"image_version": {
 		"latest": "2023-07-24"
 	}
