@@ -1,11 +1,11 @@
 {
 	"vietbot_version": {
-		"latest": "beta 20-10-2023-01"
+		"latest": "beta 03-11-2023-01"
 	},
 	"update_command": "", 
-	"new_features": "",
-	"bug_fixed": "Lỗi skill hẹn giờ/lập lịch",	
-	"improvements": "",	
+	"new_features": "Điều khiển Volume qua API Type 3",
+	"bug_fixed": "Lỗi khi sử dụng API Type 2",	
+	"improvements": "Quy hoạch các mode API",	
 	"image_version": {
 		"latest": "2023-07-24"
 	}
