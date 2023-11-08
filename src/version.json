@@ -3,7 +3,7 @@
 		"latest": "beta 08-11-2023-01"
 	},
 	"update_command": "", 
-	"new_features": "",
+	"new_features": "Phát nhạc Local, Youtube tại Tab Media của Web UI",
 	"bug_fixed": "Lỗi phát lặp thông báo TTS",	
 	"improvements": "",	
 	"image_version": {
