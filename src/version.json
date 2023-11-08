@@ -1,11 +1,11 @@
 {
 	"vietbot_version": {
-		"latest": "beta 07-11-2023-01"
+		"latest": "beta 08-11-2023-01"
 	},
 	"update_command": "", 
 	"new_features": "",
-	"bug_fixed": "Tương thích với Porcupine 3.0.0",	
-	"improvements": "Quy hoạch các mode API",	
+	"bug_fixed": "Lỗi phát lặp thông báo TTS",	
+	"improvements": "",	
 	"image_version": {
 		"latest": "2023-07-24"
 	}
