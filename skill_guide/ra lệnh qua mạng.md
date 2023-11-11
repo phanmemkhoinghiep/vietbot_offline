@@ -55,7 +55,7 @@ Trong đó text, link là câu trả lời và link online của bài hát, kên
 Khai báo trong configuration.yaml
 ```sh
 rest_command:
-  vietbot_tts:
+  vietbot_command_tts:
     url: http://192.168.1.109:5000
     method: POST
     payload: '{"data":"{{ data }}","type":2}'
