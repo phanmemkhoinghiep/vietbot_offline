@@ -1,10 +1,10 @@
 {
 	"vietbot_version": {
-		"latest": "beta 08-11-2023-01"
+		"latest": "beta 13-11-2023-01"
 	},
 	"update_command": "", 
-	"new_features": "Phát nhạc Local, Youtube tại Tab Media của Web UI",
-	"bug_fixed": "Lỗi phát lặp thông báo TTS",	
+	"new_features": "",
+	"bug_fixed": "Lỗi ko lặp lại custom skill ở chế độ hỏi đáp liên tục",	
 	"improvements": "",	
 	"image_version": {
 		"latest": "2023-07-24"
