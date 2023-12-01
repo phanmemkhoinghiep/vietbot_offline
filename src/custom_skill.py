@@ -34,20 +34,18 @@ use_hass=skill_data['hass']['active']
 if use_hass: #Hass skill    
     import hass_process
 
-def custom_data_process(player2,volume):#Def này sẽ trả về kết quả để Vietbot đọc nội dung
+def custom_data_process(player2,volume):#Def này sẽ độc lập xử lý để Vietbot đọc nội dung
     answer='Lỗi Hass' #Giá trị Default cho câu trả lời
     try:
         data = 'thi hành '+ stt_process().lower()    
+        answer=hass_process.hass_process(data)
+        player2.play_and_wait(tts_process('answer',True)) #False - Phát câu trả lời TTS ko cache lại nội dung, True - Có cache lại để cho lần sau
     except:
-        player2.play_and_wait(tts_process('Không nhận dạng được lệnh',True))
-        libs.logging('left','Không nhận dạng được lệnh','red') 
+        player2.play_and_wait(tts_process('Có lỗi',True))
+        libs.logging('left','Có lỗi','red') 
         play_sound('FINISH') #Dong sound
-    if use_hass:
-        try:
-            answer=hass_process.hass_process(data)
-        except:
-            pass
-    player2.play_and_wait(tts_process('answer',True)) #False - Phát câu trả lời TTS ko cache lại nội dung, True - Có cache lại để cho lần sau
+
+
 
 
 if __name__ == '__main__':  
