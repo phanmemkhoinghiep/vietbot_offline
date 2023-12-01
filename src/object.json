@@ -859,5 +859,15 @@
         {
             "value": "ngày xưa"
         }
+    ],
+	"media_player": [{
+            "value": "trình phát"
+        },
+        {
+            "value": "bộ phát"
+        },
+        {
+            "value": "loa"
+        }
     ]
 } 
