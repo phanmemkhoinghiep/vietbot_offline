@@ -1,6 +1,6 @@
 <?php
 include "Configuration.php";
-include "./include_php/INFO_OS.php";
+include "./include_php/Fork_PHP/INFO_OS.php";
 $jsonDatazXZzz = file_get_contents("assets/json/List_Lat_Lon_Huyen_VN.json");
 $dataVTGETtt = json_decode($jsonDatazXZzz);
 $latitude = $dataVTGETtt->$wards_Tinh->latitude;
@@ -23,7 +23,7 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
     <link rel="stylesheet" href="assets/css/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/css/all.min.css">
     <link rel="stylesheet" href="assets/css/jquery.mCustomScrollbar.css">
-    <link rel="stylesheet" href="assets/css/animate.min.css">
+   <link rel="stylesheet" href="assets/css/animate.min.css"> 
     <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
     <link rel="stylesheet" href="assets/css/magnific-popup.css">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -59,7 +59,7 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
         height: auto;
         background-color: #d2d8bb;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        transition: right 0.3s ease;
+        transition: right 0.1s ease;
         z-index: 1;
     }
     
@@ -119,22 +119,12 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
     overflow: hidden; /* Để làm tròn góc thì cần che phần dư thừa */
   }
 </style>
-  <style>
-        /* CSS cho thông báo pop-up */
-        .popup {
-			border-radius: 10px;
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #000;
-            padding: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-        }
-    </style>
 </head>
 <body>
+	    <!-- Preloader -->
+    <div id="line-loader">
+      <div class="middle-line"></div>
+    </div>
 	    <div id="loading-overlay">
           <img id="loading-icon" src="../assets/img/Loading.gif" alt="Loading...">
 		  <div id="loading-message">Đang Thực Thi...</div>
@@ -152,18 +142,7 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
 </script>
 
 
-	<script>
-        // JavaScript để hiển thị và ẩn thông báo pop-up
-        function showPopup() {
-            var popup = document.getElementById("popup");
-            popup.style.display = "block";
-        }
 
-        function hidePopup() {
-            var popup = document.getElementById("popup");
-            popup.style.display = "none";
-        }
-    </script>
     <script>
     $(document).ready(function() {
         var apiKey = "<?php echo $apiKeyWeather; ?>";
@@ -266,25 +245,29 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
               <span>Skill</span>
             </a>
           </li>
-		        <!--    <li class="list-group-item">
-            <a href="#ChatBot">
-              <i class="bi bi-chat-dots" title="Chat Bot"></i>
-              <span>ChatBot</span>
-            </a>
-          </li> -->
           <li class="list-group-item">
             <a href="#File_Shell">
               <i class="bi bi-file-earmark-code" title="Quản Lý File"></i>
               <span>File</span>
             </a>
           </li>
+		  
+		  
+		 		  		          <li class="list-group-item">
+            <a href="#MediaPlayer" class="custom-btn">
+              <i class="bi bi-disc" title="Media Player"></i>
+              <span>Media</span>
+            </a>
+          </li>    
+		  
+		  
           <li class="list-group-item">
             <a href="#about" class="custom-btn">
               <i class="bi bi-info-circle-fill" title="Thông Tin"></i>
               <span>Info</span>
             </a>
           </li>
-		  		           
+        
          
         </ul>
         <div class="menu-footer">
@@ -313,20 +296,65 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
 <div class="info">
 <?php
 
+// Đường dẫn tới tệp JSON
+$jsonFilePath = "$DuognDanUI_HTML/assets/json/password.json";
+// Kiểm tra xem tệp JSON đã tồn tại chưa
+if (!file_exists($jsonFilePath)) {
+    // Tạo một mảng mặc định nếu tệp JSON không tồn tại
+    $defaultData = [
+        "password_ui" => "",
+		"salt" => "",
+		"mail" => ""
+    ];
+    // Tạo tệp JSON và ghi dữ liệu mặc định vào nó
+    file_put_contents($jsonFilePath, json_encode($defaultData,JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+
+    // Đặt quyền truy cập cho tệp JSON thành 644 (quyền đọc và ghi cho người sở hữu, quyền đọc cho các người dùng khác)
+    chmod($jsonFilePath, 0777);
+}
+// Đọc nội dung từ tệp JSON
+$jsonData = file_get_contents($jsonFilePath);
+// Chuyển dữ liệu JSON thành mảng PHP
+$data = json_decode($jsonData, true);
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Kiểm tra xem người dùng đã đăng nhập hay chưa
+	
+        if (isset($_POST['password1']) && isset($_POST['password2'])) {
+            $password1 = $_POST['password1'];
+            $password2 = $_POST['password2'];
+            $mailllgmail = $_POST['mailllgmail'];
+
+            // Kiểm tra xem mật khẩu và xác nhận mật khẩu có khớp nhau
+            if ($password1 === $password2) {
+                // Lưu mật khẩu vào mảng và ghi vào tệp JSON
+                $data['password_ui'] = md5($password1);
+                $data['salt'] = base64_encode($password1);
+                $data['mail'] = $mailllgmail;
+                file_put_contents($jsonFilePath, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+
+                // Đặt quyền truy cập cho tệp JSON thành 644 (quyền đọc và ghi cho người sở hữu, quyền đọc cho các người dùng khác)
+                chmod($jsonFilePath, 0777);
+
+                // Đăng nhập thành công, đánh dấu phiên đã đăng nhập
+                $_SESSION['logged_in'] = true;
+                echo "<br/><center><font size=3><b><i>- Tạo mật khẩu mới thành công!<br/>- Hãy nhập mật khẩu để đăng nhập</i></b></font></center>";
+            } else {
+                echo "<br/><center><font size=3><b><i>Mật khẩu không khớp, vui lòng thử lại!</i></b></font></center>";
+            }
+        }else {
+			
+			    // Kiểm tra xem người dùng đã đăng nhập hay chưa
     if (isset($_SESSION['root_id'])) {
-		
 		if (isset($_POST['logout'])) {
 			// Xử lý đăng xuất
 			session_unset();
 			session_destroy();
-			echo "<br/><br/><center><i>Đăng xuất thành công!</i></center><br/>";
+			echo "<br/><center><font size=3><b><i>Đăng xuất thành công!</i></b></font></center>";
 		}
     } else {
         // Nếu chưa đăng nhập, xử lý đăng nhập
         $password = $_POST["password"];
-        if (md5($password) === $Pass_Login_UI) {
+        if (md5($password) === $data['password_ui']) {
             $_SESSION['root_id'] = "$SESSION_ID_Name"; // Thêm biến root_id
             $_SESSION['username'] = 'example_user';
             echo "<i>Đăng nhập thành công!</i>";
@@ -334,53 +362,71 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Kết thúc thực thi của script sau khi đăng nhập
             //exit();
         } else {
-            echo "<br/><br/><center><i>Đăng nhập thất bại. Vui lòng kiểm tra lại mật khẩu</i></center><br/>";
+            echo "<br/><center><font size=3><b><i>Đăng nhập thất bại, vui lòng kiểm tra lại mật khẩu</i></b></font></center>";
         }
     }
+	
+		}
+
 }
 ?>
-    <?php
-    // Kiểm tra xem người dùng đã đăng nhập hay chưa
-    if (isset($_SESSION['root_id'])) {
-		?>
-				<center><h1>Xin chào, <?php echo $MYUSERNAME; ?>!</h1></center>
-				<p><b>Chào mừng bạn đến với trang quản trị VietBot</b><br/><br/><i>- Nền tảng loa thông minh tương tác hàng đầu!<br/>
-				- Tận hưởng trí tuệ nhân tạo tiên tiến và trải nghiệm âm thanh vượt trội với VietBot, 
-				người bạn đồng hành đáng tin cậy trong không gian sống của bạn.</i></p>
-				- <i>Với tính năng trí tuệ nhân tạo tiên tiến, Vietbot không chỉ là một loa thông minh thông thường, 
-				mà còn là một trợ thủ đa năng trong cuộc sống hàng ngày của bạn. Bạn có thể giao tiếp với Vietbot bằng giọng nói tự nhiên, yêu cầu phát nhạc, đọc tin tức, tìm kiếm thông tin,
-				và thực hiện nhiều tác vụ khác một cách thuận tiện.</i><br/><br/>
-				- <i>Vietbot sẽ lắng nghe và đáp ứng mọi yêu cầu của bạn.
-				Hãy đồng hành cùng Vietbot và khám phá một thế giới mới của công nghệ âm thanh và trí tuệ nhân tạo.
-				Chúng tôi tin rằng bạn sẽ trải nghiệm những điều tuyệt vời và hài lòng với Vietbot.
-				Nếu có bất kỳ câu hỏi hoặc yêu cầu nào, chúng tôi luôn sẵn lòng <b><a class="text-white" href="https://www.facebook.com/groups/1082404859211900" target="_bank">hỗ trợ</a></b> bạn. </i>
-	  <?php
-	   } else {
-        // Nếu chưa đăng nhập, hiển thị biểu mẫu đăng nhập
-        ?>
-		 <br/><center>
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" id="my-form" method="post">
-		
-           <label for="password">Mật khẩu:</label>
-            <input placeholder="Nhập Mật Khẩu Vào Đây"  type="password" id="password" name="password" required> <i class="bi bi-info-circle-fill" onclick="showPopup()" title="Nhấn Để Tìm Hiểu Thêm"></i>
-			
-			
-			<br><br>
-            <input class="btn btn-success" type="submit" value="Đăng nhập">
-        </form></center>
-		 <!-- Thông báo pop-up -->
-    <div id="popup" class="popup">
-        - Mật khẩu mặc định: <font color=red><b>admin</b></font><br/>
-		- Thay đổi mật khẩu mặc định trong file: "<font color=red><b>Configuration.php</b></font>", tìm tới dòng: "<font color=red><b>$Pass_Login_UI</b></font>"<br/>
-		- Mật khẩu cần được mã hóa dạng <font color=red><b>MD5</b></font><br/>
-		- Nhấn Vào Đây Để Tới Link Mã Hóa: <a href="/Help_Support/MD5.php" target="_bank"><b>MD5 HASH</b></a>
-       <center> <br/><button class="btn btn-danger" onclick="hidePopup()">Đóng</button></center>
-    </div>
 
-    <?php } ?>
-	  
-	  
+
+<?php	
+if (isset($Web_UI_Login) && $Web_UI_Login === true) {
+if (!isset($_SESSION['root_id'])) {
+?>
+ <br/><center>
+		    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" id="my-form" method="post">
+  <?php if (empty($data['password_ui'])) : ?>
+		Tạo Mật Khẩu Mới Cho Web UI<br/>
+        <label for="password1">Mật khẩu mới:</label>
+        <input type="password" id="password"  class="input-group-text" name="password1" required>
+        <label for="password2">Nhập lại mật khẩu:</label>
+        <input type="password" id="confirmPassword" class="input-group-text" name="password2" required>
+		<label for="mailll">Địa chỉ mail:</label>
+		<input type="text" id="mailll" class="input-group-text" name="mailllgmail" required>
+		<br/>
+		<input type="checkbox" id="showPassword">
+		<label for="showPassword">Hiển Thị Mật Khẩu</label>
+		<br/>
+        <input type="submit" class="btn btn-success" value="Tạo Mật Khẩu Mới"><a href='<?php echo $PHP_SELF; ?>'><button type='button' class='btn btn-danger'>Tải Lại</button></a>
+        <?php else : ?>
+
+        <label for="passwordd">Nhập Mật khẩu:</label>
+
+        <input type="password" id="passwordd" class="input-group-text" name="password" required><br>
+		<input type="checkbox" id="showPasswordd">
+		<label for="showPasswordd">Hiển Thị Mật Khẩu</label> | <a style="color:Yellow" href="#ForgotPassword"><b>Quên mật khẩu</b></a>
+		<br/>
+        <input type="submit" class="btn btn-success" value="Đăng nhập">
+		<a href='<?php echo $PHP_SELF; ?>'><button type='button' class='btn btn-danger'>Tải Lại</button></a>
+        <?php endif; ?>
+        </form>
+		</center>
+
+<?php
+
+
+} else {
+    include "include_php/Fork_PHP/index_.php";
+}
+	
+	} else {
+	   
+	   include "include_php/Fork_PHP/index_.php";
+	   
+	   
+	}
+?>	
+		
+
+
+
+
+	
 	  	</div>
+
       </section>
       <!--  Hero End  -->
 	        <section id="LogServiceCMD" class="section about bg-secondary text-primary">
@@ -390,11 +436,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <section id="about" class="section about bg-gray-400 text-black">
         <div class="container">
 		
-<!--
-				  <div class="count-icon">🖥️</div>
-                <span><a href="http://<?php echo gethostname(); ?>" target="_bank"><?php echo gethostname(); ?></a></span>
-                <p class="mb-0">Host Name</p>
-			-->
+
           <!--  Count up  -->
           <div id="count-up" class="count-up text-center box-border">
 
@@ -535,13 +577,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </div>
 </div>
 </div>
-
 </div>
 </div>
 </div>
 </section>
 <!--  About End  -->
-
 <!--  Resume Start  -->
 <section id="config" class="bg-gray-400 text-white section">
     <div class="container">
@@ -560,15 +600,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!--  Resume End  -->
 <!--  Portfolio Start  -->
 <section id="File_Shell" class="section portfolio bg-gray-400 text-white">
-    <iframe src="./include_php/Shell.php" width="100%" height="470px"></iframe>
+    <iframe src="./include_php/Fork_PHP/Shell.php" width="100%" height="470px"></iframe>
 </section>
 <!--  Portfolio End  -->
 <!--  Blog Start  -->
 <section id="ChatBot" class="section blog bg-gray-400 text-white">
     <iframe src="./include_php/ChatBot.php" width="100%" height="570px"></iframe>
 </section>
-<!--  Blog End  -->
 
+<section id="Google_Drive_Auto_Backup" class="section blog bg-gray-400 text-white">
+    <div class="container">
+        <h3 class="subtitle">Google Drive Auto Backup</h3>
+			<div class="rounded-iframe">
+     <iframe src="./GoogleDrive/index.php" width="100%" height="570px"></iframe>
+		</div>
+</section>
+
+<section id="MediaPlayer" class="section blog bg-gray-400 text-white">
+    <div class="container">
+        <h3 class="subtitle">Media Player</h3>
+			<div class="rounded-iframe">
+     <iframe src="./Multimedia/index.php" width="100%" height="570px"></iframe>
+		</div>
+</section>
+
+<!--  Blog End  -->
 <section id="vietbot_update" class="section blog bg-gray-400 text-white">
     <div class="container">
         <h3 class="subtitle">Cập Nhật Chương Trình</h3>
@@ -583,12 +639,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <iframe src="./ui_update/index.php" width="100%" height="570px"></iframe>
 	</div>
 </section>
-<!-- Contact Start -->
-<section id="Skill" class="section contact w-100 bg-gray-400 text-white">
+<section id="PasswordChange" class="section blog bg-gray-400 text-white">
     <div class="container">
-        <h3 class="subtitle">VietBot Skill</h3>
+        <h3 class="subtitle">Thay Đổi Mật Khẩu</h3>
+			<div class="rounded-iframe">
+        <iframe src="./include_php/Fork_PHP/ChangePassword.php" width="100%" height="570px"></iframe>
+	</div>
+</section>
+<section id="Skill" class="section blog bg-gray-400 text-white">
+    <div class="container">
+        <h3 class="subtitle">Cấu hình skill</h3>
+			<div class="rounded-iframe">
+        <iframe src="./include_php/Skill.php" width="100%" height="570px"></iframe>
+	</div>
+</section>
+<!-- Contact Start -->
+<section id="ForgotPassword" class="section contact w-100 bg-gray-400 text-white">
+    <div class="container">
+        <h3 class="subtitle">Quên Mật Khẩu</h3>
 		<div class="rounded-iframe">
-        <iframe src="./include_php/Skill.php" width="100%" height="470px"></iframe>
+        <iframe src="./include_php/Fork_PHP/ForgotPassword.php" width="100%" height="470px"></iframe>
 </div>
 
     </div>
@@ -596,21 +666,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!--  Contact End  -->
 
 </main>
-<!--  Main End  -->
 
-<!--  Mobile Next and Prev Button Start -->
-<!--
-    <div class="next-prev-page d-block d-lg-none">
-	
-   <div class="btn-group">   <button type="button" class="prev-page bg-base-color hstack">      
-        <i class="bi bi-chevron-compact-left mx-auto"></i>
-      </button></div><div class="btn-group">
-      <button type="button" class="next-page bg-base-color mt-1 mt-lg-3 hstack">
-        <i class="bi bi-chevron-compact-right mx-auto"></i>
-      </button></div>
-    </div>
-	-->
-<!--  Mobile Next and Prev Button End -->
 <!--  Navbar Button Mobile Start -->
 <div class="menu-toggle">
     <span></span>
@@ -625,11 +681,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <a class="btn btn-success" href="#UI_update" role="button" title="Nhấn Để Kiểm Tra, Cập Nhật Giao Diện">Cập Nhật Giao Diện</a>
         <a class="btn btn-secondary" href="./Help_Support/index.php" role="button" target="_bank" title="Nhấn Để Kiểm Tra, Cập Nhật Giao Diện">Hướng Dẫn / Sử Dụng Vietbot</a>
 
-        <form action="" id="my-form" method="post">
+		<?php	
+if (isset($Web_UI_Login) && $Web_UI_Login === true) {
+	echo '<a class="btn btn-info" href="#PasswordChange" role="button" title="Đổi Mật Khẩu">Đổi Mật Khẩu Web UI</a>';
+	echo '<form action="" id="my-form" method="post">
          <button class="btn btn-warning" type="submit" name="logout" title="Đăng Xuất">Đăng Xuất Hệ Thống</button>
-        </form>
-
-
+        </form>';
+	} else {
+		//nếu trong config là false thì sẽ ẩn
+	   echo '<!-- <a class="btn btn-info" href="#PasswordChange" role="button" title="Đổi Mật Khẩu">Đổi Mật Khẩu Web UI</a> -->';
+	}
+?>	
         <!--  <h6 class="text-center theme-skin-title">Đổi Màu Giao Diện</h6> -->
         <div class="colors text-center">
             <span class="WhiteBg" id="colorss" title="Nhấn Để Đổi Màu Giao Diện"></span>
@@ -650,8 +712,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="contentt">
         <!-- Content of your website goes here -->
-      
-
         <!-- Add background overlay element -->
         <div class="background-overlay" onclick="closeSidebar()"></div>
 
@@ -667,80 +727,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 
-	<!--
-	  <div class="footer-text">
-     <?php echo "Phiên bản UI: ".$dataVersion->ui_version->current; ?>
-    </div>
-	  -->
-    <!-- Văn bản nằm ở cuối trang -->
-  <?php
-$curl = curl_init();
-curl_setopt_array($curl, array(
-  CURLOPT_URL => 'http://'.$serverIP.':5000',
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => '',
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 0,
-  CURLOPT_FOLLOWLOCATION => true,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => 'POST',
-  CURLOPT_POSTFIELDS =>'{"type": 3,"data": "vietbot_version"}',
-  CURLOPT_HTTPHEADER => array(
-    'Accept: */*',
-    'Accept-Language: vi',
-    'Connection: keep-alive',
-    'Content-Type: application/json',
-    'DNT: 3',
-    'Origin: http://'.$serverIP,
-    'Referer: http://'.$serverIP.'/',
-    'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'
-  ),
-));
-$response = curl_exec($curl);
-curl_close($curl);
-$data = json_decode($response, true);
-// Kiểm tra kết quả từ yêu cầu cURL
-if (!empty($data) && isset($data['result'])) {
-  $currentresult = $data['result'];
-} else {
-  // Lấy dữ liệu "latest" từ tệp tin version.json cục bộ
-  $localJson = file_get_contents($DuognDanThuMucJson.'/version.json');
-  $localData = json_decode($localJson, true);
-  $currentresult = $localData['vietbot_version']['latest'];
-}
-// Lấy dữ liệu "latest" từ tệp tin version.json trên GitHub
-//$gitJson = file_get_contents('https://raw.githubusercontent.com/phanmemkhoinghiep/vietbot_offline/beta/src/version.json');
-$gitJson = file_get_contents($Vietbot_Version);
-$gitData = json_decode($gitJson, true);
-$latestVersion = $gitData['vietbot_version']['latest'];
-// So sánh giá trị "vietbot_version" từ cURL và từ GitHub
-if ($currentresult === $latestVersion) {
-  //echo "Bạn đang sử dụng phiên bản mới nhất: " . $currentresult;
-} else {
-  //$messagee .= "Có phiên bản mới: " . $latestVersion.'\n';
-  echo '<div class="blinking-container"><p class="ptexxt"><font color="red"><b>Có phiên bản Vietbot mới: '.$latestVersion.' </font><a href="#vietbot_update"> Kiểm Tra</b></a></p></div>';
-}
-//UI
-$localFile = $DuognDanUI_HTML.'/version.json';
-// Lấy nội dung JSON từ URL
-$remoteJsonData = file_get_contents($UI_Version);
-$remoteData = json_decode($remoteJsonData, true);
-// Đọc nội dung JSON từ tệp tin cục bộ
-$localJsonData = file_get_contents($localFile);
-$localDataa = json_decode($localJsonData, true);
-// Lấy giá trị 'value' từ cả hai nguồn dữ liệu
-$remoteValue = $remoteData['ui_version']['latest'];
-$localValue = $localDataa['ui_version']['current'];
-// So sánh giá trị
-if ($remoteValue !== $localValue) {
-   echo '<div class="blinking-container"><p class="ptexxt"><font color="red"><b>Có phiên bản giao diện mới: '.$remoteValue.' </font><a href="#UI_update"> Kiểm Tra</b></a></p></div>';
-    //$messagee .= 'Phiên bản hiện tại của bạn: '.$localValue.' Vui lòng cập nhật.';
-} else {
-    //$messagee .= 'Bạn đang sử dụng phiên bản mới nhất: '.$localValue;
-}
 
-  ?>
- 
+
+<div class="blinking-container" id="updateMessage"></div>
+
+
 
     <!-- Mouase Magic Cursor Start -->
     <div class="m-magic-cursor mmc-outer"></div>
@@ -748,8 +739,8 @@ if ($remoteValue !== $localValue) {
     <!-- Mouase Magic Cursor End -->
 
     <!--  JavaScripts  -->
-    <!--  Jquery 3.4.1  -->
-    <script src="assets/js/jquery-3.4.1.min.js"></script>
+    <!--  Jquery 3.4.1  
+    <script src="assets/js/jquery-3.6.1.min.js"></script>-->
     <!--  Bootstrap Js  -->
     <script src="assets/js/bootstrap.js"></script>
     <!--  Malihu ScrollBar Js  -->
@@ -767,6 +758,64 @@ if ($remoteValue !== $localValue) {
 
 
 
+
+<script>
+  $(document).ready(function() {
+    // AJAX request for UI version
+    $.ajax({
+      url: '<?php echo $UI_Version; ?>',
+      type: 'GET',
+      dataType: 'json',
+      success: function(remoteData) {
+        var localJsonData = <?php echo json_encode(file_get_contents($DuognDanUI_HTML.'/version.json')); ?>;
+        var localData = JSON.parse(localJsonData);
+        var remoteValue = remoteData['ui_version']['latest'];
+        var localValue = localData['ui_version']['current'];
+        handleUIVersion(remoteValue, localValue);
+      }
+    });
+
+    function handleUIVersion(remoteValue, localValue) {
+	var updateMessageElement = document.getElementById('updateMessage');
+      if (remoteValue === localValue) {
+		//Phiên bản mới nhất
+      } else {
+        //console.log('Có phiên bản giao diện mới: ' + remoteValue);
+        var message = '<font color="red"><b>Có phiên bản giao diện mới: ' + remoteValue + ' </font><a href="#UI_update"> Kiểm Tra</b></a>';
+        updateMessageElement.innerHTML = message;
+      }
+    }
+  });
+</script>
+
+<script>
+  $(document).ready(function() {
+    // AJAX request for vietbot version
+    $.ajax({
+      url: '<?php echo $Vietbot_Version; ?>',
+      type: 'GET',
+      dataType: 'json',
+      success: function(remoteDataa) {
+        var localJsonDataa = <?php echo json_encode(file_get_contents($DuognDanThuMucJson.'/version.json')); ?>;
+        var localDataa = JSON.parse(localJsonDataa);
+        var remoteValuea = remoteDataa['vietbot_version']['latest'];
+        var localValuea = localDataa['vietbot_version']['latest'];
+        handleUIVersion(remoteValuea, localValuea);
+      }
+    });
+
+    function handleUIVersion(remoteValuea, localValuea) {
+	var updateMessageElement = document.getElementById('updateMessage');
+      if (remoteValuea === localValuea) {
+		//Phiên bản mới nhất
+      } else {
+        //console.log('Có phiên bản giao diện mới: ' + remoteValuea);
+        var message = '<font color="red"><b>Có phiên bản Vietbot mới: ' + remoteValuea + ' </font><a href="#vietbot_update"> Kiểm Tra</b></a>';
+        updateMessageElement.innerHTML = message;
+      }
+    }
+  });
+</script>
 
 <script type="text/javascript">
     function time() {
@@ -819,6 +868,7 @@ if ($remoteValue !== $localValue) {
     const linkElement = document.querySelector('.btn-success');
     const buttonElement = document.querySelector('.btn-danger');
     const buttonnElement = document.querySelector('.btn-secondary');
+    const buttonnnElement = document.querySelector('.btn-info');
 
     buttonElement.addEventListener('click', function() {
         // Loại bỏ lớp "show" và thêm lớp "hide" cho phần tử divElement
@@ -830,6 +880,17 @@ if ($remoteValue !== $localValue) {
         divElement.classList.remove('show');
         divElement.classList.add('hide');
     });
+	
+		//bỏ qua lỗi nếu phần tử không tồn tại
+		if (buttonnnElement) {
+  	    buttonnnElement.addEventListener('click', function() {
+        // Loại bỏ lớp "show" và thêm lớp "hide" cho phần tử divElement
+        divElement.classList.remove('show');
+        divElement.classList.add('hide');
+		});
+		}
+	
+
     // Gắn sự kiện click vào liên kết
     linkElement.addEventListener('click', function() {
         // Loại bỏ lớp "show" và thêm lớp "hide" cho phần tử divElement
@@ -912,6 +973,52 @@ window.addEventListener('message', function(event) {
   }
 });
 </script>
+ <script>
+        // Lấy các phần tử cần thao tác
+        const showPasswordCheckbox = document.getElementById('showPassword');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+		
+
+	if (showPasswordCheckbox) {
+          // Thêm sự kiện change cho checkbox
+        showPasswordCheckbox.addEventListener('change', function () {
+            // Nếu checkbox được tích, thay đổi type thành "text", ngược lại thì là "password"
+            if (showPasswordCheckbox.checked) {
+                passwordInput.type = 'text';
+                confirmPasswordInput.type = 'text';
+                
+            } else {
+                passwordInput.type = 'password';
+                confirmPasswordInput.type = 'password';
+                
+            }
+        });
+		
+}
+    </script>
+	
+    <script>
+        // Lấy các phần tử cần thao tác
+        const showPasswordCheckboxx = document.getElementById('showPasswordd');
+        const passwordInputt = document.getElementById('passwordd');
+
+
+		if (showPasswordCheckboxx) {
+         // Thêm sự kiện change cho checkbox
+        showPasswordCheckboxx.addEventListener('change', function () {
+            // Nếu checkbox được tích, thay đổi type thành "text", ngược lại thì là "password"
+            if (showPasswordCheckboxx.checked) {
+                passwordInputt.type = 'text';
+            } else {
+                passwordInputt.type = 'password';
+            }
+        });
+}
+
+
+    </script>
+	
 </body>
 
 </html>

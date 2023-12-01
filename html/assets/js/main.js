@@ -15,7 +15,7 @@ $(document).ready(function() {
   //  portfolioPopup();
     sidebarMenu();
   //  mapInit();
-    mouseMagicCursor();
+  //  mouseMagicCursor();
     ColorPallet();
     //themeOption();
 });
@@ -891,7 +891,7 @@ function mapInit() {
 */
 
 /*-------------------------  Mouse Magic Cursor  -------------------------*/
-
+/*
 function mouseMagicCursor(){
 	
     "use strict";
@@ -922,7 +922,7 @@ function mouseMagicCursor(){
         }
     }
 };
-
+*/
 /*-------------------------  Color Panllet  -------------------------*/
 function ColorPallet() {
 

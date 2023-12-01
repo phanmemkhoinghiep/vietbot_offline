@@ -1,5 +1,10 @@
 {
     "smart_config": {
+        "block_updates": {
+            "vietbot_program": false,
+            "web_ui": false,
+            "web_ui_login": false
+        },
         "mic": {
             "type": "default"
         },
@@ -51,13 +56,12 @@
                 "province": "Tỉnh Hưng Yên"
             }
         },
-        "console_ouput": null,
         "logging_type": null
     },
     "smart_wakeup": {
         "hotword_engine": {
             "type": "porcupine",
-            "key": "lOXqU4Jy7sA3bArwy+w=="
+            "key": "iB0k3SrH"
         },
         "wakeup_reply": [
             {

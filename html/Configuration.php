@@ -2,6 +2,7 @@
 //Code By: Vũ Tuyển
 //Facebook: https://www.facebook.com/TWFyaW9uMDAx
 //Bỏ qua hiển thị lỗi trên màn hình nếu có
+//Mail: vietbotsmartspeaker@gmail.com
 @error_reporting(0);
 @date_default_timezone_set('Asia/Ho_Chi_Minh');
 // Khởi động session
@@ -22,10 +23,36 @@ $UI_VietBot = "https://github.com/marion001/UI_VietBot";
 $Vietbot_Version = "https://raw.githubusercontent.com/phanmemkhoinghiep/vietbot_offline/beta/src/version.json";
 $UI_Version = "https://raw.githubusercontent.com/marion001/UI_VietBot/main/version.json";
 
-//Mật Khẩu Đăng Nhập Các Chức Năng Web UI
-$Pass_Login_UI = "21232f297a57a5a743894a0e4a801fc3"; //Mã hóa md5 = admin
+//list Url Dowload thư viện
+//lib Google APIs Client PHP
+$url_lib_GDrive = 'https://raw.githubusercontent.com/marion001/Google-APIs-Client-Library-PHP/main/lib_Google_APIs_Client_php.tar.gz';
+
 //Mật Khẩu Đăng Nhập Trình Quản Lý File Manager
 $Pass_Login_File_Manager = "admin"; // admin
+
+//Cấu Hình Send Mail
+//App Passwords: https://myaccount.google.com/apppasswords
+//Tài Khoản Gmail
+$Mail_Gmail = "dmlldGJvdHNtYXJ0c3BlYWtlckBnbWFpbC5jb20="; //Giữ Nguyên  B64
+//Key App Passwords (Thay Cho Mật Khẩu) Của Gmail
+$Mail_APP_Passwords = "Y2J1aWZjemJwZGx0enRpZg==";  //Giữ Nguyên  B64
+$Mail_Host = "smtp.gmail.com";  //Giữ Nguyên
+$Mail_Port = 587;  //Giữ Nguyên
+$Mail_SMTPSecure = "tls";  //Giữ Nguyên
+
+//cấu hình MQTT (beta)
+$MQTT_Server = '192.168.14.17';     				// server mqtt của bạn
+$MQTT_Port = "1883";                     			// port mqtt của bạn
+$MQTT_UserName = 'hassio';                   	// tài khoản mqtt
+$MQTT_Password = 'hassio';                   		// mật khẩu mqtt
+$MQTT_Client_ID = 'Vietbot_MQTT_'.$serverIP; 		// đặt danh tính cho client khi kết nối mqtt
+
+//upload MP3 Media Player 
+$Upload_Max_Size = "300"; //MB kích thước file .mp3 tải lên tối đa
+//Số lượng tệp tối đa được phép tải lên file mp3, quá 20 cần can thiệp trong file php.ini
+$maxFilesUploadMp3 = "20"; 
+//Key youtube tìm kiếm nhạc mp3 mã hóa base64
+$apiKeyYoutube = "QUl6YVN5QXVXZVZueU0zaWphbzVYUEQ2MnpyTVh1QmowSmdMWUF3"; // Thay YOUR_YOUTUBE_API_KEY bằng khóa API YouTube của bạn
 
 //ĐƯờng Dẫn VietBot Chính
 $Path_Vietbot_src = "/home/pi/vietbot_offline";
@@ -51,6 +78,9 @@ $maxBackupFiles = "10";
 
 //Giới hạn file backup UI  Vietbot tar.gz (Khi Cập Nhật Firmware)
 $maxBackupFilesUI = "5";
+
+//giới hạn tệp backup Google Dirver
+$maxBackupGoogleDrive = "10";
 
 //Giới hạn ngày kỷ niệm: 10 giá trị
 $Limit_NgayKyNiem = "15"; 
@@ -79,37 +109,56 @@ $Limit_Radio = "10";
 $Limit_Pre_Answer = "3";
 
 //Thời gian đếm ngược tải lại trang khi update UI và Vietbot
-$Page_Load_Time_Countdown = "3"; //Giây
+$Page_Load_Time_Countdown = "6"; //Giây
+
+//thời gian đếm ngược đọc log màn hình 1000 = 1 giây
+$Log_Load_Time_Countdown = "2000"; //2000 = 2Giây
+
+//thời gian chờ time out media player api
+$Time_Out_MediaPlayer_API = "4000"; //4000 bằng 4 giây
 
 ///////////////////////////////////////////////////////////////////////////////
-//API Config Setting
+//API webui Config Setting
+$API_Messenger_Disabled = "Thao tác thất bại, API WEB UI chưa được bật";
 $allowedCommands_ALL = "all"; //"all" Biến cho phép chạy tất cả các lệnh
 // Danh sách chỉ cho phép chạy các lệnh an toàn khi bỏ chữ "all" bên trên
 $allowedCommands = "ls,dir,touch,reboot,uname"; //Tester
 $apiKey = 'vietbot'; //api key, user cần mã hóa api key này dạng md5 3f406f61a2b5053b53cda80e0320a60b
 
+
 ///////////////////////////////////////////////////////////////////////////////
-//Đọc, lấy vài dữ liệu của config.json
-$jsonSKILL = file_get_contents("$DuognDanThuMucJson"."/skill.json");
-$Data_Json_Skill = json_decode($jsonSKILL);
+$Data_Json_Skill = json_decode(file_get_contents("$DuognDanThuMucJson"."/skill.json"));
 
-$jsonDatazXZ = file_get_contents("$DuognDanThuMucJson"."/config.json");
-$dataVTGET = json_decode($jsonDatazXZ);
+$dataVTGET = json_decode(file_get_contents("$DuognDanThuMucJson"."/config.json"));
 
-$jsonDataVersionUI = file_get_contents("$DuognDanUI_HTML"."/version.json");
-$dataVersionUI = json_decode($jsonDataVersionUI);
+$dataVersionUI = json_decode(file_get_contents("$DuognDanUI_HTML"."/version.json"));
 
-$jsonDataVersionVietbot = file_get_contents("$DuognDanThuMucJson"."/version.json");
-$dataVersionVietbot = json_decode($jsonDataVersionVietbot);
+$dataVersionVietbot = json_decode(file_get_contents("$DuognDanThuMucJson"."/version.json"));
 
+$action_json = json_decode(file_get_contents("$DuognDanThuMucJson"."/action.json"));
+
+$object_json = json_decode(file_get_contents("$DuognDanThuMucJson"."/object.json"));
 
 
 $PORT_CHATBOT = $dataVTGET->smart_config->web_interface->port;
 $MYUSERNAME = $dataVTGET->smart_config->user_info->name;
+$Web_UI_Login = $dataVTGET->smart_config->block_updates->web_ui_login;
+$Web_UI_Enable_Api = $dataVTGET->smart_config->block_updates->enable_api;
+$Web_UI_Enable_GDrive_Backup = $dataVTGET->smart_config->block_updates->google_drive_backup;
 
-$wards_Lang = $dataVTGET->smart_config->user_info->address->wards; //Xã
+//Vị Trí, Địa Chỉ
+$wards_Lang = $dataVTGET->smart_config->user_info->address->wards; 
 $wards_Huyen = $dataVTGET->smart_config->user_info->address->district;
 $wards_Tinh = $dataVTGET->smart_config->user_info->address->province;
+
+//Lấy Dữ Liệu Config Chặn Cập Nhật
+$block_updates_vietbot_program = $dataVTGET->smart_config->block_updates->vietbot_program;
+$block_updates_web_ui = $dataVTGET->smart_config->block_updates->web_ui;
+//lấy dữ liệu config kiểm tra trạng thái hiển thị log hiện tại
+$check_current_log_status = $dataVTGET->smart_config->logging_type;
+
+//Port Vietbot
+$Port_Vietbot = $dataVTGET->smart_config->web_interface->port;
 
 $apiKeyWeather = $Data_Json_Skill->weather->openweathermap_key;
 ?>

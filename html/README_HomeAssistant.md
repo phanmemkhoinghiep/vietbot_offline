@@ -94,6 +94,10 @@ Giao Diện Love Lace:
 
           <hr> Thông Tin Hệ Thống:<br/>
 
+
+          - Nhiệt Độ CPU: <font
+          color=gree>{{state_attr('sensor.vietbot_api_info','info_os').temperature_cpu}}</font>
+
       
           - Bộ Nhớ:<br/> - Tổng Dung Lượng: <font
           color=gree>{{state_attr('sensor.vietbot_api_info','info_os').disk.disk_total}}</font><br/>
@@ -129,3 +133,65 @@ Giao Diện Love Lace:
                 state_attr('sensor.vietbot_api_info','info_os').uname_a}}</font>
           - Thời Gian Hoạt Động: <font color=gree>{{
                 state_attr('sensor.vietbot_api_info','info_os').uptime}}</font>
+
+______________________________________________________________________________________________
+Cấu Hình Volume Trên Home Assistant
+
+input_number.yaml:
+
+    vietbot_volume_slider:
+      name: Vietbot Volume Slider
+      icon: mdi:volume-high
+      #initial: 75
+      min: 0
+      max: 100
+      step: 1
+      unit_of_measurement: "%"
+      mode: slider
+
+automation.yaml:
+
+    - id: 45454654ghjg66756756786hr57
+      alias: Vietbot Volume Slider
+      trigger:
+        platform: state
+        entity_id: input_number.vietbot_volume_slider
+      action:
+        - service: rest_command.vietbot_ui_volume_change
+          data:
+            volumevietbot: "{{ states('input_number.vietbot_volume_slider') | int }}"
+
+rest_commands.yaml
+
+    vietbot_ui_volume_change:
+      url: http://192.168.14.194/API.php
+      method: POST
+      payload: '{"volume": "{{ volumevietbot }}", "api_key": "3f406f61a2b5053b53cda80e0320a60b"}'
+      content_type: 'application/json; charset=utf-8'
+________________________________________________________________________
+Cấu hình restart vietbot và reboot hệ thống trên home assistant
+
+rest_commands.yaml
+
+    vietbot_ui_restart:
+      url: http://192.168.14.194/API.php
+      method: POST
+      payload: '{"command": "restart", "api_key": "3f406f61a2b5053b53cda80e0320a60b"}'
+      content_type: 'application/json; charset=utf-8'
+  
+    vietbot_ui_reboot:
+      url: http://192.168.14.194/API.php
+      method: POST
+      payload: '{"command": "reboot", "api_key": "3f406f61a2b5053b53cda80e0320a60b"}'
+      content_type: 'application/json; charset=utf-8'
+
+scripts.yaml
+
+    vietbot_api_restart:
+      sequence:  
+      - service: rest_command.vietbot_ui_restart
+
+    vietbot_api_reboot:
+      sequence:  
+      - service: rest_command.vietbot_ui_reboot
+      

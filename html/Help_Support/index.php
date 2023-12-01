@@ -1,3 +1,10 @@
+<?php
+// Code By: Vũ Tuyển
+// Facebook: https://www.facebook.com/TWFyaW9uMDAx
+//error_reporting(E_ALL);
+?>
+
+
 <!DOCTYPE html>
 <html lang="vi" class="max-width-d">
 <!--
@@ -59,11 +66,11 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
 <h5>- Các chức năng và hướng dẫn trong tab <b>config.json</b> và <b>skill.json</b> đều được diễn giải ở dấu: <i class="bi bi-info-circle-fill" title="Nhấn Để Tìm Hiểu Thêm"></i><br/>
 - Cấu hình thông số Web UI nằm ở file <font color=red>Configuration.php</font> theo đường dẫn: <font color=red>/home/pi/vietbot_offline/html/Configuration.php</font>
 <h5><hr/>
-<br/><h5>Chức Năng/Nút Nhấn:</h5><i>
+<br/><h5><font color=red>Chức Năng/Nút Nhấn:</font></h5><i>
  - Nút <b> Play: </b> Nhấn 1 lần sẽ gọi bot, ấn giữ nút sẽ phát thông tin hiện tại của loa<br>
  - Nút <b> Volume + -: </b> Nhấn 1 lần sẽ tăng/giảm volume, ấn giữ max volume 100%<br/>
  - Nút <b> Tắt Mic: </b> Nhấn 1 lần sẽ tắt Mic, nhấn giữ sẽ reboot lại toàn bộ hệ thống<br/></i><hr/>
-<h5>Home Assistant (Hass) Liên Kết/Ra Lệnh:</h5>
+<h5><font color=red>Home Assistant (Hass) Liên Kết/Ra Lệnh:</font></h5>
 <b>Cách Thức Liên Kết:</b><br/><i>
 +) trên giao diện Vietbot hãy di chuyển tới tab <b>Skill</b> -> <b>HomeAssistant (Hass)</b> và làm theo các bước sau:<br/>
 +) B1: <b>URL</b> điền url địa chỉ hass nhà của bạn (Khuyến nghị dùng url local để đạt tốc dộ tối đa, VD: <b>http://192.168.14.17:8123</b>)<br/>
@@ -97,7 +104,7 @@ Ví Dụ: <<b>Tắt</b>> <<b>quạt phòng khách</b>> hay: <<b>Bật</b>> <<b>�
  - <b>Nếu không kết nối được Hass</b>: Đưa ra thông báo không kết nối được<br/>
  - <b>Nếu ra lệnh không thành công</b>: Đưa ra thông báo lý do<br/></i>
  <hr/>
-<h5>API Vietbot:</h5>
+<h5><font color=red>API Vietbot:</font></h5>
 - <b>Method</b>: POST<br/><br/>
 <b>Truyền văn bản vào Vietbot để phát thành âm thanh:</b><br/><i>
 - <b>Cấu Trúc body</b>: {"type": 1,"data": "Nội Dung Cần Phát"}<br/><br/></i>
@@ -177,12 +184,12 @@ script:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data: Tắt Tivi phòng khách<br/>
 &nbsp;&nbsp;mode: single<br/>
 <hr/>
-<h5>Nâng Cấp Full Dung Lượng Cho Thẻ:</h5>
+<h5><font color=red>Nâng Cấp Full Dung Lượng Cho Thẻ:</font></h5>
 - Đăng nhập vào ssh rồi gõ lệnh sau:<br/>
 &nbsp;$: <b>sudo raspi-config</b><br/>
 - Chọn: <b>(6)Advance Options</b> -> <b>(A1)Expand File System</b> đợi vài giây -> <b>OK</b> -> <b>Fish</b> -> <b>Yes</b> để rebot<br/>
 <hr/>
-<h5>API WebUI:</h5>
+<h5><font color=red>API WebUI:</font></h5>
 API: <a href="<?php echo "http://".$_SERVER['SERVER_ADDR']."/API.php"; ?>" target="_bank"><?php echo "http://".$_SERVER['SERVER_ADDR']."/API.php"; ?></a><br/>
 - Method: POST
 Giá trị bao gồm: <br/>
@@ -266,6 +273,23 @@ Giá trị bắt buộc:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message: "Có phiên bản mới: {{ state_attr('sensor.vietbot_api_info', 'info_vietbot')['vietbot_version']['new_version']}}"<br/>
 </font>
 <hr/>
+<h5><font color=red>Hướng dẫn Đặt Pass Đăng Nhập Web UI</font></h5>
+
+B1: đi tới tab: <b>Config Setting</b> -> <b>Cài Đặt UI, Cập Nhật</b> -> tích vào: <b>Đăng Nhập Trên WEB UI:</b> sau đó tải lại trang chủ<br/>
+B2: Trang chủ sẽ hiện lên các input để ban nhập dữ liệu là: <b>Mật khẩu</b> và <b>Mail</b>, bạn cần nhập vào rồi lưu lại.<br/>
+B3: Tiến hành tải lại trang chủ sẽ hiển thị lên ô nhập mật khẩu để vào web ui quản lý</b><br/>
+- <b>Đổi Mật Khẩu</b> và <b>Đăng Xuất</b> sẽ nằm ở icon <b>Cài Đặt</b> của WEB UI.<br/>
+<i>Lưu ý: (Trong trường hợp bạn quên mật khẩu và mail thì bạn cần xóa file <b>password.json</b> theo đường dẫn: <b>/home/pi/vietbot_offline/html/assets/json/password.json</b></i><br/>
+<hr/>
+<h5><font color=red>Mở giới hạn upload file trên web ui</font></h5>
+- Chạy 2 lệnh sau:<br/>
+$: sudo sed -i 's/upload_max_filesize = .*/upload_max_filesize = 300M/' /etc/php/7.4/apache2/php.ini<br/>
+$: sudo sed -i 's/post_max_size = .*/post_max_size = 350M/' /etc/php/7.4/apache2/php.ini<br/>
+<hr/>
+<h5><font color=red>Hướng dẫn Cài đặt Google Drive Auto Backup</font></h5>
+
+<a href="./HuongDanGDriveBackup.html" target="_bank">Nhấn vào đây để xem hướng dẫn Google Drive Auto Backup</a>
+
 
 <h1>Comback Soon</h1>
 	  

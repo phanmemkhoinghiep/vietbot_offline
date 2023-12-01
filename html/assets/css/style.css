@@ -1638,7 +1638,7 @@ textarea:-moz-placeholder {
   top: 40px;
   z-index: 1100;
   position: fixed;
-  transition: all 0.3s ease;
+  transition: all 0.1s ease; 
   right: 75px;
   width: 158px;
   border-radius: 0.75rem;
