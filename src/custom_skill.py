@@ -31,7 +31,7 @@ adv_from_now=[p['value'] for p in adv_data['from_now']]
 adv_nearby=[p['value'] for p in adv_data['nearby']]
 
 
-def custom_data_process(player2,led,volume):#Def này sẽ trả về kết quả để Vietbot đọc nội dung
+def custom_data_process(player2,volume):#Def này sẽ trả về kết quả để Vietbot đọc nội dung
     answer_text='Không có câu trả lời cho tình huống này' #Giá trị Default cho câu trả lời
     answer_path=None #Giá trị Default cho link file âm thanh hoặc link stream
 
