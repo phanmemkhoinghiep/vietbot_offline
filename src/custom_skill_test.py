@@ -63,25 +63,25 @@ def custom_data_process(player2,led,volume):#Def này sẽ trả về kết qu�
                     for p_tag in p_tags:
                         full_content += f"{p_tag.text.strip()}\n"    
                 if any(item in data for item in obj_monday):
-                    thu_hai = re.search(r'THỨ HAI(.*?)THỨ BA', full_content, re.DOTALL)
+                    thu_hai =libs.re.search(r'THỨ HAI(.*?)THỨ BA', full_content, re.DOTALL)
                     answer_text = thu_hai.group(1).strip()
                 elif any(item in data for item in obj_tuesday):
-                    thu_ba = re.search(r'THỨ BA(.*?)THỨ TƯ', full_content, re.DOTALL)
+                    thu_ba =libs.re.search(r'THỨ BA(.*?)THỨ TƯ', full_content, re.DOTALL)
                     answer_text = thu_ba.group(1).strip()
                 elif any(item in data for item in obj_wednesday):
-                    thu_tu = re.search(r'THỨ TƯ(.*?)THỨ NĂM', full_content, re.DOTALL)
+                    thu_tu =libs.re.search(r'THỨ TƯ(.*?)THỨ NĂM', full_content, re.DOTALL)
                     answer_text = thu_tu.group(1).strip()
                 elif any(item in data for item in obj_thursday):
-                    thu_nam = re.search(r'THỨ NĂM(.*?)THỨ SÁU', full_content, re.DOTALL)
+                    thu_nam =libs.re.search(r'THỨ NĂM(.*?)THỨ SÁU', full_content, re.DOTALL)
                     answer_text = thu_nam.group(1).strip()        
                 elif any(item in data for item in obj_friday):
-                    thu_sau = re.search(r'THỨ SÁU(.*?)THỨ BẢY', full_content, re.DOTALL)
+                    thu_sau =libs.re.search(r'THỨ SÁU(.*?)THỨ BẢY', full_content, re.DOTALL)
                     answer_text = thu_sau.group(1).strip()        
                 elif any(item in data for item in obj_saturday):
-                    thu_bay = re.search(r'THỨ BẢY(.*?)CHỦ NHẬT', full_content, re.DOTALL)
+                    thu_bay =libs.re.search(r'THỨ BẢY(.*?)CHỦ NHẬT', full_content, re.DOTALL)
                     answer_text = thu_bay.group(1).strip()        
                 elif any(item in data for item in obj_friday):
-                    chu_nhat = re.search(r'CHỦ NHẬT(.*?)$', full_content, re.DOTALL)
+                    chu_nhat =libs.re.search(r'CHỦ NHẬT(.*?)$', full_content, re.DOTALL)
                     answer_text = chu_nhat.group(1).strip()        
                 else:
                     # Lấy ngày hôm nay
@@ -92,25 +92,25 @@ def custom_data_process(player2,led,volume):#Def này sẽ trả về kết qu�
                     ten_ngay = ['THỨ HAI', 'THỨ BA', 'THỨ TƯ', 'THỨ NĂM', 'THỨ SÁU', 'THỨ BẢY', 'CHỦ NHẬT']
                     ten_thu = ten_ngay[so_thu_tu_ngay]
                     if ten_thu =='THỨ HAI':
-                        thu_hai = re.search(r'THỨ HAI(.*?)THỨ BA', full_content, re.DOTALL)
+                        thu_hai =libs.re.search(r'THỨ HAI(.*?)THỨ BA', full_content, re.DOTALL)
                         answer_text = thu_hai.group(1).strip()
                     elif ten_thu =='THỨ BA':
-                        thu_ba = re.search(r'THỨ BA(.*?)THỨ TƯ', full_content, re.DOTALL)
+                        thu_ba =libs.re.search(r'THỨ BA(.*?)THỨ TƯ', full_content, re.DOTALL)
                         answer_text = thu_ba.group(1).strip()
                     elif ten_thu =='THỨ TƯ':
-                        thu_tu = re.search(r'THỨ TƯ(.*?)THỨ NĂM', full_content, re.DOTALL)
+                        thu_tu =libs.re.search(r'THỨ TƯ(.*?)THỨ NĂM', full_content, re.DOTALL)
                         answer_text = thu_tu.group(1).strip()
                     elif ten_thu =='THỨ NĂM':
-                        thu_nam = re.search(r'THỨ NĂM(.*?)THỨ SÁU', full_content, re.DOTALL)
+                        thu_nam =libs.re.search(r'THỨ NĂM(.*?)THỨ SÁU', full_content, re.DOTALL)
                         answer_text = thu_nam.group(1).strip()        
                     elif ten_thu =='THỨ SÁU':
-                        thu_sau = re.search(r'THỨ SÁU(.*?)THỨ BẢY', full_content, re.DOTALL)
+                        thu_sau =libs.re.search(r'THỨ SÁU(.*?)THỨ BẢY', full_content, re.DOTALL)
                         answer_text = thu_sau.group(1).strip()        
                     elif ten_thu =='THỨ BẨY':
-                        thu_bay = re.search(r'THỨ BẢY(.*?)CHỦ NHẬT', full_content, re.DOTALL)
+                        thu_bay =libs.re.search(r'THỨ BẢY(.*?)CHỦ NHẬT', full_content, re.DOTALL)
                         answer_text = thu_bay.group(1).strip()        
                     elif ten_thu=='CHỦ NHẬT':
-                        chu_nhat = re.search(r'CHỦ NHẬT(.*?)$', full_content, re.DOTALL)
+                        chu_nhat =libs.re.search(r'CHỦ NHẬT(.*?)$', full_content, re.DOTALL)
                         answer_text = chu_nhat.group(1).strip()                                            
         except:            
             answer_text = 'Lỗi xử lý thông tin'
