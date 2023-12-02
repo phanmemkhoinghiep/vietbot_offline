@@ -81,7 +81,7 @@ def custom_data_process(player2,led,volume):#Def này sẽ trả về kết qu�
                 elif any(item in data for item in obj_saturday):
                     thu_bay =libs.re.search(r'THỨ BẢY(.*?)CHỦ NHẬT', full_content, re.DOTALL)
                     answer_text = thu_bay.group(1).strip()        
-                elif any(item in data for item in obj_friday):
+                elif any(item in data for item in obj_sunday):
                     chu_nhat =libs.re.search(r'CHỦ NHẬT(.*?)$', full_content, re.DOTALL)
                     answer_text = chu_nhat.group(1).strip()        
                 else:
