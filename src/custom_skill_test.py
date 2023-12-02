@@ -61,7 +61,8 @@ def custom_data_process(player2,led,volume):#Def này sẽ trả về kết qu�
                 for td_tag in td_tags:
                     p_tags = td_tag.find_all('p')
                     for p_tag in p_tags:
-                        full_content += f"{p_tag.text.strip()}\n"    
+                        full_content += f"{p_tag.text.strip()}\n"   
+                full_content=full_content.replace('TP', 'Thành phần:')                     
                 if any(item in data for item in obj_monday):
                     thu_hai =libs.re.search(r'THỨ HAI(.*?)THỨ BA', full_content, re.DOTALL)
                     answer_text = thu_hai.group(1).strip()
