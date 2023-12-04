@@ -1,10 +1,10 @@
 {
 	"vietbot_version": {
-		"latest": "beta 02-12-2023-01"
+		"latest": "beta 04-12-2023-01"
 	},
 	"update_command": "", 
 	"new_features": "",
-	"bug_fixed": "Lỗi vặt liên quan tới volume, hass",	
+	"bug_fixed": "Lỗi vặt liên quan tới led, hass",	
 	"improvements": "",	
 	"image_version": {
 		"latest": "2023-07-24"
