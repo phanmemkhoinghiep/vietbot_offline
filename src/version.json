@@ -3,8 +3,8 @@
 		"latest": "beta 04-12-2023-01"
 	},
 	"update_command": "", 
-	"new_features": "",
-	"bug_fixed": "Lỗi vặt liên quan tới led, hass",	
+	"new_features": "API điều khiển trạng thái của led theo trạng thái bot",
+	"bug_fixed": "Lỗi led với nút Mic",	
 	"improvements": "",	
 	"image_version": {
 		"latest": "2023-07-24"
