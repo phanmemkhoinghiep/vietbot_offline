@@ -173,10 +173,10 @@
 		"active": true
 	},
 	"gold_rate_data": [{
-			"location": "Hồ Chí Minh"
+			"location": "Hà Nội"
 		},
 		{
-			"location": "Hà Nội"
+			"location": "Hồ Chí Minh"
 		},
 		{
 			"location": "Đà Nẵng"
