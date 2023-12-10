@@ -39,9 +39,9 @@ def custom_data_process(player2,volume):#Def này sẽ độc lập xử lý đ�
     try:
         data = 'thi hành '+ stt_process().lower()    
         answer=hass_process.hass_process(data)
-        player2.play_and_wait(tts_process(answer,True)) #False - Phát câu trả lời TTS ko cache lại nội dung, True - Có cache lại để cho lần sau
+        player2.play_media(tts_process(answer,True),True) #False - Phát câu trả lời TTS ko cache lại nội dung, True - Có cache lại để cho lần sau
     except:
-        player2.play_and_wait(tts_process('Có lỗi',True))
+        player2.play_media(tts_process('Có lỗi',True),True)
         libs.logging('left','Có lỗi','red') 
         play_sound('FINISH') #Dong sound
 
