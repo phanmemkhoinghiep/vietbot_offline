@@ -116,7 +116,7 @@ def custom_data_process(player2,led,volume):#Def này sẽ trả về kết qu�
         except:            
             answer_text = 'Lỗi xử lý thông tin'
 
-    player2.play_and_wait(tts_process('answer_text',False)) #False - Phát câu trả lời TTS ko cache lại nội dung, True - Có cache lại để cho lần sau
+    player2.play_media(tts_process('answer_text',False),True) #False - Phát câu trả lời TTS ko cache lại nội dung, True - Có cache lại để cho lần sau
 
 
 if __name__ == '__main__':  
