@@ -5,7 +5,7 @@
 	"update_command": "", 
 	"new_features": "API điều khiển trạng thái của LED theo trạng thái bot",
 	"bug_fixed": "Lỗi đồng bộ LED",	
-	"improvements": "",	
+	"improvements": "Quy hoạch Player cho 2 mode API và Mic",	
 	"image_version": {
 		"latest": "2023-07-24"
 	}
