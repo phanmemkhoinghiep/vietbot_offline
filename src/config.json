@@ -57,7 +57,7 @@
                 "province": "Tỉnh Hưng Yên"
             }
         },
-        "logging_type": "console"
+        "logging_type": "console",
         "console_ouput": "full",
         "bot_mode": "custom"
     },
