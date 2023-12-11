@@ -1,11 +1,11 @@
 {
 	"vietbot_version": {
-		"latest": "beta 10-12-2023-01"
+		"latest": "beta 11-12-2023-01"
 	},
 	"update_command": "", 
 	"new_features": "API điều khiển trạng thái của LED theo trạng thái bot",
-	"bug_fixed": "Lỗi đồng bộ LED",	
-	"improvements": "Quy hoạch Player cho 2 mode API và Mic",	
+	"bug_fixed": "Lỗi Hass",	
+	"improvements": "",	
 	"image_version": {
 		"latest": "2023-07-24"
 	}
