@@ -1,6 +1,6 @@
 {
 	"vietbot_version": {
-		"latest": "beta 11-12-2023-01"
+		"latest": "beta 12-12-2023-01"
 	},
 	"update_command": "", 
 	"new_features": "API điều khiển trạng thái của LED theo trạng thái bot",
