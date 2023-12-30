@@ -1,11 +1,11 @@
 {
 	"vietbot_version": {
-		"latest": "beta 15-12-2023-01"
+		"latest": "beta 30-12-2023-01"
 	},
 	"update_command": "", 
-	"new_features": "Đồng bộ giữa phát từ API và phát từ Mic",
-	"bug_fixed": "Lỗi khi phát nhạc",	
-	"improvements": "",	
+	"new_features": "Tắt bật 1 số chế độ bằng phím",
+	"bug_fixed": "Lỗi skill giá vàng",	
+	"improvements": "Tốc độ khi wakeup bằng hotword",	
 	"image_version": {
 		"latest": "2023-07-24"
 	}
