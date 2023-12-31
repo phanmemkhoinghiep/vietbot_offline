@@ -4,7 +4,7 @@
 	},
 	"update_command": "", 
 	"new_features": "Tắt bật 1 số chế độ bằng phím",
-	"bug_fixed": "Lỗi skill giá vàng",	
+	"bug_fixed": "Lỗi skill giá vàng và thời gian timeout",	
 	"improvements": "Tốc độ khi wakeup bằng hotword",	
 	"image_version": {
 		"latest": "22-09-2023"
