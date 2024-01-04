@@ -64,7 +64,7 @@ script:
   alias: test
   description: ''
   action:
-    - service: rest_command.vietbot_tts
+    - service: rest_command.vietbot_command_tts
       data:
         data: Tắt Tivi phòng khách 
   mode: single
