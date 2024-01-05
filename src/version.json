@@ -1,11 +1,11 @@
 {
 	"vietbot_version": {
-		"latest": "beta 01-01-2024-01"
+		"latest": "beta 05-01-2024-01"
 	},
 	"update_command": "", 
-	"new_features": "Tắt bật 1 số chế độ bằng phím",
-	"bug_fixed": "Lỗi skill giá vàng và thời gian timeout",	
-	"improvements": "Tốc độ khi wakeup bằng hotword",	
+	"new_features": "Vietbot STT",
+	"bug_fixed": "",	
+	"improvements": "",	
 	"image_version": {
 		"latest": "22-09-2023"
 	}
