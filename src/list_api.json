@@ -1,0 +1,373 @@
+{
+    "tts_api": {
+        "Content-Type": "application/json",
+        "method": "POST",
+        "payload": {
+            "api_type": 1,
+            "data": "tts content"
+        }
+    },
+    "playback_direct_music_api": {
+        "Content-Type": "application/json",
+        "method": "POST",
+        "payload": {
+            "api_type": 3,
+            "data": "music",
+            "link_type": "direct"
+        }
+    },
+    "playback_zingmp3_music_api": {
+        "Content-Type": "application/json",
+        "method": "POST",
+        "payload": {
+            "api_type": 3,
+            "data": "music",
+            "link_type": "zingmp3"
+        }
+    },
+    "playback_youtube_music_api": {
+        "Content-Type": "application/json",
+        "method": "POST",
+        "payload": {
+            "api_type": 3,
+            "data": "music",
+            "link_type": "youtube"
+        }
+    },
+    "set_wakeup_button_short_press": {
+        "Content-Type": "application/json",
+        "method": "POST",
+        "payload": {
+            "api_type": 3,
+            "data": "wakeup_button",
+            "action": "short_press"
+        }
+    },
+    "set_wakeup_button_long_press": {
+        "Content-Type": "application/json",
+        "method": "POST",
+        "payload": {
+            "api_type": 3,
+            "data": "wakeup_button",
+            "action": "long_press"
+        }
+    },
+    "set_mic_button_short_press": {
+        "Content-Type": "application/json",
+        "method": "POST",
+        "payload": {
+            "api_type": 3,
+            "data": "mic_button",
+            "action": "short_press"
+        }
+    },
+    "set_mic_button_long_press": {
+        "Content-Type": "application/json",
+        "method": "POST",
+        "payload": {
+            "api_type": 3,
+            "data": "mic_button",
+            "action": "long_press"
+        }
+    },
+    "set_vol_+_button_short_press": {
+        "Content-Type": "application/json",
+        "method": "POST",
+        "payload": {
+            "api_type": 3,
+            "data": "vol_+_button",
+            "action": "short_press"
+        }
+    },
+    "set_vol_+_button_long_press": {
+        "Content-Type": "application/json",
+        "method": "POST",
+        "payload": {
+            "api_type": 3,
+            "data": "vol_+_button",
+            "action": "long_press"
+        }
+    },
+    "set_vol_-_button_short_press": {
+        "Content-Type": "application/json",
+        "method": "POST",
+        "payload": {
+            "api_type": 3,
+            "data": "vol_-_button",
+            "action": "short_press"
+        }
+    },
+    "set_vol_-_button_long_press": {
+        "Content-Type": "application/json",
+        "method": "POST",
+        "payload": {
+            "api_type": 3,
+            "data": "vol_-_button",
+            "action": "long_press"
+        }
+    },
+    "set_player_pause_state": {
+        "Content-Type": "application/json",
+        "method": "POST",
+        "payload": {
+            "api_type": 3,
+            "data": "set_player",
+            "action": "pause"
+        }
+    },
+    "set_player_continue_state": {
+        "Content-Type": "application/json",
+        "method": "POST",
+        "payload": {
+            "api_type": 3,
+            "data": "set_player",
+            "action": "continue"
+        }
+    },
+    "set_player_stop_state": {
+        "Content-Type": "application/json",
+        "method": "POST",
+        "payload": {
+            "api_type": 3,
+            "data": "set_player",
+            "action": "stop"
+        }
+    },
+    "set_volume_up": {
+        "Content-Type": "application/json",
+        "method": "POST",
+        "payload": {
+            "api_type": 3,
+            "data": "volume",
+            "action": "up"
+        }
+    },
+    "set_volume_down": {
+        "Content-Type": "application/json",
+        "method": "POST",
+        "payload": {
+            "api_type": 3,
+            "data": "volume",
+            "action": "down"
+        }
+    },
+    "set_volume_min": {
+        "Content-Type": "application/json",
+        "method": "POST",
+        "payload": {
+            "api_type": 3,
+            "data": "volume",
+            "action": "min"
+        }
+    },
+    "set_volume_max": {
+        "Content-Type": "application/json",
+        "method": "POST",
+        "payload": {
+            "api_type": 3,
+            "data": "volume",
+            "action": "max"
+        }
+    },
+    "set_volume_percent": {
+        "Content-Type": "application/json",
+        "method": "POST",
+        "payload": {
+            "api_type": 3,
+            "data": "volume",
+            "action": "setup",
+            "new_value": "100"
+        }
+    },
+    "set_led_state_wakeup": {
+        "Content-Type": "application/json",
+        "method": "POST",
+        "payload": {
+            "api_type": 3,
+            "data": "led",
+            "action": "wakeup"
+        }
+    },
+    "set_led_state_off": {
+        "Content-Type": "application/json",
+        "method": "POST",
+        "payload": {
+            "api_type": 3,
+            "data": "led",
+            "action": "off"
+        }
+    },
+    "set_led_state_mute": {
+        "Content-Type": "application/json",
+        "method": "POST",
+        "payload": {
+            "api_type": 3,
+            "data": "led",
+            "action": "mute"
+        }
+    },
+    "set_led_state_listen": {
+        "Content-Type": "application/json",
+        "method": "POST",
+        "payload": {
+            "api_type": 3,
+            "data": "led",
+            "action": "listen"
+        }
+    },
+    "set_led_state_think": {
+        "Content-Type": "application/json",
+        "method": "POST",
+        "payload": {
+            "api_type": 3,
+            "data": "led",
+            "action": "think"
+        }
+    },
+    "set_led_state_speak": {
+        "Content-Type": "application/json",
+        "method": "POST",
+        "payload": {
+            "api_type": 3,
+            "data": "led",
+            "action": "speak"
+        }
+    },
+    "get_text_answer": {
+        "Content-Type": "application/json",
+        "method": "POST",
+        "payload": {
+            "api_type": 4,
+            "data": "text_question"
+        }
+    },	
+    "get_vietbot_state": {
+        "Content-Type": "application/json",
+        "method": "GET",
+        "payload": {
+            "api_type": 3,
+            "data": "state"
+        }
+    },
+    "get_volume": {
+        "Content-Type": "application/json",
+        "method": "GET",
+        "payload": {
+            "api_type": 3,
+            "data": "volume"
+        }
+    },
+    "get_conversation_state": {
+        "Content-Type": "application/json",
+        "method": "GET",
+        "payload": {
+            "api_type": 3,
+            "data": "conversation"
+        }
+    },	
+    "get_wakeup_reply_state": {
+        "Content-Type": "application/json",
+        "method": "GET",
+        "payload": {
+            "api_type": 3,
+            "data": "wakeup_reply"
+        }
+    },	
+    "get_last_hotword_use": {
+        "Content-Type": "application/json",
+        "method": "GET",
+        "payload": {
+            "api_type": 3,
+            "data": "last_hotword"
+        }
+    },	
+    "get_last_request": {
+        "Content-Type": "application/json",
+        "method": "GET",
+        "payload": {
+            "api_type": 3,
+            "data": "last_request"
+        }
+    },	
+    "get_last_answer": {
+        "Content-Type": "application/json",
+        "method": "GET",
+        "payload": {
+            "api_type": 3,
+            "data": "last_answer"
+        }
+    },		
+    "get_api_playback_state": {
+        "Content-Type": "application/json",
+        "method": "GET",
+        "payload": {
+            "api_type": 3,
+            "data": "api_playback"
+        }
+    },
+    "get_mic_playback_state": {
+        "Content-Type": "application/json",
+        "method": "GET",
+        "payload": {
+            "api_type": 3,
+            "data": "mic_playback"
+        }
+    },
+    "get_running_times": {
+        "Content-Type": "application/json",
+        "method": "GET",
+        "payload": {
+            "api_type": 3,
+            "data": "running_times"
+        }
+    },
+    "get_vietbot_version": {
+        "Content-Type": "application/json",
+        "method": "GET",
+        "payload": {
+            "api_type": 3,
+            "data": "vietbot_version"
+        }
+    },
+    "get_ui_version": {
+        "Content-Type": "application/json",
+        "method": "GET",
+        "payload": {
+            "api_type": 3,
+            "data": "ui_version"
+        }
+    },
+    "get_update_suggestion": {
+        "Content-Type": "application/json",
+        "method": "GET",
+        "payload": {
+            "api_type": 3,
+            "data": "update_suggestion"
+        }
+    },
+    "get_serial_number": {
+        "Content-Type": "application/json",
+        "method": "GET",
+        "payload": {
+            "api_type": 3,
+            "data": "serial_number"
+        }
+    },
+    "get_ip_address": {
+        "Content-Type": "application/json",
+        "method": "GET",
+        "payload": {
+            "api_type": 3,
+            "data": "ip_address"
+        }
+    },
+    "get_hostname": {
+        "Content-Type": "application/json",
+        "method": "GET",
+        "payload": {
+            "api_type": 3,
+            "data": "host_name"
+        }
+    }
+
+}
