@@ -3,7 +3,9 @@
         "block_updates": {
             "vietbot_program": false,
             "web_ui": false,
-            "web_ui_login": false
+            "web_ui_login": false,
+            "enable_api": false,
+            "google_drive_backup": false
         },
         "web_ui_login": false,
         "mic": {
