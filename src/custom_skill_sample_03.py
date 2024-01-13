@@ -17,10 +17,15 @@ adv_data = data.get('adverb.json', {})
 from tts_process import tts_process
 from stt_process import process as stt_process
 from speaker_process import play_sound
-
-def get(script_name):
+#Get Hass info
+session = libs.requests.Session()
+token=skill_data['hass']['token']
+hass_url=skill_data['hass']['url']
+headers = {'Authorization': 'Bearer '+ token,'content-type': 'application/json'}
+script_name='Đi ngủ' #Lấy đúng giá trị friendly của script name tương ứng
+def get_entity():
     entity_result=''
-    response = session.get(url + '/api/states', headers=headers, verify=False)
+    response = session.get(hass_url + '/api/states', headers=headers, verify=False)
     if response.status_code == 200:
         entities = response.json()
         for entity in entities:
@@ -30,20 +35,20 @@ def get(script_name):
               break
     return entity_result
 
-
 def custom_data_process(player2,volume):#Def này sẽ độc lập xử lý để Vietbot đọc nội dung
     answer='Lỗi Hass' #Giá trị Default cho câu trả lời
+    payload = {'entity_id': get_entity()}
     try:
-        data = 'thi hành '+ stt_process().lower()    
-        answer=hass_process.hass_process(data)
+         r = session.post(url+'/api/services/script/turn_on', data=libs.json.dumps(payload), headers=headers, verify=False)
+         if r.status_code == 200:
+             answer= 'Đã thi hành '+script_name+' thành công' 
+         else:
+             answer= 'Thi hành '+script_name+' không thành công'
         player2.play_media(tts_process(answer,True),True) #False - Phát câu trả lời TTS ko cache lại nội dung, True - Có cache lại để cho lần sau
     except:
         player2.play_media(tts_process('Có lỗi',True),True)
         libs.logging('left','Có lỗi','red') 
         play_sound('FINISH') #Dong sound
-
-
-
 
 if __name__ == '__main__':  
     from speaker_process import Player, Volume
@@ -51,5 +56,4 @@ if __name__ == '__main__':
     # volume=VOLUME(0)
     player=Player()
     volume=Volume(0)
-    data='bây giờ là mấy giờ'
-    print(custom_data_process(player,volume,data))    
+    print(custom_data_process(player,volume))    
