@@ -16,6 +16,7 @@
         "led": {
             "type": "Vietbot AIO Board V2.0",
             "number_led": 12,
+            "led_gpio": 10,            
             "effect_mode": 1,
             "brightness": 210,
             "wakeup_color": "03254b",
