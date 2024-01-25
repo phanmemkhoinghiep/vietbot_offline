@@ -140,25 +140,14 @@
             "value": "hẹn giờ"
         }
     ],
-    "setup": [{
-            "value": "cài"
+    "setup": {
+            "value": "cài đặt"
         },
-        {
-            "value": "đặt"
-        },
-        {
-            "value": "thiết lập"
-        }
-    ],
-    "execute": [{
+
+    "execute": {
             "value": "thực hiện"
-        },
-        {
-            "value": "thực thi"
-        },
-        {
-            "value": "thi hành"
         }
-    ]
+
+
 
 }
