@@ -58,8 +58,7 @@
             }
         },
         "logging_type": "console",
-        "console_ouput": "full",
-        "bot_mode": "custom"
+        "bot_mode": "full"
     },
     "smart_wakeup": {
         "hotword_engine": {
