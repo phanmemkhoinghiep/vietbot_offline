@@ -13,7 +13,7 @@ elif bot_mode=='full':
     main_process_full.main_process()
 elif bot_mode=='custom':    
     try:
-        import custom_process
-        custom_process.main_process()
+        import main_process_custom
+        main_process_custom.main_process()
     except Exception as e1:
         libs.logging('left','Lỗi khi nạp chạy Custom Mode:' +str(e1),'red')    
