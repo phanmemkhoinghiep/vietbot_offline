@@ -462,5 +462,5 @@
 		"priority_2": "ZingMP3",
 		"priority_3": "Youtube"
          },
-	"bypass_all_skill":true
+	"bypass_all_skill":false
 }
