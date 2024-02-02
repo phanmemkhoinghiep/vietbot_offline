@@ -5,7 +5,7 @@
 	"update_command": "", 
 	"new_features": "ChatGPT theo phiên làm việc với timeout cài đặt được",
 	"bug_fixed": "",	
-	"improvements": "",	
+	"improvements": "Tăng tốc độ xử lý ChatGPT, phát nhạc online",	
 	"image_version": {
 		"latest": "22-09-2023"
 	}
