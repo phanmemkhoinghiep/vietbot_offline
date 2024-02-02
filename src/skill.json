@@ -411,7 +411,8 @@
 	},
 	"chatgpt": {
 		"token": "sk-8kFidsfsf4anlf",
-		"session_timeout": 3600,		
+    		"model": "gpt-3.5-turbo",
+		"session_timeout": 3600,			
 		"error_answer": "Không thực hiện được tra cứu chatGPT, hãy kiểm tra lại"
 	},
 	"hanet": {
