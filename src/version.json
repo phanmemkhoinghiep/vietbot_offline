@@ -1,11 +1,11 @@
 {
 	"vietbot_version": {
-		"latest": "beta 02-02-2024-03"
+		"latest": "beta 04-02-2024-03"
 	},
 	"update_command": "", 
-	"new_features": "ChatGPT theo phiên làm việc với timeout cài đặt được",
+	"new_features": "Tùy biến tham số so sánh cached kết quả",
 	"bug_fixed": "",	
-	"improvements": "Tăng tốc độ xử lý ChatGPT, phát nhạc online",	
+	"improvements": "Tăng tốc độ xử lý TTS",	
 	"image_version": {
 		"latest": "22-09-2023"
 	}
