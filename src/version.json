@@ -3,8 +3,8 @@
 		"latest": "beta 04-02-2024-01"
 	},
 	"update_command": "", 
-	"new_features": "Tùy biến tham số so sánh cached kết quả",
-	"bug_fixed": "",	
+	"new_features": "Tùy biến tham số so sánh cache kết quả",
+	"bug_fixed": "Lỗi vặt",	
 	"improvements": "Tăng tốc độ xử lý TTS",	
 	"image_version": {
 		"latest": "22-09-2023"
