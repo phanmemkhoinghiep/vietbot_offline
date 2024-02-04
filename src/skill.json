@@ -401,6 +401,7 @@
 		"Secure-1PSID": "Zwg7SzgZ-UXLnJ-qBu2iV6nDguEmwe9CzOiTeDQJxPgu0K0ZQ1HBj19kHg3geNf4Ye581w.",
 		"Secure-1PSIDTS": "sidts-CjEBSAxbGdWnKLDXxUHIL7Y6HFZzWho-JyTiy7B9nmBEBhiDJkoXCro8aaEYOoJYhPYZEAA",
 		"Secure-1PSIDCC": "APoG2W810OI76FUO_99gSQdbIfClAk6Aa_Iw1JMClsiTvLI2zNBTq4OBpTl8vdSRpRvvHrKHnA",
+		"cache_timeout": 43200,	
 		"error_answer": "Không thực hiện được tra cứu Google Bard, hãy kiểm tra lại"
 	},
 	"gg_ass": {
