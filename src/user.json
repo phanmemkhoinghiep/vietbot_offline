@@ -29,7 +29,16 @@
             "request": "OK em",
             "command": null,
             "reply": "OK anh"
-        }		
-		
+        },		
+        {
+            "request": "anh về rồi",
+            "command": "thi hành về nhà",
+            "reply": "Chào mừng anh về nhà"
+        },			
+        {
+            "request": "ngủ thôi",
+            "command": "thi hành đi ngủ",
+            "reply": "Đã chuyển chế độ đi ngủ, chúc ngủ ngon"
+        }	
     ]
 }
