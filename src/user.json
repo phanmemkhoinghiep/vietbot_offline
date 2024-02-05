@@ -36,9 +36,14 @@
             "reply": "Chào mừng anh về nhà"
         },			
         {
+            "request": "anh đi đây",
+            "command": "thi hành ra ngoài",
+            "reply": null
+        },	
+        {
             "request": "ngủ thôi",
             "command": "thi hành đi ngủ",
             "reply": "Đã chuyển chế độ đi ngủ, chúc ngủ ngon"
-        }	
+        }	        
     ]
 }
