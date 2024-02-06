@@ -1,11 +1,11 @@
 {
 	"vietbot_version": {
-		"latest": "beta 04-02-2024-02"
+		"latest": "beta 06-02-2024-02"
 	},
 	"update_command": "", 
-	"new_features": "Cache cho Google Bard, tùy biến timeout của cache",
-	"bug_fixed": "Lỗi vặt",	
-	"improvements": "Tăng tốc độ xử lý TTS",	
+	"new_features": "",
+	"bug_fixed": "",	
+	"improvements": "Thay đổi thuật toán chọn tên thiết bị của Hass",	
 	"image_version": {
 		"latest": "22-09-2023"
 	}
