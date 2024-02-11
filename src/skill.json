@@ -397,6 +397,12 @@
 	"simsim": {
 		"error_answer": "Không thực hiện được tra cứu Sim sim, hãy kiểm tra lại"
 	},
+	"maika": {
+	        "username": "toiyeumaika@gmail.com",
+	        "password": "66886868@maikA",
+		 "cache_timeout": 43200,		
+	        "error_answer": "Không thực hiện được tra cứu OLLI Maika, hãy kiểm tra lại"
+	},		
 	"gg_bard": {
 		"Secure-1PSID": "Zwg7SzgZ-UXLnJ-qBu2iV6nDguEmwe9CzOiTeDQJxPgu0K0ZQ1HBj19kHg3geNf4Ye581w.",
 		"Secure-1PSIDTS": "sidts-CjEBSAxbGdWnKLDXxUHIL7Y6HFZzWho-JyTiy7B9nmBEBhiDJkoXCro8aaEYOoJYhPYZEAA",
