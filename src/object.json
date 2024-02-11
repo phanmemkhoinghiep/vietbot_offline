@@ -443,15 +443,18 @@
             "value": "năm xưa"
         }
     ],
-    "funny_story": [{
-            "value": "truyện cười"
+    "podcast": [{
+            "value": "kể truyện"
         },
         {
-            "value": "hài hước"
+            "value": "kể chuyện"
         },
         {
-            "value": "truyện hài"
-        }
+            "value": "câu chuyện"
+        },
+        {
+            "value": "câu truyện"
+        }	    
     ],
     "event": [{
         "value": "sự kiện"
