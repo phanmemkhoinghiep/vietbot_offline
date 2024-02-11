@@ -1,11 +1,11 @@
 {
 	"vietbot_version": {
-		"latest": "beta 06-02-2024-02"
+		"latest": "beta 11-02-2024-02"
 	},
 	"update_command": "", 
-	"new_features": "",
-	"bug_fixed": "",	
-	"improvements": "Thay đổi thuật toán chọn tên thiết bị của Hass",	
+	"new_features": "Tính năng Podcast",
+	"bug_fixed": "Tình trạng LED",	
+	"improvements": "Tối ưu thuật toán gọi LED",	
 	"image_version": {
 		"latest": "22-09-2023"
 	}
