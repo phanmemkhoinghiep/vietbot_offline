@@ -1,17 +1,16 @@
 {
     "smart_config": {
-        "block_updates": {
-            "vietbot_program": false,
-            "web_ui": false,
-            "web_ui_login": false
-        },
-        "web_ui_login": false,
         "mic": {
             "type": "default"
         },
-        "speaker": {
-            "type": "default",
-            "amixer_id": 2
+        "speaker": {            
+            "system": {
+                "amixer_id": 2
+            },
+            "cast": {
+                "name": "Pixel4XL-79",
+                "call_name": "điện thoại"
+            }
         },
         "led": {
             "type": "Vietbot AIO Board V2.0",
