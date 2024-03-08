@@ -873,14 +873,16 @@
             "value": "ngày xưa"
         }
     ],
+	"cast_player": [
+        {
+            "value": "loa ngoài"
+        }
+    ],
 	"media_player": [{
-            "value": "trình phát"
+            "value": "máy phát"
         },
         {
             "value": "bộ phát"
-        },
-        {
-            "value": "loa"
         }
     ]
 } 
