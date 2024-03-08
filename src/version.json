@@ -1,10 +1,10 @@
 {
 	"vietbot_version": {
-		"latest": "beta 19-02-2024-02"
+		"latest": "beta 08-03-2024-01"
 	},
 	"update_command": "", 
-	"new_features": "",
-	"bug_fixed": "ZingMP3 API mới, sửa lỗi vặt",	
+	"new_features": "Phát loa Cast",
+	"bug_fixed": "Sửa lỗi vặt",	
 	"improvements": "playback player",	
 	"image_version": {
 		"latest": "22-09-2023"
