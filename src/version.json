@@ -1,9 +1,9 @@
 {
 	"vietbot_version": {
-		"latest": "beta 11-03-2024-01"
+		"latest": "beta 12-03-2024-01"
 	},
 	"update_command": "", 
-	"new_features": "",
+	"new_features": "Lựa chọn nóng Cast Player mới",
 	"bug_fixed": "Sửa lỗi vặt",	
 	"improvements": "playback player",	
 	"image_version": {
