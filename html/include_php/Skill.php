@@ -9,6 +9,10 @@ $skillArray = json_decode($skillData, true);
 ?>
 <!DOCTYPE html>
 <html>
+	<!--
+Code By: Vũ Tuyển
+Facebook: https://www.facebook.com/TWFyaW9uMDAx
+-->
 <head>
     <title><?php echo $MYUSERNAME; ?>, Cấu Hình Skill VietBot</title>
 	    <meta charset="UTF-8">
@@ -41,7 +45,7 @@ $skillArray = json_decode($skillData, true);
     }
     
     ::-webkit-scrollbar {
-        width: 5px;
+        width: 12px;
     }
     
     ::-webkit-scrollbar-track {
@@ -231,7 +235,8 @@ $stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO);
 $stream_out2 = ssh2_fetch_stream($stream2, SSH2_STREAM_STDIO); 
 stream_get_contents($stream_out1); 
 stream_get_contents($stream_out2); 
-header("Location: $PHP_SELF");
+echo '<meta http-equiv="refresh" content="1">';
+//header("Location: $PHP_SELF");
 }
 // Đường dẫn đến thư mục "Backup_Config"
 $backupDirz = "Backup_Skill/";

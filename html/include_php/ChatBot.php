@@ -5,6 +5,10 @@ include "../Configuration.php";
 ?>
 <!DOCTYPE html>
 <head>
+	<!--
+Code By: Vũ Tuyển
+Facebook: https://www.facebook.com/TWFyaW9uMDAx
+-->
   <title><?php echo $MYUSERNAME; ?> ChatBot</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -16,7 +20,7 @@ include "../Configuration.php";
         justify-content: center;
         /*   align-items: center; */
         /*  height: 100vh;*/
-        
+         font-size: 15px;
         background-color: #d2d8bb;
 		 
     }
@@ -30,7 +34,7 @@ include "../Configuration.php";
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            height: 70vh;
+            height: 99vh;
         }
     #chatbox {
         flex-grow: 1;
@@ -46,7 +50,7 @@ include "../Configuration.php";
        background-color: #f0f0f0;
     }
         .chat-form-button {
-		padding-bottom: 10px; 
+		padding-bottom: 30px; 
         background-color: #f0f0f0;
     }
     .chat-input {
@@ -184,6 +188,13 @@ include "../Configuration.php";
             margin-left: 0;
         }
     }
+	 .bi-broadcast-pin {
+  color: blue;
+}
+ .bi-broadcast-pin:hover {
+  color: red;
+  cursor: pointer;
+}
 </style>
 <?php	
 if (isset($Web_UI_Login) && $Web_UI_Login === true) {

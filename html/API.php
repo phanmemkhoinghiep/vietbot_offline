@@ -8,6 +8,8 @@
  */
 include "Configuration.php";
 include "./include_php/Fork_PHP/INFO_OS.php";
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json");
 $version = "1.1";
 
 //$Web_ui_jSon = json_decode(file_get_contents("assets/json/webui_.json"), true);
@@ -15,7 +17,25 @@ $version = "1.1";
 //$Enable_API = $Web_ui_jSon['enable_api'];
 $Enable_API = $Web_UI_Enable_Api;
 //echo "$apiActive";
+
+// Lấy thông tin về model Raspberry Pi
+$modelInfo = trim(file_get_contents('/proc/device-tree/model'));
+
+// Kiểm tra xem có thông tin về model không
+if (!empty($modelInfo)) {
+   $infomodel = $modelInfo;
+} else {
+    $infomodel = null;
+}
+
+
 $information = array(
+		'username' => $MYUSERNAME,
+		'current_user' => $GET_current_USER,
+		'hostname' => $HostName,
+		'server_ip' => $serverIP,
+		'info_model' => $infomodel,
+		'php_uname' => php_uname(),
         'api_version' => $version,
         'github_vietbot_offline' => $GitHub_VietBot_OFF,
         'ui_vietbot' => $UI_VietBot,
@@ -31,6 +51,14 @@ $information = array(
 		
 		)
 );
+
+if (isset($_GET['vietbotscan'])) {
+    echo json_encode(array(
+        'information' => $information
+    ));
+	exit();
+} 
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405); // Method Not Allowed
     echo json_encode(array(

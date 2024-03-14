@@ -11,25 +11,28 @@
 	<script src="../assets/js/jquery-3.6.1.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
     
+
+    <div id="loading-overlay">
+        <img id="loading-icon" src="../assets/img/Loading.gif" alt="Loading...">
+        <div id="loading-message">Đang tiến hành, vui lòng đợi...</div>
+    </div>
+	
     <script>
         $(document).ready(function() {
             $('#my-form').on('submit', function() {
-                // Hiển thị biểu tượng loading
+                // Hiển thị biểu tượng loading 
                 $('#loading-overlay').show();
 
                 // Vô hiệu hóa nút gửi
                 $('#submit-btn').attr('disabled', true);
             });
         });
-    </script>
-    <div id="loading-overlay">
-        <img id="loading-icon" src="../assets/img/Loading.gif" alt="Loading...">
-        <div id="loading-message">Đang tiến hành, vui lòng đợi...</div>
-    </div>
-	
-	
+    </script>	
 	
 <?php
+$timestamp = date('d_m_Y_His'); 
+$backupDir = $DuognDanUI_HTML.'/ui_update/backup'; // Đường dẫn thư mục sao lưu lại file sao lưu
+
 echo '<center><div id="messageee"></div></center>';
 if (isset($_POST['install_lib_gdrive'])) {
 $compressedFilePath = $DuognDanUI_HTML.'/assets/lib_php/lib_Google_APIs_Client_php.tar.gz';
@@ -116,9 +119,9 @@ if (file_exists($autoloadPath) && is_file($autoloadPath)) {
         
         // Kiểm tra phiên bản của thư viện (nếu cần)
         if (defined('Google_Client::LIBVER')) {
-            $libraryVersion = Google_Client::LIBVER;
+            //$libraryVersion = Google_Client::LIBVER;
            // echo " Phiên bản: $libraryVersion";
-            $messageeee .= "<font color=red>Phiên Bản Google APIs Client: <b>$libraryVersion</b></font>";
+            //$messageeee .= "<font color=red>Phiên Bản Google APIs Client: <b>$libraryVersion</b></font>";
             
         }
     } else {
@@ -150,6 +153,47 @@ if (file_exists($autoloadPath) && is_file($autoloadPath)) {
 	exit();
 }
 
+
+
+//Chmod 777
+if (isset($_POST['set_full_quyen'])) {
+$connection = ssh2_connect($serverIP, $SSH_Port);
+if (!$connection) {die($E_rror_HOST);}
+if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
+$stream1 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$Path_Vietbot_src);
+stream_set_blocking($stream1, true);
+$stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO);
+stream_get_contents($stream_out1);
+echo '<meta http-equiv="refresh" content="1">';
+//header("Location: $PHP_SELF"); 
+exit;
+}
+// Thư mục cần kiểm tra 777
+$directories = array("$DuognDanUI_HTML","$DuognDanThuMucJson");
+function checkPermissions($path, &$hasPermissionIssue) {
+    $files = scandir($path);
+    foreach ($files as $file) {
+		// bỏ qua thư mục tts_saved và __pycache__ check quyền
+        if ($file === '.' || $file === '..' || $file === 'tts_saved' || $file === '__pycache__' || $file === 'backup') {continue;}
+        $filePath = $path . '/' . $file;
+        $permissions = fileperms($filePath);
+        if ($permissions !== false && ($permissions & 0777) !== 0777) {
+            if (!$hasPermissionIssue) {
+               // echo "<br/><center><h3 class='text-danger'>Một Số File,Thư Mục Trong <b>$path</b> Không Có Quyền Can Thiệp.<h3><br/>";
+			   echo "<br/><center>Phát hiện thấy một số nội dung bị thay đổi quyền hạn.<br/>";
+			echo "<form method='post' id='my-form' action=''> <button type='submit' name='set_full_quyen' class='btn btn-success'>Cấp Quyền</button></form></center><br/>";
+                $hasPermissionIssue = true;
+				exit();
+			}	
+            break;}
+        if (is_dir($filePath)) {
+            checkPermissions($filePath, $hasPermissionIssue);
+        }}}
+// Kiểm tra từng thư mục 777
+foreach ($directories as $directory) {
+    $hasPermissionIssue = false;
+    checkPermissions($directory, $hasPermissionIssue);
+}
 
 ?>
 	
@@ -267,7 +311,7 @@ function copyRecursiveExclude($source, $destination, $excludeExtensions = array(
                     copy($sourceFile, $destinationFile);
                 }
             }
-        }
+        } 
     }
     closedir($dir);
 }
@@ -288,42 +332,29 @@ function deleteDirectory($directory) {
     }
     rmdir($directory);
 }
-//Chmod 777
-if (isset($_POST['set_full_quyen'])) {
-$connection = ssh2_connect($serverIP, $SSH_Port);
-if (!$connection) {die($E_rror_HOST);}
-if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
-$stream1 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$Path_Vietbot_src);
-stream_set_blocking($stream1, true);
-$stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO);
-stream_get_contents($stream_out1);
-header("Location: $PHP_SELF"); exit;
-}
-// Thư mục cần kiểm tra 777
-$directories = array("$DuognDanUI_HTML","$DuognDanThuMucJson");
-function checkPermissions($path, &$hasPermissionIssue) {
-    $files = scandir($path);
+//Xóa các file và thư mục  con, giữ lại thư mục dích
+function deleteContents($directory) {
+    if (!is_dir($directory)) {
+        return false;
+    }
+
+    $files = glob($directory . '/*');
+
     foreach ($files as $file) {
-		// bỏ qua thư mục tts_saved và __pycache__ check quyền
-        if ($file === '.' || $file === '..' || $file === 'tts_saved' || $file === '__pycache__' || $file === 'backup') {continue;}
-        $filePath = $path . '/' . $file;
-        $permissions = fileperms($filePath);
-        if ($permissions !== false && ($permissions & 0777) !== 0777) {
-            if (!$hasPermissionIssue) {
-               // echo "<br/><center><h3 class='text-danger'>Một Số File,Thư Mục Trong <b>$path</b> Không Có Quyền Can Thiệp.<h3><br/>";
-			   echo "<center>Phát hiện thấy một số nội dung bị thay đổi quyền hạn.<br/>";
-			echo "<form method='post' id='my-form' action='".$PHP_SELF."'> <button type='submit' name='set_full_quyen' class='btn btn-success'>Cấp Quyền</button></form></center>";
-                $hasPermissionIssue = true;
-				exit();
-			}	
-            break;}
-        if (is_dir($filePath)) {
-            checkPermissions($filePath, $hasPermissionIssue);
-        }}}
-// Kiểm tra từng thư mục 777
-foreach ($directories as $directory) {
-    $hasPermissionIssue = false;
-    checkPermissions($directory, $hasPermissionIssue);
+        is_dir($file) ? deleteDirectorySub($file) : unlink($file);
+    }
+
+    //echo 'Đã xóa tất cả nội dung trong thư mục: ' . $directory . '<br>';
+}
+
+function deleteDirectorySub($directory) {
+    if (!is_dir($directory)) {
+        return false;
+    }
+
+    deleteContents($directory);
+    rmdir($directory);
+   // echo 'Đã xóa thư mục: ' . $directory . '<br>';
 }
 
 if (isset($_POST['checkforupdates_ui'])) {
@@ -360,7 +391,7 @@ if ($remoteValue !== $localValue) {
             echo "</script>";
 }
 }
-
+$startCheckboxReload = "";
 if (isset($_POST['ui_update'])) {
 	if (isset($block_updates_web_ui) && $block_updates_web_ui === true) {
         //echo "Checkbox được tích và không cho cập nhật.";
@@ -369,9 +400,16 @@ if (isset($_POST['ui_update'])) {
             echo "messagee.innerHTML += '<font color=red><i>Cập Nhật <b>Web UI</b> Đã Bị Tắt, Cần Đi Tới Tab <b>Cấu Hình Config</b> Để Bỏ Tích</i></font><br/>';";
             echo "</script>";
     } else {
-$backupDir = $DuognDanUI_HTML.'/ui_update/backup'; // Đường dẫn thư mục sao lưu lại file sao lưu
-$timestamp = date('d_m_Y_His'); 
-$startCheckboxReload = $_POST['startCheckboxReload'];
+
+//$startCheckboxReload = $_POST['startCheckboxReload'];
+if (isset($_POST['startCheckboxReload'])) {
+    // Nếu tồn tại, gán giá trị từ $_POST vào biến 
+    $startCheckboxReload = $_POST['startCheckboxReload'];
+}
+
+
+
+
 $backupFile = $backupDir . '/ui_backup_' . $timestamp . '.tar.gz';
 $excludeArgs = '--exclude="*.tar.gz" --exclude="backup_update/extract/UI_VietBot-main/*"';
 $tarCommand = 'tar -czvf ' . $backupFile . ' ' . $excludeArgs . ' -C ' . dirname($DuognDanUI_HTML) . ' ' . basename($DuognDanUI_HTML);
@@ -399,6 +437,15 @@ if ($returnCode === 0) {
             echo "</script>";
 	
 }
+
+//sao chép file Play_List.json
+$source_Play_List = "$DuognDanUI_HTML/Multimedia/Play_List.json";
+$destination_Play_List = "$DuognDanUI_HTML/ui_update/dowload_extract/Play_List.json";
+
+$command_Play_List = "cp $source_Play_List $destination_Play_List";
+exec($command_Play_List);
+
+
 //END sao Lưu
 $url = $UI_VietBot.'/archive/master.zip';
 $zipFile = $DuognDanUI_HTML.'/ui_update/dowload_extract/UI_VietBot.zip';
@@ -421,15 +468,37 @@ if ($zip) {
         if (!is_dir($dirPath)) {
             mkdir($dirPath, 0777, true);
         }
-        // Mở mục trong tập tin zip
-        if (zip_entry_open($zip, $zipEntry, "r")) {
-            // Đọc nội dung mục trong tập tin zip
-            $entryContent = zip_entry_read($zipEntry, zip_entry_filesize($zipEntry));
-            // Lưu nội dung vào đường dẫn cụ thể
-            file_put_contents($entryPath, $entryContent);
-            // Đóng mục trong tập tin zip
-            zip_entry_close($zipEntry);
+		// Mở mục trong tập tin zip
+		if (zip_entry_open($zip, $zipEntry, "r")) {
+    // Lấy thông tin về mục trong tập tin zip
+    $entryName = zip_entry_name($zipEntry);
+    
+    // Kiểm tra xem mục có phải là thư mục không
+    if (substr($entryName, -1) === "/") {
+        // Đây là một thư mục, hãy tạo thư mục nếu nó không tồn tại
+        if (!is_dir($entryPath)) {
+            mkdir($entryPath, 0777, true);
         }
+    } else {
+        // Đây là một tập tin, hãy đảm bảo thư mục chứa nó tồn tại
+        $entryDirectory = dirname($entryPath);
+        if (!is_dir($entryDirectory)) {
+            mkdir($entryDirectory, 0777, true);
+        }
+
+        // Đọc nội dung mục trong tập tin zip
+        $entryContent = zip_entry_read($zipEntry, zip_entry_filesize($zipEntry));
+
+        // Lưu nội dung vào đường dẫn cụ thể
+        if (file_put_contents($entryPath, $entryContent) === false) {
+            // Xử lý lỗi khi ghi tập tin
+            echo "Lỗi khi ghi tập tin $entryPath";
+        }
+    }
+
+    // Đóng mục trong tập tin zip
+    zip_entry_close($zipEntry);
+		}
     }
     // Đóng tập tin zip
     zip_close($zip);
@@ -451,7 +520,14 @@ if ($zip) {
             echo "</script>";
 	
 }
-//Chmod 777 khi chạy xong backup
+
+//sao chép lại file Play_List.json
+$command_Play_List_back = "cp $destination_Play_List $source_Play_List";
+$command_Play_List_back_del = "rm $destination_Play_List";
+exec($command_Play_List_back);
+exec($command_Play_List_back_del);
+
+//Chmod 777 khi chạy xong backup 
 $connection = ssh2_connect($serverIP, $SSH_Port);
 if (!$connection) {die($E_rror_HOST);}
 if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
@@ -476,6 +552,19 @@ if (isset($Web_UI_Enable_GDrive_Backup) && $Web_UI_Enable_GDrive_Backup === true
     $jsonFilePath = $DuognDanUI_HTML.'/GoogleDrive/client_secret.json';
     $jsonData = file_get_contents($jsonFilePath);
     $DataArrayClient_Secret = json_decode($jsonData, true);
+// Kiểm tra lỗi JSON
+if (json_last_error() !== JSON_ERROR_NONE) {
+    // Có lỗi khi giải mã JSON
+	$json_last_error_msgg = json_last_error_msg();   
+echo "<script>";
+echo "var MessageGDriverrr = document.getElementById('MessageGDriver');";
+echo "MessageGDriverrr.innerHTML += '<br/><font color=red>Sai cấu trúc tệp json /GoogleDrive/client_secret.json, mã lỗi: $json_last_error_msgg</font>';";
+echo "MessageGDriverrr.innerHTML += '<br/><font color=red>Kiểm tra lại dữ liệu nhập vào ở tab <b>Config/Cấu Hình</b></font>';";
+echo "MessageGDriverrr.innerHTML += '<br/><font color=red>Sẽ không có file backup nào được tải lên</font>';";
+echo "</script>";
+	
+
+}
     if ($DataArrayClient_Secret === null) {
        $get_loi_e_Messager = $e->getMessage();
 			echo "<script>";
@@ -555,7 +644,7 @@ if (isset($Web_UI_Enable_GDrive_Backup) && $Web_UI_Enable_GDrive_Backup === true
     } else {
        		echo "<script>";
             echo "var MessageGDriverrr = document.getElementById('MessageGDriver');";
-            echo "MessageGDriverrr.innerHTML += '<font color=red><b>Google Drive Auto Backup</b> Tệp token.json Lỗi, Cần Cấu Hình Xác Thực Lại.<br/></font>';";
+            echo "MessageGDriverrr.innerHTML += '<font color=red><b>Google Drive Auto Backup</b> Tệp token.json Lỗi, Token đã hết hạn hoặc bị thu hồi. Cần Cấu Hình Xác Thực Lại.<br/></font>';";
             echo "MessageGDriverrr.innerHTML += '<font color=red><b>Sẽ không có file backup nào được tải lên<br/></font>';";
             echo "MessageGDriverrr.innerHTML += '<font color=red><a href=../#Google_Drive_Auto_Backup target=_bank>Nhấn vào đây để tới trang Cấu Hình Xác Thực</a><br></font>';";
             echo "MessageGDriverrr.innerHTML += '<font color=red>Xác thực xong bạn cần quay lại đây để <b>Cập Nhật</b> lại.<br/><br></font>';";
@@ -677,20 +766,6 @@ if (isset($Web_UI_Enable_GDrive_Backup) && $Web_UI_Enable_GDrive_Backup === true
             echo "</script>";
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 if (@$_POST['audioo_playmp3_success'] === "playmp3_success") {
 	echo '<audio style="display: none;" id="myAudio_success" controls autoplay>';
     echo '<source src="../assets/audio/ui_update_success.mp3" type="audio/mpeg">';
@@ -705,13 +780,65 @@ if (@$_POST['audioo_playmp3_success'] === "playmp3_success") {
 ?>
 
 <?php
-
-
-
-
-
+} 
 }
+
+if (isset($_POST['upload_restors_ui'])) {
+    // Kiểm tra nếu biểu mẫu đã được gửi và có file được chọn
+    if (!empty($_FILES['file_restos_upload']['name'])) {
+        $uploadDir = "$DuognDanUI_HTML/ui_update/dowload_extract/"; // Thay đổi đường dẫn tải lên của bạn
+        $uploadedFileName = 'upload_restors_ui.tar.gz'; // Thay đổi tên tệp tin mới
+        
+        // Kiểm tra xem tên tệp có bắt đầu bằng "ui_backup_"
+        if (strpos($_FILES['file_restos_upload']['name'], 'ui_backup_') === 0) {
+            $uploadFile = $uploadDir . $uploadedFileName;
+            
+            // Di chuyển tập tin đã tải lên đến thư mục chỉ định
+            if (move_uploaded_file($_FILES['file_restos_upload']['tmp_name'], $uploadFile)) {
+                //echo 'Tập tin hợp lệ và đã được tải lên thành công: ' . $uploadedFileName;
+                // Thực hiện chmod cho tệp tin .tar.gz và các tệp tin khi giải nén
+                chmod($uploadFile, 0777);
+				//Giải nén
+				extractTarGz($uploadFile, $uploadDir);
+                // Xóa tệp tin nén và thư mục đã giải nén
+                unlink($uploadFile);
+                // Kiểm tra xem trong thư mục $uploadDir đã có thư mục "html" hay không
+                $htmlDirectory = $uploadDir . 'html';
+                if (is_dir($htmlDirectory)) {
+                    //echo 'Thư mục "html" đã tồn tại sau khi giải nén.';
+					copyRecursiveExclude($htmlDirectory, $DuognDanUI_HTML, array('.zip', '.tar.gz'));
+					//deleteDirectory($htmlDirectory);
+					shell_exec("rm $DuognDanUI_HTML/ui_update/dowload_extract/README.md");
+					deleteContents($uploadDir);
+					//SSH Chmod file
+					$connection = ssh2_connect($serverIP, $SSH_Port);
+					if (!$connection) {die($E_rror_HOST);}
+					if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
+					$stream1 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$Path_Vietbot_src);
+					stream_set_blocking($stream1, true);
+					$stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO);
+					stream_get_contents($stream_out1);
+					//echo '<meta http-equiv="refresh" content="1">';   
+					//header("Location: $PHP_SELF"); 
+					//exit;
+					echo "<center><font color=green>Khôi phục dữ liệu Web UI thành công, hãy tải lại trang để áp dụng</font></center>";
+                } else {
+					deleteContents($uploadDir);
+                    echo '<center><font color=red>Khôi Phục Thất Bại, Thư mục "html" không tồn tại sau khi giải nén.</font></center>';
+                }
+                //echo 'Tệp tin đã được giải nén và cấp quyền chmod thành công';
+            } else {
+                echo '<center><font color=red>Tải lên thất bại: ' . $_FILES['file_restos_upload']['error'] . '</font></center>';
+            }
+        } else {
+            echo '<center><font color=red>Lỗi! Tên tệp không hợp lệ. Vui lòng chọn tệp backup được Web UI tạo ra và có tên bắt đầu bằng "ui_backup_"</font></center>';
+        }
+    } else {
+        echo '<center><font color=red>Hãy chọn file tải lên để khôi phục Web UI</font></center>';
+    }
 }
+
+ 
 if (isset($_POST['restors_ui'])) {
     $selectedFile = $_POST['tarFile'];
     if ($selectedFile === "....") {
@@ -756,6 +883,58 @@ if (isset($_POST['download']) && isset($_POST['tarFile'])) {
         echo "<script>window.open('$targetLink', '_blank');</script>";
     }
 }
+
+if (isset($_POST['tao_ban_sao_luu_va_tai_xuong'])) {
+	
+$backupFile = $backupDir . '/ui_backup_' . $timestamp . '.tar.gz';
+$excludeArgs = '--exclude="*.tar.gz" --exclude="backup_update/extract/UI_VietBot-main/*"';
+$tarCommand = 'tar -czvf ' . $backupFile . ' ' . $excludeArgs . ' -C ' . dirname($DuognDanUI_HTML) . ' ' . basename($DuognDanUI_HTML);
+exec($tarCommand, $output, $returnCode);
+if ($returnCode === 0) {
+    chmod($backupFile, 0777);
+  //echo 'Tạo bản sao lưu giao diện thành công, hãy tải lại trang để áp dụng';
+    $backupFiles = glob($backupDir . '/*.tar.gz');
+    $numBackupFiles = count($backupFiles);
+    if ($numBackupFiles > $maxBackupFilesUI) {
+        usort($backupFiles, function ($a, $b) {
+            return filemtime($a) - filemtime($b);
+        });
+        $filesToDelete = array_slice($backupFiles, 0, $numBackupFiles - $maxBackupFilesUI);
+        foreach ($filesToDelete as $file) {
+            unlink($file);
+			$basenameeee = basename($file);
+           // $messagee .= 'Backup đạt giới hạn, đã xóa tệp tin sao lưu cũ: ' . $basenameeee . '\n';
+        }
+    }
+	//Tải xuống
+    $filePath = '/ui_update/backup/' . basename($backupFile); // Đường dẫn đến thư mục chứa tệp tin
+    if (basename($backupFile) === "....") {
+        // $message .= '<font color=red>Vui lòng chọn file cần tải xuống!</font>';
+		 	echo "<script>";
+            echo "var message = document.getElementById('message');";
+            echo "message.innerHTML += '<font color=red>Lỗi, Không tìm thấy file backup để tải xuống</font><br/>';";
+            echo "</script>";
+    } else {
+        // Tạo liên kết tới trang mục tiêu trong tab mới
+        $targetLink = "http://$serverIP$filePath"; // Đặt đường dẫn mục tiêu tại đây
+        echo "<script>window.open('$targetLink', '_blank');</script>";
+		echo "<script>";
+            echo "var message = document.getElementById('message');";
+            echo "message.innerHTML += '<font color=green>Đã tạo bản sao lưu mới và tải xuống thành công</font><br/>';";
+            echo "</script>";
+    }
+	
+} else { 
+			echo "<script>";
+            echo "var messagee = document.getElementById('messagee');";
+            echo "messagee.innerHTML += '<font color=red>Có lỗi xảy ra khi tạo bản sao lưu.</font><br/>';";
+            echo "</script>";
+	
+}
+	
+}
+
+
 ?>
 
 
@@ -763,7 +942,7 @@ if (isset($_POST['download']) && isset($_POST['tarFile'])) {
 
 
 
-	   <div class="row justify-content-center"><div class="col-auto"><div class="input-group">
+<br/>	   <div class="row justify-content-center"><div class="col-auto"><div class="input-group">
 <?php
 $directory = $DuognDanUI_HTML.'/ui_update/backup';
 // Lấy danh sách các tệp .tar.gz trong thư mục
@@ -782,12 +961,40 @@ $selectDropdown .= '</select>';
 echo $selectDropdown; 
 ?>
 <input type="submit" name="download" class="btn btn-primary" value="Tải xuống">
-<input type="submit" name="restors_ui" class="btn btn-warning" value="Khôi Phục">
+<input type="submit" name="restors_ui" class="btn btn-warning" value="Khôi Phục"></form>
+
 </div>
 </div>
+</div>
+<div class="row justify-content-center">
+<div class="col-auto">
+<br/>
+ <form action="" id="form_update" method="post" enctype="multipart/form-data">
+ <b>Tải lên tệp tin khôi phục:</b>
+<div class="input-group">
+
+  
+    <input type="file" class="form-control"  name="file_restos_upload" id="file_restos_upload" accept=".tar.gz">
+
+  
+    <button class="btn btn-primary" name="upload_restors_ui" type="submit">Tải Lên</button>
+  
+ 
 </div><br/>
+<center>
+<button class="btn btn-success" name="tao_ban_sao_luu_va_tai_xuong" type="submit">Tạo Mới Bản Sao Lưu WEB UI Và Tải Xuống</button>
+
+</center>
+    </form> 
+	
+
+
+</div>
+</div>
+
+<br/>
   </div>
-  </form>
+  
  <br/> <p class="right-align"><b>Phiên bản giao diện:  <font color=red><?php echo $dataVersionUI->ui_version->current; ?></font></b></p>
   
 
@@ -844,6 +1051,16 @@ startCheckbox.addEventListener('change', function() {
   }
 });
 </script>
+    <script>
+        $(document).ready(function() {
+            $('#form_update').on('submit', function() {
+                // Hiển thị biểu tượng loading 
+                $('#loading-overlay').show();
 
+                // Vô hiệu hóa nút gửi
+                $('#submit-btn').attr('disabled', true);
+            });
+        });
+    </script>	
 	</body>
 	</html>

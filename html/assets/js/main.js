@@ -924,13 +924,35 @@ function mouseMagicCursor(){
 };
 */
 /*-------------------------  Color Panllet  -------------------------*/
+/*
 function ColorPallet() {
 
     "use strict";
 
     $("#color-switcher .pallet-button").click(function () {
-        $("#color-switcher .color-pallet").toggleClass('show')
+        $("#color-switcher .color-pallet").toggleClass('show');
+		console.log("show");
     })
+
+}
+*/
+
+
+function ColorPallet() {
+    "use strict";
+
+    $("#color-switcher .pallet-button .cp-toggle").click(function (event) {
+        event.stopPropagation(); // Ngăn chặn sự lan truyền của sự kiện click
+        
+        // Kiểm tra nếu color-pallet đã được hiển thị thì ẩn đi, ngược lại thì hiển thị
+        $("#color-switcher .color-pallet").toggleClass('show');
+        console.log("show");
+    });
+
+    // Ngăn chặn sự lan truyền của sự kiện click từ các phần tử khác trong .pallet-button
+    $("#color-switcher .pallet-button").not(".cp-toggle").click(function (event) {
+        event.stopPropagation(); // Ngăn chặn sự lan truyền của sự kiện click
+    });
 }
 
 

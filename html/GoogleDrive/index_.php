@@ -4,8 +4,8 @@
 //error_reporting(E_ALL);
 //ini_set('display_errors', 1);
 ?>
-  <body>
-      <script>
+<body>
+    <script>
         $(document).ready(function() {
             $('#my-form').on('submit', function() {
                 // Hiển thị biểu tượng loading
@@ -16,34 +16,110 @@
             });
         });
     </script>
-	<script>
-    function selectAllText() {
-        var input = document.getElementById("boidennoidung");
-        input.select();
-		try {
-            document.execCommand("copy");
-          //  alert("Nội dung đã được sao chép thành công!");
-        } catch (err) {
-            //console.error('Lỗi khi sao chép nội dung: ', err);
-           // alert("Lỗi khi sao chép nội dung. Vui lòng thử lại.");
+    <script>
+        $(document).ready(function() {
+            $('#form_dowload_restors').on('submit', function() {
+                // Hiển thị biểu tượng loading
+                $('#loading-overlay').show();
+
+                // Vô hiệu hóa nút gửi
+                $('#submit-btn').attr('disabled', true);
+            });
+        });
+    </script>
+    <script>
+        function selectAllText() {
+            var input = document.getElementById("boidennoidung");
+            input.select();
+            try {
+                document.execCommand("copy");
+                //  alert("Nội dung đã được sao chép thành công!");
+            } catch (err) {
+                //console.error('Lỗi khi sao chép nội dung: ', err);
+                // alert("Lỗi khi sao chép nội dung. Vui lòng thử lại.");
+            }
         }
-    }
-	
-</script>
+
+        function openNewTab(button) {
+            // Lấy giá trị của thuộc tính data-url-link
+            var urlToOpen = button.getAttribute('data-url-link');
+
+            if (urlToOpen) {
+                // Mở đường dẫn trong tab mới nếu giá trị tồn tại
+                window.open(urlToOpen, '_blank');
+            } else {
+                // Xử lý trường hợp không có giá trị data-url-link
+                alert('Không có đường dẫn được cung cấp');
+                console.error('Không có đường dẫn được cung cấp.');
+            }
+        }
+    </script>
     <div id="loading-overlay">
         <img id="loading-icon" src="../assets/img/Loading.gif" alt="Loading...">
-       <div id="loading-message">Đang tiến hành, vui lòng đợi...</div> 
-         
+        <div id="loading-message">Đang tiến hành, vui lòng đợi...</div>
+
     </div>
-  <center><h4>Google Drive Auto Backup Vietbot</h4></center><br/>
-  
-	<center> 
-	<div id="messageee"></div></center>
-	
-	
+    <center>
+        <h4>Google Drive Auto Backup Vietbot</h4>
+    </center>
+    <br/>
+
+    <center>
+        <div id="messageee"></div>
+    </center>
 
 
 <?php
+
+function extractTarGz($file, $destination) {
+    $command = "tar -xzf $file -C $destination";
+    exec($command);
+}
+function copyRecursiveExclude($source, $destination, $excludeExtensions = array('.zip', '.tar.gz')) {
+    $dir = opendir($source);
+    @mkdir($destination);
+
+    while (($file = readdir($dir))) {
+        if (($file != '.') && ($file != '..')) {
+            $sourceFile = $source . '/' . $file;
+            $destinationFile = $destination . '/' . $file;
+
+            if (is_dir($sourceFile)) {
+                copyRecursiveExclude($sourceFile, $destinationFile, $excludeExtensions);
+            } else {
+                $extension = pathinfo($sourceFile, PATHINFO_EXTENSION);
+                if (!in_array($extension, $excludeExtensions)) {
+                    copy($sourceFile, $destinationFile);
+                }
+            }
+        } 
+    }
+    closedir($dir);
+}
+function deleteContents($directory) {
+    if (!is_dir($directory)) {
+        return false;
+    }
+
+    $files = glob($directory . '/*');
+
+    foreach ($files as $file) {
+        is_dir($file) ? deleteDirectorySub($file) : unlink($file);
+    }
+
+    //echo 'Đã xóa tất cả nội dung trong thư mục: ' . $directory . '<br>';
+}
+
+function deleteDirectorySub($directory) {
+    if (!is_dir($directory)) {
+        return false;
+    }
+
+    deleteContents($directory);
+    rmdir($directory);
+   // echo 'Đã xóa thư mục: ' . $directory . '<br>';
+}
+$messageeee = '';
 if (isset($_POST['install_lib_gdrive'])) {
 $compressedFilePath = $DuognDanUI_HTML.'/assets/lib_php/lib_Google_APIs_Client_php.tar.gz';
 $extractedFolderPath = $DuognDanUI_HTML.'/assets/lib_php/';
@@ -248,8 +324,19 @@ $tokenDatajjj = json_decode(file_get_contents($tokenFilePath), true);
 		echo '<form method="POST" id="my-form" action="">';
         echo '<center><h4><font color=green>Google Drive Auto Backup hiện đang hợp lệ và hoạt động bình thường!</font></h4><br/>';
 		echo "<button name='reset_token' class='btn btn-danger'>Reset Token</button>";
-		echo "<a href='$PHP_SELF'><button class='btn btn-primary'>Làm Mới</button></a></center>";
+		echo "<a href='$PHP_SELF'><button class='btn btn-primary'>Làm Mới</button></a>";
+		echo "<button name='list_backup_web_ui' class='btn btn-success'>List Backup WEB UI</button>";
+		echo "<button name='list_back_up_vietbot' class='btn btn-warning'>List Backup Vietbot</button></center><br/>";
+		
 		echo "</form>";
+		$driveService = new Google_Service_Drive($client);
+		// Lấy thông tin người dùng đang đăng nhập
+		$about = $driveService->about->get(array('fields' => 'user'));
+		// Hiển thị tên tài khoản
+		$accountName = $about->getUser()->getDisplayName();
+		//echo 'Tên tài khoản: ' . $accountName;
+		$messageeee .= "<br/><font color=blue>Tên tài khoản: <b>$accountName</b></font>";
+		
     }
 	
     } else {
@@ -270,7 +357,12 @@ $tokenDatajjj = json_decode(file_get_contents($tokenFilePath), true);
             echo '<font color=green>Vui lòng xác thực ứng dụng với <b>Vietbot</b> bằng cách truy cập đường dẫn sau và nhập mã ủy quyền:</font><br/><br/>';
 			echo 'Sao chép địa chỉ bên dưới đây và dán vào trình duyệt để <a href="' . $authUrl . '" target="_bank">Lấy Mã Ủy Quyền</a>:<br/>';
             echo '<div class="input-group mb-3"><input type="text" id="boidennoidung" class="form-control" value="' . $authUrl . '" aria-describedby="basic-addon2">
-			<button onclick="selectAllText()" class="btn btn-success">Sao Chép</button></div><br>';
+			<button onclick="selectAllText()" class="btn btn-primary">Sao Chép</button>
+			
+<button type="button" class="btn btn-success" data-url-link="'.$authUrl.'" onclick="openNewTab(this)">Đi Tới</button>
+			
+			</div>
+			<br>';
 			echo '<form method="POST" id="my-form" action="">Nhập Mã Ủy Quyền <font color=red>*</font>:<br/><div class="input-group mb-3">
 			<input type="text" name="code_token" class="form-control" placeholder="Nhập mã ủy quyền vào đây" aria-describedby="basic-addon2" required>
 			<div class="input-group-append"><input class="btn btn-primary" type="submit" value="Xác thực"></div></div></form>';
@@ -306,10 +398,252 @@ else {
     echo "<font color=red><h4><center>Cần phải được bật <b>Google Drive Auto Backup</b> trong tab <b>Config/Cấu Hình</b> để xem và thiết lập</center></h4></font><br/>";
 	echo "<center><a href='$PHP_SELF'><button class='btn btn-primary'>Tải lại</button></a></center>";
 }
+
+if (isset($_POST['dowload_file_end_restor_ui'])) {
+	$serviceRestorUI = new Google_Service_Drive($client);
+	$fileId = $_POST['dowload_file_end_restor_ui'];
+if (empty($fileId)) {
+    echo '<center><font color=red>Có lỗi xả ra, Không lấy được ID của tệp. Vui lòng thử lại</font></center>';
+} else {
+    try {
+        // Lấy thông tin về file
+        $file = $serviceRestorUI->files->get($fileId);
+
+        // Lấy nội dung của file
+        $content = $serviceRestorUI->files->get($fileId, ['alt' => 'media']);
+		
+		$ExtractDir = $DuognDanUI_HTML.'/ui_update/dowload_extract/';
+        // Thay đổi đường dẫn lưu file
+        $savePath = $ExtractDir.$file->getName();
+		
+        // Lưu file vào ổ đĩa cục bộ
+        file_put_contents($savePath, $content->getBody()->getContents());
+		chmod($savePath, 0777); 
+		//giải nén tệp tar.gz
+		extractTarGz($savePath, $ExtractDir);
+                // Xóa tệp tin nén và thư mục đã giải nén
+                unlink($savePath); 
+                // Kiểm tra xem trong thư mục $ExtractDir đã có thư mục "html" hay không
+                $htmlDirectory = $ExtractDir . 'html';
+                if (is_dir($htmlDirectory)) { 
+                    //echo 'Thư mục "html" đã tồn tại sau khi giải nén.';
+					copyRecursiveExclude($htmlDirectory, $DuognDanUI_HTML, array('.zip', '.tar.gz'));
+					//deleteDirectory($htmlDirectory);
+					shell_exec("rm $DuognDanUI_HTML/ui_update/dowload_extract/README.md");
+					deleteContents($ExtractDir);
+					//SSH Chmod file
+					$connection = ssh2_connect($serverIP, $SSH_Port);
+					if (!$connection) {die($E_rror_HOST);}
+					if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
+					$stream1 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$Path_Vietbot_src);
+					stream_set_blocking($stream1, true);
+					$stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO);
+					stream_get_contents($stream_out1);
+					//echo '<meta http-equiv="refresh" content="1">';   
+					//header("Location: $PHP_SELF"); 
+					//exit;
+					echo "<center><font color=green>Khôi phục dữ liệu Web UI từ Drive thành công, hãy tải lại trang để áp dụng</font></center>";
+                } else {
+					deleteContents($ExtractDir);
+                    echo '<center><font color=red>Khôi Phục Thất Bại, Thư mục "html" không tồn tại sau khi giải nén.</font></center>';
+                }
+    } catch (Exception $e) {
+        echo 'Lỗi: ' . $e->getMessage();
+    }
+}
+}
+
+if (isset($_POST['dowload_file_end_restor_vietbot'])) {
+	$serviceRestorUI = new Google_Service_Drive($client);
+	$fileId = $_POST['dowload_file_end_restor_vietbot'];
+if (empty($fileId)) {
+    echo '<center><font color=red>Có lỗi xả ra, Không lấy được ID của tệp. Vui lòng thử lại</font></center>';
+} else {
+    try {
+        // Lấy thông tin về file
+        $file = $serviceRestorUI->files->get($fileId);
+
+        // Lấy nội dung của file
+        $content = $serviceRestorUI->files->get($fileId, ['alt' => 'media']);
+		
+		$ExtractDirVietbot = $DuognDanUI_HTML.'/backup_update/extract/';
+        // Thay đổi đường dẫn lưu file
+        $savePathVietbot = $ExtractDirVietbot.$file->getName();
+		
+        // Lưu file vào ổ đĩa cục bộ
+        file_put_contents($savePathVietbot, $content->getBody()->getContents());
+		chmod($savePathVietbot, 0777); 
+		//giải nén tệp tar.gz
+		extractTarGz($savePathVietbot, $ExtractDirVietbot);
+                // Xóa tệp tin nén và thư mục đã giải nén
+                unlink($savePathVietbot); 
+                // Kiểm tra xem trong thư mục $ExtractDirVietbot đã có thư mục "html" hay không
+                $VietbotDirectory = $ExtractDirVietbot . 'src';
+                $VietbotDirectoryRESOURCE = $ExtractDirVietbot . 'resources';
+                if (is_dir($VietbotDirectory)) { 
+                    //echo 'Thư mục "html" đã tồn tại sau khi giải nén.';
+					copyRecursiveExclude($VietbotDirectory, $DuognDanThuMucJson, array('.zip', '.tar.gz'));
+					copyRecursiveExclude($VietbotDirectoryRESOURCE, $PathResources, array('.zip', '.tar.gz'));
+					deleteContents($ExtractDirVietbot);
+					//SSH Chmod file
+					$connection = ssh2_connect($serverIP, $SSH_Port);
+					if (!$connection) {die($E_rror_HOST);}
+					if (!ssh2_auth_password($connection, $SSH_TaiKhoan, $SSH_MatKhau)) {die($E_rror);}
+					$stream1 = ssh2_exec($connection, 'sudo chmod -R 0777 '.$Path_Vietbot_src);
+					stream_set_blocking($stream1, true);
+					$stream_out1 = ssh2_fetch_stream($stream1, SSH2_STREAM_STDIO);
+					stream_get_contents($stream_out1);
+					//echo '<meta http-equiv="refresh" content="1">';   
+					//header("Location: $PHP_SELF"); 
+					//exit;
+					echo "<center><font color=green>Khôi phục dữ liệu Vietbot từ Drive thành công, hãy Khởi Động Lại Vietbot để áp dụng</font></center>";
+                } else {
+					deleteContents($ExtractDirVietbot);
+                    echo '<center><font color=red>Khôi Phục Thất Bại, Thư mục "src" của Vietbot không tồn tại sau khi giải nén.</font></center>';
+                }
+    } catch (Exception $e) {
+        echo 'Lỗi: ' . $e->getMessage();
+    }
+}
+}
+
+
+	//list_backup_web_ui
+if (isset($_POST['list_backup_web_ui'])) {
+#$driveService = new Google_Service_Drive($client);
+$folderName = 'Vietbot_WebUi';
+$folders = $driveService->files->listFiles([
+    'q' => "mimeType='application/vnd.google-apps.folder' and name='$folderName'",
+]);
+
+if (count($folders) > 0) {
+    $folderId = $folders[0]->getId();
+    $files = $driveService->files->listFiles([
+        'q' => "'$folderId' in parents",
+    ]);
+    if (count($files) > 0) {
+		$i = 0;
+		echo '<form method="POST" id="form_dowload_restors" action=""><br/><div class="row justify-content-center"><div class="col-auto"><table class="table table-bordered">
+		<thead>
+		<tr><th colspan="4"><center><font color=red>Danh Sách File Backup WebUI Trên Google Drive</font></center></th></tr>
+    <tr>
+      <th scope="col"><center>Tên File</center></th>
+      <th scope="col"><center>Khôi Phục</center></th>
+      <th scope="col"><center>Tải Xuống</center></th>
+      <th scope="col"><center>Xem File</center></th>
+    </tr>
+  </thead>
+		<tbody>';
+        foreach ($files as $file) {
+			$i++;
+            $fileName = $file->getName();
+            $fileId = $file->getId();
+            $downloadLink = "https://drive.google.com/uc?export=download&id=$fileId";
+            $viewLink = "https://drive.google.com/file/d/$fileId/view";
+
+            //echo "<p>$fileName <a href=\"$downloadLink\" target=\"_blank\" download>Tải Xuống</a> | <a href=\"$viewLink\" target=\"_blank\">Xem file</a></p>";
+
+echo '<tr>
+      <th scope="row" title="ID file: '.$fileId.'">'.$fileName.'</th>
+		<td><button name="dowload_file_end_restor_ui" class="btn btn-warning" title="Khôi phục dữ liệu từ File: '.$fileName.'" value="'.$fileId.'">Khôi Phục</button></center></td>
+      <td><a href="'.$downloadLink.'" data-url-link="'.$downloadLink.'" onclick="openNewTab(this)" download><button type="button" class="btn btn-danger" title="Tải xuống file: '.$fileName.'">Tải Xuống</button></a></td>
+      <td><button type="button" class="btn btn-primary" data-url-link="'.$viewLink.'" onclick="openNewTab(this)" title="Xem file '.$fileName.' trực tiếp từ link Google Drive">Mở Trong Tab Mới</button></td>
+    </tr>
+	';
+            // Cài đặt quyền truy cập công khai cho tệp tin
+            $userPermission = new Google_Service_Drive_Permission([
+                'type' => 'anyone',
+                'role' => 'reader',
+            ]);
+
+            $driveService->permissions->create($fileId, $userPermission, ['fields' => 'id']);
+        }
+		echo '<tr><td colspan="3">Tổng số: <font color=red>'.$i.'</font> file</td></tr></tbody></table></div></div></form>';
+		
+    } else {
+        echo "<center>Không có tệp tin trong thư mục sao lưu của WebUI trên Google Drive</center>";
+    }
+} else {
+    //echo "Không tìm thấy thư mục có tên '$folderName'.";
+    echo "<center>Không tìm thấy thư mục chứa các tệp sao lưu WebUI</center>";
+}
+
+}
+
+
+	//list_back_up_vietbot
+if (isset($_POST['list_back_up_vietbot'])) {
+#$driveService = new Google_Service_Drive($client);
+$folderName = 'Vietbot_Source';
+$folders = $driveService->files->listFiles([
+    'q' => "mimeType='application/vnd.google-apps.folder' and name='$folderName'",
+]);
+
+if (count($folders) > 0) {
+    $folderId = $folders[0]->getId();
+    $files = $driveService->files->listFiles([
+        'q' => "'$folderId' in parents",
+    ]);
+    if (count($files) > 0) {
+		$i = 0;
+		echo '<form method="POST" id="form_dowload_restors" action=""><br/><div class="row justify-content-center"><div class="col-auto"><table class="table table-bordered">
+		<thead>
+		<tr><th colspan="4"><center><font color=red>Danh Sách File Backup Vietbot src Trên Google Drive</font></center></th></tr>
+    <tr>
+      <th scope="col"><center>Tên File</center></th>
+      <th scope="col"><center>Khôi Phục</center></th>
+      <th scope="col"><center>Tải Xuống</center></th>
+      <th scope="col"><center>Xem File</center></th>
+    </tr>
+  </thead>
+		<tbody>';
+        foreach ($files as $file) {
+			$i++;
+            $fileName = $file->getName();
+            $fileId = $file->getId();
+            $downloadLink = "https://drive.google.com/uc?export=download&id=$fileId";
+            $viewLink = "https://drive.google.com/file/d/$fileId/view";
+
+            //echo "<p>$fileName <a href=\"$downloadLink\" target=\"_blank\" download>Tải Xuống</a> | <a href=\"$viewLink\" target=\"_blank\">Xem file</a></p>";
+
+echo '<tr>
+      <th scope="row" title="ID file: '.$fileId.'">'.$fileName.'</th>
+	  <td><button name="dowload_file_end_restor_vietbot" class="btn btn-warning" title="Khôi phục dữ liệu từ File: '.$fileName.'" value="'.$fileId.'">Khôi Phục</button></td>
+      <td><a href="'.$downloadLink.'" data-url-link="'.$downloadLink.'" onclick="openNewTab(this)" download><button type="button" class="btn btn-danger">Tải Xuống</button></a></td>
+	  <td><button type="button" class="btn btn-primary" data-url-link="'.$viewLink.'" onclick="openNewTab(this)" title="Xem file '.$fileName.' trực tiếp từ link Google Drive">Mở Trong Tab Mới</button></td>
+    </tr>
+	';
+            // Cài đặt quyền truy cập công khai cho tệp tin
+            $userPermission = new Google_Service_Drive_Permission([
+                'type' => 'anyone',
+                'role' => 'reader',
+            ]);
+
+            $driveService->permissions->create($fileId, $userPermission, ['fields' => 'id']);
+        }
+		echo '<tr><td colspan="3">Tổng số: <font color=red>'.$i.'</font> file</td></tr></tbody></table></div></div></form>';
+		
+    } else {
+        echo "<center>Không có tệp tin trong thư mục sao lưu của Vietbot trên Google Drive</center>";
+    }
+} else {
+    //echo "Không tìm thấy thư mục có tên '$folderName'.";
+    echo "<center>Không tìm thấy thư mục chứa các tệp sao lưu Vietbot</center>";
+}
+
+}
+
 ?>
+
+
+
+
+
 	<br/><div class="right-align" id="messageeee"></div>
 				<script>
             var messageeee = document.getElementById('messageeee');
             messageeee.innerHTML += '<?php echo $messageeee; ?>';
              </script>
+
+
 </body></html>

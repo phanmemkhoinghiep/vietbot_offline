@@ -3,12 +3,16 @@
 //Facebook: https://www.facebook.com/TWFyaW9uMDAx
 //Bỏ qua hiển thị lỗi trên màn hình nếu có
 //Mail: vietbotsmartspeaker@gmail.com
+//ini_set('display_errors', 1);
+//error_reporting(E_ALL);
 @error_reporting(0);
 @date_default_timezone_set('Asia/Ho_Chi_Minh');
+ini_set('memory_limit', '256M');
 // Khởi động session
-session_start();
+
 $session_expiration = 86400; //Cài đặt thời gian sống của session cookie thành 1 ngày 1 ngày (1 giờ = 3600 giây)
 session_set_cookie_params($session_expiration);
+session_start();
 
 $SESSION_ID_Name = "Marion001"; //để nguyên
 $HostName = gethostname();
@@ -26,6 +30,8 @@ $UI_Version = "https://raw.githubusercontent.com/marion001/UI_VietBot/main/versi
 //list Url Dowload thư viện
 //lib Google APIs Client PHP
 $url_lib_GDrive = 'https://raw.githubusercontent.com/marion001/Google-APIs-Client-Library-PHP/main/lib_Google_APIs_Client_php.tar.gz';
+
+$apiUrlporcupine = "https://api.github.com/repos/Picovoice/porcupine/releases";
 
 //Mật Khẩu Đăng Nhập Trình Quản Lý File Manager
 $Pass_Login_File_Manager = "admin"; // admin
@@ -54,15 +60,17 @@ $maxFilesUploadMp3 = "20";
 //Key youtube tìm kiếm nhạc mp3 mã hóa base64
 $apiKeyYoutube = "QUl6YVN5QXVXZVZueU0zaWphbzVYUEQ2MnpyTVh1QmowSmdMWUF3"; // Thay YOUR_YOUTUBE_API_KEY bằng khóa API YouTube của bạn
 
-//ĐƯờng Dẫn VietBot Chính
-$Path_Vietbot_src = "/home/pi/vietbot_offline";
 
+$PATH_USER_ROOT = "/home/pi";
+//ĐƯờng Dẫn VietBot Chính
+$Path_Vietbot_src = $PATH_USER_ROOT.'/vietbot_offline';
 //Đường dẫn nhánh để hết mặc định
 $DuognDanThuMucJson = $Path_Vietbot_src.'/src';
 $DuognDanUI_HTML = $Path_Vietbot_src.'/html';
 $PathResources = $Path_Vietbot_src.'/resources';
 $directorySound = $Path_Vietbot_src.'/src/sound/default/';
 $Lib_Hotword = $Path_Vietbot_src.'/resources/picovoice/lib';
+$path_picovoice = $PATH_USER_ROOT.'/.local/lib/python3.9/site-packages/picovoice';
 
 //SSH Tải Khoản, Mật Khẩu Đăng Nhập SSH (Bắt Buộc Phải Nhập Để Dùng Các Lệnh Hệ Thống)
 $SSH_TaiKhoan = "pi"; //Tài Khoản Đăng Nhập pi SSH Của Bạn
@@ -93,6 +101,11 @@ $Limit_Telegram = "3";
 
 //Giới hạn Phản Hồi Khi Được Đánh Thức
 $Limit_Wakeup_Reply = "7";
+
+
+//giới hạn Cast
+$Limit_Cast = "20";
+
 //Cài Văn Bản Mặc Định Nếu Biến $Limit_Wakeup_Reply bị xóa hết
 $Limit_Wakeup_Reply_Default_Response = "Dạ";
 
@@ -115,7 +128,7 @@ $Page_Load_Time_Countdown = "6"; //Giây
 $Log_Load_Time_Countdown = "2000"; //2000 = 2Giây
 
 //thời gian chờ time out media player api
-$Time_Out_MediaPlayer_API = "4000"; //4000 bằng 4 giây
+$Time_Out_MediaPlayer_API = "10000"; //4000 bằng 4 giây
 
 ///////////////////////////////////////////////////////////////////////////////
 //API webui Config Setting
@@ -128,6 +141,7 @@ $apiKey = 'vietbot'; //api key, user cần mã hóa api key này dạng md5 3f40
 
 ///////////////////////////////////////////////////////////////////////////////
 $Data_Json_Skill = json_decode(file_get_contents("$DuognDanThuMucJson"."/skill.json"));
+$Data_Json_Skilll = json_decode(file_get_contents("$DuognDanThuMucJson"."/skill.json"), true);
 
 $dataVTGET = json_decode(file_get_contents("$DuognDanThuMucJson"."/config.json"));
 
@@ -138,6 +152,10 @@ $dataVersionVietbot = json_decode(file_get_contents("$DuognDanThuMucJson"."/vers
 $action_json = json_decode(file_get_contents("$DuognDanThuMucJson"."/action.json"));
 
 $object_json = json_decode(file_get_contents("$DuognDanThuMucJson"."/object.json"));
+
+$state_json = json_decode(file_get_contents("$DuognDanThuMucJson"."/state.json"));
+
+//$api_vietbot = json_decode(file_get_contents("/home/pi/vietbot_offline/html/assets/json/api_list_vietbot.json"));
 
 
 $PORT_CHATBOT = $dataVTGET->smart_config->web_interface->port;
@@ -157,8 +175,14 @@ $block_updates_web_ui = $dataVTGET->smart_config->block_updates->web_ui;
 //lấy dữ liệu config kiểm tra trạng thái hiển thị log hiện tại
 $check_current_log_status = $dataVTGET->smart_config->logging_type;
 
+$Get_hotword_Lang = $dataVTGET->smart_wakeup->hotword[0]->lang;
+
 //Port Vietbot
 $Port_Vietbot = $dataVTGET->smart_config->web_interface->port;
 
 $apiKeyWeather = $Data_Json_Skill->weather->openweathermap_key;
+
+$sync_media_player_checkbox = $Data_Json_Skill->ui_media_player->sync_media_player;
+$sync_media_player_sync_delay = $Data_Json_Skill->ui_media_player->sync_delay;
+//$sync_music_stream = $Data_Json_Skill->ui_media_player->music_stream;
 ?>

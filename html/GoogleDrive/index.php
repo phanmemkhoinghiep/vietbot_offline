@@ -7,7 +7,12 @@ include "../Configuration.php";
 include("../assets/lib_php/Net/SSH2.php");
 ?>
 <!DOCTYPE html>
-<html><head>
+<html>
+	<!--
+Code By: Vũ Tuyển
+Facebook: https://www.facebook.com/TWFyaW9uMDAx
+-->
+	<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title><?php echo $MYUSERNAME; ?>, Google Drive Backup</title>
@@ -28,7 +33,22 @@ include("../assets/lib_php/Net/SSH2.php");
             text-align: right;
 			margin-right: 30px;
         }
+        ::-webkit-scrollbar {
+        width: 13px;
+    }
     
+    ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+        background: rgb(251, 255, 7);
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+    }
 	</style>
   </head>
 <?php	

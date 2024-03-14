@@ -6,13 +6,14 @@
 
 
 <script src="../../assets/js/axios_0.21.1.min.js"></script>
+ <link rel="stylesheet" href="../../assets/css/bootstrap-icons.css">
 </head>
 
 <body>
     <br/>
     <div class="chat-container">
         <div class="chat-wrapper">
-            <div id="message-content" class="message-content">Chào bạn mình là loa thông minh Vietbot!</div>
+            <div id="message-content" class="message-content">Chào <?php echo $MYUSERNAME; ?> mình là loa thông minh Vietbot!</div>
         </div>
 
         <div id="chatbox" class="container-fluid"></div>
@@ -25,12 +26,12 @@
 					
 					</span> -->
   <select id="message-type-checkbox" class="form-select">
-  <option  selected value="4" title="Chế Độ Hỏi Đáp Ở Chatbox Không Phát Ra Loa">Hỏi Đáp</option>
+  <option  selected value="3" title="Chế Độ Hỏi Đáp Ở Chatbox Không Phát Ra Loa">Hỏi Đáp</option>
+  <option  value="2" title="Phát Nhạc, Podcast Ra Loa" data-podcastname="play_podcast">PodCast</option>
   <option value="1" title="TTS Chuyển Văn Bản Thành Giọng Nói Để Đọc Ra Loa">Chỉ Đọc</option>
-  <option value="2" title="Full Chức Năng">Full</option>
 </select>
                 </div>
-                <input type="text" class="form-control" id="user-input" class="chat-input" placeholder="Nhập tin nhắn..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <input type="text" class="form-control" id="user-input" class="chat-input" placeholder="Nhập văn bản, nội dung, tin nhắn..." aria-label="Recipient's username" aria-describedby="basic-addon2">
 
 
             
@@ -66,29 +67,39 @@ function getTimestamp() {
   const userInput = document.getElementById('user-input');
   const deleteAllButton = document.getElementById('delete-all-button');
   const messageTypeCheckbox = document.getElementById('message-type-checkbox');
-
   let typingIndicator;
   let isBotReplying = false;
   let waitMessageTimer; // Biến đếm thời gian chờ hiển thị WAIT_MESSAGE
   let responseTimer; // Biến đếm thời gian chờ phản hồi
   chatForm.addEventListener('submit', async (event) => {
     event.preventDefault();
-
     const userMessage = userInput.value;
     userInput.value = '';
 
     if (userMessage.trim() === '') {
       return;
     }
-	//1 = tts, 4 = hỏi đáp
-    //const messageType = messageTypeCheckbox.checked ? 1 : 4;
-	//parseInt chuyển đổi giá trị thành một số nguyên (integer) không nằm trong dấu nháy
-    const messageType = parseInt(messageTypeCheckbox.value);
-
-	   // Hiển thị giá trị đã chọn và giá trị đã nhập trong console
-   // console.log("Giá trị đã chọn là: " + messageType);
-    // console.log("Tin nhắn của người dùng là: " + userMessage);
+    // Lấy ra option được chọn trong select box của form
+    const selectedOption = document.querySelector('#message-type-checkbox option:checked');
+    // Kiểm tra xem option đã được chọn hay chưa
+    if (selectedOption) {
+        // Nếu option đã được chọn, kiểm tra xem có thuộc tính data-podcastname không
+        const podcastName = selectedOption.getAttribute('data-podcastname');
+        if (podcastName) {
+            // Nếu có thuộc tính data-podcastname, hiển thị giá trị trong console.log
+            //console.log('Data Podcast Name:', podcastName);
+			userMessageee = podcastName;
+        } else {
+            // Nếu không có thuộc tính data-podcastname, thông báo lỗi hoặc thực hiện hành động khác tùy thuộc vào yêu cầu của bạn
+            //console.log('Option được chọn nhưng không có thuộc tính data-podcastname.');
+			userMessageee = userMessage;
+			
+        }
+    } else {
+        userMessageee = userMessage;
+    }
 	
+    const messageType = parseInt(messageTypeCheckbox.value);
     // Kiểm tra kết nối tới API trước khi gửi yêu cầu để đưa ra thông báo
     try {
       const response = await axios.get('http://<?php echo $serverIP; ?>:<?php echo $Port_Vietbot; ?>');
@@ -104,22 +115,22 @@ function getTimestamp() {
      displayMessage(ERROR_MESSAGE_CONNECTION, false, true);
       return;
     }
+	
 ///////////////////////////
     const url = 'http://<?php echo $serverIP; ?>:<?php echo $Port_Vietbot; ?>/';
     const headers = {
       Accept: '*/*',
       'Accept-Language': 'vi',
-      Connection: 'keep-alive',
       'Content-Type': 'application/json',
-      DNT: '1',
-      Origin: 'http://<?php echo $serverIP; ?>:<?php echo $Port_Vietbot; ?>',
-      Referer: 'http://<?php echo $serverIP; ?>:<?php echo $Port_Vietbot; ?>/',
-      'User-Agent':
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
     };
     const data = {
       type: messageType,
-      data: userMessage,
+      //ChatBox + TTS
+      data: userMessageee,
+	  
+	  //PodCasst
+	  name: userMessage,
+	  player_type: "system"
     };
 
     try {
@@ -144,7 +155,6 @@ function getTimestamp() {
         waitMessageElement.remove();
       }
       }, RESPONSE_TIMEOUT);
-
       const response = await axios.post(url, data, { headers });
       clearTimeout(waitMessageTimer); // Xóa thông báo "Vui lòng chờ thêm..." nếu đã hiển thị
       clearTimeout(responseTimer); // Xóa thông báo "Có vẻ Vietbot đang không phản hồi, vui lòng thử lại!" nếu đã hiển thị
@@ -155,10 +165,48 @@ function getTimestamp() {
       if (waitMessageElement) {
         waitMessageElement.remove();
       }
-      displayMessage(response.data.answer, false);
+      // Kiểm tra xem giá trị response.data.answer có tồn tại hay không
+	if (response.data.answer !== undefined && response.data.answer !== null) {
+		displayMessage(response.data.answer, false);
+	} else {
+		// Nếu không tồn tại, sử dụng giá trị response.data.response
+		const responseString = response.data.response.toString();
+		if (responseString.includes("https://cdn-ocs.ivie")) {
+	//loại bỏ dấu phẩy trước https
+	const modifiedResponse = responseString.replace(/,?\bhttps:\/\/cdn-ocs.ivie.*?\.mp3\b/g, '');
+    // Hiển thị giá trị đã chỉnh sửa
+    //console.log(responseString);
+// Tách chuỗi từ dấu phẩy
+const parts = responseString.split(',');
+
+
+// Kiểm tra xem có ít nhất một phần tử sau khi tách
+if (parts.length > 0) {
+    // Gán phần tử đầu tiên cho biến showlinkpodcast
+    const showlinkpodcast = parts[1].trim(); // Lưu ý rằng ta lấy phần tử thứ hai ở đây
+
+    // Hiển thị message kèm phần tử <i>
+    displayMessage(parts[0] + " | <i class='bi bi-broadcast-pin' onclick='handleBroadcastPinClick()' data-namebaihatpodcast = '"+modifiedResponse+"' data-urlpodcast='" + showlinkpodcast + "' title='Phát nhạc Podcast'></i>", false);
+} else {
+    // Nếu không tìm thấy phần tử sau khi tách chuỗi, hiển thị message mà không có phần tử <i>
+    displayMessage(modifiedResponse, false);
+}
+    //displayMessage(modifiedResponse+" <i class='bi bi-broadcast-pin' onclick='handleBroadcastPinClick()' data-urlpodcast='"+showlinkpodcast+"' title='Phát nhạc Podcast'></i>", false);
+	// Sử dụng phương thức match() với biểu thức chính quy để tìm tất cả các kết quả khớp với mẫu "https"
+
+//else {
+    //console.log("Không tìm thấy bất kỳ link https nào trong nội dung.");
+//}
+	
+} else {
+	displayMessage(response.data.response, false);
+    //console.error("response.data.response không phải là chuỗi.");
+}
+		//displayMessage(response.data.response, false);
+		//console.log("okkkk string");
+	}
     } catch (error) {
       console.error(error);
-
       // Hiển thị thông báo lỗi
 	  //nếu sau 30 giây vẫn đang chờ câu trả lời từ API  thì nó sẽ coi đó là một trường hợp lỗi và thực hiện các hành động để thông báo về lỗi cho người dùng
       setTimeout(() => {
@@ -179,17 +227,22 @@ showTimestampCheckbox.addEventListener('change', () => {
   chatContainer.classList.toggle('hide-timestamp', !showTimestampCheckbox.checked);
 });
 
-
   const displayMessage = (message, isUserMessage, isTimeoutMessage = false) => {
-	  
+	  //console.log(message);
 	  //Nếu Giá trị là undefined
 	if (typeof message === 'undefined') {
-		message = 'Nội dung đã được đọc ra loa';
+		//message = 'Nội dung trả về không được xác định';
+		message = displayMessage(response.data.response, false);
 	    //return;
 	}
 	  //Nếu Giá trị là null
+	if (message === "Lỗi: argument of type 'NoneType' is not iterable") {
+		message = 'Không tìm thấy nội dung phù hợp!';
+	    //return;
+	}
+	
 	if (message === null) {
-		message = 'Không có dữ liệu';
+		message = 'Không nhận được dữ liệu trả về';
 	    //return;
 	}
 	
@@ -204,22 +257,14 @@ showTimestampCheckbox.addEventListener('change', () => {
 
 
   const timestamp = getTimestamp(); // Lấy thời gian
-  //const timestampElement = document.createElement('div');
- // timestampElement.classList.add('message-timestamp');
-  //timestampElement.textContent = `[${timestamp}]`; // Bao gồm thời gian
-
-
   const messageContent = document.createElement('div');
   messageContent.classList.add('message-content');
    // Kiểm tra trạng thái của ô kiểm "show-timestamp-checkbox"
  if (showTimestampCheckbox.checked) {
-	messageContent.textContent = `[${timestamp}] ${message}`; //  Thêm Hàm thời gian vào Chatbox khi được tích
+	messageContent.innerHTML = `[${timestamp}] ${message}`; //  Thêm Hàm thời gian vào Chatbox khi được tích
   }else {
-    messageContent.textContent = message; //nếu không được tích
+    messageContent.innerHTML = message; //nếu không được tích
   }
-	
-	
-
     const deleteButton = document.createElement('button');
     deleteButton.classList.add('delete-button');
     deleteButton.innerHTML = '&times;';
@@ -249,7 +294,6 @@ showTimestampCheckbox.addEventListener('change', () => {
       messageElement.classList.add('timeout-message');
     }
   };
-
   const displayTypingIndicator = () => {
     const typingIndicator = document.createElement('div');
     typingIndicator.classList.add('typing-indicator');
@@ -277,6 +321,48 @@ showTimestampCheckbox.addEventListener('change', () => {
   deleteAllButton.addEventListener('click', () => {
     chatbox.innerHTML = '';
   });
+  </script>
+  
+ <script>
+ //Phát nhạc podcast khi nahans vào icon
+    function handleBroadcastPinClick() {
+        // Lấy giá trị của thuộc tính dữ liệu 'data-urlpodcast' của phần tử
+        var urlPodcast = document.querySelector('.bi-broadcast-pin').dataset.urlpodcast;
+        var tetxNamePodcast = document.querySelector('.bi-broadcast-pin').dataset.namebaihatpodcast;
+//console.log(urlPodcast);
+// Định nghĩa URL và dữ liệu
+const url = "http://<?php echo $serverIP; ?>:<?php echo $Port_Vietbot; ?>/";
+const data = {
+  type: 2,
+  data: "play_music",
+  link_type: "direct",
+  link: urlPodcast
+};
+
+// Gửi yêu cầu AJAX sử dụng Axios
+axios.post(url, data, {
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  timeout: 0
+})
+.then(function (response) {
+  if (response.data.state === "Success") {
+	state_replace_podcast = response.data.state.replace("Success", "Đã phát Podcast: <b>" +tetxNamePodcast+ "</b>");
+    displayMessage(state_replace_podcast, false);
+  } else {
+    displayMessage(response.data.state);
+  }
+  
+})
+.catch(function (error) {
+  // Xử lý lỗi nếu có
+  console.error(error);
+});
+    }
 </script>
+
+
+
 </body>
 </html>

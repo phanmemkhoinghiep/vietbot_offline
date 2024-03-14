@@ -23,11 +23,6 @@
     });
 });
 </script>
-
-
-
-
-
 <?php
 
 // Kiểm tra nếu form đã được gửi
@@ -91,7 +86,7 @@ chmod($backupFile, 0777);
         if (!empty($name) && !empty($chatId)) {
             $newTelegramData[] = [
                 'name' => $name,
-                'chat_id' => $chatId
+                'chat_id' => intval($chatId)
             ];
         }
     }
@@ -160,12 +155,17 @@ chmod($backupFile, 0777);
     $HassUrl = @$_POST['hass_url'];
     $HassDisplay_Full_State = isset($_POST['hass_display_full_state']) ? true : false;
     $activeHass = isset($_POST['activeHass']) && $_POST['activeHass'] === 'on' ? true : false;
+	
+	//bỏ qua skill vietbot
+    $bypass_all_skill = isset($_POST['bypass_all_skill']) && $_POST['bypass_all_skill'] === 'on' ? true : false;
 	//Chat GPT
 	$ChatGptKey = @$_POST['chatgpt_key'];
+	$ChatGptchatgpt_timeout = @$_POST['chatgpt_timeout'];
 	//Google Brand
 	$Google_bard_Secure1PSID = @$_POST['Secure-1PSID'];
 	$Google_bard_Secure_1PSIDTS = @$_POST['Secure-1PSIDTS'];
 	$Google_bard_Secure_1PSIDCC = @$_POST['Secure-1PSIDCC'];
+	
 	
 	//Telegram
 	$activeTelegram = isset($_POST['activeTelegram']) && $_POST['activeTelegram'] === 'on' ? true : false;
@@ -181,8 +181,24 @@ chmod($backupFile, 0777);
     $skillArray['hass']['url'] = $HassUrl;
     $skillArray['hass']['display_full_state'] = $HassDisplay_Full_State;
     $skillArray['hass']['active'] = $activeHass;
+	//bypass_all_skill
+    $skillArray['bypass_all_skill'] = $bypass_all_skill;
 	//ChatGPT
     $skillArray['chatgpt']['token'] = $ChatGptKey;
+    $skillArray['chatgpt']['session_timeout'] = intval($ChatGptchatgpt_timeout);
+	
+	//Media Player Sync ($_POST['media_player_sync_ui'] === 'true');
+    //$skillArray['ui_media_player']['sync_media_player'] = ($_POST['media_player_sync_ui'] === 'true');
+	if (isset($_POST['media_player_sync_ui'])) {
+    // Gán giá trị của 'media_player_sync_ui' vào biến $sync_ui
+		$sync_ui = ($_POST['media_player_sync_ui'] === 'true');
+    // Gán giá trị vào mảng $skillArray
+		$skillArray['ui_media_player']['sync_media_player'] = $sync_ui;
+	} else {
+	// giá trị mặc định là false nếu không có giá trị
+		$skillArray['ui_media_player']['sync_media_player'] = false;
+	}
+    $skillArray['ui_media_player']['sync_delay'] = @$_POST['sync_delay_media_player'];
 	//Camera hanet
 	$activeCameraHanet = isset($_POST['activeCameraHanet']) && $_POST['activeCameraHanet'] === 'on' ? true : false;
 	
@@ -215,6 +231,7 @@ chmod($backupFile, 0777);
     $skillArray['gg_bard']['Secure-1PSID'] = $Google_bard_Secure1PSID;
     $skillArray['gg_bard']['Secure-1PSIDTS'] = $Google_bard_Secure_1PSIDTS;
     $skillArray['gg_bard']['Secure-1PSIDCC'] = $Google_bard_Secure_1PSIDCC;
+    $skillArray['gg_bard']['cache_timeout'] = intval($_POST['bard_cache_time_out']);
 	// Google Asssitant Mode
     $skillArray['gg_ass']['mode'] = $Google_Assistant_Mode;
 	//Lưu Chế Độ Ưu Tiên
@@ -329,6 +346,15 @@ if (count($fileLists) > 0) {
 
 <!-- Form để hiển thị và chỉnh sửa dữ liệu -->
 <form id="my-form" onsubmit="return vuTuyen();"  method="POST">
+<h5>Bỏ Qua Skill Vietbot:</h5>
+
+<div class="row justify-content-center"><div class="col-auto">	 
+        <div class="custom-control custom-switch" title="Bật/Tắt để kích hoạt/huỷ kích hoạt">
+            <input type="checkbox" class="custom-control-input" id="bypass_all_skill" name="bypass_all_skill" <?php echo $skillArray['bypass_all_skill'] === true ? 'checked' : ''; ?>>
+            <label class="custom-control-label" for="bypass_all_skill"></label>
+</div></div></div>
+
+<hr/>
 <h5>Open Weather Map: <i class="bi bi-info-circle-fill" onclick="togglePopupOpenWeatherMap()" title="Nhấn Để Tìm Hiểu Thêm"></i></h5>
       <div id="popupContainerOpenWeatherMap" class="popup-container" onclick="hidePopupOpenWeatherMap()">
     <div id="popupContent" onclick="preventEventPropagationOpenWeatherMap(event)">
@@ -434,7 +460,7 @@ B4: Go to Application -> Cookies -> "__Secure-1PSID" và "__Secure-1PSIDTS" và 
 <div class="row justify-content-center"><div class="col-auto">	 
  <table class="table table-responsive table-striped table-bordered align-middle">
 <tbody>
-<tr><th scope="row"colspan="2"><center><font color=red>Session Google Bard</font></center></th>
+<tr><th scope="row" colspan="2"><center><font color=red>Cookie Google Bard</font></center></th>
 </tr>
 <tr><th scope="row">Secure-1PSID:</th>
 <td><input type="text" class="form-control" id="Secure-1PSID" name="Secure-1PSID" placeholder="Nhập Cookie Secure-1PSID Của Google bard" title="Nhập Cookie Secure-1PSID Của Google bard" value="<?php echo $skillArray['gg_bard']['Secure-1PSID']; ?>">
@@ -451,6 +477,17 @@ B4: Go to Application -> Cookies -> "__Secure-1PSID" và "__Secure-1PSIDTS" và 
 </td>
 </tr>
 
+<tr>
+<th scope="row">Phiên làm việc (Giây/s):</th>
+<td><input type="number" class="form-control" id="bard_cache_time_out" step="100" min="43200" name="bard_cache_time_out" placeholder="43200" title="Hết thời gian chờ (s)" value="<?php echo $skillArray['gg_bard']['cache_timeout']; ?>">
+</td>
+</tr>
+
+<!--
+<tr><td colspan="2"><center>
+<button class="btn btn-warning" type="button" onclick="sendCookiesBard()">Kiểm Tra Cookie</button>
+</center></td></tr>
+-->
 </tbody>
 </table></div></div>
 	
@@ -468,18 +505,25 @@ B4: Go to Application -> Cookies -> "__Secure-1PSID" và "__Secure-1PSIDTS" và 
  <table class="table table-responsive table-striped table-bordered align-middle">
 <tbody><tr>
 <th scope="row"> <label for="chatgpt_key">Token ChatGPT:</label></th>
-<td><input type="text" class="form-control" id="chatgpt_key" name="chatgpt_key" placeholder="Nhập Token Của ChatGPT" title="Nhập Token Của ChatGPT" value="<?php echo $skillArray['chatgpt']['token']; ?>"></td>
-</tr></tbody></table></div></div><hr/>
+<td><input type="text" class="form-control" id="chatgpt_key" name="chatgpt_key" placeholder="Nhập Token Của ChatGPT" title="Nhập Token Của ChatGPT" value="<?php echo $skillArray['chatgpt']['token']; ?>"></td><br/>
+
+</tr>
+<tr><th scope="row"> <label for="chatgpt_key">Phiên làm việc (Giây/s):</label></th>
+<td><input type="number" class="form-control" id="chatgpt_timeout" name="chatgpt_timeout" min="3600" step="100" placeholder="CHat GPT Time Out" title="Chat GPt Time Out" value="<?php echo $skillArray['chatgpt']['session_timeout']; ?>"></td></tr>
+
+</tbody></table></div></div><hr/>
 <h5>Google Assistant: <i class="bi bi-info-circle-fill" onclick="togglePopupGGASS()" title="Nhấn Để Tìm Hiểu Thêm"></i></h5>
       <div id="popupContainerGGASS" class="popup-container" onclick="hidePopupGGASS()">
     <div id="popupContent" onclick="preventEventPropagationGGASS(event)">
       <center><b>Google Assistant Skill:</b></center><br/>
+	  <center><b>Sử dụng file cấu hình Google cá nhân>/b></center><br/>
 	  - <b>Bật </b> để chạy chế độ Mặc Định (default)<br/>
 	  - <b>Tắt </b> để chạy chế độ Thủ Công (manual)
 </div></div>
 <div class="row justify-content-center"><div class="col-auto">	 
         <div class="custom-control custom-switch" title="Bật/Tắt để kích hoạt/huỷ kích hoạt">
             <input type="checkbox" class="custom-control-input" id="gg_ass_Mode" name="gg_ass_Mode" <?php echo $skillArray['gg_ass']['mode'] === 'default' ? 'checked' : ''; ?>>
+			
             <label class="custom-control-label" for="gg_ass_Mode"></label>
 </div></div></div>
 <hr/>
@@ -540,18 +584,22 @@ B4: Go to Application -> Cookies -> "__Secure-1PSID" và "__Secure-1PSIDTS" và 
 <hr/>
 
 
-<h5>Ưu Tiên Nguồn Phát Media Player:</h5>
+<h5>Media Player:</h5>
 <?php
 	//Get Ưu tiên Trợ Lý Ảo/ AI
 	$music_source_priority_1 = $skillArray['music_source']['priority_1'];
 	$music_source_priority_2 = $skillArray['music_source']['priority_2'];
 	$music_source_priority_3 = $skillArray['music_source']['priority_3'];
+	
+	$sync_delay_media_player = $skillArray['ui_media_player']['sync_delay'];
+	$sync_media_player = $skillArray['ui_media_player']['sync_media_player'];
+	
 ?>
 <div class="form-check form-switch d-flex justify-content-center">   <div class="col-auto">
 <table class="table table-bordered">
   <thead>
     <tr>
-      <th scope="col" colspan="2"><center><font color=red>Chọn Thứ Tự Nguồn Phát Media Player</font></center></th>
+      <th scope="col" colspan="2"><center><font color=red>Thứ Tự Ưu Tiên Nguồn Phát</font></center></th>
     </tr>
   </thead>
   <tbody>
@@ -586,6 +634,21 @@ B4: Go to Application -> Cookies -> "__Secure-1PSID" và "__Secure-1PSIDTS" và 
         <option value="ZingMP3" <?php if ($music_source_priority_3 === "ZingMP3") echo "selected"; ?>>ZingMP3</option>
         <option value="Youtube" <?php if ($music_source_priority_3 === "Youtube") echo "selected"; ?>>Youtube</option>
     </select></td>
+    </tr>
+	
+	    <tr>
+      <th scope="col" colspan="2"><center><font color=red>Đồng Bộ (Sync)</font></center></th>
+    </tr>
+    <tr>
+      <th scope="row" title="tích để đồng bộ music media của vietbot với tab media trên web ui">Đồng Bộ Với Web UI: </th>
+      <td><input type="checkbox" name="media_player_sync_ui" title="tích để đồng bộ music media của vietbot với tab media trên web ui" value="true" <?php echo ($sync_media_player) ? 'checked' : ''; ?>></td>
+
+
+    </tr>
+
+	    <tr>
+      <th scope="row" title="Mặc định đặt là 1">Thời Gian Trễ Sync (Giây):</th>
+      <td><input type="number" placeholder="1" class="form-control" title="Mặc định đặt là 1" name="sync_delay_media_player" min="1" step="1" max="5" value="<?php echo $sync_delay_media_player; ?>"></td>
     </tr>
   </tbody>
 </table>
@@ -1517,8 +1580,30 @@ if (count($fileLists) > 0) {
         }
     });
 </script>
+<!--
+    <script>
+        function sendCookiesBard() {
+			$('#loading-overlay').show();
+            var Cookie_1PSID = document.getElementById('Secure-1PSID').value;
+            var Cookie_1PSIDTS = document.getElementById('Secure-1PSIDTS').value;
+            var Cookie_1PSIDCC = document.getElementById('Secure-1PSIDCC').value;
 
+            var xhr = new XMLHttpRequest();
+            var url = `Ajax/Check_Bard_Cookie.php?Cookie_1PSID=${Cookie_1PSID}&Cookie_1PSIDTS=${Cookie_1PSIDTS}&Cookie_1PSIDCC=${Cookie_1PSIDCC}`;
 
+            xhr.open("GET", url, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // Xử lý kết quả nếu cần
+					$('#loading-overlay').hide();
+                    //console.log(xhr.responseText);
+                    alert(xhr.responseText);
+                }
+            };
+            xhr.send();
+        }
+    </script>
+	-->
 <script>
     // Hàm để cuộn lên đầu trang
     function scrollToTop() {

@@ -56,11 +56,12 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
         top: 10px;
         right: -100%;
         width: 40%;
-        height: auto;
+        height: 450px;
         background-color: #d2d8bb;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         transition: right 0.1s ease;
         z-index: 1;
+        overflow: hidden;
     }
     
     @media (max-width: 768px) {
@@ -68,8 +69,25 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
         
         .right-sidebar {
             width: 100%;
-            /* Width for mobile */
+            height: 83vh;
         }
+        iframe {
+            width: 40%;
+            /* Đặt chiều rộng của iframe là 100% */
+            
+            height: auto;
+            /* Đặt chiều cao của iframe làborder: none; /* Loại bỏ viền của iframe */
+        }
+    }
+    
+    .resize-handle {
+        width: 10px;
+        height: 10px;
+        background-color: #333;
+        position: absolute;
+        cursor: ne-resize;
+        bottom: 0;
+        left: 0;
     }
     
     .toggle-btnnn {
@@ -107,6 +125,8 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
     }
     
     a.cp-toggleee {
+		margin-top: 1px;
+        cursor: pointer;
         z-index: 1000;
         transition: all 0.3s ease;
         border-radius: 0.75rem;
@@ -114,10 +134,85 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
         border: 1px solid rgb(255 255 255 / 30%);
         -webkit-backdrop-filter: blur(10px);
     }
-	  .rounded-iframe {
-    border-radius: 10px 10px 10px 10px;
-    overflow: hidden; /* Để làm tròn góc thì cần che phần dư thừa */
-  }
+    
+    a.cp-toggleeee {
+        z-index: 1000;
+        transition: all 0.3s ease;
+        border-radius: 0.75rem;
+        background: rgb(255 255 255 / 20%);
+        border: 1px solid rgb(255 255 255 / 30%);
+        -webkit-backdrop-filter: blur(10px);
+    }
+    
+    .rounded-iframe {
+        border-radius: 10px 10px 10px 10px;
+        overflow: hidden;
+        /* Để làm tròn góc thì cần che phần dư thừa */
+    }
+    
+    iframe {
+        width: 100%;
+        /* Đặt chiều rộng của iframe là 100% */
+        
+        height: 83vh;
+        /* Đặt chiều cao của iframe là 100% */
+        
+        border: none;
+        /* Loại bỏ viền của iframe */
+    }
+</style>
+<style>
+    .cp-toggleeeee {
+		margin-top: 2px;
+        padding: 3px;
+        /* Thêm padding để tạo khoảng cách giữa nội dung và viền */
+        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* Căn giữa theo chiều dọc */
+        
+        justify-content: center;
+        /* Căn giữa theo chiều ngang */
+        
+        z-index: 1000;
+        transition: all 0.3s ease;
+        border-radius: 0.75rem;
+        background: rgb(255 255 255 / 20%);
+        border: 1px solid rgb(255 255 255 / 30%);
+        -webkit-backdrop-filter: blur(10px);
+    }
+    
+    .volume_value {
+        cursor: pointer;
+        margin: 33px;
+        transform: rotate(-90deg);
+        width: 90px;
+        margin-top: 35px;
+    }
+    
+    .volume-container {
+        float: right;
+        /* Dịch chuyển về bên phải */
+        
+        margin-left: 10px;
+        /* Khoảng cách giữa div và div bên phải */
+    }
+    
+    .cp-toggleee:hover .bi-chat-dots {
+        color: red;
+    }
+    
+    .cp-toggle:hover .bi-gear {
+        color: red;
+    }
+    
+    .cp-toggleeeee i:hover {
+        color: red;
+    }
+	.colorred {
+		cursor: pointer;
+	}
 </style>
 </head>
 <body>
@@ -141,13 +236,13 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
 });
 </script>
 
-
+<!--
 
     <script>
     $(document).ready(function() {
-        var apiKey = "<?php echo $apiKeyWeather; ?>";
-        var lat = "<?php echo $latitude ?>"; // Latitude
-        var lon = "<?php echo $longitude ?>"; // Longitude
+        var apiKey = "<?php //echo $apiKeyWeather; ?>";
+        var lat = "<?php //echo $latitude ?>"; // Latitude
+        var lon = "<?php //echo $longitude ?>"; // Longitude
 
         function getWeather() {
             var apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
@@ -182,10 +277,11 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
         getWeather();
     });
     </script>
+	-->
     <div class="menu-overlay d-none"></div>
     <!--   Right Side Start  -->
     <div class="right-side d-none d-lg-block">
-      <div id="date"></div><hr/>
+      <div id="tmptoday"></div><hr/>
 	   <body onload="time()">
 	  <b><div id="clock"></div></b>
       <div class="social-box">
@@ -221,8 +317,9 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
           <a href="./"><img src="assets/img/VietBot128.png" alt="/" title="Nhấn Để Về Trang Chủ"></a>
         </div>
       <h1 class="mt-1" style="font-size: 14px;"><?php echo $MYUSERNAME; ?></h1>
-			<a class="download-cv btn btn-warning d-none d-lg-inline-block" href="#LogServiceCMD" style="opacity: 1; font-size: 16px; padding: 10px 30px;" title="Nhấn để kiểm tra log, các tác vụ, và nhập lệnh cần thiết">Log/Service/CMD</a>
-      </div>
+		<!--	<a class="download-cv btn btn-warning d-none d-lg-inline-block" href="" style="opacity: 1; font-size: 16px; padding: 10px 30px;" title="Comback_Soon">Comback_Soon</a>
+      -->
+	  </div>
       <div class="menu-align">
         <ul class="list-group menu text-center " id="menu">
           <li class="list-group-item">
@@ -246,9 +343,9 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
             </a>
           </li>
           <li class="list-group-item">
-            <a href="#File_Shell">
-              <i class="bi bi-file-earmark-code" title="Quản Lý File"></i>
-              <span>File</span>
+            <a href="#LogServiceCMD1">
+              <i class="bi bi-terminal-plus" title="Log/Service/Debug/Command"></i>
+              <span>Debug</span>
             </a>
           </li>
 		  
@@ -270,9 +367,9 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
         
          
         </ul>
-        <div class="menu-footer">
-          <a class="download-cv primary-button mt-3 mb-4 d-lg-none" href="#LogServiceCMD" title="Kiểm Tra Log, Các Hoạt Động Của Hệ Thống, Command">Log/Service/CMD</a>
-        </div>
+      <!--  <div class="menu-footer">
+          <a class="download-cv primary-button mt-3 mb-4 d-lg-none" href="" title="Comback_Soon">Comback_Soon</a>
+        </div> -->
 	
       </div>
     </div>
@@ -280,20 +377,21 @@ Facebook: https://www.facebook.com/TWFyaW9uMDAx
     <!--  Main Start  -->
     <main id="main" class="main-2">
       <!--  Hero Start  -->
-      <section id="hero" class="bg-primary text-white section hero w-100">
+      <section id="hero" style="width: 0px;left: 0px;" class="bg-primary text-white section hero w-100">
+	  <h1><center>Xin Chào: <?php echo $MYUSERNAME; ?></center></h1>
 	  	  				<!--		<div class="d-flex flex-row-reverse">
 							  <div class="p-2"><?php //echo "$wards_Duong $wards_Lang $wards_Huyen $wards_Tinh"; ?></div></div> -->
-							<div class="d-flex flex-row">
+<!--							<div class="d-flex flex-row">
 				<div class="p-2"><div id="tmptoday"></div></div>  <div class="p-2"><div id="clock1"></div></div></div>
 <div class="d-flex flex-row">
   <div class="p-2"><div class="d-flex flex-row"> <div id="temperature" class="h1"></div> <img id="weather-icon" src="" alt="Weather Icon"></div></div>
   <div class="d-flex flex-column">
-  <div class="d-flex flex-row"><?php echo "$wards_Tinh".",<div id='country'></div>"; ?></div>
+  <div class="d-flex flex-row"><?php //echo "$wards_Tinh".",<div id='country'></div>"; ?></div>
  <div class="d-flex flex-row">Độ ẩm: &nbsp;<div id="humidity"></div></div>
  <div class="d-flex flex-row"> Tốc độ gió: &nbsp;<div id="wind-speed"></div></div>
 </div>
 </div>
-<div class="info">
+<div class="info"> -->
 <?php
 
 // Đường dẫn tới tệp JSON
@@ -425,13 +523,13 @@ if (!isset($_SESSION['root_id'])) {
 
 
 	
-	  	</div>
+	<!--  	</div> -->
 
       </section>
-      <!--  Hero End  -->
-	        <section id="LogServiceCMD" class="section about bg-secondary text-primary">
-			 <iframe src="./include_php/LogServiceCMD.php" width="100%" height="430px"></iframe>
-			 </section>
+
+
+
+
       <!--  About Start  -->
       <section id="about" class="section about bg-gray-400 text-black">
         <div class="container">
@@ -599,15 +697,17 @@ if (!isset($_SESSION['root_id'])) {
 </section>
 <!--  Resume End  -->
 <!--  Portfolio Start  -->
-<section id="File_Shell" class="section portfolio bg-gray-400 text-white">
-    <iframe src="./include_php/Fork_PHP/Shell.php" width="100%" height="470px"></iframe>
+<section id="LogServiceCMD1" class="section portfolio bg-gray-400 text-white">
+ <!--   <iframe src="./include_php/Fork_PHP/Shell.php" width="100%" height="470px"></iframe> -->
+<iframe src="./include_php/LogServiceCMD.php" width="100%" height="430px"></iframe>
 </section>
 <!--  Portfolio End  -->
 <!--  Blog Start  -->
+<!--
 <section id="ChatBot" class="section blog bg-gray-400 text-white">
     <iframe src="./include_php/ChatBot.php" width="100%" height="570px"></iframe>
 </section>
-
+-->
 <section id="Google_Drive_Auto_Backup" class="section blog bg-gray-400 text-white">
     <div class="container">
         <h3 class="subtitle">Google Drive Auto Backup</h3>
@@ -653,6 +753,14 @@ if (!isset($_SESSION['root_id'])) {
         <iframe src="./include_php/Skill.php" width="100%" height="570px"></iframe>
 	</div>
 </section>
+
+<section id="CFG_WifiManager" class="section contact w-100 bg-gray-400 text-white">
+    <div class="container">
+        <h3 class="subtitle">Cấu Hình Wifi</h3>
+<iframe src="./WifiManager/index.php" width="100%" height="570px"></iframe>
+    </div>
+</section>
+
 <!-- Contact Start -->
 <section id="ForgotPassword" class="section contact w-100 bg-gray-400 text-white">
     <div class="container">
@@ -676,11 +784,12 @@ if (!isset($_SESSION['root_id'])) {
 <!--  Navbar Button Mobile End -->
 <!--  Color Pallet  -->
 <div id="color-switcher" class="color-switcher">
+
     <div class="text-center color-pallet hide">
         <a class="btn btn-danger" href="#vietbot_update" role="button" title="Nhấn Để Kiểm Tra, Cập Nhật Phầm Mềm">Cập Nhật Chương Trình</a>
         <a class="btn btn-success" href="#UI_update" role="button" title="Nhấn Để Kiểm Tra, Cập Nhật Giao Diện">Cập Nhật Giao Diện</a>
-        <a class="btn btn-secondary" href="./Help_Support/index.php" role="button" target="_bank" title="Nhấn Để Kiểm Tra, Cập Nhật Giao Diện">Hướng Dẫn / Sử Dụng Vietbot</a>
-
+        
+		
 		<?php	
 if (isset($Web_UI_Login) && $Web_UI_Login === true) {
 	echo '<a class="btn btn-info" href="#PasswordChange" role="button" title="Đổi Mật Khẩu">Đổi Mật Khẩu Web UI</a>';
@@ -693,7 +802,11 @@ if (isset($Web_UI_Login) && $Web_UI_Login === true) {
 	}
 ?>	
         <!--  <h6 class="text-center theme-skin-title">Đổi Màu Giao Diện</h6> -->
-        <div class="colors text-center">
+
+	   <a href="#CFG_WifiManager" role="button" class="btn btn-primary"><i class="bi bi-wifi" title="Cài Đặt,Cấu Hình Wifi"></i></a>
+	   <a href="#Google_Drive_Auto_Backup" role="button" class="btn btn-dark" title="Google Drive Backup"><img src="assets/img/drive.png" title="Google Drive Backup"></a>
+	   <a class="btn btn-secondary" href="./Help_Support/index.php" role="button" target="_bank" title="Hướng Dẫn / Sử Dụng Vietbot"><i class="bi bi-question-square-fill" title="Hướng Dẫn / Sử Dụng Vietbot"></i></a>
+	   <div class="colors text-center">
             <span class="WhiteBg" id="colorss" title="Nhấn Để Đổi Màu Giao Diện"></span>
             <span class="01Bg" id="colorss" title="Nhấn Để Đổi Màu Giao Diện"></span>
             <span class="03Bg" id="colorss" title="Nhấn Để Đổi Màu Giao Diện"></span>
@@ -702,12 +815,39 @@ if (isset($Web_UI_Login) && $Web_UI_Login === true) {
             <span class="GG02Bg" id="colorss" title="Nhấn Để Đổi Màu Giao Diện"></span>
         </div>
     </div>
-    <div class="pallet-button hide" >
-        <a href="javascript:void(0)" class="cp-toggle"><i class="bi bi-gear" title="Nhấn Để Hiển Thị Cài Đặt"></i></a>
-		<div>
 
- <a onclick="toggleSidebar()" class="cp-toggleee"><i class="bi bi-chat-dots" title="Nhấn Để Mở ChatBot"></i></a></div>
+    <div class="pallet-button hide">
+        <a href="javascript:void(0)" class="cp-toggle"><i class="bi bi-gear" title="Nhấn Để Hiển Thị Cài Đặt"></i></a>
+ 		
+ <a onclick="toggleSidebar()" class="cp-toggleee"><i class="bi bi-chat-dots" title="Nhấn Để Mở ChatBot"></i></a>
+ 
+
+
+
+ 
+	<div id="volume_slide_index" class="cp-toggleeeee">
+	 <b><font color=blue><span id="volume_percentage"><?php echo $state_json->volume; ?></span>%</font></b>   
+
+ 
+ <input type="range" class="volume_value" title="Kéo Để Thay Đổi Âm Lượng" id="volume_value" name="volume_value" min="0" max="100" step="1" value="<?php echo $state_json->volume; ?>">
+	<p class="bi bi-volume-up-fill" title="Âm Lượng"></p>	
+ 
+ 
+ 	  <a class="colorred" onmousedown="startTimerMic()" onmouseup="stopTimerMic()" onclick="handleClickMic()" ontouchstart="startTimerMic()" ontouchend="stopTimerMic()"><i class="bi bi-mic-mute-fill" title="Nhấn nhả để Bật/Tắt mic, nhấn giữ 3s để Bật/Tắt câu phản hồi, nhấn tắt Mic và nhấn giữ 3s để khởi động lại Loa"></i></a>
+	
+
+
+<a class="colorred" onmousedown="startTimer()" onmouseup="stopTimer()" ontouchstart="startTimer()" ontouchend="stopTimer()" onclick="handleClick()">
+   <i class="bi bi-play-circle" title="Nhấn nhả để đánh thức Bot, Nhấn giữ 3s để bật chế độ hội thoại (Hỏi đáp liên tục)"></i>
+</a>
+ 
+ </div>
+	 
+
+	 
 	</div>
+
+	
 </div>
 
     <div class="contentt">
@@ -715,15 +855,17 @@ if (isset($Web_UI_Login) && $Web_UI_Login === true) {
         <!-- Add background overlay element -->
         <div class="background-overlay" onclick="closeSidebar()"></div>
 
-        <div class="right-sidebar" id="sidebar" onclick="event.stopPropagation()">
+       <!-- <div class="right-sidebar" id="sidebar" onclick="event.stopPropagation()"> -->
+        <div class="right-sidebar" id="sidebar">
             <!-- Your sidebar content goes here -->
             <div class="toggle-btnnn-container">
             <center>   <a onclick="toggleSidebar()" class="cp-toggleee"><i class="bi bi-x-circle-fill" title="Nhấn để đóng"></i></a></center>
 		
 			
-				 <iframe src="./include_php/ChatBot.php" width="100%" height="570px"></iframe>
+				 <iframe id="iframeChatBot" src="./include_php/ChatBot.php" frameborder="0" allowfullscreen></iframe>
                
             </div>
+			 <div class="resize-handle"></div>
         </div>
     </div>
 
@@ -737,10 +879,7 @@ if (isset($Web_UI_Login) && $Web_UI_Login === true) {
     <div class="m-magic-cursor mmc-outer"></div>
 	  <div class="m-magic-cursor mmc-inner"></div>
     <!-- Mouase Magic Cursor End -->
-
-    <!--  JavaScripts  -->
-    <!--  Jquery 3.4.1  
-    <script src="assets/js/jquery-3.6.1.min.js"></script>-->
+    <script src="assets/js/jquery-3.6.1.min.js"></script>
     <!--  Bootstrap Js  -->
     <script src="assets/js/bootstrap.js"></script>
     <!--  Malihu ScrollBar Js  -->
@@ -756,7 +895,62 @@ if (isset($Web_UI_Login) && $Web_UI_Login === true) {
     <!--  Arshia Js  -->
     <script src="assets/js/main.js"></script>
 
+<script>
+//$("#iframeChatBot").width("576px");
+//$("#iframeChatBot").height("450px");
+//thay đổi kích thước chatbox
+    $(document).ready(function() {
+        let isResizing = false;
+        let lastDownX;
+        let lastDownY;
 
+        $(".resize-handle").mousedown(function(e) {
+            isResizing = true;
+            lastDownX = e.clientX;
+            lastDownY = e.clientY;
+        });
+
+        $(".resize-handle").mouseleave(function(e) {
+            // Nếu chuột rời khỏi vùng resize-handle, cập nhật kích thước của thẻ iframe theo kích thước của thẻ div
+            let newWidth = $("#sidebar").width();
+            let newHeight = $("#sidebar").height();
+
+            $("#iframeChatBot").width(newWidth);
+            $("#iframeChatBot").height(newHeight);
+        });
+        $(document).mousemove(function(e) {
+            if (isResizing) {
+                let newWidth = $("#sidebar").width() + (lastDownX - e.clientX);
+                let newHeight = $("#sidebar").height() + (e.clientY - lastDownY);
+
+                $("#sidebar").width(newWidth);
+                $("#sidebar").height(newHeight);
+
+                if (e.buttons === 1) {
+                    // Nếu chuột đang được giữ, thì cập nhật kích thước của thẻ iframe thành 100px
+                    $("#iframeChatBot").width(100);
+                    $("#iframeChatBot").height(100);
+                    //console.log("Giữ Chuột");
+                }
+
+                lastDownX = e.clientX;
+                lastDownY = e.clientY;
+            }
+        }).mouseup(function(e) {
+            if (isResizing) {
+                isResizing = false;
+                //console.log("Nhả chuột");
+                // Nếu chuột đã được giữ khi di chuyển, thì cập nhật kích thước của thẻ iframe theo kích thước của thẻ div
+                let newWidth = $("#sidebar").width();
+                let newHeight = $("#sidebar").height();
+                // Cập nhật kích thước của thẻ iframe thành kích thước của thẻ div
+                $("#iframeChatBot").width(newWidth);
+                $("#iframeChatBot").height(newHeight);
+
+            }
+        });
+    });
+</script>
 
 
 <script>
@@ -816,44 +1010,41 @@ if (isset($Web_UI_Login) && $Web_UI_Login === true) {
     }
   });
 </script>
+   <script>
+        function time() {
+            var today = new Date();
+            var weekday = ["Chủ nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
+            var day = weekday[today.getDay()];
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; // Tháng 1 là 0!
+            var yyyy = today.getFullYear();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            m = checkTime(m);
+            s = checkTime(s);
+            var nowTime = h + ":" + m + ":" + s;
+            if (dd < 10) {
+                dd = '0' + dd;
+            }
+            if (mm < 10) {
+                mm = '0' + mm;
+            }
+            var formattedDate = '<font color=red><b>'+day + '</b></font><br/><font color=blue>' + dd + '/' + mm + '<br/>' + yyyy+'</font>';
 
-<script type="text/javascript">
-    function time() {
-        var today = new Date();
-        var weekday = new Array(7);
-        weekday[0] = "Chủ nhật";
-        weekday[1] = "Thứ Hai";
-        weekday[2] = "Thứ Ba";
-        weekday[3] = "Thứ Tư";
-        weekday[4] = "Thứ Năm";
-        weekday[5] = "Thứ Sáu";
-        weekday[6] = "Thứ Bảy";
-        var day = weekday[today.getDay()];
-        var dd = today.getDate();
-        var mm = today.getMonth() + 1; //January is 0!
-        var yyyy = today.getFullYear();
-        var h = today.getHours();
-        var m = today.getMinutes();
-        var s = today.getSeconds();
-        m = checkTime(m);
-        s = checkTime(s);
-        nowTime = h + ":" + m + ":" + s;
-        if (dd < 10) {
-            dd = '0' + dd
+            var tmptoday = '<span class="date"><b>' + formattedDate + '</b></span>';
+            var tmp = '<span class="date"><b>' + nowTime + '</b></span>';
+
+            var clockElement = document.getElementById("clock");
+            var tmptodayElement = document.getElementById("tmptoday");
+
+            if (clockElement && tmptodayElement) {
+                clockElement.innerHTML = tmp;
+                tmptodayElement.innerHTML = tmptoday;
+
+                setTimeout(time, 1000);
+            }
         }
-        if (mm < 10) {
-            mm = '0' + mm
-        }
-        today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-
-        tmptoday = '<span class="date">' + today + '</span>';
-        tmp = '<span class="date">' + nowTime + '</span>';
-
-        document.getElementById("clock").innerHTML = tmp;
-        document.getElementById("clock1").innerHTML = tmp;
-        document.getElementById("tmptoday").innerHTML = tmptoday;
-
-        clocktime = setTimeout("time()", "1000", "JavaScript");
 
         function checkTime(i) {
             if (i < 10) {
@@ -861,14 +1052,30 @@ if (isset($Web_UI_Login) && $Web_UI_Login === true) {
             }
             return i;
         }
-    }
-	
+
+        document.addEventListener("DOMContentLoaded", function() {
+            time();
+        });
+    </script>
+<script type="text/javascript">
+
     // Lấy phần tử <div>, phần tử liên kết và phần tử nút bấm
     const divElement = document.querySelector('.text-center.color-pallet');
     const linkElement = document.querySelector('.btn-success');
     const buttonElement = document.querySelector('.btn-danger');
     const buttonnElement = document.querySelector('.btn-secondary');
     const buttonnnElement = document.querySelector('.btn-info');
+    const buttonnnnElement = document.querySelector('.btn-primary');
+    const buttonnnnnElement = document.querySelector('.btn-dark');
+
+	const volume_slide_index = document.getElementById('volume_slide_index');
+
+
+    volume_slide_index.addEventListener('click', function() {
+		//console.log("volume_slide_index");
+        // Loại bỏ lớp "show" và thêm lớp "hide" cho phần tử divElement
+		divElement.classList.remove('show');
+    });
 
     buttonElement.addEventListener('click', function() {
         // Loại bỏ lớp "show" và thêm lớp "hide" cho phần tử divElement
@@ -884,6 +1091,20 @@ if (isset($Web_UI_Login) && $Web_UI_Login === true) {
 		//bỏ qua lỗi nếu phần tử không tồn tại
 		if (buttonnnElement) {
   	    buttonnnElement.addEventListener('click', function() {
+        // Loại bỏ lớp "show" và thêm lớp "hide" cho phần tử divElement
+        divElement.classList.remove('show');
+        divElement.classList.add('hide');
+		});
+		}
+		if (buttonnnnElement) {
+  	    buttonnnnElement.addEventListener('click', function() {
+        // Loại bỏ lớp "show" và thêm lớp "hide" cho phần tử divElement
+        divElement.classList.remove('show');
+        divElement.classList.add('hide');
+		});
+		}
+		if (buttonnnnnElement) {
+  	    buttonnnnnElement.addEventListener('click', function() {
         // Loại bỏ lớp "show" và thêm lớp "hide" cho phần tử divElement
         divElement.classList.remove('show');
         divElement.classList.add('hide');
@@ -1018,7 +1239,271 @@ window.addEventListener('message', function(event) {
 
 
     </script>
+	<script>
+    // Lấy các phần tử DOM cần thiết
+    const volumeValue = document.getElementById('volume_value');
+    const volumePercentage = document.getElementById('volume_percentage');
+
+    // Lắng nghe sự kiện thay đổi giá trị của input range
+    volumeValue.addEventListener('input', updatePercentage);
+
+    // Lắng nghe sự kiện nhả chuột hoặc touchend
+    volumeValue.addEventListener('mouseup', handleMouseUp);
+    volumeValue.addEventListener('touchend', handleMouseUp);
+
+    // Hàm cập nhật giá trị % lên thẻ span và gửi AJAX request
+    function updatePercentage() {
+        const value = volumeValue.value;
+        volumePercentage.textContent = `${value}`;
+    }
+
+    // Hàm xử lý khi nhả chuột hoặc touchend
+    function handleMouseUp() {
+        const value = volumeValue.value;
+        //console.log(value);
+
+        // Gửi AJAX request
+        var settings = {
+            "url": "http://<?php echo $serverIP; ?>:<?php echo $Port_Vietbot; ?>",
+            "method": "POST",
+            "timeout": 0,
+            "headers": {
+                "Accept": "*/*",
+                "Accept-Language": "vi",
+                "Cache-Control": "no-cache",
+                "Content-Type": "application/json",
+                "Pragma": "no-cache",
+            },
+            "data": JSON.stringify({
+                "type": 2,
+                "data": "set_system_volume",
+                "action": "setup",
+                "new_value": Math.round(value)
+            }),
+        };
+
+        $.ajax(settings).done(function (response) {
+            // Cập nhật lại giá trị trả về lên thẻ input và span
+			if (typeof response.new_volume === "undefined") {
+			response.new_volume = "..."
+			}
+			if (response.state === "Success") {
+			    var audio = new Audio('assets/audio/tut_tut.mp3');
+				var volumePercentage = Math.round(value) 
+				audio.volume = volumePercentage / 100;
+				audio.play();
+				//console.log("oK");
+			}
+
+            const newVolume = response.new_volume;
+            const oldVolume = response.old_volume;
+
+            volumeValue.value = newVolume;
+            volumePercentage.textContent = `${newVolume}`;
+
+            //console.log(response.state);
+        });
+    }
+</script>
+
 	
+<script>
+//Volume Slide
+    // Khởi tạo biến hover và update
+    var hover = false;
+    var update = true;
+
+    // Bắt sự kiện khi con trỏ chuột hover vào thẻ input
+    document.getElementById('volume_value').addEventListener('mouseenter', function() {
+        hover = true;
+        update = false;
+    });
+
+    // Bắt sự kiện khi con trỏ chuột rời khỏi thẻ input
+    document.getElementById('volume_value').addEventListener('mouseleave', function() {
+        hover = false;
+        update = true;
+    });
+
+
+    // Bắt sự kiện khi con trỏ chuột hover vào thẻ input mobile
+    document.getElementById('volume_value').addEventListener('touchstart', function() {
+        hover = true;
+        update = false;
+    });
+    // Bắt sự kiện khi con trỏ chuột rời khỏi thẻ input mobile
+    document.getElementById('volume_value').addEventListener('touchend', function() {
+        hover = false;
+        update = true;
+    });
+
+    // Lắng nghe sự kiện message từ iframe con là multimedia
+    window.addEventListener('message', function(event) {
+
+        // Bắt sự kiện khi con trỏ chuột hover vào thẻ input
+        document.getElementById('volume_value').addEventListener('mouseenter', function() {
+            update = false; // Dừng cập nhật khi con trỏ chuột hover vào
+            //console.log('Dừng cập nhật tự động');
+        });
+ 
+        // Bắt sự kiện khi con trỏ chuột rời khỏi thẻ input
+        document.getElementById('volume_value').addEventListener('mouseleave', function() {
+            update = true; // Cho phép cập nhật khi con trỏ chuột rời đi
+            //console.log('Tiếp tục cập nhật tự động');
+        });
+
+        // Bắt sự kiện khi con trỏ chuột hover vào thẻ input trên mobile
+        document.getElementById('volume_value').addEventListener('touchstart', function() {
+            update = false; // Dừng cập nhật khi con trỏ chuột hover vào
+            //console.log('Dừng cập nhật tự động');
+        });
+
+        // Bắt sự kiện khi con trỏ chuột rời khỏi thẻ input trên mobile
+        document.getElementById('volume_value').addEventListener('touchend', function() {
+            update = true; // Cho phép cập nhật khi con trỏ chuột rời đi
+            //console.log('Tiếp tục cập nhật tự động');
+        });
+
+        // Xử lý dữ liệu nhận được
+        var receivedData = event.data;
+
+        if (!hover && update) {
+
+            // Cập nhật giá trị âm lượng và hiển thị
+            document.getElementById('volume_value').value = receivedData.volume;
+            document.getElementById('volume_percentage').innerText = receivedData.volume;
+        }
+
+        //console.log(receivedData.volume);
+    });
+</script>
+
+<script>
+//Nút Mic
+    var holdTimerMic;
+    var isLongPressMic = false;
+
+    function startTimerMic() {
+        // Bắt đầu tính thời gian khi nút được nhấn
+        holdTimerMic = setTimeout(function() {
+            //console.log("Bạn đã nhấn giữ 3 giây");
+			
+            isLongPressMic = true; // Đánh dấu rằng người dùng đã nhấn giữ đủ lâu
+            if (isLongPressMic) {
+                wakeUpBotMic('long');
+				alert("Đã thực thi tác vụ nhấn giữ Mic");
+            }
+
+        }, 3000); // Thời gian tính bằng mili giây (ở đây là 3 giây)
+    }
+
+    function stopTimerMic() {
+        // Hủy tính thời gian khi nút được nhả ra
+        clearTimeout(holdTimerMic);
+    }
+
+    function handleClickMic() {
+        // Thực hiện hành động khi nhấn nút một lần
+        if (!isLongPressMic) {
+            wakeUpBotMic('short');
+			//alert("Đã thực thi tác vụ nhấn nhả Mic");
+        }
+        // Đặt lại biến isLongPressMic về false sau khi nhấn nút
+        isLongPressMic = false;
+    }
+
+    // Đánh thức bot
+    function wakeUpBotMic(actionMic) {
+
+        // Thực hiện các hành động cần thiết khi icon được nhấn
+        // Ví dụ: Gửi yêu cầu AJAX để đánh thức Bot
+        var settingsMic = {
+            "url": "http://<?php echo $serverIP; ?>:<?php echo $Port_Vietbot; ?>",
+            "method": "POST",
+            "timeout": 0,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "data": JSON.stringify({
+                "type": 2,
+                "data": "set_keypad",
+                "keypad": "mic",
+                "action": actionMic
+            }),
+        };
+
+        $.ajax(settingsMic).done(function(response) {
+            //console.log(response);
+        });
+    }
+</script>
+<script>
+//Nút Tam Giác
+    var holdTimer;
+    var isLongPress = false;
+
+    function startTimer() {
+        // Bắt đầu tính thời gian khi nút được nhấn
+        holdTimer = setTimeout(function() {
+            //console.log("Bạn đã nhấn giữ 3 giây");
+			
+            isLongPress = true; // Đánh dấu rằng người dùng đã nhấn giữ đủ lâu
+            if (isLongPress) {
+                wakeUpBot('long');
+				alert("Đã thực thi tác vụ nhấn giữ");
+            }
+
+        }, 3000); // Thời gian tính bằng mili giây (ở đây là 3 giây)
+    }
+
+    function stopTimer() {
+        // Hủy tính thời gian khi nút được nhả ra
+        clearTimeout(holdTimer);
+    }
+
+    function handleClick() {
+        // Thực hiện hành động khi nhấn nút một lần
+        if (!isLongPress) {
+            wakeUpBot('short');
+			//alert("Đã thực thi tác vụ nhấn nhả");
+        }
+        // Đặt lại biến isLongPress về false sau khi nhấn nút
+        isLongPress = false;
+    }
+
+    // Đánh thức bot
+    function wakeUpBot(action) {
+
+        // Thực hiện các hành động cần thiết khi icon được nhấn
+        // Ví dụ: Gửi yêu cầu AJAX để đánh thức Bot
+        var settings = {
+            "url": "http://<?php echo $serverIP; ?>:<?php echo $Port_Vietbot; ?>",
+            "method": "POST",
+            "timeout": 0,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "data": JSON.stringify({
+                "type": 2,
+                "data": "set_keypad",
+                "keypad": "wakeup",
+                "action": action
+            }),
+        };
+
+        $.ajax(settings).done(function(response) {
+			
+						if (response.response === "Đã kích hoạt nhấn phím Wakeup!") {
+			    var audio = new Audio('assets/audio/ding.mp3');
+				audio.volume = 1;
+				audio.play();
+				//console.log("oK");
+			}
+			
+            //console.log(response);
+        });
+    }
+</script>
 </body>
 
 </html>
