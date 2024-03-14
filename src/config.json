@@ -11,7 +11,8 @@
             "cast": {
                 "name": "Pixel4XL-79",
                 "call_name": "điện thoại"
-            }
+            },
+            "amixer_id": 2
         },
         "led": {
             "type": "Vietbot AIO Board V2.0",
