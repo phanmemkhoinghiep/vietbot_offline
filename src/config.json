@@ -2,7 +2,7 @@
     "smart_config": {
         "mic": {
             "type": "default",
-            "id": 0
+            "id": 12
         },
         "speaker": {            
             "system": {
