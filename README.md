@@ -1,5 +1,5 @@
 [![trophy](https://github-profile-trophy.vercel.app/?username=phanmemkhoinghiep)](https://github.com/phanmemkhoinghiep/vietbot_offline)
-[![trophy](https://github-profile-trophy.vercel.app/?username=phanmemkhoinghiep)](https://github.com/phanmemkhoinghiep/vietbot_offline)
+[![trophy](https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=onedark)](https://github.com/ryo-ma/github-profile-trophy)
 # vietbot_offline
 Phiên bản Beta
 
