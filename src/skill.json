@@ -398,10 +398,10 @@
 		"error_answer": "Không thực hiện được tra cứu Sim sim, hãy kiểm tra lại"
 	},
 	"maika": {
-	        "username": "toiyeumaika@gmail.com",
-	        "password": "66886868@maikA",
+	        "username": "toiyeuolli@gmail.com",
+	        "password": "66886868@ollI",
 		 "cache_timeout": 43200,		
-	        "error_answer": "Không thực hiện được tra cứu OLLI Maika, hãy kiểm tra lại"
+	        "error_answer": "Không thực hiện được tra cứu OLLI AI, hãy kiểm tra lại"
 	},		
 	"google_ai": {
 		"api_key": "sdfsàdàdsffsadf",	
