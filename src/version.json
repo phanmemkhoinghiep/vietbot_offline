@@ -1,9 +1,9 @@
 {
 	"vietbot_version": {
-		"latest": "beta 14-03-2024-01"
+		"latest": "beta 20-03-2024-01"
 	},
 	"update_command": "", 
-	"new_features": "Chọn Mic theo ID từ config và WebUI",
+	"new_features": "Trợ lý ảo Google Gemini ",
 	"bug_fixed": "Sửa lỗi vặt",	
 	"improvements": "playback player",	
 	"image_version": {
