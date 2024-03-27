@@ -1,9 +1,9 @@
 {
 	"vietbot_version": {
-		"latest": "beta 26-03-2024-01"
+		"latest": "beta 27-03-2024-01"
 	},
 	"update_command": "", 
-	"new_features": "Chạy không cần Picovoice",
+	"new_features": "",
 	"bug_fixed": "Sửa lỗi vặt",	
 	"improvements": "playback player",	
 	"image_version": {
