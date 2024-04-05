@@ -1,10 +1,10 @@
 {
 	"vietbot_version": {
-		"latest": "beta 27-03-2024-02"
+		"latest": "beta 01-04-2024-01"
 	},
 	"update_command": "", 
 	"new_features": "",
-	"bug_fixed": "Sửa lỗi vặt",	
+	"bug_fixed": "Sửa lỗi Hass báo trạng thái default",	
 	"improvements": "playback player",	
 	"image_version": {
 		"latest": "22-09-2023"
