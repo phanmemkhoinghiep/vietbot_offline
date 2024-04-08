@@ -616,7 +616,7 @@
         }
     ],
     "compare_percent": {
-        "music_compare": 80,
+        "music_compare": 70,
         "smarthome_compare": 80
     },
     "light_brightness": [{
