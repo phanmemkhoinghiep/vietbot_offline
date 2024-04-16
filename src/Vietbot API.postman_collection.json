@@ -71,18 +71,81 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"type\": 1,\"data\": \"bot_info\"}"
+					"raw": ""
 				},
 				"url": {
-					"raw": "http://192.168.1.121:5000",
+					"raw": "http://192.168.3.22:5000?data=bot_state",
 					"protocol": "http",
 					"host": [
 						"192",
 						"168",
-						"1",
-						"121"
+						"3",
+						"22"
 					],
-					"port": "5000"
+					"port": "5000",
+					"query": [
+						{
+							"key": "type",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "data",
+							"value": "bot_state"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get thông tin bot",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				},
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "charset",
+						"value": "utf-8",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://192.168.3.22:5000?data=bot_info",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"3",
+						"22"
+					],
+					"port": "5000",
+					"query": [
+						{
+							"key": "type",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "data",
+							"value": "bot_info"
+						}
+					]
 				}
 			},
 			"response": []
@@ -115,13 +178,13 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://192.168.1.121:5000/get_log",
+					"raw": "http://192.168.3.22:5000/get_log",
 					"protocol": "http",
 					"host": [
 						"192",
 						"168",
-						"1",
-						"121"
+						"3",
+						"22"
 					],
 					"port": "5000",
 					"path": [
@@ -156,18 +219,24 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"type\": 1,\"data\": \"wakeup_reply_state\"}"
+					"raw": ""
 				},
 				"url": {
-					"raw": "http://192.168.1.121:5000",
+					"raw": "http://192.168.3.22:5000?data=wakeup_reply_state",
 					"protocol": "http",
 					"host": [
 						"192",
 						"168",
-						"1",
-						"121"
+						"3",
+						"22"
 					],
-					"port": "5000"
+					"port": "5000",
+					"query": [
+						{
+							"key": "data",
+							"value": "wakeup_reply_state"
+						}
+					]
 				}
 			},
 			"response": []
@@ -197,18 +266,24 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"type\": 1,\"data\": \"picovoice_state\"}"
+					"raw": ""
 				},
 				"url": {
-					"raw": "http://192.168.1.121:5000",
+					"raw": "http://192.168.3.22:5000?data=picovoice_state",
 					"protocol": "http",
 					"host": [
 						"192",
 						"168",
-						"1",
-						"121"
+						"3",
+						"22"
 					],
-					"port": "5000"
+					"port": "5000",
+					"query": [
+						{
+							"key": "data",
+							"value": "picovoice_state"
+						}
+					]
 				}
 			},
 			"response": []
@@ -238,18 +313,24 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"type\": 1,\"data\": \"conversation_state\"}"
+					"raw": ""
 				},
 				"url": {
-					"raw": "http://192.168.1.121:5000",
+					"raw": "http://192.168.3.22:5000?data=conversation_state",
 					"protocol": "http",
 					"host": [
 						"192",
 						"168",
-						"1",
-						"121"
+						"3",
+						"22"
 					],
-					"port": "5000"
+					"port": "5000",
+					"query": [
+						{
+							"key": "data",
+							"value": "conversation_state"
+						}
+					]
 				}
 			},
 			"response": []
@@ -279,18 +360,24 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"type\": 1,\"data\": \"last_hotword_use\"}"
+					"raw": ""
 				},
 				"url": {
-					"raw": "http://192.168.1.121:5000",
+					"raw": "http://192.168.3.22:5000?data=last_hotword_use",
 					"protocol": "http",
 					"host": [
 						"192",
 						"168",
-						"1",
-						"121"
+						"3",
+						"22"
 					],
-					"port": "5000"
+					"port": "5000",
+					"query": [
+						{
+							"key": "data",
+							"value": "last_hotword_use"
+						}
+					]
 				}
 			},
 			"response": []
@@ -320,18 +407,24 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"type\": 1,\"data\": \"last_request\"}"
+					"raw": ""
 				},
 				"url": {
-					"raw": "http://192.168.1.121:5000",
+					"raw": "http://192.168.3.22:5000?data=last_request",
 					"protocol": "http",
 					"host": [
 						"192",
 						"168",
-						"1",
-						"121"
+						"3",
+						"22"
 					],
-					"port": "5000"
+					"port": "5000",
+					"query": [
+						{
+							"key": "data",
+							"value": "last_request"
+						}
+					]
 				}
 			},
 			"response": []
@@ -361,18 +454,24 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"type\": 1,\"data\": \"last_answer\"}"
+					"raw": ""
 				},
 				"url": {
-					"raw": "http://192.168.1.121:5000",
+					"raw": "http://192.168.3.22:5000?data=last_answer",
 					"protocol": "http",
 					"host": [
 						"192",
 						"168",
-						"1",
-						"121"
+						"3",
+						"22"
 					],
-					"port": "5000"
+					"port": "5000",
+					"query": [
+						{
+							"key": "data",
+							"value": "last_answer"
+						}
+					]
 				}
 			},
 			"response": []
@@ -402,18 +501,24 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"type\": 1,\"data\": \"sys_player\"}"
+					"raw": ""
 				},
 				"url": {
-					"raw": "http://192.168.1.121:5000",
+					"raw": "http://192.168.3.22:5000?data=sys_player",
 					"protocol": "http",
 					"host": [
 						"192",
 						"168",
-						"1",
-						"121"
+						"3",
+						"22"
 					],
-					"port": "5000"
+					"port": "5000",
+					"query": [
+						{
+							"key": "data",
+							"value": "sys_player"
+						}
+					]
 				}
 			},
 			"response": []
@@ -443,18 +548,24 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"type\": 1,\"data\": \"cast_volume\"}"
+					"raw": ""
 				},
 				"url": {
-					"raw": "http://192.168.1.121:5000",
+					"raw": "http://192.168.3.22:5000?data=cast_player",
 					"protocol": "http",
 					"host": [
 						"192",
 						"168",
-						"1",
-						"121"
+						"3",
+						"22"
 					],
-					"port": "5000"
+					"port": "5000",
+					"query": [
+						{
+							"key": "data",
+							"value": "cast_player"
+						}
+					]
 				}
 			},
 			"response": []
@@ -484,18 +595,24 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"type\": 1,\"data\": \"sys_volume\"}"
+					"raw": ""
 				},
 				"url": {
-					"raw": "http://192.168.1.121:5000",
+					"raw": "http://192.168.3.22:5000?data=sys_volume",
 					"protocol": "http",
 					"host": [
 						"192",
 						"168",
-						"1",
-						"121"
+						"3",
+						"22"
 					],
-					"port": "5000"
+					"port": "5000",
+					"query": [
+						{
+							"key": "data",
+							"value": "sys_volume"
+						}
+					]
 				}
 			},
 			"response": []
@@ -528,15 +645,21 @@
 					"raw": "{\"type\": 1,\"data\": \"sys_volume\"}"
 				},
 				"url": {
-					"raw": "http://192.168.1.121:5000",
+					"raw": "http://192.168.3.22:5000?data=cast_volume",
 					"protocol": "http",
 					"host": [
 						"192",
 						"168",
-						"1",
-						"121"
+						"3",
+						"22"
 					],
-					"port": "5000"
+					"port": "5000",
+					"query": [
+						{
+							"key": "data",
+							"value": "cast_volume"
+						}
+					]
 				}
 			},
 			"response": []
@@ -566,18 +689,24 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"type\": 1,\"data\": \"led_state\"}"
+					"raw": ""
 				},
 				"url": {
-					"raw": "http://192.168.1.121:5000",
+					"raw": "http://192.168.3.22:5000?data=led_state",
 					"protocol": "http",
 					"host": [
 						"192",
 						"168",
-						"1",
-						"121"
+						"3",
+						"22"
 					],
-					"port": "5000"
+					"port": "5000",
+					"query": [
+						{
+							"key": "data",
+							"value": "led_state"
+						}
+					]
 				}
 			},
 			"response": []
@@ -2129,13 +2258,13 @@
 					"raw": "{\"type\": 2,\"data\":\"set_keypad\",\"keypad\":\"mic\",\"action\":\"long\"}"
 				},
 				"url": {
-					"raw": "http://192.168.1.121:5000",
+					"raw": "http://192.168.3.22:5000",
 					"protocol": "http",
 					"host": [
 						"192",
 						"168",
-						"1",
-						"121"
+						"3",
+						"22"
 					],
 					"port": "5000"
 				}
@@ -2209,13 +2338,13 @@
 					"raw": "{\"type\": 2,\"data\":\"set_keypad\",\"keypad\":\"mic\",\"action\":\"short\"}"
 				},
 				"url": {
-					"raw": "http://192.168.1.121:5000",
+					"raw": "http://192.168.3.22:5000",
 					"protocol": "http",
 					"host": [
 						"192",
 						"168",
-						"1",
-						"121"
+						"3",
+						"22"
 					],
 					"port": "5000"
 				}
