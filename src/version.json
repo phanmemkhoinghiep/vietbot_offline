@@ -1,10 +1,10 @@
 {
 	"vietbot_version": {
-		"latest": "beta 16-04-2024-01"
+		"latest": "beta 09-05-2024-01"
 	},
 	"update_command": "", 
 	"new_features": "Bỏ Hanet Skill",
-	"bug_fixed": "Sửa lỗi API get",	
+	"bug_fixed": "Sửa lỗi Skill thời tiết",	
 	"improvements": "",	
 	"image_version": {
 		"latest": "22-09-2023"
