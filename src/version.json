@@ -1,10 +1,10 @@
 {
 	"vietbot_version": {
-		"latest": "beta 09-05-2024-01"
+		"latest": "beta 10-07-2024-01"
 	},
 	"update_command": "", 
-	"new_features": "Bỏ Hanet Skill",
-	"bug_fixed": "Sửa lỗi Skill thời tiết",	
+	"new_features": "Bỏ các Skill thời tiết, tin tức, tra cứu tỉ giá, speedtest, wikipedia, google assistant",
+	"bug_fixed": "",	
 	"improvements": "",	
 	"image_version": {
 		"latest": "22-09-2023"
