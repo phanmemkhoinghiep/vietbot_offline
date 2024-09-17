@@ -1,9 +1,9 @@
 {
 	"vietbot_version": {
-		"latest": "beta 10-07-2024-01"
+		"latest": "beta 17-09-2024-01"
 	},
 	"update_command": "", 
-	"new_features": "Bỏ các Skill thời tiết, tin tức, tra cứu tỉ giá, speedtest, wikipedia, google assistant",
+	"new_features": "Tên file MD5 cho TTS, tính năng bypass skill chuyển sang data process custom",
 	"bug_fixed": "",	
 	"improvements": "",	
 	"image_version": {
