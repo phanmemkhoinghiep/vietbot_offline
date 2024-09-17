@@ -80,8 +80,8 @@ adv_from_now=[p['value'] for p in adv_data['from_now']]
 adv_nearby=[p['value'] for p in adv_data['nearby']]
 
     
-def data_process_custom(player,data):
-    answer=None
+def data_process(player,data):
+    answer='12345'
     music_path=None
     return answer,music_path
 
