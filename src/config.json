@@ -4,7 +4,7 @@
             "type": "default",
             "id": 12
         },
-        "speaker": {            
+        "speaker": {
             "system": {
                 "amixer_id": 2
             }
@@ -146,7 +146,7 @@
                 "command": null,
                 "active": true,
                 "value": null
-            },			
+            },
             {
                 "type": "porcupine",
                 "custom_skill": false,
@@ -157,7 +157,7 @@
                 "command": null,
                 "active": true,
                 "value": null
-            },		
+            },
             {
                 "type": "porcupine",
                 "custom_skill": false,
@@ -168,7 +168,7 @@
                 "command": null,
                 "active": true,
                 "value": null
-            },	
+            },
             {
                 "type": "porcupine",
                 "custom_skill": false,
@@ -179,7 +179,7 @@
                 "command": null,
                 "active": true,
                 "value": null
-            },	
+            },
             {
                 "type": "porcupine",
                 "custom_skill": false,
@@ -190,7 +190,7 @@
                 "command": null,
                 "active": true,
                 "value": null
-            },	
+            },
             {
                 "type": "porcupine",
                 "custom_skill": false,
@@ -201,7 +201,7 @@
                 "command": null,
                 "active": true,
                 "value": null
-            },	
+            },
             {
                 "type": "porcupine",
                 "custom_skill": false,
@@ -212,7 +212,7 @@
                 "command": null,
                 "active": true,
                 "value": null
-            },	
+            },
             {
                 "type": "porcupine",
                 "custom_skill": false,
@@ -223,7 +223,7 @@
                 "command": null,
                 "active": true,
                 "value": null
-            },	
+            },
             {
                 "type": "porcupine",
                 "custom_skill": false,
@@ -234,7 +234,7 @@
                 "command": null,
                 "active": true,
                 "value": null
-            },				
+            },
             {
                 "type": "porcupine",
                 "custom_skill": false,
@@ -245,7 +245,7 @@
                 "command": null,
                 "active": true,
                 "value": null
-            },	
+            },
             {
                 "type": "porcupine",
                 "custom_skill": false,
@@ -256,7 +256,7 @@
                 "command": null,
                 "active": true,
                 "value": null
-            }				
+            }
         ]
     },
     "smart_request": {
@@ -303,6 +303,40 @@
                 "value": "Chờ thêm để xử lý"
             }
         ]
-
+    },
+    "smart_skill": {
+        "time": {
+            "error_answer": "Không thực hiện được tra cứu thời gian, hãy kiểm tra lại"
+        },
+        "solar_calendar": {
+            "error_answer": "Không thực hiện được tra cứu lịch âm, hãy kiểm tra lại"
+        },
+        "lunar_calendar": {
+            "error_answer": "Không thực hiện được tra cứu lịch âm, hãy kiểm tra lại"
+        },
+        "hass": {
+            "url": "https://theanh.duckdns.org",
+            "token": "eyJhbGciOiJ0c6mX7K6PWna2ZPVhMQPc",
+            "error_answer": "Không thực hiện được điều khiển Hass, hãy kiểm tra lại",
+            "display_full_state": true
+        },
+        "weather": {
+            "openweathermap_key": "ffddba060ff1a735f04ff426f85f070b",
+            "error_answer": "Không thực hiện được tra cứu thời tiết khu vực, hãy kiểm tra lại"
+        },
+        "music": {
+            "error_answer": "Không thực hiện được phát nhạc, hãy kiểm tra lại",
+            "music_compare_percent": 80
+        },
+        "cache_compare_result": 95
+    },
+    "smart_user": {
+        "name": "Nguyễn Duy",
+        "address": {
+            "wards": "Phường Nhân Hòa",
+            "district": "Quận Cầu Giấy",
+            "province": "Thành phố Hà Nội"
+        },
+        "level": 1
     }
 }
