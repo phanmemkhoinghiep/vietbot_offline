@@ -262,7 +262,7 @@
     "smart_request": {
         "continuous_asking": false,
         "stt": {
-            "type": "stt_vietbot",
+            "type": "vietbot",
             "token": "",
             "time_out": 5,
             "error_speak": false
@@ -283,7 +283,7 @@
             }
         },
         "tts": {
-            "type": "tts_edge",
+            "type": "edge",
             "token": "",
             "voice_name": "female_southern_voice",
             "voice_profile": "",
