@@ -49,10 +49,7 @@ async def get_process():
                 'mic_block': global_vars.mic_block,
                 "player": {
                  'player_state':global_vars.player1.get_state(),
-                 'media_info':global_vars.player1.get_media(),                 
-                 'song_link':global_vars.song_link,                                  
-                 'song_title':global_vars.song_title,
-                 'cover_link':global_vars.cover_link
+                 'media_info':global_vars.player1.get_media()                 
                 }
                 })
         else:
