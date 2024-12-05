@@ -1,9 +1,1 @@
-{
-	"vietbot_version": {
-		"current": "beta 12-07-2023"
-	},
-	"volume": 65,
-	"running_count": 0,
-	"hostname": "pizero2w",
-	"ip_address": "192.168.1.10"
-}
+{"vietbot_version": {"current": "beta 23-09-2024-01"}, "volume": 50, "running_count": 592, "hostname": "vietbot64", "ip_address": "192.168.3.139"}

@@ -1,12 +1,12 @@
 {
 	"vietbot_version": {
-		"latest": "beta 17-09-2024-01"
+		"latest": "beta 21-08-2023-01"
 	},
 	"update_command": "", 
-	"new_features": "Tên file MD5 cho TTS, tính năng bypass skill chuyển sang data process custom",
+	"new_features": "",
 	"bug_fixed": "",	
-	"improvements": "",	
+	"improvements": "Xử lý các skill nội bộ nhanh hơn (Tiếp tục)",	
 	"image_version": {
-		"latest": "23-09-2023"
+		"latest": "2023-07-24"
 	}
 }

@@ -1,49 +1,13 @@
 {
-    "script": [
-        {
-            "request": "có đó không em",
-            "command": null,
-            "reply": "em đây"
-        },
-        {
-            "request": "hôm nay rét không",
-            "command": null,
-            "reply": "còn rét hơn hôm qua ấy"
-        },
-        {
-            "request": "anh nên làm gì",
-            "command": null,
-            "reply": "anh ngủ tiếp đi"
-        },
-        {
-            "request": "vậy anh ngủ thêm tiếng nữa",
-            "command": null,
-            "reply": "ok anh"
-        },
-        {
-            "request": "à nhớ làm gì rồi chứ",
-            "command": null,
-            "reply": "Vâng, em lui thời gian bật bình thêm 30 phút nữa, nhắc anh sau 1 tiếng nữa nhé"
-        },
-        {
-            "request": "OK em",
-            "command": null,
-            "reply": "OK anh"
-        },		
-        {
-            "request": "anh về rồi",
-            "command": "thi hành về nhà",
-            "reply": "Chào mừng anh về nhà"
-        },			
-        {
-            "request": "anh đi đây",
-            "command": "thi hành ra ngoài",
-            "reply": null
-        },	
-        {
-            "request": "ngủ thôi",
-            "command": "thi hành đi ngủ",
-            "reply": "Đã chuyển chế độ đi ngủ, chúc ngủ ngon"
-        }	        
-    ]
+	"info": {
+            "name": "Nguyễn Duy",
+            "address": {
+                "wards": "Phường Nhân Hòa",
+                "district": "Quận Cầu Giấy",
+                "province": "Thành phố Hà Nội"
+			},
+			"level":1            
+	}
+
+	
 }

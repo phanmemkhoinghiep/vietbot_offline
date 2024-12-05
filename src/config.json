@@ -7,21 +7,16 @@
         "speaker": {            
             "system": {
                 "amixer_id": 2
-            },
-            "cast": {
-                "name": "Pixel4XL-79",
-                "call_name": "điện thoại"
-            },
-            "amixer_id": 2
+            }
         },
         "led": {
             "type": "Vietbot AIO Board V2.0",
             "number_led": 12,
-            "led_gpio": 10,            
+            "led_gpio": 10,
             "effect_mode": 1,
-            "brightness": 210,
-            "wakeup_color": "03254b",
-            "muted_color": "FF3333",
+            "brightness": 255,
+            "wakeup_color": "11801e",
+            "muted_color": "FF6333",
             "listen_effect": 1,
             "think_effect": 2,
             "speak_effect": 3
@@ -51,28 +46,23 @@
         "web_interface": {
             "port": 5000
         },
-        "user_info": {
-            "name": "Vũ Tuyển",
-            "address": {
-                "wards": "Xã Vĩnh Khúc",
-                "district": "Huyện Văn Giang",
-                "province": "Tỉnh Hưng Yên"
-            }
-        },
         "logging_type": "console",
-        "bot_mode": "full"
+        "block_updates": {
+            "vietbot_program": false,
+            "web_ui": false
+        }
     },
     "smart_wakeup": {
         "hotword_engine": {
             "type": "porcupine",
-            "key": "iB0kfsdfsdf+w=="
+            "key": "rYLdYmprIByZ0RQD5Zj1Lmfff9o9dkI5huXYY3HY0wrNRTC0P4bIDg=="
         },
         "wakeup_reply": [
             {
-                "value": "có em"
+                "value": "Winni sẵn sàng phục vụ"
             },
             {
-                "value": "em đây"
+                "value": "Xin chào và sẵn sàng phục vụ"
             },
             {
                 "value": "đây anh"
@@ -96,10 +86,10 @@
                 "custom_skill": false,
                 "file_name": "alexa_raspberry-pi.ppn",
                 "lang": "eng",
-                "sensitive": 0.1,
+                "sensitive": 0.5,
                 "say_reply": false,
                 "command": null,
-                "active": false,
+                "active": true,
                 "value": null
             },
             {
@@ -107,7 +97,7 @@
                 "custom_skill": false,
                 "lang": "eng",
                 "file_name": "americano_raspberry-pi.ppn",
-                "sensitive": 0.4,
+                "sensitive": 0.5,
                 "say_reply": false,
                 "command": null,
                 "active": true,
@@ -116,21 +106,10 @@
             {
                 "type": "porcupine",
                 "custom_skill": false,
+                "file_name": "blueberry_raspberry-pi.ppn",
                 "lang": "eng",
-                "file_name": "hey google_raspberry-pi.ppn",
-                "sensitive": 0.1,
+                "sensitive": 0.5,
                 "say_reply": false,
-                "command": null,
-                "active": false,
-                "value": null
-            },
-            {
-                "type": "porcupine",
-                "custom_skill": false,
-                "lang": "eng",
-                "file_name": "hey siri_raspberry-pi.ppn",
-                "sensitive": 0.3,
-                "say_reply": true,
                 "command": null,
                 "active": true,
                 "value": null
@@ -138,97 +117,192 @@
             {
                 "type": "porcupine",
                 "custom_skill": false,
+                "file_name": "bumblebee_raspberry-pi.ppn",
                 "lang": "eng",
-                "file_name": "hey-vi-bot_en_raspberry-pi.ppn",
-                "sensitive": 0.1,
+                "sensitive": 0.5,
                 "say_reply": false,
                 "command": null,
-                "active": false,
+                "active": true,
                 "value": null
             },
             {
                 "type": "porcupine",
                 "custom_skill": false,
+                "file_name": "computer_raspberry-pi.ppn",
                 "lang": "eng",
-                "file_name": "hi-fen_en_raspberry-pi.ppn",
-                "sensitive": 0.1,
+                "sensitive": 0.5,
                 "say_reply": false,
                 "command": null,
-                "active": false
+                "active": true,
+                "value": null
             },
             {
                 "type": "porcupine",
                 "custom_skill": false,
+                "file_name": "grapefruit_raspberry-pi.ppn",
                 "lang": "eng",
-                "file_name": "ok google_raspberry-pi.ppn",
-                "sensitive": 0.1,
+                "sensitive": 0.5,
                 "say_reply": false,
                 "command": null,
-                "active": false
-            },
+                "active": true,
+                "value": null
+            },			
             {
                 "type": "porcupine",
                 "custom_skill": false,
+                "file_name": "grasshopper_raspberry-pi.ppn",
                 "lang": "eng",
-                "file_name": "ok-vi-bot_en_raspberry-pi.ppn",
-                "sensitive": 0.1,
+                "sensitive": 0.5,
                 "say_reply": false,
                 "command": null,
-                "active": false
-            }
+                "active": true,
+                "value": null
+            },		
+            {
+                "type": "porcupine",
+                "custom_skill": false,
+                "file_name": "hey_barista_raspberry-pi.ppn",
+                "lang": "eng",
+                "sensitive": 0.5,
+                "say_reply": false,
+                "command": null,
+                "active": true,
+                "value": null
+            },	
+            {
+                "type": "porcupine",
+                "custom_skill": false,
+                "file_name": "hey_google_raspberry-pi.ppn",
+                "lang": "eng",
+                "sensitive": 0.5,
+                "say_reply": false,
+                "command": null,
+                "active": true,
+                "value": null
+            },	
+            {
+                "type": "porcupine",
+                "custom_skill": false,
+                "file_name": "hey_siri_raspberry-pi.ppn",
+                "lang": "eng",
+                "sensitive": 0.5,
+                "say_reply": false,
+                "command": null,
+                "active": true,
+                "value": null
+            },	
+            {
+                "type": "porcupine",
+                "custom_skill": false,
+                "file_name": "jarvis_raspberry-pi.ppn",
+                "lang": "eng",
+                "sensitive": 0.5,
+                "say_reply": false,
+                "command": null,
+                "active": true,
+                "value": null
+            },	
+            {
+                "type": "porcupine",
+                "custom_skill": false,
+                "file_name": "ok_google_raspberry-pi.ppn",
+                "lang": "eng",
+                "sensitive": 0.5,
+                "say_reply": false,
+                "command": null,
+                "active": true,
+                "value": null
+            },	
+            {
+                "type": "porcupine",
+                "custom_skill": false,
+                "file_name": "pico_clock_raspberry-pi.ppn",
+                "lang": "eng",
+                "sensitive": 0.5,
+                "say_reply": false,
+                "command": null,
+                "active": true,
+                "value": null
+            },	
+            {
+                "type": "porcupine",
+                "custom_skill": false,
+                "file_name": "picovoice_raspberry-pi.ppn",
+                "lang": "eng",
+                "sensitive": 0.5,
+                "say_reply": false,
+                "command": null,
+                "active": true,
+                "value": null
+            },				
+            {
+                "type": "porcupine",
+                "custom_skill": false,
+                "file_name": "porcupine_raspberry-pi.ppn",
+                "lang": "eng",
+                "sensitive": 0.5,
+                "say_reply": false,
+                "command": null,
+                "active": true,
+                "value": null
+            },	
+            {
+                "type": "porcupine",
+                "custom_skill": false,
+                "file_name": "terminator_raspberry-pi.ppn",
+                "lang": "eng",
+                "sensitive": 0.5,
+                "say_reply": false,
+                "command": null,
+                "active": true,
+                "value": null
+            }				
         ]
     },
     "smart_request": {
         "continuous_asking": false,
         "stt": {
-            "type": "stt_gg_free",
+            "type": "stt_vietbot",
             "token": "",
-            "stt_gg_ass_mode": "default",
-            "credentials_file": "credentials.json",
-            "device_config_file": "device_config.json",
-            "time_out": 6000
+            "time_out": 5,
+            "error_speak": false
         }
     },
     "smart_answer": {
-        "startup_state_speaking": true,
+        "startup_state_speaking": false,
         "sound": {
             "default": {
                 "start": "sound/default/ding.mp3",
                 "finish": "sound/default/dong.mp3",
                 "volume_change": "sound/default/tut_tut.mp3"
             },
-            "custom": {
-                "start": "sound/custom/"
-            },
             "welcome": {
-                "mode": "text",
-                "path": "sound/welcome/welcome.mp3",
+                "mode": "path",
+                "path": "sound/welcome/window.mp3",
                 "text": "Xin chào mời đọc khẩu lệnh, để ra lệnh"
             }
         },
         "tts": {
-            "type": "tts_gg_free",
+            "type": "tts_edge",
             "token": "",
-            "voice_name": null,
-            "voice_profile": null,
-            "speed": null,
-            "pitch": null
+            "voice_name": "female_southern_voice",
+            "voice_profile": "",
+            "speed": "",
+            "pitch": ""
         },
-        "external_bot_priority_1": "gg_bard",
-        "external_bot_priority_2": "gg_ass",
-        "external_bot_priority_3": "chatGPT",
+        "external_bot_priority_1": "germini",
         "pre_answer_timeout": 8,
         "pre_answer": [
             {
-                "value": "Cần thêm thời gian, vui lòng đợi"
+                "value": "Cần thêm thời gian"
             },
             {
                 "value": "Vui lòng chờ thêm"
             },
             {
-                "value": "Cần thêm thời gian để xử lý"
+                "value": "Chờ thêm để xử lý"
             }
-        ],
-        "number_characters_to_switch_mode": 300
+        ]
+
     }
 }

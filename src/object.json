@@ -165,41 +165,11 @@
     "this_year": [{
         "value": "năm này"
     }],
-    "weather": [{
-            "value": "thời tiết"
-        },
-        {
-            "value": "có mưa"
-        },
-        {
-            "value": "có nắng"
-        },
-        {
-            "value": "có gió"
-        }
-    ],
-    "news": [{
-            "value": "tin tức"
-        },
-        {
-            "value": "báo"
-        },
-        {
-            "value": "thời sự"
-        }
-    ],
     "music": [{
             "value": "nhạc"
         },
         {
             "value": "bài"
-        }
-    ],
-    "network_speed": [{
-            "value": "đường truyền"
-        },
-        {
-            "value": "tốc độ mạng"
         }
     ],
     "all": [{
@@ -381,29 +351,6 @@
         },
         {
             "value": "tại"
-        }
-    ],
-    "distance": [{
-            "value": "khoảng cách"
-        },
-        {
-            "value": "quãng đường"
-        }
-    ],
-    "route": [{
-            "value": "tuyến đường"
-        },
-        {
-            "value": "đường đến"
-        },
-        {
-            "value": "đường tới"
-        },
-        {
-            "value": "tuyến đường"
-        },
-        {
-            "value": "chỉ đường"
         }
     ],
     "anniversary": [{
@@ -616,7 +563,7 @@
         }
     ],
     "compare_percent": {
-        "music_compare": 60,
+        "music_compare": 70,
         "smarthome_compare": 80
     },
     "light_brightness": [{
@@ -749,96 +696,6 @@
             "value": "khẩu lệnh"
         }
     ],
-    "restaurant": [{
-            "value": "nhà hàng"
-        },
-        {
-            "value": "quán ăn"
-        },
-        {
-            "value": "chỗ ăn uống"
-        }
-    ],
-    "cafe": [{
-            "value": "cafe"
-        },
-        {
-            "value": "cà phê"
-        },
-        {
-            "value": "đồ uống"
-        }
-    ],
-    "bar": [{
-        "value": "quán ba"
-    }],
-    "bakery": [{
-            "value": "tiệm bánh"
-        },
-        {
-            "value": "bánh ngọt"
-        },
-        {
-            "value": "bán bánh"
-        }
-    ],
-    "grocery_or_supermarket": [{
-            "value": "siêu thị"
-        }
-
-    ],
-    "pharmacy": [{
-            "value": "tiệm thuốc"
-        },
-        {
-            "value": "quầy thuốc"
-        },
-        {
-            "value": "hiệu thuốc"
-        }
-    ],
-    "hospital": [{
-            "value": "bệnh viện"
-        },
-        {
-            "value": "bệnh xá"
-        }
-    ],
-    "gym": [{
-            "value": "phòng gym"
-        },
-        {
-            "value": "tập gym"
-        },
-        {
-            "value": "địa chỉ gym"
-        }
-    ],
-    "park": [{
-            "value": "công viên"
-        }
-
-    ],
-    "shopping_mall": [{
-            "value": "trung tâm mua sắm"
-        }
-
-    ],
-    "movie_theater": [{
-            "value": "rạp chiếu phim"
-        }
-
-    ],
-    "hotel": [{
-            "value": "nhà nghỉ"
-        },
-        {
-            "value": "nhà trọ"
-        },
-        {
-            "value": "khách sạn"
-        }
-    ],
     "conversation": [{
             "value": "hội thoại"
         },
@@ -866,23 +723,27 @@
             "value": "microphone"
         }
     ],
-	"fairy_tale": [{
-            "value": "cổ tích"
-        },
-        {
-            "value": "ngày xưa"
-        }
-    ],
-	"cast_player": [
-        {
-            "value": "loa ngoài"
-        }
-    ],
 	"media_player": [{
             "value": "máy phát"
         },
         {
             "value": "bộ phát"
         }
-    ]
+    ],
+    "weather": [{
+            "value": "thời tiết"
+        },
+        {
+            "value": "có mưa"
+        },
+        {
+            "value": "có nắng"
+        },
+        {
+            "value": "có gió"
+        },
+        {
+            "value": "mưa gió"
+        }
+    ]	
 } 
