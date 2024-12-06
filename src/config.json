@@ -283,7 +283,7 @@
             }
         },
         "tts": {
-            "type": "edge",
+            "type": "tts_edge",
             "token": "",
             "voice_name": "female_southern_voice",
             "voice_profile": "",
