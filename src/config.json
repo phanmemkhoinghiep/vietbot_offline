@@ -262,7 +262,7 @@
     "smart_request": {
         "continuous_asking": false,
         "stt": {
-            "type": "vietbot",
+            "type": "stt_vietbot",
             "token": "",
             "time_out": 5,
             "error_speak": false
