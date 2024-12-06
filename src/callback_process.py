@@ -4,13 +4,13 @@ import global_vars
 import constant
 from loop_process import loop,playback_loop
 #STT
-if constant.stt_mode=='vietbot':
+if constant.stt_mode=='vietbot': #Chọn stt vietbot
     from stt_process import stt_process    
 
-elif constant.stt_mode=='gSTT':
+elif constant.stt_mode=='gSTT':#Chọn stt google free
     from tts_process import gg_stt_process          
     
-elif constant.stt_mode=='gg_cloud':
+elif constant.stt_mode=='gg_cloud': #Chọn stt gg cloud
     from tts_process import ggcloud_stt_process          
 
 #TTS
@@ -26,21 +26,16 @@ except:
     from text_process import text_process        
  
 
-async def process(not_back_to_loop):
+async def process(not_back_to_loop): #Hàm xử lý khi không phát nhạc
     """Xử lý chính."""
-    # Kiểm tra kiểu của depth
     if not not_back_to_loop:
         await loop(process)
-        return
-    if depth >= 10:
-        libs.logging("left", "ĐÃ ĐẠT ĐẾN GIỚI HẠN LẶP", "red")
-        libs.reboot_os()
         return
     libs.logging("left", "ĐÃ KÍCH HOẠT, CHỜ LỆNH", "green")
     global_vars.player2.play_sound('START')                        
     try:
         global_vars.led.set_state("THINK")
-        data = stt_process(global_vars.mic_stream)
+        data = stt_process(global_vars.mic_stream) #Đọc text từ luồng stream thông qua STT
         data = data.lower()
         global_vars.last_request = data
     except Exception as e:
@@ -48,7 +43,7 @@ async def process(not_back_to_loop):
         await loop(process)
         return   
     answer = None
-    answer = text_process(data)
+    answer = text_process(data) #Trả về 2 giá trị, text và link
     global_vars.last_answer = answer[0]
     libs.logging('left', global_vars.last_answer, 'green')
     if answer[1] is None:
@@ -64,7 +59,7 @@ async def process(not_back_to_loop):
         await playback_loop(playback_process)
         return
             
-async def playback_process(not_back_to_loop):
+async def playback_process(not_back_to_loop):#Hàm xử lý khi đang phát nhạc
     if not not_back_to_loop:
         await playback_loop(playback_process)
         return
@@ -73,7 +68,7 @@ async def playback_process(not_back_to_loop):
     global_vars.player2.play_sound('START')                        
     try:
         global_vars.led.set_state("THINK")
-        data = stt_process(global_vars.mic_stream)
+        data = stt_process(global_vars.mic_stream) #Đọc text từ luồng stream thông qua STT
         data = data.lower()
         global_vars.last_request = data
     except Exception as e:
@@ -83,15 +78,15 @@ async def playback_process(not_back_to_loop):
         return
 
     answer = None
-    answer = text_process(data)
+    answer = text_process(data) #Trả về 2 giá trị, text và link
     global_vars.last_answer = answer[0]
     libs.logging('left', answer[0], 'green')
     if answer[1] is None:
-        global_vars.player1.play_insert_media(await tts_process(answer[0], True))           
+        global_vars.player1.play_insert_media(await tts_process(answer[0], True))  #Chèn câu trả lời vào trước nhạc đang phát rồi phát         
     else:
         global_vars.player1.stop()
-        global_vars.player1.play_media(await tts_process(answer[0], True), True)
-        global_vars.player1.play_media(answer[1], False)
+        global_vars.player1.play_media(await tts_process(answer[0], True), True) #Phát câu trả lời
+        global_vars.player1.play_media(answer[1], False) #Phát nhạc mới
     await playback_loop(playback_process)
     return
 
