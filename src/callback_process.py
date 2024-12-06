@@ -1,4 +1,4 @@
-import libs
+from libs import asyncio, logging
 import global_vars
 import constant
 from loop_process import loop,playback_loop
@@ -30,21 +30,21 @@ async def process(not_back_to_loop): #Hàm xử lý khi không phát nhạc
     if not not_back_to_loop:
         await loop(process)
         return
-    libs.logging("left", "ĐÃ KÍCH HOẠT, CHỜ LỆNH", "green")
+    logging("left", "ĐÃ KÍCH HOẠT, CHỜ LỆNH", "green")
     global_vars.player2.play_sound('START')                        
     try:
         global_vars.led.set_state("THINK")
-        data = stt_process(global_vars.mic_stream) #Đọc text từ luồng stream thông qua STT
+        data = await stt_process(global_vars.mic_stream) #Đọc text từ luồng stream thông qua STT
         data = data.lower()
         global_vars.last_request = data
     except Exception as e:
-        libs.logging("left", f"Không nhận dạng được lệnh: {e}", "red")
+        logging("left", f"Không nhận dạng được lệnh: {e}", "red")
         await loop(process)
         return   
     answer = None
     answer = text_process(data) #Trả về 2 giá trị, text và link
     global_vars.last_answer = answer[0]
-    libs.logging('left', global_vars.last_answer, 'green')
+    logging('left', global_vars.last_answer, 'green')
     if answer[1] is None:
         global_vars.player1.play_media(await tts_process(answer[0], True), True)
         if global_vars.conversation:
@@ -63,15 +63,15 @@ async def playback_process(not_back_to_loop):#Hàm xử lý khi đang phát nh�
         await playback_loop(playback_process)
         return
     global_vars.player1.pause()
-    libs.logging("left", "PLAYBACK MODE, ĐÃ KÍCH HOẠT, CHỜ LỆNH", "green")
+    logging("left", "PLAYBACK MODE, ĐÃ KÍCH HOẠT, CHỜ LỆNH", "green")
     global_vars.player2.play_sound('START')                        
     try:
         global_vars.led.set_state("THINK")
-        data = stt_process(global_vars.mic_stream) #Đọc text từ luồng stream thông qua STT
+        data = await stt_process(global_vars.mic_stream) #Đọc text từ luồng stream thông qua STT
         data = data.lower()
         global_vars.last_request = data
     except Exception as e:
-        libs.logging("left", f"Không nhận diện được lệnh: {e}", "red")
+        logging("left", f"Không nhận diện được lệnh: {e}", "red")
         global_vars.player1.pause()
         await playback_loop(playback_process)
         return
@@ -79,7 +79,7 @@ async def playback_process(not_back_to_loop):#Hàm xử lý khi đang phát nh�
     answer = None
     answer = text_process(data) #Trả về 2 giá trị, text và link
     global_vars.last_answer = answer[0]
-    libs.logging('left', answer[0], 'green')
+    logging('left', answer[0], 'green')
     if answer[1] is None:
         global_vars.player1.play_insert_media(await tts_process(answer[0], True))  #Chèn câu trả lời vào trước nhạc đang phát rồi phát         
     else:
