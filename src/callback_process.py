@@ -10,7 +10,7 @@ elif constant.stt_mode=='stt_gg_free': #Chọn STT Google Free
     from gg_stt_process import stt_process          
     
 elif constant.stt_mode=='stt_gg_cloud': #Chọn STT Google CLoud
-    from gcloud_stt_process import stt_process                  
+    from ggcloud_stt_process import stt_process                  
 
 #TTS
 from tts_process import tts_process 
