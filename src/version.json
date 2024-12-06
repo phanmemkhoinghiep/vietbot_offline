@@ -4,7 +4,7 @@
 	},
 	"update_command": "", 
 	"new_features": "Tách biệt cấp độ người dùng",
-	"bug_fixed": "",	
+	"bug_fixed": "Sửa 1 số lỗi vặt",	
 	"improvements": "Chuyển sang kiến trúc Async",	
 	"image_version": {
 		"latest": "2023-07-24"
