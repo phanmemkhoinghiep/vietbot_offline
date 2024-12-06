@@ -1,19 +1,32 @@
-# !/usr/bin/python
+#!/usr/bin/pythonf
 # -*- coding: utf-8 -*-
-#-*-coding:gb2312-*-
-import libs
-with open('config.json') as config_json:
-    conf_data = libs.json.load(config_json)  
-bot_mode=conf_data['smart_config']['bot_mode']
-if bot_mode=='rapid':        
-    import main_process_rapid
-    main_process_rapid.main_process()
-elif bot_mode=='full':
-    import main_process_full
-    main_process_full.main_process()
-elif bot_mode=='custom':    
+# -*- coding: gb2312 -*-
+import constant
+import global_vars
+import init
+import asyncio
+from loop_process import loop
+from callback_process import process
+# from api_process import run_task  # Sử dụng hàm run_task đã sửa 
+from api_process import app  # Import ứng dụng Quart từ api_process.py
+async def main():
+    # Run tasks
+    tasks = [
+        asyncio.create_task(loop(process)),  # Vòng lặp chính
+        asyncio.create_task(app.run_task(host="0.0.0.0", port=constant.web_port)),  # API server
+    ]
     try:
-        import main_process_custom
-        main_process_custom.main_process()
-    except Exception as e1:
-        libs.logging('left','Lỗi khi nạp chạy Custom Mode:' +str(e1),'red')    
+        # Gather tasks and wait for completion
+        await asyncio.gather(*tasks)
+    except KeyboardInterrupt:
+        print("Program interrupted by user. Cleaning up...")
+        for task in tasks:
+            task.cancel()  # Hủy các task đang chạy
+        await asyncio.gather(*tasks, return_exceptions=True)  # Đợi các task bị hủy
+    except Exception as e:
+        print(f"Lỗi xảy ra: {e}")
+    finally:
+        print("Program exited cleanly.")
+
+if __name__ == "__main__":
+    asyncio.run(main())
