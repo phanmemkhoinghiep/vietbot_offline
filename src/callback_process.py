@@ -4,14 +4,14 @@ import global_vars
 import constant
 from loop_process import loop,playback_loop
 #STT
-if constant.stt_mode=='vietbot': #Chọn stt vietbot
+if constant.stt_mode=='stt_vietbot': #Chọn STT Vietbot
     from stt_process import stt_process    
 
-elif constant.stt_mode=='gSTT':#Chọn stt google free
-    from tts_process import gg_stt_process          
+elif constant.stt_mode=='stt_gg_free': #Chọn STT Google Free
+    from gg_stt_process import stt_process          
     
-elif constant.stt_mode=='gg_cloud': #Chọn stt gg cloud
-    from tts_process import ggcloud_stt_process          
+elif constant.stt_mode=='stt_gg_cloud': #Chọn STT Google CLoud
+    from gg_cloud_process import stt_process                  
 
 #TTS
 from tts_process import tts_process 
@@ -19,9 +19,9 @@ from tts_process import tts_process
 #Import Text process lib
 try:
     if constant.user_level==1:
-        from text_process import text_process #Data Process                   
+        from text_process import text_process #Sử dụng xử lý text mặc định
     elif constant.user_level==2:
-        from custom_text_process import text_process #Data Process    
+        from custom_text_process import text_process ##Sử dụng xử lý text custom, tự code
 except:
     from text_process import text_process        
  
