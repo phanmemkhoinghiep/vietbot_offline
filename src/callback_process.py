@@ -1,4 +1,3 @@
-import asyncio
 import libs
 import global_vars
 import constant
