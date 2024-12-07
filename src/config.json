@@ -150,7 +150,7 @@
             {
                 "type": "porcupine",
                 "custom_skill": false,
-                "file_name": "jarvis_raspberry-pi.ppn",
+                "file_name": "jarvis",
                 "lang": "eng",
                 "sensitive": 0.5,
                 "say_reply": false,
@@ -161,7 +161,7 @@
             {
                 "type": "porcupine",
                 "custom_skill": false,
-                "file_name": "picovoice_raspberry-pi.ppn",
+                "file_name": "picovoice",
                 "lang": "eng",
                 "sensitive": 0.5,
                 "say_reply": false,
@@ -172,7 +172,7 @@
             {
                 "type": "porcupine",
                 "custom_skill": false,
-                "file_name": "terminator_raspberry-pi.ppn",
+                "file_name": "terminator",
                 "lang": "eng",
                 "sensitive": 0.5,
                 "say_reply": false,
