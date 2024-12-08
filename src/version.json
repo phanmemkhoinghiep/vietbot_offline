@@ -2,9 +2,7 @@
 	"vietbot_version": {
 		"latest": "beta 08-12-2024-01"
 	},
-	"update_command": "
-	python3 -m pip uninstall pvporcupine picovoice
-	python3 -m pip install pvporcupine aiofiles quart
+	"update_command": " python3 -m pip uninstall pvporcupine picovoice python3 -m pip install pvporcupine aiofiles quart
 	", 
 	"new_features": "Tách biệt cấp độ người dùng",
 	"bug_fixed": "Sửa 1 số lỗi vặt",	
