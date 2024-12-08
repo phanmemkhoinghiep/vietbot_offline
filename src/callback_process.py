@@ -35,6 +35,10 @@ async def process(not_back_to_loop): #Hàm xử lý khi không phát nhạc
     try:
         global_vars.led.set_state("THINK")
         data = await stt_process(global_vars.mic_stream) #Đọc text từ luồng stream thông qua STT
+        if not data.strip():
+            logging("left", "Không nhận dạng được lệnh: Không nói gì", "red") # Khi không nói gì, stt trả về chuỗi rỗng
+            await loop(process)
+            return
         data = data.lower()
         global_vars.last_request = data
     except Exception as e:
@@ -68,6 +72,11 @@ async def playback_process(not_back_to_loop):#Hàm xử lý khi đang phát nh�
     try:
         global_vars.led.set_state("THINK")
         data = await stt_process(global_vars.mic_stream) #Đọc text từ luồng stream thông qua STT
+        if not data.strip():
+            logging("left", "Không nhận dạng được lệnh: Không nói gì", "red")  # Khi không nói gì, stt trả về chuỗi rỗng
+            global_vars.player1.pause()
+            await playback_loop(playback_process)
+            return
         data = data.lower()
         global_vars.last_request = data
     except Exception as e:
