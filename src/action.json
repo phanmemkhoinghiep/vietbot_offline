@@ -1,4 +1,13 @@
 {
+    "play": {
+            "value": "phát"
+        },
+    "pause": {
+            "value": "dừng"
+        },
+    "stop": {
+            "value": "ngừng"
+        },
     "on": {
         "value": "bật"
     },
@@ -82,33 +91,6 @@
             "value": "nhỏ đi"
         }
     ],
-    "play": [{
-            "value": "phát"
-        },
-        {
-            "value": "chơi"
-        }
-    ],
-    "pause": [{
-            "value": "tạm dừng"
-        },
-        {
-            "value": "tạm ngừng"
-        }
-    ],	
-    "stop": [{
-            "value": "stop"
-        },
-        {
-            "value": "dừng phát"
-        },
-        {
-            "value": "dừng lại"
-        },
-        {
-            "value": "ngừng phát"
-        }
-    ],
     "send": [{
             "value": "gửi"
         },
@@ -147,7 +129,5 @@
     "execute": {
             "value": "thực hiện"
         }
-
-
 
 }
