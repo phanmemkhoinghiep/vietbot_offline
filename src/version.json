@@ -1,11 +1,11 @@
 {
 	"vietbot_version": {
-		"latest": "beta 10-12-2024-02"
+		"latest": "beta 13-12-2024-02"
 	},
 	"update_command1": "python3 -m pip uninstall pvporcupine picovoice", 
 	"update_command2": "python3 -m pip install pvporcupine aiofiles quart", 
 	"new_features": "Tách biệt cấp độ người dùng",
-	"bug_fixed": "Sửa 1 số lỗi vặt",	
+	"bug_fixed": "Sửa lỗi khi đặt chế độ log là web",	
 	"improvements": "Cải thiện khả năng gọi hotword",	
 	"image_version": {
 		"latest": "2023-07-24"
