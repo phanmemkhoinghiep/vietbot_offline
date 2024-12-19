@@ -4,7 +4,7 @@
 from libs import pvporcupine,struct,pyaudio,logging,constant
 
 
-class PorcupineManager:
+class WakeManager:
     def __init__(self):
         # Tải thông tin cấu hình từ constant 
         hotword_config = constant.config_data['smart_wakeup']
