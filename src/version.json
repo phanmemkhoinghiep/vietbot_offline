@@ -1,6 +1,6 @@
 {
 	"vietbot_version": {
-		"latest": "beta 18-12-2024-01"
+		"latest": "beta 19-12-2024-01"
 	},
 	"update_command1": "python3 -m pip uninstall pvporcupine picovoice", 
 	"update_command2": "python3 -m pip install pvporcupine aiofiles quart", 
