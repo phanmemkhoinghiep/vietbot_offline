@@ -1,0 +1,30 @@
+{
+    "at_moment": [{
+        "value": "thời điểm này"
+    }, {
+        "value": "bây giờ"
+    }, {
+        "value": "lúc này"
+    }],
+    "at_time": [{
+        "value": "từ"
+    }, {
+        "value": "vào"
+    }, {
+        "value": "lúc"
+    }],
+    "from_now": [{
+        "value": "sau"
+    }, {
+        "value": "nữa"
+    }, {
+        "value": "tới"
+    }],
+    "nearby": [{
+        "value": "gần đây"
+    }, {
+        "value": "quanh đây"
+    }, {
+        "value": "xung quanh"
+    }]	
+}
