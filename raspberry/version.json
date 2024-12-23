@@ -1,11 +1,11 @@
 {
 	"vietbot_version": {
-		"latest": "beta 21-08-2023-01"
+		"latest": "beta 23-08-2023-01"
 	},
 	"update_command": "", 
-	"new_features": "",
+	"new_features": "Google Cloud Speech To Text V2",
 	"bug_fixed": "",	
-	"improvements": "Xử lý các skill nội bộ nhanh hơn (Tiếp tục)",	
+	"improvements": "Biến toàn cục",	
 	"image_version": {
 		"latest": "2023-07-24"
 	}
