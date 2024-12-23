@@ -1,6 +1,6 @@
 [![trophy](https://github-profile-trophy.vercel.app/?username=phanmemkhoinghiep&theme=onedark)](https://github.com/phanmemkhoinghiep/vietbot_offline)
 # vietbot_offline
-Phiên bản Beta
+Phiên bản chính thức
 
 Xử lý hoàn toàn tại chỗ không liên kết tới máy chủ vietbot
 
