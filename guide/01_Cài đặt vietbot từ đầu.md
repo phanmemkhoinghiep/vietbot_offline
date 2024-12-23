@@ -39,7 +39,7 @@ CONF_SWAPSIZE=1000
 ```
 tăng giá trị 500 thành 2000, sau đó bấm Ctrl + Alt + X để save lại
 
-2.4. Cài đặt Soundcard cho Mic2Hat, mạch AIO
+2.4. Cài đặt Soundcard cho Mic2Hat, mạch AIO (Nếu sử dụng)
 ```sh
 git clone https://github.com/waveshareteam/WM8960-Audio-HAT.git
 ```
@@ -52,6 +52,12 @@ Sau khi cài xong
 ```sh
 sudo reboot
 ```
+2.5. Mở SPI cho led ws_2812 (Nếu sử dụng)
+```sh
+sudo raspi-config
+```
+Tìm đến mục Interface và kích hoạt mở SPI
+
 ### STEP3. Cài đặt các gói liên quan
 3.1. Cài các gói phục vụ cho Python
 ```sh
