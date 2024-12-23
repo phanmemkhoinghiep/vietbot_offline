@@ -1,6 +1,6 @@
 {
 	"vietbot_version": {
-		"latest": "beta 23-08-2023-01"
+		"latest": "23-08-2023-01"
 	},
 	"update_command": "", 
 	"new_features": "Google Cloud Speech To Text V2",
