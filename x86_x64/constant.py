@@ -57,7 +57,7 @@ amixer_id=config_data['smart_config']['speaker']["system"]["amixer_id"]
 led_type =config_data['smart_config']['led']['type']
 
 
-#Color for sys.stdout
+#Color for print out
 reset = "\033[0m"
 red = "\033[0;31m"
 green = "\033[0;32m"
