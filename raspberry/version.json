@@ -4,7 +4,7 @@
 	},
 	"update_command": "", 
 	"new_features": "Google Cloud Speech To Text V2",
-	"bug_fixed": "",	
+	"bug_fixed": "libs trùng tên hệ thống với Python 3.11",	
 	"improvements": "Biến toàn cục",	
 	"image_version": {
 		"latest": "2023-07-24"
