@@ -18,6 +18,8 @@ Xác định thiết bị Mic ID sử dụng tương ứng với con số mic_id
 ```
 Thay giá trị 12 bằng giá trị phù hợp
 
+Lưu lại
+
 ### STEP2. Xác định Sound card (Nếu dùng Pi3b+/Pi4/Pi5 hoặc Soud card USB)
 2.1. Xác định Mic ID của thiết bị
 Chạy file check_mic_id.py
@@ -33,3 +35,5 @@ Xác định thiết bị Soundcard sử dụng tương ứng với con số id 
                 "amixer_id": 2
 ```
 Thay giá trị 2 bằng giá trị phù hợp
+
+Lưu lại
