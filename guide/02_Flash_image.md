@@ -2,7 +2,7 @@
 
 ### STEP1. Download bộ Image cho Raspberry Pi đã cài đặt sẵn
 
-Download bộ Image cho Raspberry Pi đã cài đặt sẵn cho Mic2Hat tại Guide 031
+Download bộ Image cho Raspberry Pi tại Link sau:
 
 ### STEP2. Ghi vào thẻ SD
 
