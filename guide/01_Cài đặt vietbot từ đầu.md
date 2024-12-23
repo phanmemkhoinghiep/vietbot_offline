@@ -33,12 +33,12 @@ sudo dphys-swapfile swapoff
 sudo dphys-swapfile swapoff
 ```
 Cửa sổ nano mở ra
-
 Tại dòng 
 ```sh
 CONF_SWAPSIZE=1000
 ```
 tăng giá trị 500 thành 2000, sau đó bấm Ctrl + Alt + X để save lại
+
 2.4. Cài đặt Soundcard cho Mic2Hat, mạch AIO
 ```sh
 git clone https://github.com/waveshareteam/WM8960-Audio-HAT.git
@@ -88,6 +88,7 @@ Mở file config.json they key của Picovoice ở dòng thứ 58
 "key": "nA2Kkj/oRFQ=="
 ```
 thành giá trị đã đăng ký trên Picovoice console
+
 4.3. Chạy vietbot
 Gõ các lệnh sau
 ```sh
