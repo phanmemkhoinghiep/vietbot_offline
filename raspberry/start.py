@@ -1,23 +1,23 @@
-#!/usr/bin/pythonf
-# -*- coding: utf-8 -*-
-# -*- coding: gb2312 -*-
+#!/usr/bin/python
+# -*- coding: utf-8 -*- 
+# -*- coding: gb2312 -*- 
 import constant
 import global_vars
 import init
 import asyncio
 from loop_process import loop
 from callback_process import process
-# from api_process import run_task  # Sử dụng hàm run_task đã sửa 
 from api_process import app  # Import ứng dụng Quart từ api_process.py
+
 async def main():
-    # Run tasks
+    # Tạo các tác vụ bất đồng bộ
     tasks = [
-        asyncio.create_task(loop(process)),  # Vòng lặp chính
-        asyncio.create_task(app.run_task(host="0.0.0.0", port=constant.web_port)),  # API server task
-        
+        asyncio.create_task(loop(process, False)),  # Chạy vòng lặp chính
+        asyncio.create_task(app.run_task(host="0.0.0.0", port=constant.web_port))  # Chạy API server
     ]
+    
     try:
-        # Gather tasks and wait for completion
+        # Chờ các tác vụ hoàn thành mà không block
         await asyncio.gather(*tasks)
     except KeyboardInterrupt:
         print("Program interrupted by user. Cleaning up...")
