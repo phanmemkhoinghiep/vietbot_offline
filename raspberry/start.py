@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*- 
 # -*- coding: gb2312 -*- 
-from libs import constant, global_vars
+from lib_process import constant, global_vars
 import init
 import asyncio
 from loop_process import loop
