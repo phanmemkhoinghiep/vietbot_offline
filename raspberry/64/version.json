@@ -1,12 +1,9 @@
 {
 	"vietbot_version": {
-		"latest": "beta 21-08-2023-01"
+		"latest": "24-12-2024-01"
 	},
 	"update_command": "", 
-	"new_features": "",
+	"new_features": "Ra mắt phiên bản 64 bit",
 	"bug_fixed": "",	
-	"improvements": "Xử lý các skill nội bộ nhanh hơn (Tiếp tục)",	
-	"image_version": {
-		"latest": "2023-07-24"
-	}
+	"improvements": "Tối ưu loop và callback",	
 }
