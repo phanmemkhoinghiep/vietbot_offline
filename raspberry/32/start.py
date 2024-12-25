@@ -1,7 +1,7 @@
 #!/usr/bin/pythonf
 # -*- coding: utf-8 -*-
-from lib_process import constant, global_vars, asyncio
-import init
+from lib_process import global_constants, global_vars, asyncio
+import init_process
 from loop_process import loop
 from callback_process import process
 from api_process import app  # Import ứng dụng Quart từ api_process.py
