@@ -1,6 +1,5 @@
 #!/usr/bin/pythonf
 # -*- coding: utf-8 -*-
-# -*- coding: gb2312 -*-
 from lib_process import constant, global_vars, asyncio
 import init
 from loop_process import loop
