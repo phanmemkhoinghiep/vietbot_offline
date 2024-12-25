@@ -24,7 +24,7 @@ sudo apt-get upgrade -y
 ```
 2.2. Cài gói cơ bản
 ```sh
-sudo apt-get nano git -y
+sudo apt-get install nano git -y
 ```
 2.3. Cài đặt Swap 2G
 
@@ -61,7 +61,7 @@ Tìm đến mục Interface và kích hoạt mở SPI
 ### STEP3. Cài đặt các gói liên quan
 3.1. Cài các gói phục vụ cho Python
 ```sh
-sudo apt-get install python3-pip python3-venv python3-dev libopenblas-dev python3-pyaudio python3-rpi.gpio vlc
+sudo apt-get install python3-pip python3-venv python3-dev libopenblas-dev python3-pyaudio python3-rpi.gpio vlc -y
 ```
 3.2. Tạo env
 ```sh
