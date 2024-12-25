@@ -78,7 +78,7 @@ Nếu ra dấu nhắc lệnh như sau:
 là thành công
 3.4. Cài đặt gói Python
 ```sh
-python3 -m pip install pvporcupine python-vlc requests aiofiles aiohttp pyusb edge_tts sounddevice pyalsaaudio spidev SpeechRecognition pathlib2 gpiozero google-cloud google-cloud-speech google-cloud-texttospeech rpi_ws281x gTTS fuzzywuzzy html2text websocket Quart python-Levenshtein pigpio RPi.GPIO lgpio numpy bs4
+python3 -m pip install pvporcupine python-vlc requests aiofiles aiohttp pyusb edge_tts sounddevice pyalsaaudio spidev SpeechRecognition pathlib2 gpiozero google-cloud google-cloud-speech google-cloud-texttospeech rpi_ws281x gTTS fuzzywuzzy html2text websocket Quart python-Levenshtein pigpio RPi.GPIO lgpio numpy PyAudio
 ```
 ### STEP4. Cài đặt & Chạy vietbot
 
