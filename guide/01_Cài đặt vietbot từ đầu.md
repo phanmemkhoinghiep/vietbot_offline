@@ -71,7 +71,7 @@ sudo apt-get install python3.9 python3.9-pip ython3.9-venv python3.9-dev python3
 
 3.2. Tạo env
 ```sh
-python3 -m venv vietbot_env
+python3.9 -m venv vietbot_env
 ```
 3.3. Chạy Env
 ```sh
@@ -83,8 +83,9 @@ Nếu ra dấu nhắc lệnh như sau:
 ```
 là thành công
 3.4. Cài đặt gói Python
+Trong môi trường evn, gõ
 ```sh
-python3 -m pip install pvporcupine python-vlc requests aiofiles aiohttp pyusb edge_tts sounddevice pyalsaaudio spidev SpeechRecognition pathlib2 gpiozero google-cloud google-cloud-speech google-cloud-texttospeech rpi_ws281x gTTS fuzzywuzzy html2text websocket Quart python-Levenshtein pigpio RPi.GPIO lgpio numpy PyAudio
+python3.9 -m pip install pvporcupine python-vlc requests aiofiles aiohttp pyusb edge_tts sounddevice pyalsaaudio spidev SpeechRecognition pathlib2 gpiozero google-cloud google-cloud-speech google-cloud-texttospeech rpi_ws281x gTTS fuzzywuzzy html2text websocket Quart python-Levenshtein pigpio RPi.GPIO lgpio numpy PyAudio
 ```
 ### STEP4. Cài đặt & Chạy vietbot
 
