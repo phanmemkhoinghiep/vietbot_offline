@@ -98,6 +98,10 @@ thành giá trị đã đăng ký trên Picovoice console
 4.3. Chạy vietbot
 Gõ các lệnh sau
 ```sh
-cd /home/pi/vietbot_offline/raspberry/start.py
+cd /home/pi/vietbot_offline/raspberry/32/start.py
 ```
-Là Vietbot đã chạy thành công
+hoặc
+```sh
+cd /home/pi/vietbot_offline/raspberry/64/start.py
+```
+Tùy phiên bản OS
