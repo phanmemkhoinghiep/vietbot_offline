@@ -1,7 +1,8 @@
 #!/usr/bin/pythonf
 # -*- coding: utf-8 -*-
 # -*- coding: gb2312 -*-
-from lib_process import constant, global_vars, init, asyncio
+from lib_process import constant, global_vars, asyncio
+import init
 from loop_process import loop
 from callback_process import process
 # from api_process import run_task  # Sử dụng hàm run_task đã sửa 
