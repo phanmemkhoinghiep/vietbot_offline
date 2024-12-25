@@ -1,14 +1,14 @@
 from quart import Quart, request, Response,jsonify
-from lib_process import asyncio, json,constant,global_vars
+from lib_process import asyncio, json,global_constants,global_vars
 #TTS
 from tts_process import tts_process  
 # Import các module xử lý văn bản theo cấp độ người dùng
 try:
-    if constant.user_level == 1:
+    if global_constants.user_level == 1:
         from text_process import text_process  # Data Process
-    elif constant.user_level == 2:
+    elif global_constants.user_level == 2:
         from ai_text_process import text_process  # Data Process
-    elif constant.user_level == 3:
+    elif global_constants.user_level == 3:
         from custom_text_process import text_process  # Data Process
 except:
     from text_process import text_process
@@ -124,4 +124,4 @@ async def post_process():
 if __name__ == '__main__':
     import asyncio
     print("Starting API Server directly...")
-    asyncio.run(app.run_task(host="0.0.0.0", port=constant.web_port))
+    asyncio.run(app.run_task(host="0.0.0.0", port=global_constants.web_port))
