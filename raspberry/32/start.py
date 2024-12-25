@@ -9,7 +9,7 @@ async def main():
     # Run tasks
     tasks = [
         asyncio.create_task(loop(process, False)),  # Chạy vòng lặp chính
-        asyncio.create_task(app.run_task(host="0.0.0.0", port=constant.web_port)),  # Chạy vòng lặp lắng nghe API
+        asyncio.create_task(app.run_task(host="0.0.0.0", port=global_constants.web_port)),  # Chạy vòng lặp lắng nghe API
     ]
     try:
         # Gather tasks and wait for completion
