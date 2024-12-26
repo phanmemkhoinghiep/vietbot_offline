@@ -4,6 +4,6 @@
 	},
 	"update_command": "", 
 	"new_features": "Ra mắt phiên bản 64 bit",
-	"bug_fixed": "",	
+	"bug_fixed": "Lỗi tăng giảm volume và phát nhạc xong",	
 	"improvements": "Tối ưu loop và callback",	
 }
