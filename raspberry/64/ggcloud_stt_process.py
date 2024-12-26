@@ -28,7 +28,7 @@ Example usage:
 
 from google.cloud.speech_v2 import SpeechClient
 from google.cloud.speech_v2.types import cloud_speech as cloud_speech_types
-from lib_process import queue, re, sys, time, pyaudio,os,constant,print_out,asyncio
+from lib_process import queue, re, sys, time, pyaudio,os,global_constants,print_out,asyncio
 
 
 # Thiết lập thông tin xác thực Google Cloud
@@ -52,18 +52,18 @@ class MicrophoneStream:
     ) -> None:
         self._buff = queue.Queue()
         self.closed = True
-        self.stream_limit=constant.stt_timeout
+        self.stream_limit=global_constants.stt_timeout
         self.start_time = time.time()
     def __enter__(self: object) -> object:
         self._audio_interface = pyaudio.PyAudio()
         self._audio_stream = self._audio_interface.open(
-            format=constant.FORMAT,
-            channels=constant.CHANNELS,
-            rate=constant.DEFAULT_AUDIO_SAMPLE_RATE,
+            format=global_constants.FORMAT,
+            channels=global_constants.CHANNELS,
+            rate=global_constants.DEFAULT_AUDIO_SAMPLE_RATE,
             input=True,
-            input_device_index=constant.mic_id,
+            input_device_index=global_constants.mic_id,
             # output_device_index=None,            
-            frames_per_buffer=constant.CHUNK,
+            frames_per_buffer=global_constants.CHUNK,
             stream_callback=self._fill_buffer,
         )
         self.closed = False
@@ -130,9 +130,9 @@ client = SpeechClient()
 
 recognition_config = cloud_speech_types.RecognitionConfig(
     explicit_decoding_config=cloud_speech_types.ExplicitDecodingConfig(
-        sample_rate_hertz=constant.DEFAULT_AUDIO_SAMPLE_RATE,
+        sample_rate_hertz=global_constants.DEFAULT_AUDIO_SAMPLE_RATE,
         encoding=cloud_speech_types.ExplicitDecodingConfig.AudioEncoding.LINEAR16,
-        audio_channel_count=constant.CHANNELS
+        audio_channel_count=global_constants.CHANNELS
     ),
     language_codes=["vi-VN"],
     model="short",
@@ -144,7 +144,7 @@ streaming_config = cloud_speech_types.StreamingRecognitionConfig(
     )
 )
 config_request = cloud_speech_types.StreamingRecognizeRequest(
-    recognizer = 'projects/'+constant.project_id+'/locations/global/recognizers/'+constant.recognizer_id,    
+    recognizer = 'projects/'+global_constants.project_id+'/locations/global/recognizers/'+global_constants.recognizer_id,    
     streaming_config=streaming_config,
 )
 

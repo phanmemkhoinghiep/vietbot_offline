@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #-*-coding:gb2312-*-
-from lib_process import pvporcupine,struct,pyaudio,print_out,constant
+from lib_process import pvporcupine,struct,pyaudio,print_out,global_constants
 
 
 class WakeupManager:
     def __init__(self):
-        # Tải thông tin cấu hình từ constant 
-        hotword_config = constant.config_data['smart_wakeup']
+        # Tải thông tin cấu hình từ global_constants 
+        hotword_config = global_constants.config_data['smart_wakeup']
         self.hotword_key = hotword_config['hotword_engine']['key']
         # Tạo danh sách keyword_paths từ các từ khóa mặc định
         try:
@@ -36,10 +36,10 @@ class WakeupManager:
                                                 sensitivities=self.sensitivities)
             self.pa = pyaudio.PyAudio()
             self.audio_stream = self.pa.open(rate=self.porcupine.sample_rate,
-                                             channels=constant.CHANNELS,
+                                             channels=global_constants.CHANNELS,
                                              format=pyaudio.paInt16,
                                              input=True,
-                                             input_device_index=constant.mic_id,
+                                             input_device_index=global_constants.mic_id,
                                              output_device_index=None,
                                              frames_per_buffer=512)
             return True
