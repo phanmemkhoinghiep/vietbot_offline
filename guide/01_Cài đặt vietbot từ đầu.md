@@ -82,6 +82,7 @@ Nếu ra dấu nhắc lệnh như sau:
 (vietbot_env) pi@vietbot32:~ 
 ```
 là thành công
+
 3.4. Cài đặt gói Python
 Trong môi trường evn, gõ
 ```sh
