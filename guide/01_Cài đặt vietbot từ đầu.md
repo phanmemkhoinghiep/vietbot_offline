@@ -86,7 +86,7 @@ là thành công
 3.4. Cài đặt gói Python
 Trong môi trường evn, gõ
 ```sh
-pip install pvporcupine python-vlc requests aiofiles aiohttp pyusb edge_tts sounddevice pyalsaaudio spidev SpeechRecognition pathlib2 gpiozero google-cloud google-cloud-speech google-cloud-texttospeech rpi_ws281x gTTS fuzzywuzzy websocket Quart python-Levenshtein pigpio RPi.GPIO lgpio numpy PyAudio
+pip install pvporcupine python-vlc requests aiofiles aiohttp pyusb edge_tts sounddevice pyalsaaudio spidev SpeechRecognition pathlib2 gpiozero google-cloud google-cloud-speech google-cloud-texttospeech rpi_ws281x gTTS fuzzywuzzy websocket-client Quart python-Levenshtein pigpio RPi.GPIO lgpio numpy PyAudio
 ```
 ### STEP4. Cài đặt & Chạy vietbot
 
