@@ -66,12 +66,12 @@ sudo apt-get install libopenblas-dev vlc -y
 ```
 và
 ```sh
-sudo apt-get install python3.9 python3.9-pip python3.9-venv python3.9-dev python3.9-rpi.gpio python3.9-pyaudio
+sudo apt-get install python3 python3-pip python3-venv python3-dev python3-rpi.gpio python3-pyaudio
 ```
 
 3.2. Tạo env
 ```sh
-python3.9 -m venv vietbot_env
+python3 -m venv vietbot_env
 ```
 3.3. Chạy Env
 ```sh
