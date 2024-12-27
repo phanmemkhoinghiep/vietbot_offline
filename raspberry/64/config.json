@@ -185,9 +185,9 @@
     "smart_request": {
         "continuous_asking": false,
         "stt": {
-            "type": "stt_gg_cloud",
-			"recognizer_id": "vietbot",
-			"ggcloud_project_id": "vietbot-9ab0e",
+            "type": "stt_vietbot",
+	    "recognizer_id": "vietbot",
+	    "ggcloud_project_id": "vietbot-9ab0e",
             "token": "",
             "time_out": 6000,
             "error_speak": false
