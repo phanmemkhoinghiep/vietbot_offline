@@ -2,12 +2,13 @@
     "play": {
             "value": "phát"
         },
-    "pause": {
+    "stop": [{
             "value": "dừng"
         },
-    "stop": {
+        {
             "value": "ngừng"
-        },
+        }
+    ],		
     "on": {
         "value": "bật"
     },
