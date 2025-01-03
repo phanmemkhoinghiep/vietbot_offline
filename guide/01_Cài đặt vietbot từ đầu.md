@@ -31,6 +31,7 @@ sudo apt-get install nano git -y
 ```sh
 sudo dphys-swapfile swapoff
 sudo dphys-swapfile swapoff
+sudo nano /etc/dphys-swapfile
 ```
 Cửa sổ nano mở ra
 Tại dòng 
