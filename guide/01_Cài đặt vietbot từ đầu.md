@@ -16,7 +16,7 @@ password: vietbot
 Trên console của Pi, sử dụng lần lượt các lệnh sau
 
 ```sh
-sudo apt-get update -y
+sudo apt-get update
 ```
 Sau khi chạy xong, chạy tiếp
 ```sh
