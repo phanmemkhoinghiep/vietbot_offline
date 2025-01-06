@@ -30,15 +30,17 @@ sudo apt-get install nano git -y
 
 ```sh
 sudo dphys-swapfile swapoff
-sudo dphys-swapfile swapoff
+```
+
+```sh
 sudo nano /etc/dphys-swapfile
 ```
 Cửa sổ nano mở ra
 Tại dòng 
 ```sh
-CONF_SWAPSIZE=1000
+CONF_SWAPSIZE=512
 ```
-tăng giá trị 500 thành 2000, sau đó bấm Ctrl + Alt + X để save lại
+tăng giá trị 512 thành 2048, sau đó bấm Ctrl + Alt + X để save lại
 
 2.4. Cài đặt Soundcard cho Mic2Hat, mạch AIO (Nếu sử dụng)
 ```sh
