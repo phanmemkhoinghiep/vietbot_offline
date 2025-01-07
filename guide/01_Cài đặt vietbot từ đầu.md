@@ -100,11 +100,85 @@ git clone --depth 1 https://github.com/phanmemkhoinghiep/vietbot_offline.git
 Chờ cho đến khi kết thúc
 
 4.2. Config vietbot
+
+4.2.1. Lấy Mic id của microphone
+Sử dụng lệnh 
+
+```sh
+python3 get_mic_id.py
+```
+Xem kết quả trả về, chọn lấy thiết bị Mic phù hợp
+Ví dụ kết quả trả về
+Danh sách các thiết bị âm thanh khả dụng:
+```sh
+ID: 0, Tên: bcm2835 Headphones: - (hw:0,0), Loại: 0 kênh đầu vào
+ID: 1, Tên: USB Composite Device: Audio (hw:3,0), Loại: 1 kênh đầu vào
+ID: 2, Tên: sysdefault, Loại: 0 kênh đầu vào
+ID: 3, Tên: default, Loại: 0 kênh đầu vào
+ID: 4, Tên: dmix, Loại: 0 kênh đầu vào
+```
+Thì mic_id sẽ là 1
+
+4.2.2. Lấy Rate của microphone
+
+Sử dụng lệnh với "hw: 3,0" lấy từ kết quả thực tế có được ở mục 4.2.1
+
+```sh
+arecord -D hw:3,0 --dump-hw-params
+```
+Ví dụ kết quả trả về:
+```sh
+Warning: Some sources (like microphones) may produce inaudible results
+         with 8-bit sampling. Use '-f' argument to increase resolution
+         e.g. '-f S16_LE'.
+Recording WAVE 'stdin' : Unsigned 8 bit, Rate 8000 Hz, Mono
+HW Params of device "hw:3,0":
+--------------------
+ACCESS:  MMAP_INTERLEAVED RW_INTERLEAVED
+FORMAT:  S16_LE
+SUBFORMAT:  STD
+SAMPLE_BITS: 16
+FRAME_BITS: 16
+CHANNELS: 1
+RATE: 32000
+PERIOD_TIME: [1000 1000000]
+PERIOD_SIZE: [32 32000]
+PERIOD_BYTES: [64 64000]
+PERIODS: [2 1024]
+BUFFER_TIME: [2000 2000000]
+BUFFER_SIZE: [64 64000]
+BUFFER_BYTES: [128 128000]
+TICK_TIME: ALL
+--------------------
+arecord: set_params:1352: Sample format non available
+Available formats:
+- S16_LE
+```
+Thì microphone này chỉ có 1 giá trị rate duy nhất là 32000
+
+4.2.3. Lấy giá trị amixer_id (Giá trị id của soundcard)
+
+```sh
+amixer
+```
+Nếu kết quả trả về:
+
+```sh
+Simple mixer control 'PCM',0
+  Capabilities: pvolume pvolume-joined pswitch pswitch-joined
+  Playback channels: Mono
+  Limits: Playback -10239 - 400
+  Mono: Playback -3856 [60%] [-38.56dB] [on]
+```
+Thì amixer có giá trị là 0
+
+4.2.4. Config picovoice
 Mở file config.json they key của Picovoice ở dòng thứ 58
 ```sh
 "key": "nA2Kkj/oRFQ=="
 ```
 thành giá trị đã đăng ký trên Picovoice console
+
 
 4.3. Chạy vietbot
 Gõ các lệnh sau
