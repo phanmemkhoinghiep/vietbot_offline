@@ -1,9 +1,9 @@
 {
     "vietbot_version": {
-        "latest": "24-12-2024-01"
+        "latest": "12-01-2025-01"
     },
     "update_command": "", 
-    "new_features": "Google Cloud Speech V2",
+    "new_features": "PV Recoder thay cho PyAudio",
     "bug_fixed": "",    
     "improvements": "Tối ưu biến cục bộ"   
 }
