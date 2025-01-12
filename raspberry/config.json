@@ -1,0 +1,277 @@
+{
+    "smart_config": {
+        "mic": {
+            "type": "default",
+            "id": 1
+        },
+        "speaker": {
+            "system": {
+                "amixer_id": 0
+            }
+        },
+        "led": {
+            "type": "none_led",
+            "number_led": 12,
+            "led_gpio": 10,
+            "effect_mode": 1,
+            "brightness": 255,
+            "wakeup_color": "11801e",
+            "muted_color": "FF6333",
+            "listen_effect": 1,
+            "think_effect": 2,
+            "speak_effect": 3
+        },
+        "button": {
+            "down": {
+                "gpio": 25,
+                "pulled_high": false,
+                "active": true
+            }, 
+            "up": {
+                "gpio": 5,
+                "pulled_high": false,
+                "active": true
+            },
+            "wakeup": {
+                "gpio": 26,
+                "pulled_high": false,
+                "active": true
+            },
+            "mic": {
+                "gpio": 6,
+                "pulled_high": false,
+                "active": true
+            }
+        },
+        "web_interface": {
+            "port": 5000
+        },
+        "logging_type": "console",
+        "block_updates": {
+            "vietbot_program": false,
+            "web_ui": false
+        }
+    },
+    "smart_wakeup": {
+        "porcupine": {
+            "key": "nAgdgdfgn9tFQ==",
+            "active": false,            
+            "hotword": [
+                {
+                    "type": "porcupine",
+                    "custom_skill": false,
+                    "file_name": "alexa",
+                    "lang": "eng",
+                    "sensitive": 0.3,
+                    "say_reply": false,
+                    "command": null,
+                    "active": true,
+                    "value": null
+                },
+                {
+                    "type": "porcupine",
+                    "custom_skill": false,
+                    "lang": "eng",
+                    "file_name": "americano",
+                    "sensitive": 0.3,
+                    "say_reply": false,
+                    "command": null,
+                    "active": true,
+                    "value": null
+                },
+                {
+                    "type": "porcupine",
+                    "custom_skill": false,
+                    "file_name": "blueberry",
+                    "lang": "eng",
+                    "sensitive": 0.3,
+                    "say_reply": false,
+                    "command": null,
+                    "active": true,
+                    "value": null
+                },
+                {
+                    "type": "porcupine",
+                    "custom_skill": false,
+                    "file_name": "bumblebee",
+                    "lang": "eng",
+                    "sensitive": 0.3,
+                    "say_reply": false,
+                    "command": null,
+                    "active": true,
+                    "value": null
+                },
+                {
+                    "type": "porcupine",
+                    "custom_skill": false,
+                    "file_name": "computer",
+                    "lang": "eng",
+                    "sensitive": 0.3,
+                    "say_reply": false,
+                    "command": null,
+                    "active": true,
+                    "value": null
+                },
+                {
+                    "type": "porcupine",
+                    "custom_skill": false,
+                    "file_name": "grasshopper",
+                    "lang": "eng",
+                    "sensitive": 0.3,
+                    "say_reply": false,
+                    "command": null,
+                    "active": true,
+                    "value": null
+                },
+                {
+                    "type": "porcupine",
+                    "custom_skill": false,
+                    "file_name": "jarvis",
+                    "lang": "eng",
+                    "sensitive": 0.3,
+                    "say_reply": false,
+                    "command": null,
+                    "active": true,
+                    "value": null
+                },
+                {
+                    "type": "porcupine",
+                    "custom_skill": false,
+                    "file_name": "picovoice",
+                    "lang": "eng",
+                    "sensitive": 0.3,
+                    "say_reply": false,
+                    "command": null,
+                    "active": true,
+                    "value": null
+                },
+                {
+                    "type": "porcupine",
+                    "custom_skill": false,
+                    "file_name": "terminator",
+                    "lang": "eng",
+                    "sensitive": 0.3,
+                    "say_reply": false,
+                    "command": null,
+                    "active": true,
+                    "value": null
+                }
+            ]
+        },
+        "openwakeword": {
+            "sensitive": 0.3,
+            "active": true
+        },
+        "wakeup_reply": [
+            {
+                "value": "Winni sẵn sàng phục vụ"
+            },
+            {
+                "value": "Xin chào và sẵn sàng phục vụ"
+            },
+            {
+                "value": "đây anh"
+            },
+            {
+                "value": "gì anh"
+            },
+            {
+                "value": "yes anh"
+            },
+            {
+                "value": "anh à"
+            },
+            {
+                "value": "vâng anh"
+            }
+        ]
+    },
+    "smart_request": {
+        "continuous_asking": false,
+        "stt": {
+            "type": "ggcloud_stt",
+            "recognizer_id": "vietbot",
+            "ggcloud_project_id": "vietbot-9ab0e",
+            "token": "",
+            "time_out": 6,
+            "error_speak": false
+        }
+    },
+    "smart_answer": {
+        "startup_state_speaking": false,
+        "sound": {
+            "default": {
+                "start": "sound/default/ding.mp3",
+                "finish": "sound/default/dong.mp3",
+                "volume_change": "sound/default/tut_tut.mp3"
+            },
+            "welcome": {
+                "mode": "path",
+                "path": "sound/welcome/window.mp3",
+                "text": "Xin chào mời đọc khẩu lệnh, để ra lệnh"
+            }
+        },
+        "tts": {
+            "type": "tts_edge",
+            "token": "",
+            "voice_name": "female_southern_voice",
+            "voice_profile": "",
+            "speed": "",
+            "pitch": ""
+        },
+        "external_bot_priority_1": "germini",
+        "pre_answer_timeout": 8,
+        "pre_answer": [
+            {
+                "value": "Cần thêm thời gian"
+            },
+            {
+                "value": "Vui lòng chờ thêm"
+            },
+            {
+                "value": "Chờ thêm để xử lý"
+            }
+        ]
+    },
+    "smart_skill": {
+        "time": {
+            "error_answer": "Không thực hiện được tra cứu thời gian, hãy kiểm tra lại"
+        },
+        "solar_calendar": {
+            "error_answer": "Không thực hiện được tra cứu lịch âm, hãy kiểm tra lại"
+        },
+        "lunar_calendar": {
+            "error_answer": "Không thực hiện được tra cứu lịch âm, hãy kiểm tra lại"
+        },
+        "hass": {
+            "url": "http://myhass.duckdns.org",
+            "token": "eyJhbGciOiKfa4",
+            "error_answer": "Không thực hiện được điều khiển Hass, hãy kiểm tra lại",
+            "display_full_state": true
+        },
+        "weather": {
+            "openweathermap_key": "ffddba060ff1a735f04ff426f85f070b",
+            "error_answer": "Không thực hiện được tra cứu thời tiết khu vực, hãy kiểm tra lại"
+        },
+        "music": {
+            "error_answer": "Không thực hiện được phát nhạc, hãy kiểm tra lại",
+            "music_compare_percent": 80
+        },
+        "cache_compare_result": 95,
+        "dify": {
+            "api_key": "app-qVedgdfg7kO",
+			      "url":"https://api.dify.ai/v1/chat-messages",			
+			      "error":"Lỗi xử lý từ AI chatbot",	
+			      "no_answer":"Không có trả lời từ AI chatbot"	
+        }
+    },
+    "smart_user": {
+        "name": "Nguyễn Duy",
+        "address": {
+            "wards": "Phường Nhân Hòa",
+            "district": "Quận Cầu Giấy",
+            "province": "Thành phố Hà Nội"
+        },
+        "level": 2
+    }
+}
