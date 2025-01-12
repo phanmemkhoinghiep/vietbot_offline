@@ -65,7 +65,7 @@ Tìm đến mục Interface và kích hoạt mở SPI
 3.1. Cài các gói phục vụ cho Python
 
 ```sh
-sudo apt-get install libopenblas-dev portaudio19-dev vlc -y
+sudo apt-get install libopenblas-dev portaudio19-dev vlc falc -y
 ```
 và
 ```sh
@@ -89,7 +89,7 @@ là thành công
 3.4. Cài đặt gói Python
 Trong môi trường evn, gõ
 ```sh
-pip install pvporcupine python-vlc requests aiofiles aiohttp pyusb edge_tts sounddevice pyalsaaudio spidev SpeechRecognition pathlib2 gpiozero google-cloud google-cloud-speech google-cloud-texttospeech rpi_ws281x gTTS fuzzywuzzy websocket-client Quart python-Levenshtein pigpio RPi.GPIO lgpio numpy PyAudio
+pip install pvporcupine python-vlc requests aiofiles aiohttp pyusb edge_tts sounddevice pyalsaaudio spidev SpeechRecognition pathlib2 gpiozero google-cloud google-cloud-speech google-cloud-texttospeech rpi_ws281x gTTS fuzzywuzzy websocket-client Quart python-Levenshtein pigpio RPi.GPIO lgpio numpy pvrecorder
 ```
 ### STEP4. Cài đặt & Chạy vietbot
 
