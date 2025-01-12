@@ -1,9 +1,0 @@
-{
-	"vietbot_version": {
-		"latest": "26-12-2024-01"
-	},
-	"update_command": "", 
-	"new_features": "Ra mắt phiên bản 64 bit",
-	"bug_fixed": "Lỗi tăng giảm volume và phát nhạc xong",	
-	"improvements": "Tối ưu loop và callback",	
-}
