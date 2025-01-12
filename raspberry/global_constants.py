@@ -1,6 +1,6 @@
 # !/usr/bin/pythonf       
 # -*- coding: utf-8 -*-
-from lib_process import json, pyaudio,os
+import json,os
 
 
 CHANNELS=1
