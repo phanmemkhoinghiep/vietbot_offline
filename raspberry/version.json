@@ -3,7 +3,7 @@
         "latest": "12-01-2025-01"
     },
     "update_command": "", 
-    "new_features": "PV Recoder thay cho PyAudio",
+    "new_features": "PVRecoder thay cho PyAudio",
     "bug_fixed": "",    
     "improvements": "Tối ưu biến cục bộ"   
 }
