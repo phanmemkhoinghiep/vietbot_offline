@@ -55,7 +55,7 @@
     "smart_wakeup": {
         "porcupine": {
             "key": "nAgdgdfgn9tFQ==",
-            "active": false,            
+            "active": true,            
             "hotword": [
                 {
                     "type": "porcupine",
@@ -160,7 +160,7 @@
         },
         "openwakeword": {
             "sensitive": 0.3,
-            "active": true
+            "active": false
         },
         "wakeup_reply": [
             {
