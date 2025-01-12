@@ -65,7 +65,7 @@ Tìm đến mục Interface và kích hoạt mở SPI
 3.1. Cài các gói phục vụ cho Python
 
 ```sh
-sudo apt-get install libopenblas-dev portaudio19-dev vlc falc -y
+sudo apt-get install libopenblas-dev portaudio19-dev vlc flac -y
 ```
 và
 ```sh
