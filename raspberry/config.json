@@ -2,11 +2,11 @@
     "smart_config": {
         "mic": {
             "type": "default",
-            "id": 1
+            "id": 12
         },
         "speaker": {
             "system": {
-                "amixer_id": 0
+                "amixer_id": 2
             }
         },
         "led": {
