@@ -162,7 +162,7 @@ ID: 4, Tên: dmix, Loại: 0 kênh đầu vào
 ```
 Thì mic_id sẽ là 1
 
-4.3.2. Lấy Rate của microphone
+Lấy Rate của microphone (Nếu cần)
 
 Sử dụng lệnh với "hw: 3,0" lấy từ kết quả thực tế có được ở mục 4.2.1
 
@@ -199,7 +199,7 @@ Available formats:
 ```
 Thì microphone này chỉ có 1 giá trị rate duy nhất là 32000
 
-4.3.3. Lấy giá trị amixer_id (Giá trị id của soundcard)
+4.3.2. Lấy giá trị amixer_id (Giá trị id của soundcard)
 
 ```sh
 amixer
@@ -215,7 +215,7 @@ Simple mixer control 'PCM',0
 ```
 Thì amixer có giá trị là 0
 
-4.3.4. Config picovoice
+4.3.3. Config picovoice
 Mở file config.json they key của Picovoice ở dòng thứ 58
 ```sh
 "key": "nA2Kkj/oRFQ=="
