@@ -89,8 +89,14 @@ là thành công
 3.4. Cài đặt gói Python
 Trong môi trường evn, gõ
 ```sh
-pip install pvporcupine python-vlc requests aiofiles aiohttp edge_tts sounddevice pyalsaaudio SpeechRecognition pathlib2 google-cloud gTTS fuzzywuzzy websocket-client Quart python-Levenshtein numpy pvrecorder
+pip install pvporcupine python-vlc requests aiofiles aiohttp edge_tts sounddevice pyalsaaudio SpeechRecognition pathlib2 google-cloud gTTS fuzzywuzzy websocket-client Quart python-Levenshtein pvrecorder
 ```
+và
+
+```sh
+pip install numpy==1.26.4
+```
+
 ### STEP4. Cài đặt & Chạy vietbot
 4.1. Cài đặt các gói tùy chọn theo phần cứng:
 
