@@ -61,7 +61,7 @@ sudo raspi-config
 ```
 Tìm đến mục Interface và kích hoạt mở SPI
 
-### STEP3. Cài đặt các gói liên quan
+### STEP3. Cài đặt các gói liên quan cơ bản
 3.1. Cài các gói phục vụ cho Python
 
 ```sh
@@ -89,19 +89,56 @@ là thành công
 3.4. Cài đặt gói Python
 Trong môi trường evn, gõ
 ```sh
-pip install pvporcupine python-vlc requests aiofiles aiohttp pyusb edge_tts sounddevice pyalsaaudio spidev SpeechRecognition pathlib2 gpiozero google-cloud google-cloud-speech google-cloud-texttospeech rpi_ws281x gTTS fuzzywuzzy websocket-client Quart python-Levenshtein pigpio RPi.GPIO lgpio numpy pvrecorder
+pip install pvporcupine python-vlc requests aiofiles aiohttp edge_tts sounddevice pyalsaaudio SpeechRecognition pathlib2 google-cloud gTTS fuzzywuzzy websocket-client Quart python-Levenshtein numpy pvrecorder
 ```
 ### STEP4. Cài đặt & Chạy vietbot
+4.1. Cài đặt các gói tùy chọn theo phần cứng:
 
-4.1. Download code vietbot từ github
+4.1.1. Nếu dùng phím bấm cần cài đặt, nếu không dùng bỏ qua
+
+```sh
+pip install pigpio RPi.GPIO lgpio gpiozero
+```
+4.1.2. Nếu dùng Led cài đặt, nếu không dùng bỏ qua
+
+```sh
+pip install rpi_ws281x spidev
+```
+4.1.3. Nếu dùng Mic/Sound USB cài đặt, nếu không dùng bỏ qua
+
+```sh
+pip install pyusb
+```
+4.1.4. Nếu dùng Picovoice cài đặt, nếu không dùng bỏ qua
+
+```sh
+pip install pvporcupine
+```
+4.1.5. Nếu dùng Openwakeword cài đặt, nếu không dùng bỏ qua
+
+```sh
+pip install openwakeword
+```
+4.1.6. Nếu dùng Google Cloud Speech to Text cài đặt, nếu không dùng bỏ qua
+
+```sh
+pip install google-cloud-speech
+```
+4.1.7. Nếu dùng Google Cloud Text to Speech cài đặt, nếu không dùng bỏ qua
+
+```sh
+google-cloud-texttospeech
+```
+
+4.2. Download code vietbot từ github
 ```sh
 git clone --depth 1 https://github.com/phanmemkhoinghiep/vietbot_offline.git
 ```
 Chờ cho đến khi kết thúc
 
-4.2. Config vietbot
+4.3. Config vietbot
 
-4.2.1. Lấy Mic id của microphone
+4.3.1. Lấy Mic id của microphone
 Sử dụng lệnh 
 
 ```sh
@@ -119,7 +156,7 @@ ID: 4, Tên: dmix, Loại: 0 kênh đầu vào
 ```
 Thì mic_id sẽ là 1
 
-4.2.2. Lấy Rate của microphone
+4.3.2. Lấy Rate của microphone
 
 Sử dụng lệnh với "hw: 3,0" lấy từ kết quả thực tế có được ở mục 4.2.1
 
@@ -156,7 +193,7 @@ Available formats:
 ```
 Thì microphone này chỉ có 1 giá trị rate duy nhất là 32000
 
-4.2.3. Lấy giá trị amixer_id (Giá trị id của soundcard)
+4.3.3. Lấy giá trị amixer_id (Giá trị id của soundcard)
 
 ```sh
 amixer
@@ -172,7 +209,7 @@ Simple mixer control 'PCM',0
 ```
 Thì amixer có giá trị là 0
 
-4.2.4. Config picovoice
+4.3.4. Config picovoice
 Mở file config.json they key của Picovoice ở dòng thứ 58
 ```sh
 "key": "nA2Kkj/oRFQ=="
@@ -180,7 +217,7 @@ Mở file config.json they key của Picovoice ở dòng thứ 58
 thành giá trị đã đăng ký trên Picovoice console
 
 
-4.3. Chạy vietbot
+4.4. Chạy vietbot
 Gõ các lệnh sau
 ```sh
 cd /home/pi/vietbot_offline/raspberry/32/start.py
