@@ -1,30 +1,19 @@
-from lib_process import threading,time,Color,PixelStrip,random,colorsys
+from lib_process import threading,time,Color,PixelStrip,random,colorsys, global_constants
 state_data = 'OFF'
 class Led():    
-    def __init__(self,config_data):
-        effect_mode=config_data['smart_config']['led']['effect_mode']    
-        LED_COUNT =config_data['smart_config']['led']['number_led']                
-        LED_BRIGHTNESS =config_data['smart_config']['led']['brightness']                
-        LED_PIN =config_data['smart_config']['led']['led_gpio']                
-        wakeup_color=config_data['smart_config']['led']['wakeup_color']                
-        muted_color=config_data['smart_config']['led']['muted_color']        
-        listen_effect=config_data['smart_config']['led']['listen_effect']
-        think_effect=config_data['smart_config']['led']['think_effect']
-        speak_effect=config_data['smart_config']['led']['speak_effect']
-
+    def __init__(self):
+        LED_COUNT=global_constants.LED_AIO_COUNT
+        self.LED_COUNT=LED_COUNT
+         
 # Define LED strip parameters
-        LED_FREQ_HZ = 800000
-        LED_DMA = 10
-        LED_INVERT = False
-        LED_CHANNEL = 0
     # Create an instance of the LED strip
         # strip = Adafruit_NeoPixel(LED_COUNT,LED_PIN,LED_FREQ_HZ,LED_DMA,LED_INVERT,LED_BRIGHTNESS,LED_CHANNEL)
-        strip = PixelStrip(LED_COUNT,LED_PIN,LED_FREQ_HZ,LED_DMA,LED_INVERT,LED_BRIGHTNESS,LED_CHANNEL,strip_type=None, gamma=None)
-        self.wakeup_color=wakeup_color
-        self.muted_color=muted_color
-        self.listen_effect=listen_effect
-        self.think_effect=think_effect
-        self.speak_effect=speak_effect
+        strip = PixelStrip(LED_COUNT,global_constants.LED_PIN,global_constants.LED_FREQ_HZ,global_constants.LED_DMA,global_constants.LED_INVERT,global_constants.LED_BRIGHTNESS,global_constants.LED_CHANNEL,strip_type=None, gamma=None)
+        self.wakeup_color=global_constants.wakeup_color
+        self.muted_color=global_constants.muted_color
+        self.listen_effect=global_constants.listen_effect
+        self.think_effect=global_constants.think_effect
+        self.speak_effect=global_constants.speak_effect
         # Initialize the LED strip
         strip.begin()
         self.strip=strip       
@@ -183,14 +172,15 @@ class Led():
             self.effect = new_effect                                                         
                         
                         
-
-# if __name__ == '__main__':
-    # import libs
-
-    # led=Led(conf_data,True)
-    # led.set_state('MUTE')
-    # if led.get_state() =='MUTE':
-        # print('sdfsdfda')
+if __name__ == '__main__':
+    import libs
+    import global_constants
+    led=Led()
+    led.set_state('SPEAK')
+    time.sleep(2)
+    led.colorWipe(Color(0,0,0))
+    if led.get_state() =='OFF':
+        print('sdfsdfda')
 
     
                  
