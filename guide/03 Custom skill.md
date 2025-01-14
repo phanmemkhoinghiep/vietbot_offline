@@ -18,11 +18,11 @@ Text_process: Kiểm tra điều kiện thỏa mãn để xử lý các skill c�
 Custom_skill_process: Kiểm tra các điều kiện tùy chọn để gọi các def xử lý từng skill bổ sung trả về text hoặc link, => Nếu không thỏa mãn gọi kết thúc
 
 ```
-Trong ví dụ này, sẽ tạo 2 custom skill, 1 là skill hỏi ngày kỉ niệm cá nhân và 1 skill sử dụng AI bot Dify, luồng xử lý sẽ như sau:
+Trong ví dụ này, sẽ tạo 2 custom skill, 1 là skill hỏi ngày này năm xưa và 1 skill sử dụng AI bot Dify, luồng xử lý sẽ như sau:
 
 ```sh
 
-Custom_skill_process: Kiểm tra data thỏa mãn điều kiện để gọi skill kỉ niệm cá nhân, nếu không thỏa mãn thì gọi skill sử dụng AI bot Dify để trả lời, như vậy skill AI bot Dify sẽ trả lời toàn bộ các câu hỏi không thỏa mãn tại các skill mặc định và các skill custom
+Custom_skill_process: Kiểm tra data thỏa mãn điều kiện để gọi skill kỉ niệm ngày này năm xưa, nếu không thỏa mãn thì gọi skill sử dụng AI bot Dify để trả lời, như vậy skill AI bot Dify sẽ trả lời toàn bộ các câu hỏi không thỏa mãn tại các skill mặc định và các skill custom
 
 ```
  
@@ -38,8 +38,11 @@ Custom_skill_process: Kiểm tra data thỏa mãn điều kiện để gọi ski
 
 2.2.1. Lưu các thông số cần config trong file json, nếu lưu luôn trong các file config.json
 
-Ví dụ nếu khai các tham số config của skill Diffy trong config.json:
+Ví dụ nếu khai các tham số config của các skill trong config.json:
 ```sh
+	"today_history": {
+		"url":"https://lichngaytot.com/ajax/NgayNayNamXuaAjax""
+	},  
         "dify": {
             "api_key": "app-qVedgdfg7kO",
 			      "url":"https://api.dify.ai/v1/chat-messages",			
@@ -47,108 +50,27 @@ Ví dụ nếu khai các tham số config của skill Diffy trong config.json:
 			      "no_answer":"Không có trả lời từ AI chatbot"	
         }
 ```
-2.2.2. Tạo mới file skill.json để lưu config của skill 
+2.2.2. Tạo và lưu điều kiện để kiểm tra skill ngày này năm xưa trong file object.json
+
 ```sh
-{
-    "time": {
-        "error_answer": "Không thực hiện được tra cứu thời gian, hãy kiểm tra lại",
-        "active": true
-    },
-    "music": {
-        "error_answer": "Không thực hiện được phát nhạc, hãy kiểm tra lại",
-        "active": true
-    },
-    "lunar_calendar": {
-        "error_answer": "Không thực hiện được tra cứu lịch âm, hãy kiểm tra lại",
-        "active": true
-    },
-    "anniversary": {
-        "error_answer": "Không thực hiện được tra cứu ngày kỉ niệm, hãy kiểm tra lại",
-        "active": true
-    },
-    "anniversary_data": [{
-            "name": "tết dương lịch",
-            "day": "1",
-            "month": "1",
-            "is_lunar_calendar": false
+    "history": [{
+            "value": "lịch sử"
         },
         {
-            "name": "tết âm lịch",
-            "day": "1",
-            "month": "1",
-            "is_lunar_calendar": true
-        },
-        {
-            "name": "thành lập đảng cộng sản việt nam",
-            "day": "3",
-            "month": "2",
-            "is_lunar_calendar": false
-        },
-        {
-            "name": "lễ tình nhân",
-            "day": "14",
-            "month": "2",
-            "is_lunar_calendar": false
-        },
-        {
-            "name": "quốc tế phụ nữ",
-            "day": "8",
-            "month": "3",
-            "is_lunar_calendar": false
-        },
-        {
-            "name": "giỗ Tổ",
-            "day": "10",
-            "month": "3",
-            "is_lunar_calendar": true
-        },
-        {
-            "name": "test code",
-            "day": "22",
-            "month": "4",
-            "is_lunar_calendar": false
-        },
-        {
-            "name": "giải phóng miền Nam",
-            "day": "30",
-            "month": "4",
-            "is_lunar_calendar": false
-        },
-        {
-            "name": "quốc tế lao động",
-            "day": "1",
-            "month": "5",
-            "is_lunar_calendar": false
-        },
-        {
-            "name": "quốc khánh",
-            "day": "2",
-            "month": "9",
-            "is_lunar_calendar": false
-        },
-        {
-            "name": "phụ nữ Việt Nam",
-            "day": "20",
-            "month": "10",
-            "is_lunar_calendar": false
-        },
-        {
-            "name": "Giáng Sinh",
-            "day": "24",
-            "month": "12",
-            "is_lunar_calendar": false
+            "value": "năm xưa"
         }
-    ]
-}
+    ],
 ```
-
-
+Có nghĩa là, nếu data trả về def custom_skill_process mà có chứa từ "lịch sử" hoặc "năm xưa" thì sẽ gọi skill history_process
 
 2.2. Khai báo các biến dạng hằng số trong global_constants.py
 
-Ví dụ, các biến của Skill diffy được khai báo tại đây
+Ví dụ, các biến của Skill Today_history và diffy được khai báo tại đây
 
 ```sh
+#Today History Skill
+today_history_url=config_data['smart_skill']['today_history']['url']
+
 #Dify Skill
 dify_api_key=config_data['smart_skill']['dify']['api_key']
 dify_url=config_data['smart_skill']['dify']['url']
