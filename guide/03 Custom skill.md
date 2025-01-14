@@ -24,7 +24,7 @@ Trong ví dụ này, sẽ tạo 2 custom skill, 1 là skill hỏi ngày kỉ ni�
 
 Custom_skill_process: Kiểm tra data thỏa mãn điều kiện để gọi skill kỉ niệm cá nhân, nếu không thỏa mãn thì gọi skill sử dụng AI bot Dify để trả lời, như vậy skill AI bot Dify sẽ trả lời toàn bộ các câu hỏi không thỏa mãn tại các skill mặc định và các skill custom
 
-```sh
+```
  
 ### STEP2. Khai báo trong json
 
