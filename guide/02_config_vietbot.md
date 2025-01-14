@@ -178,7 +178,6 @@ sudo nano /etc/systemd/system/vietbot.service
 ```
 Cửa sổ nano mở ra, paste các dòng sau
 
-
 ```sh
 [Unit]
 Description=Vietbot
@@ -194,8 +193,9 @@ Environment=PYTHONUNBUFFERED=1
 [Install]
 WantedBy=multi-user.target
 ```
+Ấn Ctrl + X sau đó bấm Y để lưu
 
-2.3.3. Gõ tiếp các lệnh sau:
+2.3.2. Gõ tiếp các lệnh sau:
 
 ```sh
 sudo systemctl daemon-reload
@@ -208,6 +208,7 @@ sudo systemctl enable vietbot.service
 ```sh
 sudo systemctl start vietbot.service
 ```
+2.3.3. Xem trạng thái & Log 
 
 Để xem trạng thái của service, dùng lệnh
 
