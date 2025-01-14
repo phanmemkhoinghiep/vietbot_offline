@@ -1,4 +1,3 @@
-'''
 from pvrecorder import PvRecorder
 def show_micro_devices():
     print(f"Danh Sách các thiết bị Micro:")
