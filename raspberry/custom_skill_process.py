@@ -90,6 +90,6 @@ def custom_skill_process(data):
     return answer
 # Chạy thử chương trình
 if __name__ == "__main__":
-    data = "Chế độ hỗ trợ lãi suất vay mua nhà ở cụ thể"
+    data = "Ngày này năm xưa có gì"
     result = custom_skill_process(data)
     print("Kết quả bot:", result)
