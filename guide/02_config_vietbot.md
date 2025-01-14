@@ -3,11 +3,20 @@
 ### STEP1. Config vietbot
 
 1.1. Lấy Mic id của microphone
-Sử dụng lệnh 
+
+Gõ  lệnh sau
+```sh
+source vietbot_env/bin/active
+```
+
+```sh
+cd vietbot_offline
+```
 
 ```sh
 python3 get_mic_id.py
 ```
+
 Xem kết quả trả về, chọn lấy thiết bị Mic phù hợp
 Ví dụ kết quả trả về
 Danh sách các thiết bị âm thanh khả dụng:
@@ -97,11 +106,20 @@ Sửa giá trị 0.3 sang giá trị mong muốn (Càng lớn càng nhạy)
 1.4. Config Openwakeword (Nếu dùng Openwakeword để Wakeup)
 
 1.3.2. Download model của Openwakeword
-Chạy script 
+
+Gõ  lệnh sau
 ```sh
-"key": "nA2Kkj/oRFQ==",
+source vietbot_env/bin/active
 ```
-thành giá trị đã đăng ký trên Picovoice console, giữa 2 dấu ""
+
+```sh
+cd vietbot_offline
+```
+
+```sh
+python3 get_openwakeword_model.py
+```
+
 1.3.2. Kích hoạt
 Mở file config.json ở dòng thứ 163
 Sửa active từ false sang true, nếu true thì giữ nguyên
