@@ -258,6 +258,9 @@
             "music_compare_percent": 80
         },
         "cache_compare_result": 95,
+	"today_history": {
+		"url":"https://lichngaytot.com/ajax/NgayNayNamXuaAjax""
+	},    
         "dify": {
             "api_key": "app-qVedgdfg7kO",
 			      "url":"https://api.dify.ai/v1/chat-messages",			
