@@ -87,6 +87,39 @@ Sử dụng biến toàn cục, nếu muốn đọc hoặc chỉnh sửa biến 
 Trong script custom_skill_process.py tạo các def xử lý data và trả về text hoặc text và link 
 
 3.1. Code def xử lý
+
+Cài đặt lib bs4 từ môi trường env
+```sh
+        pip install bs4
+```
+
+Ví dụ def today_history_process
+```sh
+def today_history_process(opt):
+    try:
+
+        # Using a dictionary to map the options to their corresponding functions
+        date_map = {
+            'YESTERDAY': get_current_date()[0],
+            'TODAY': get_current_date()[1],
+            'TOMORROW': get_current_date()[2],
+            'NEXT_DAY': get_current_date()[3],
+            'NEXT_WEEK': get_current_date()[4]  # adding an option for the 5th date
+        }
+        selected_date = date_map.get(opt)
+        if not selected_date:
+            return None
+        payload = {
+            'ngayxem': f"{selected_date.day:02d}-{selected_date.month:02d}-{selected_date.year}"
+        }
+        response = requests.post(global_constants.today_history_url, headers=today_hisotry_headers, data=payload)
+        soup = bs4.BeautifulSoup(response.text, 'html.parser')
+        return clean_content(soup.get_text())
+    except Exception as e:
+        print_out('left',f"Lỗi xử lý Today_history Skill: {str(e)}",'red')
+        return 'Không có câu trả lời từ skill của vietbot trong tình huống này'
+```
+
 Ví dụ def dify_process
 ```sh
 def dify_process(data):
@@ -99,7 +132,7 @@ def dify_process(data):
         "files": []
     }
     try:
-        response = requests.post(global_constants.dify_url, headers=headers, json=request_json, stream=True)
+        response = requests.post(global_constants.dify_url, headers=dify_headers, json=request_json, stream=True)
         if response.status_code != 200:
             raise ValueError(f"HTTP Error: {response.status_code} - {response.text}")
         
@@ -126,14 +159,29 @@ def dify_process(data):
         # Nếu không tìm thấy giá trị
         return global_constants.dify_no_answer
     except Exception as e:
-        print(f"Lỗi xử lý API Dify: {str(e)}")
+        print_out('left',f"Lỗi xử lý Dify Skill: {str(e)}",'red')
         return global_constants.dify_no_answer
 ```
+
+
 3.2. Lập trình để hàm def custom_skill_process gọi tiếp def xử lý data và trả về kết quả của hàm def xử lý data
 
-Ví dụ gọi hàm dify_process
+Ví dụ def custom_skill_process
 ```sh
 def custom_skill_process(data):
-    return dify_process(data)
+    answer='Không có câu trả lời từ skill của vietbot trong tình huống này'
+    if any(item in data for item in global_constant.obj_history):
+        if any(item in data for item in global_constant.obj_yesterday):
+            answer=today_history_process('YESTERDAY')
+        elif any(item in data for item in global_constant.obj_today):
+            answer=today_history_process('TODAY')            
+        elif any(item in data for item in global_constant.obj_tomorrow):
+            answer=today_history_process('TOMORROW')     
+        elif any(item in data for item in global_constant.obj_next_day):
+            answer=today_history_process('NEXT_DAY')                 
+        elif any(item in data for item in global_constant.obj_next_week):
+            answer=today_history_process('NEXT_WEEK')    
+    else:
+        answer=dify_process(data)    
+    return answer
 ```
-
