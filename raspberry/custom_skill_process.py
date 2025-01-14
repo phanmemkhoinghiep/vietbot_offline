@@ -9,6 +9,29 @@ headers = {
     "Authorization": "Bearer " + global_constants.dify_api_key,
     "Content-Type": "application/json"
 }
+def today_history_process(opt):
+    try:
+        url = "https://lichngaytot.com/ajax/NgayNayNamXuaAjax"
+        headers = {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'}
+        # Using a dictionary to map the options to their corresponding functions
+        date_map = {
+            'YESTERDAY': get_current_date()[0],
+            'TODAY': get_current_date()[1],
+            'TOMORROW': get_current_date()[2],
+            'NEXT_DAY': get_current_date()[3],
+            'NEXT_WEEK': get_current_date()[4]  # adding an option for the 5th date
+        }
+        selected_date = date_map.get(opt)
+        if not selected_date:
+            return None
+        payload = {
+            'ngayxem': f"{selected_date.day:02d}-{selected_date.month:02d}-{selected_date.year}"
+        }
+        response = libs.requests.post(global_constants.today_history_url, headers=headers, data=payload)
+        soup = libs.bs4.BeautifulSoup(response.text, 'html.parser')
+        return clean_content(soup.get_text())
+    except:
+        return None
 def dify_process(data):
     request_json = {
         "inputs": {},
@@ -50,8 +73,21 @@ def dify_process(data):
         return global_constants.dify_no_answer
 # Hàm xử lý văn bản
 def custom_skill_process(data):
-    return dify_process(data)
-
+    answer='Không có câu trả lời từ skill của vietbot trong tình huống này'
+    if any(item in data for item in global_constant.obj_history):
+        if any(item in data for item in global_constant.obj_yesterday):
+            answer=today_history_process('YESTERDAY')
+        elif any(item in data for item in global_constant.obj_today):
+            answer=today_history_process('TODAY')            
+        elif any(item in data for item in global_constant.obj_tomorrow):
+            answer=today_history_process('TOMORROW')     
+        elif any(item in data for item in global_constant.obj_next_day):
+            answer=today_history_process('NEXT_DAY')                 
+        elif any(item in data for item in global_constant.obj_next_week):
+            answer=today_history_process('NEXT_WEEK')    
+    else:
+        answer=dify_process(data)    
+    return answer
 # Chạy thử chương trình
 if __name__ == "__main__":
     data = "Chế độ hỗ trợ lãi suất vay mua nhà ở cụ thể"
