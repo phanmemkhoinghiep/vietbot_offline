@@ -10,7 +10,7 @@ source vietbot_env/bin/active
 ```
 
 ```sh
-cd vietbot_offline
+cd vietbot_offline/raspberry
 ```
 
 ```sh
@@ -29,42 +29,25 @@ ID: 4, Tên: dmix, Loại: 0 kênh đầu vào
 ```
 Thì mic_id sẽ là 1
 
-Lấy Rate của microphone (Hiện tại không cần)
-
-Sử dụng lệnh với "hw: 3,0" lấy từ kết quả thực tế có được ở mục 4.2.1
+Gõ  lệnh sau
+```sh
+source vietbot_env/bin/active
+```
 
 ```sh
-arecord -D hw:3,0 --dump-hw-params
+cd vietbot_offline/raspberry
 ```
-Ví dụ kết quả trả về:
+
 ```sh
-Warning: Some sources (like microphones) may produce inaudible results
-         with 8-bit sampling. Use '-f' argument to increase resolution
-         e.g. '-f S16_LE'.
-Recording WAVE 'stdin' : Unsigned 8 bit, Rate 8000 Hz, Mono
-HW Params of device "hw:3,0":
---------------------
-ACCESS:  MMAP_INTERLEAVED RW_INTERLEAVED
-FORMAT:  S16_LE
-SUBFORMAT:  STD
-SAMPLE_BITS: 16
-FRAME_BITS: 16
-CHANNELS: 1
-RATE: 32000
-PERIOD_TIME: [1000 1000000]
-PERIOD_SIZE: [32 32000]
-PERIOD_BYTES: [64 64000]
-PERIODS: [2 1024]
-BUFFER_TIME: [2000 2000000]
-BUFFER_SIZE: [64 64000]
-BUFFER_BYTES: [128 128000]
-TICK_TIME: ALL
---------------------
-arecord: set_params:1352: Sample format non available
-Available formats:
-- S16_LE
+sudo nano config.json
 ```
-Thì microphone này chỉ có 1 giá trị rate duy nhất là 32000
+Ở dòng số 5 thay giá trị 12 bằng 1
+
+```sh
+"id": 1 
+```
+Ấn Ctrl + X sau đó bấm Y để lưu
+
 
 1.2. Lấy giá trị amixer_id (Giá trị id của soundcard)
 
@@ -82,22 +65,59 @@ Simple mixer control 'PCM',0
 ```
 Thì amixer có giá trị là 0
 
+Gõ  lệnh sau
+```sh
+source vietbot_env/bin/active
+```
+
+```sh
+cd vietbot_offline/raspberry
+```
+
+```sh
+sudo nano config.json
+```
+Ở dòng số 9 thay giá trị 2 bằng 0
+
+```sh
+"amixer_id": 2
+```
+Ấn Ctrl + X sau đó bấm Y để lưu
+
 1.3. Config picovoice (Nếu dùng Picovoice để Wakeup)
 
 1.3.1. Cung cấp key Picovoice
-Mở file config.json thay key của Picovoice ở dòng thứ 57
+Gõ  lệnh sau
+```sh
+source vietbot_env/bin/active
+```
+
+```sh
+cd vietbot_offline/raspberry
+```
+
+```sh
+sudo nano config.json
+```
+
+Thay key của Picovoice ở dòng thứ 57
 ```sh
 "key": "nA2Kkj/oRFQ==",
 ```
 thành giá trị đã đăng ký trên Picovoice console, giữa 2 dấu ""
-1.3.2. Kích hoạt
-Mở file config.json ở dòng thứ 58
+Ấn Ctrl + X sau đó bấm Y để lưu
+
+1.3.2. Kích hoạt Picovoice
+
+Tương tự sử dụng các lệnh để nở file config.json ở dòng thứ 58
 Sửa active từ false sang true, nếu true thì giữ nguyên
 ```sh
 "active": true,
 ```
 1.3.3. Sửa độ nhậy
-Mở file config.json ở dòng tương ứng với từng hotwod
+
+Tương tự sử dụng các lệnh để nở file config.json ở dòng tương ứng với từng hotwod
+
 Sửa giá trị 0.3 sang giá trị mong muốn (Càng lớn càng nhạy)
 ```sh
 "sensitive": 0.3,
@@ -121,13 +141,13 @@ python3 get_openwakeword_model.py
 ```
 
 1.3.2. Kích hoạt
-Mở file config.json ở dòng thứ 163
+Tương tự sử dụng các lệnh để nở file config.json ở dòng thứ 163
 Sửa active từ false sang true, nếu true thì giữ nguyên
 ```sh
 "active": true,
 ```
 1.3.3. Sửa độ nhậy
-Mở file config.json ở dòng thứ 162
+Tương tự sử dụng các lệnh để nở file config.json ở dòng thứ 162
 Sửa giá trị 0.3 sang giá trị mong muốn (Càng nhỏ càng nhậy)
 ```sh
 "sensitive": 0.3,
@@ -185,8 +205,8 @@ After=network.target
 
 [Service]
 User=pi
-WorkingDirectory=/home/pi/vietbot_offline
-ExecStart=/home/pi/vietbot_env/bin/python /home/pi/vietbot_offline/start.py
+WorkingDirectory=/home/pi/vietbot_offline/raspberry
+ExecStart=/home/pi/vietbot_env/bin/python /home/pi/vietbot_offline/raspberry/start.py
 Restart=always
 Environment=PYTHONUNBUFFERED=1
 
