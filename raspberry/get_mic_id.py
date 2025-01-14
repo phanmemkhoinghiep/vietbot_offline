@@ -1,7 +1,4 @@
 '''
-Code By: Vũ Tuyển
-Facebook: https://www.facebook.com/TWFyaW9uMDAx
-'''
 from pvrecorder import PvRecorder
 def show_micro_devices():
     print(f"Danh Sách các thiết bị Micro:")
