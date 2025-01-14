@@ -2,17 +2,17 @@
 # -*- coding: utf-8 -*-
 #Processing
 from lib_process import requests,process,json,time,global_constants,print_out
+import bs4
 
-# Định nghĩa URL và headers
-url = "https://api.dify.ai/v1/chat-messages"
-headers = {
+# Định nghĩa URL và headers Dify
+dify_headers = {
     "Authorization": "Bearer " + global_constants.dify_api_key,
     "Content-Type": "application/json"
 }
+today_hisotry_headers = {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'}
 def today_history_process(opt):
     try:
-        url = "https://lichngaytot.com/ajax/NgayNayNamXuaAjax"
-        headers = {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'}
+
         # Using a dictionary to map the options to their corresponding functions
         date_map = {
             'YESTERDAY': get_current_date()[0],
@@ -27,11 +27,12 @@ def today_history_process(opt):
         payload = {
             'ngayxem': f"{selected_date.day:02d}-{selected_date.month:02d}-{selected_date.year}"
         }
-        response = libs.requests.post(global_constants.today_history_url, headers=headers, data=payload)
-        soup = libs.bs4.BeautifulSoup(response.text, 'html.parser')
+        response = requests.post(global_constants.today_history_url, headers=today_hisotry_headers, data=payload)
+        soup = bs4.BeautifulSoup(response.text, 'html.parser')
         return clean_content(soup.get_text())
-    except:
-        return None
+    except Exception as e:
+        print_out('left',f"Lỗi xử lý Today_history Skill: {str(e)}",'red')
+        return 'Không có câu trả lời từ skill của vietbot trong tình huống này'
 def dify_process(data):
     request_json = {
         "inputs": {},
@@ -42,7 +43,7 @@ def dify_process(data):
         "files": []
     }
     try:
-        response = requests.post(global_constants.dify_url, headers=headers, json=request_json, stream=True)
+        response = requests.post(global_constants.dify_url, headers=dify_headers, json=request_json, stream=True)
         if response.status_code != 200:
             raise ValueError(f"HTTP Error: {response.status_code} - {response.text}")
         
@@ -69,7 +70,7 @@ def dify_process(data):
         # Nếu không tìm thấy giá trị
         return global_constants.dify_no_answer
     except Exception as e:
-        print(f"Lỗi xử lý API Dify: {str(e)}")
+        print_out('left',f"Lỗi xử lý Dify Skill: {str(e)}",'red')
         return global_constants.dify_no_answer
 # Hàm xử lý văn bản
 def custom_skill_process(data):
