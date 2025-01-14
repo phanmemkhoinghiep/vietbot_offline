@@ -206,7 +206,11 @@ music_error=config_data['smart_skill']['music']["error_answer"]
 
 
 
-#Hass skill
+#Hass    
+# use_hass=skill_data['hass']['active']    
+hass_token=config_data['smart_skill']['hass']['token']
+hass_url=config_data['smart_skill']['hass']['url']
+display_full_state=config_data['smart_skill']['hass']['display_full_state']
 hvac_mode=[]
 hvac_mode_eng=[]
 hvac_fan=[]
@@ -267,11 +271,7 @@ for p in obj_data['unit']:
     unit_code.append(p['code'])
     unit_name.append(p['name'])
     
-#Hass    
-# use_hass=skill_data['hass']['active']    
-hass_token=config_data['smart_skill']['hass']['token']
-hass_url=config_data['smart_skill']['hass']['url']
-display_full_state=config_data['smart_skill']['hass']['display_full_state']
+
 
 
 #Weather Skill
@@ -282,6 +282,7 @@ TEMP_DELTA = -273.15
 cache_compare_result=config_data['smart_skill']['cache_compare_result']
 
 #Today History Skill
+obj_history = [p['value'] for p in obj_data['history']]
 today_history_url=config_data['smart_skill']['today_history']['url']
 
 #Dify Skill
