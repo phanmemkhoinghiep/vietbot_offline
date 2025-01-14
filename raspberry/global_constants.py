@@ -281,6 +281,8 @@ obj_weather = [p['value'] for p in obj_data['weather']]
 TEMP_DELTA = -273.15
 cache_compare_result=config_data['smart_skill']['cache_compare_result']
 
+#Today History Skill
+today_history_url=config_data['smart_skill']['today_history']['url']
 
 #Dify Skill
 dify_api_key=config_data['smart_skill']['dify']['api_key']
