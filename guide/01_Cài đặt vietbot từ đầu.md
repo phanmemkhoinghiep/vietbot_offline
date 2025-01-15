@@ -140,6 +140,9 @@ pip install google-cloud-texttospeech
 ```
 
 4.2. Download code vietbot từ github
+
+Mở 1 cửa sổ SSH khác, không vào Env và chạy lệnh
+
 ```sh
 git clone --depth 1 https://github.com/phanmemkhoinghiep/vietbot_offline.git
 ```
