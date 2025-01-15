@@ -136,7 +136,7 @@ pip install google-cloud-speech
 4.1.7. Nếu dùng Google Cloud Text to Speech cài đặt, nếu không dùng bỏ qua
 
 ```sh
-google-cloud-texttospeech
+pip install google-cloud-texttospeech
 ```
 
 4.2. Download code vietbot từ github
