@@ -69,7 +69,7 @@ sudo apt-get install libopenblas-dev portaudio19-dev vlc flac -y
 ```
 và
 ```sh
-sudo apt-get install python3 python3-pip python3-venv python3-dev python3-rpi.gpio python3-pyaudio
+sudo apt-get install python3 python3-pip python3-venv python3-dev 
 ```
 
 3.2. Tạo env
@@ -102,6 +102,9 @@ pip install numpy==1.26.4
 
 4.1.1. Nếu dùng phím bấm cần cài đặt, nếu không dùng bỏ qua
 
+```sh
+sudo apt-get install python3-rpi.gpio 
+```
 ```sh
 pip install pigpio RPi.GPIO lgpio gpiozero
 ```
