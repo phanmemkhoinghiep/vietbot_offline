@@ -89,7 +89,7 @@ là thành công
 3.4. Cài đặt gói Python
 Trong môi trường evn, gõ
 ```sh
-pip install pvporcupine python-vlc requests aiofiles aiohttp edge_tts sounddevice pyalsaaudio SpeechRecognition pathlib2 google-cloud gTTS fuzzywuzzy websocket-client Quart python-Levenshtein pvrecorder
+pip install python-vlc requests aiofiles aiohttp edge_tts sounddevice pyalsaaudio SpeechRecognition pathlib2 google-cloud gTTS fuzzywuzzy websocket-client Quart python-Levenshtein pvrecorder
 ```
 và
 
