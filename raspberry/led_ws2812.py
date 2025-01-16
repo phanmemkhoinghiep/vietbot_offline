@@ -173,7 +173,7 @@ class Led():
                         
                         
 if __name__ == '__main__':
-    import libs
+    import lib_process
     import global_constants
     led=Led()
     led.set_state('SPEAK')
