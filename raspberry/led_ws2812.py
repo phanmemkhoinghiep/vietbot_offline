@@ -178,7 +178,10 @@ if __name__ == '__main__':
     led=Led()
     led.set_state('SPEAK')
     time.sleep(2)
-    led.colorWipe(Color(0,0,0))
+    led.colorWipe(Color(0,0,0)) #Test led bằng lệnh trực tiếp
+    led.set_state('SPEAK')
+    time.sleep(2)
+    led.set_state('OFF') #Test led bằng lệnh trung gian       
     if led.get_state() =='OFF':
         print('sdfsdfda')
 
