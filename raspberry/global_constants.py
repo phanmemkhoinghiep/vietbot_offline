@@ -52,8 +52,7 @@ log_url = 'http://127.0.0.1:'+str(web_port)+'/log'
 logging_type=config_data['smart_config']['logging_type']
 pre_answer = [p['value'] for p in config_data['smart_answer'].get('pre_answer', [])]
 pre_answer_timeout=config_data['smart_answer']["pre_answer_timeout"]
-mixer_id=2    
-amixer_id=config_data['smart_config']['speaker']["system"]["amixer_id"]
+soundcard_name=config_data['smart_config']['speaker']["system"]["name"]
 led_type =config_data['smart_config']['led']['type']
 
 
