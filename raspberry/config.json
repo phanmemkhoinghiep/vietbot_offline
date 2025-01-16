@@ -263,9 +263,8 @@
 	},    
         "dify": {
             "api_key": "app-qVedgdfg7kO",
-			      "url":"https://api.dify.ai/v1/chat-messages",			
-			      "error":"Lỗi xử lý từ AI chatbot",	
-			      "no_answer":"Không có trả lời từ AI chatbot"	
+            "error":"Lỗi xử lý từ AI chatbot",	
+	    "no_answer":"Không có trả lời từ AI chatbot"	
         }
     },
     "smart_user": {
