@@ -6,7 +6,7 @@
         },
         "speaker": {
             "system": {
-                "amixer_id": 2
+                "name": "hw:1,0"
             }
         },
         "led": {
