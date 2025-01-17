@@ -238,5 +238,5 @@ sudo systemctl status vietbot.service
 Để xem log của service, dùng lệnh
 
 ```sh
-sudo journalctl -e vietbot.service -f
+sudo journalctl -u vietbot.service -f
 ```
