@@ -138,6 +138,11 @@ pip install google-cloud-speech
 ```sh
 pip install google-cloud-texttospeech
 ```
+4.1.8. Cài lib hỗ trợ Dify, nếu không dùng bỏ qua
+
+```sh
+pip install dify-client
+```
 
 4.2. Download code vietbot từ github
 
