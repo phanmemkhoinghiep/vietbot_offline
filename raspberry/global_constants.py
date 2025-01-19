@@ -173,7 +173,9 @@ adv_at_moment=[p['value'] for p in adv_data['at_moment']]
 adv_at_time=[p['value'] for p in adv_data['at_time']]
 adv_from_now=[p['value'] for p in adv_data['from_now']]
 adv_nearby=[p['value'] for p in adv_data['nearby']]
+
 #Weather Skill
+
 #Lunar Day Skill
 #Anniversary skill
 #History Skill
@@ -185,12 +187,14 @@ adv_nearby=[p['value'] for p in adv_data['nearby']]
 #Wikipedia Skill
 
 
+#Time skill
+use_time=config_data['smart_skill']['time']["active"]
 
-#Music Skill
-song_path_list =os.listdir('mp3/')    
-local_music_compare=config_data['smart_skill']['music']['music_compare_percent']
-obj_music=[p['value'] for p in obj_data['music']]
-music_error=config_data['smart_skill']['music']["error_answer"]
+#Solar skill
+use_solar=config_data['smart_skill']['solar']["active"]
+
+#Lunar skill
+use_lunar=config_data['smart_skill']['lunar']["active"]
 
 
 
@@ -255,27 +259,38 @@ for p in obj_data['light_color_data']:
 for p in obj_data['unit']:
     unit_code.append(p['code'])
     unit_name.append(p['name'])
-    
-#Hass    
-# use_hass=skill_data['hass']['active']    
+
+
 hass_token=config_data['smart_skill']['hass']['token']
 hass_url=config_data['smart_skill']['hass']['url']
 display_full_state=config_data['smart_skill']['hass']['display_full_state']
+use_hass=config_data['smart_skill']['hass']["active"]
 
-
-#Dify Skill
-dify_api_key=config_data['smart_skill']['dify']['api_key']
-dify_error=config_data['smart_skill']['dify']['error']
-dify_no_answer=config_data['smart_skill']['dify']['no_answer']
-#User
-user_level=config_data['smart_user']['level']
-user_place_province=config_data['smart_user']['address']['province']
-user_place_district=config_data['smart_user']['address']['district']
-user_place=user_place_district+', '+user_place_province
-user_place_covert=user_place.lower().replace('huyện','').replace('Huyện','').replace('Quận','').replace('quận','').replace('Thành phố','').replace('thành phố','')
 #Weather Skill
 weather_key=config_data['smart_skill']['weather']['openweathermap_key']
 weather_error=config_data['smart_skill']['weather']["error_answer"]
 obj_weather = [p['value'] for p in obj_data['weather']]
 TEMP_DELTA = -273.15
 cache_compare_result=config_data['smart_skill']['cache_compare_result']
+use_weather=config_data['smart_skill']['weather']["active"]
+
+
+#Music Skill
+song_path_list =os.listdir('mp3/')    
+local_music_compare=config_data['smart_skill']['music']['music_compare_percent']
+obj_music=[p['value'] for p in obj_data['music']]
+music_error=config_data['smart_skill']['music']["error_answer"]
+use_music=config_data['smart_skill']['music']["active"]
+
+#Dify Skill
+dify_api_key=config_data['smart_skill']['dify']['api_key']
+dify_error=config_data['smart_skill']['dify']['error']
+dify_no_answer=config_data['smart_skill']['dify']['no_answer']
+use_dify=config_data['smart_skill']['dify']["active"]
+
+#User
+user_level=config_data['smart_user']['level']
+user_place_province=config_data['smart_user']['address']['province']
+user_place_district=config_data['smart_user']['address']['district']
+user_place=user_place_district+', '+user_place_province
+user_place_covert=user_place.lower().replace('huyện','').replace('Huyện','').replace('Quận','').replace('quận','').replace('Thành phố','').replace('thành phố','')
