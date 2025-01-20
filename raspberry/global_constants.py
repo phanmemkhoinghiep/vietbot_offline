@@ -52,7 +52,7 @@ log_url = 'http://127.0.0.1:'+str(web_port)+'/log'
 logging_type=config_data['smart_config']['logging_type']
 pre_answer = [p['value'] for p in config_data['smart_answer'].get('pre_answer', [])]
 pre_answer_timeout=config_data['smart_answer']["pre_answer_timeout"]
-soundcard_name=config_data['smart_config']['speaker']["system"]["name"]
+soundcard_id=config_data['smart_config']['speaker']["id"]
 led_type =config_data['smart_config']['led']['type']
 
 
@@ -191,10 +191,10 @@ adv_nearby=[p['value'] for p in adv_data['nearby']]
 use_time=config_data['smart_skill']['time']["active"]
 
 #Solar skill
-use_solar=config_data['smart_skill']['solar']["active"]
+use_solar=config_data['smart_skill']['solar_calendar']["active"]
 
 #Lunar skill
-use_lunar=config_data['smart_skill']['lunar']["active"]
+use_lunar=config_data['smart_skill']['lunar_calendar']["active"]
 
 
 
