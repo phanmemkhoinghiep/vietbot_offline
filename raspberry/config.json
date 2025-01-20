@@ -5,9 +5,8 @@
             "id": 12
         },
         "speaker": {
-            "system": {
-                "name": "hw:1,0"
-            }
+            "type": "default",
+            "id": "hw:0,0"
         },
         "led": {
             "type": "none_led",
@@ -235,36 +234,44 @@
     },
     "smart_skill": {
         "time": {
-            "error_answer": "Không thực hiện được tra cứu thời gian, hãy kiểm tra lại"
+            "error_answer": "Không thực hiện được tra cứu thời gian, hãy kiểm tra lại",
+			"active":true
         },
         "solar_calendar": {
-            "error_answer": "Không thực hiện được tra cứu lịch âm, hãy kiểm tra lại"
+            "error_answer": "Không thực hiện được tra cứu lịch âm, hãy kiểm tra lại",
+			"active":true
         },
         "lunar_calendar": {
-            "error_answer": "Không thực hiện được tra cứu lịch âm, hãy kiểm tra lại"
+            "error_answer": "Không thực hiện được tra cứu lịch âm, hãy kiểm tra lại",
+			"active":true
         },
         "hass": {
             "url": "http://myhass.duckdns.org",
             "token": "eyJhbGciOiKfa4",
             "error_answer": "Không thực hiện được điều khiển Hass, hãy kiểm tra lại",
-            "display_full_state": true
+            "display_full_state": true,
+			"active":true
         },
         "weather": {
             "openweathermap_key": "ffddba060ff1a735f04ff426f85f070b",
-            "error_answer": "Không thực hiện được tra cứu thời tiết khu vực, hãy kiểm tra lại"
+            "error_answer": "Không thực hiện được tra cứu thời tiết khu vực, hãy kiểm tra lại",
+			"active":true
         },
         "music": {
             "error_answer": "Không thực hiện được phát nhạc, hãy kiểm tra lại",
-            "music_compare_percent": 80
+            "music_compare_percent": 80,
+			"active":true
         },
         "cache_compare_result": 95,
-	"today_history": {
-		"url":"https://lichngaytot.com/ajax/NgayNayNamXuaAjax"
-	},    
+		"today_history": {
+			"url":"https://lichngaytot.com/ajax/NgayNayNamXuaAjax",
+			"active":true
+		},    
         "dify": {
-            "api_key": "app-qVedgdfg7kO",
+            "api_key": "app-qVesfdfdw37kO",
             "error":"Lỗi xử lý từ AI chatbot",	
-	    "no_answer":"Không có trả lời từ AI chatbot"	
+			"no_answer":"Không có trả lời từ AI chatbot",	
+			"active":true
         }
     },
     "smart_user": {
