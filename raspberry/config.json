@@ -232,6 +232,9 @@
             }
         ]
     },
+    "smart_conversation": {
+            "active": true
+    }, 	
     "smart_skill": {
         "time": {
             "error_answer": "Không thực hiện được tra cứu thời gian, hãy kiểm tra lại",
